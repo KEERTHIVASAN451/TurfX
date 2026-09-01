@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Play More. Manage Better.
+    </title>
+
+    <meta
+        name="description"
+        content="TurfX - Smart turf booking and cricket tournament management platform.">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         CINEMATIC INTRO
+         ===================================================== -->
+
+    <div
+        id="introScreen"
+        class="intro-screen">
+
+        <div class="intro-overlay"></div>
+
+        <div class="intro-glow"></div>
+
+        <div class="intro-content">
+
+            <div class="intro-logo">
+
+                <span class="intro-ball">
+                    🏏
+                </span>
+
+                <span>
+                    Turf<span>X</span>
+                </span>
+
+            </div>
+
+
+            <p class="intro-kicker">
+                SMART SPORTS MANAGEMENT
+            </p>
+
+
+            <h1 class="intro-title">
+                READY TO PLAY?
+            </h1>
+
+
+            <button
+                id="letsPlayButton"
+                class="lets-play-btn"
+                type="button">
+
+                <span>
+                    LET'S PLAY
+                </span>
+
+                <span class="play-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <p class="intro-hint">
+                Enter the TurfX experience
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         INTRO VIDEO
+         ===================================================== -->
+
+    <div
+        id="videoScreen"
+        class="video-screen">
+
+        <video
+            id="introVideo"
+            class="intro-video"
+            playsinline
+            preload="auto">
+
+            <source
+                src="{{ url_for('static', filename='videos/turfx-intro.mp4') }}"
+                type="video/mp4">
+
+        </video>
+
+        <div class="video-vignette"></div>
+
+        <div class="video-brand">
+
+            <span>
+                🏏
+            </span>
+
+            <strong>
+                TurfX
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN SITE
+         ===================================================== -->
+
+    <div
+        id="mainSite"
+        class="main-site">
+
+
+        <!-- NAVBAR -->
+
+        <header class="home-navbar">
+
+            <a
+                href="/"
+                class="home-logo">
+
+                <span class="logo-ball">
+                    🏏
+                </span>
+
+                <span>
+                    Turf<span>X</span>
+                </span>
+
+            </a>
+
+
+            <nav class="home-nav">
+
+                <a
+                    href="/"
+                    class="active">
+
+                    Home
+
+                </a>
+
+                <a href="/search-turf">
+                    Find Turf
+                </a>
+
+                <a href="/tournament">
+                    Tournaments
+                </a>
+
+                <a href="/login">
+                    Login
+                </a>
+
+            </nav>
+
+
+            <a
+                href="/login"
+                class="navbar-cta">
+
+                Get Started
+                <span>→</span>
+
+            </a>
+
+        </header>
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <main>
+
+            <section class="home-hero">
+
+                <div class="hero-background"></div>
+
+                <div class="hero-dark"></div>
+
+
+                <div class="hero-content">
+
+                    <span class="hero-badge">
+                        🏏 SMART SPORTS MANAGEMENT
+                    </span>
+
+
+                    <h1>
+
+                        Play More.
+                        <br>
+
+                        <span>
+                            Manage Better.
+                        </span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Your complete platform for turf booking,
+                        cricket tournaments, payments, teams
+                        and live scores.
+
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="/login"
+                            class="hero-primary-btn">
+
+                            Get Started
+                            <span>→</span>
+
+                        </a>
+
+
+                        <a
+                            href="/search-turf"
+                            class="hero-secondary-btn">
+
+                            Explore Turfs
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="hero-stats">
+
+                        <div>
+
+                            <strong>
+                                100+
+                            </strong>
+
+                            <span>
+                                Bookings
+                            </span>
+
+                        </div>
+
+
+                        <div class="hero-divider"></div>
+
+
+                        <div>
+
+                            <strong>
+                                25+
+                            </strong>
+
+                            <span>
+                                Teams
+                            </span>
+
+                        </div>
+
+
+                        <div class="hero-divider"></div>
+
+
+                        <div>
+
+                            <strong>
+                                10+
+                            </strong>
+
+                            <span>
+                                Tournaments
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FLOATING CARD -->
+
+                <div class="hero-floating-card">
+
+                    <div class="live-dot"></div>
+
+
+                    <div>
+
+                        <span>
+                            LIVE NOW
+                        </span>
+
+                        <strong>
+                            TurfX Arena
+                        </strong>
+
+                        <small>
+                            📍 Chennai · ⭐ 4.9
+                        </small>
+
+                    </div>
+
+
+                    <strong class="floating-price">
+
+                        ₹800
+
+                        <small>
+                            /hr
+                        </small>
+
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FEATURES
+                 ================================================= -->
+
+            <section class="features-section">
+
+                <div class="section-heading">
+
+                    <span>
+                        WHY TURFX?
+                    </span>
+
+                    <h2>
+
+                        Everything You Need
+                        <br>
+
+                        <em>
+                            To Play Better.
+                        </em>
+
+                    </h2>
+
+                    <p>
+
+                        One powerful platform for players,
+                        teams, turf owners and tournaments.
+
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon green">
+                            📅
+                        </div>
+
+                        <h3>
+                            Instant Turf Booking
+                        </h3>
+
+                        <p>
+                            Search available slots,
+                            compare turfs and book your
+                            game in seconds.
+                        </p>
+
+                        <a href="/search-turf">
+                            Book a Turf →
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon orange">
+                            🏆
+                        </div>
+
+                        <h3>
+                            Complete Tournament Management
+                        </h3>
+
+                        <p>
+                            Manage teams, fixtures,
+                            points tables, players and
+                            tournament results.
+                        </p>
+
+                        <a href="/tournament">
+                            Explore Tournaments →
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon blue">
+                            📊
+                        </div>
+
+                        <h3>
+                            Live Cricket Scores
+                        </h3>
+
+                        <p>
+                            Follow live matches,
+                            player statistics and
+                            team performance.
+                        </p>
+
+                        <a href="/tournament">
+                            View Live Scores →
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon purple">
+                            🎟️
+                        </div>
+
+                        <h3>
+                            Smart QR Tickets
+                        </h3>
+
+                        <p>
+                            Get instant digital tickets
+                            and easy check-in for
+                            hassle-free entry.
+                        </p>
+
+                        <a href="/login">
+                            Get Started →
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FEATURED TURF
+                 ================================================= -->
+
+            <section class="featured-section">
+
+                <div class="featured-copy">
+
+                    <span>
+                        FEATURED TURF
+                    </span>
+
+                    <h2>
+
+                        Your Next Match
+                        <br>
+
+                        Starts Here.
+
+                    </h2>
+
+                    <p>
+
+                        Discover premium cricket turfs
+                        with professional facilities,
+                        lighting and easy online booking.
+
+                    </p>
+
+
+                    <a
+                        href="/search-turf"
+                        class="dark-cta">
+
+                        Explore Turfs →
+
+                    </a>
+
+                </div>
+
+
+                <div class="featured-card">
+
+                    <div class="featured-image">
+
+                        <span class="featured-live">
+                            OPEN NOW
+                        </span>
+
+                        <span class="featured-rating">
+                            ⭐ 4.9
+                        </span>
+
+                        <div class="featured-ball">
+                            🏏
+                        </div>
+
+                    </div>
+
+
+                    <div class="featured-info">
+
+                        <div>
+
+                            <span class="mini-label">
+                                PREMIUM CRICKET TURF
+                            </span>
+
+                            <h3>
+                                TurfX Arena
+                            </h3>
+
+                            <p>
+                                📍 Anna Nagar, Chennai
+                            </p>
+
+                        </div>
+
+
+                        <div class="featured-price">
+
+                            <strong>
+                                ₹800
+                            </strong>
+
+                            <span>
+                                / hour
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FINAL CTA
+                 ================================================= -->
+
+            <section class="home-final-cta">
+
+                <div>
+
+                    <span>
+                        READY FOR YOUR NEXT GAME?
+                    </span>
+
+                    <h2>
+
+                        Let's Make Every
+                        <br>
+
+                        Match Count.
+
+                    </h2>
+
+                    <p>
+
+                        Book your turf, build your team
+                        and play your best game.
+
+                    </p>
+
+
+                    <a
+                        href="/login"
+                        class="final-cta-btn">
+
+                        Start Playing
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- =================================================
+             FOOTER
+             ================================================= -->
+
+        <footer class="home-footer">
+
+            <div class="footer-brand">
+
+                <strong>
+                    🏏 TurfX
+                </strong>
+
+                <p>
+
+                    Smart turf booking and cricket
+                    tournament management platform.
+
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+
+                    <strong>
+                        Platform
+                    </strong>
+
+                    <a href="/search-turf">
+                        Find Turf
+                    </a>
+
+                    <a href="/tournament">
+                        Tournaments
+                    </a>
+
+                    <a href="/login">
+                        Login
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Support
+                    </strong>
+
+                    <a href="#">
+                        Help Center
+                    </a>
+
+                    <a href="#">
+                        Contact Us
+                    </a>
+
+                    <a href="#">
+                        Privacy Policy
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                © 2026 TurfX.
+                All rights reserved.
+
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}">
+    </script>
+
+</body>
+
+</html>

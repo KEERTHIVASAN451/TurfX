@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Live Score
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a
+            href="/scorecard"
+            class="active">
+
+            Live Score
+
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status live">
+
+                <span class="live-dot"></span>
+
+                LIVE MATCH
+
+            </span>
+
+            <h1>
+                Live Score
+            </h1>
+
+            <p>
+                Chennai Weekend Premier League • Match 14
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament/fixtures"
+                class="tournament-btn">
+
+                ← Fixtures
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MAIN SCORE -->
+
+    <section class="tournament-section">
+
+
+        <div class="live-score-card">
+
+
+            <div class="live-score-header">
+
+                <h2 class="live-score-title">
+
+                    Victory Kings
+                    <span
+                        style="
+                            color:#94a3b8;
+                            font-size:11px;
+                        ">
+
+                        vs
+
+                    </span>
+                    Super Strikers
+
+                </h2>
+
+
+                <span class="live-score-status">
+
+                    <span class="live-dot"></span>
+
+                    LIVE
+
+                </span>
+
+            </div>
+
+
+            <div class="live-score-main">
+
+                <div class="live-score-runs">
+                    148/6
+                </div>
+
+                <div class="live-score-over">
+                    17.4 Overs
+                </div>
+
+
+                <p
+                    style="
+                        margin-top:10px;
+                        color:#94a3b8;
+                        font-size:9px;
+                    ">
+
+                    Target: 156 • Need 8 runs from 14 balls
+
+                </p>
+
+            </div>
+
+
+            <div
+                style="
+                    display:grid;
+                    grid-template-columns:1fr 1fr;
+                    gap:10px;
+                    margin-top:22px;
+                ">
+
+                <div
+                    style="
+                        padding:14px;
+                        border-radius:10px;
+                        background:rgba(255,255,255,.06);
+                        text-align:center;
+                    ">
+
+                    <span
+                        style="
+                            color:#94a3b8;
+                            font-size:7px;
+                        ">
+
+                        CURRENT RUN RATE
+
+                    </span>
+
+                    <strong
+                        style="
+                            display:block;
+                            margin-top:4px;
+                            color:#ffffff;
+                            font-size:16px;
+                        ">
+
+                        8.37
+
+                    </strong>
+
+                </div>
+
+
+                <div
+                    style="
+                        padding:14px;
+                        border-radius:10px;
+                        background:rgba(255,255,255,.06);
+                        text-align:center;
+                    ">
+
+                    <span
+                        style="
+                            color:#94a3b8;
+                            font-size:7px;
+                        ">
+
+                        REQUIRED RATE
+
+                    </span>
+
+                    <strong
+                        style="
+                            display:block;
+                            margin-top:4px;
+                            color:#86efac;
+                            font-size:16px;
+                        ">
+
+                        3.43
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CURRENT BATTERS -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    BATTING
+                </span>
+
+                <h2>
+                    Current Batters
+                </h2>
+
+                <p>
+                    Players currently at the crease.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-grid">
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <span class="tournament-status live">
+                        ON STRIKE
+                    </span>
+
+                    <h3 class="tournament-card-title">
+                        Arun Kumar
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        62 Runs • 38 Balls
+                    </p>
+
+                    <div class="tournament-card-footer">
+
+                        <span>
+                            5 Fours • 3 Sixes
+                        </span>
+
+                        <strong>
+                            SR 163.2
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <span class="tournament-status upcoming">
+                        NON-STRIKER
+                    </span>
+
+                    <h3 class="tournament-card-title">
+                        Rohit
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        31 Runs • 24 Balls
+                    </p>
+
+                    <div class="tournament-card-footer">
+
+                        <span>
+                            3 Fours
+                        </span>
+
+                        <strong>
+                            SR 129.2
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <span class="tournament-status upcoming">
+                        BOWLER
+                    </span>
+
+                    <h3 class="tournament-card-title">
+                        Vignesh
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        3 Overs • 24 Runs
+                    </p>
+
+                    <div class="tournament-card-footer">
+
+                        <span>
+                            2 Wickets
+                        </span>
+
+                        <strong>
+                            Econ 8.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SCORE ENTRY -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    SCORE ENTRY
+                </span>
+
+                <h2>
+                    Next Ball
+                </h2>
+
+                <p>
+                    Update the current innings.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="score-entry">
+
+
+            <button
+                type="button"
+                class="score-btn">
+
+                0
+
+            </button>
+
+
+            <button
+                type="button"
+                class="score-btn">
+
+                1
+
+            </button>
+
+
+            <button
+                type="button"
+                class="score-btn">
+
+                2
+
+            </button>
+
+
+            <button
+                type="button"
+                class="score-btn">
+
+                3
+
+            </button>
+
+
+            <button
+                type="button"
+                class="score-btn">
+
+                4
+
+            </button>
+
+
+            <button
+                type="button"
+                class="score-btn">
+
+                6
+
+            </button>
+
+
+            <button
+                type="button"
+                class="score-btn">
+
+                W
+
+            </button>
+
+        </div>
+
+
+        <div
+            style="
+                display:grid;
+                grid-template-columns:repeat(3,1fr);
+                gap:9px;
+                margin-top:10px;
+            ">
+
+            <button
+                type="button"
+                class="tournament-btn">
+
+                Wide
+
+            </button>
+
+
+            <button
+                type="button"
+                class="tournament-btn">
+
+                No Ball
+
+            </button>
+
+
+            <button
+                type="button"
+                class="tournament-btn">
+
+                Bye
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- COMMENTARY -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    COMMENTARY
+                </span>
+
+                <h2>
+                    Ball by Ball
+                </h2>
+
+                <p>
+                    Latest events from the match.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="leaderboard-list">
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    17.4
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        6
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            SIX!
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Arun Kumar launches it over long-on.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    +6
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    17.3
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        4
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            FOUR
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Beautiful cover drive.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    +4
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    17.2
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        0
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            DOT BALL
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Good length delivery.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    17.1
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        1
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            SINGLE
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Quick single taken.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    +1
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MATCH INFO -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-info-grid">
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Venue
+                </span>
+
+                <strong class="value">
+                    TurfX Arena
+                </strong>
+
+                <p class="sub-value">
+                    Chennai
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Format
+                </span>
+
+                <strong class="value">
+                    20 Overs
+                </strong>
+
+                <p class="sub-value">
+                    Tennis Ball
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Match
+                </span>
+
+                <strong class="value">
+                    14
+                </strong>
+
+                <p class="sub-value">
+                    League Stage
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Status
+                </span>
+
+                <strong class="value">
+                    LIVE
+                </strong>
+
+                <p class="sub-value">
+                    17.4 Overs
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/fixtures">
+                Fixtures
+            </a>
+
+            <a href="/tournament/points-table">
+                Points Table
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const scoreButtons =
+            document.querySelectorAll(
+                ".score-btn"
+            );
+
+
+        scoreButtons.forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        scoreButtons.forEach(
+                            function (item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        button.classList.add(
+                            "active"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

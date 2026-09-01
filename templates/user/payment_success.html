@@ -1,0 +1,119 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Payment Successful | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">🏠 <span>Dashboard</span></a>
+            <a href="/search-turf">🏟️ <span>Find Turf</span></a>
+            <a href="/booking-history" class="active">📅 <span>My Bookings</span></a>
+            <a href="/team">👥 <span>My Team</span></a>
+            <a href="/tournament">🏆 <span>Tournaments</span></a>
+            <a href="/scorecard">📊 <span>Scorecard</span></a>
+            <a href="/notifications">🔔 <span>Notifications</span></a>
+            <a href="/profile">👤 <span>Profile</span></a>
+            <a href="/settings">⚙️ <span>Settings</span></a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="/logout">🚪 <span>Logout</span></a>
+        </div>
+
+    </aside>
+
+    <main class="dashboard-main">
+
+        <div class="payment-result-page">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <span class="success-label">
+                PAYMENT SUCCESSFUL
+            </span>
+
+            <h1>
+                Booking Confirmed! 🎉
+            </h1>
+
+            <p>
+                Your turf has been booked successfully.
+                Your QR ticket is ready.
+            </p>
+
+            <div class="success-booking-card">
+
+                <div>
+                    <span>BOOKING ID</span>
+                    <strong>#TX-2026-00124</strong>
+                </div>
+
+                <div>
+                    <span>TURF</span>
+                    <strong>TurfX Arena</strong>
+                </div>
+
+                <div>
+                    <span>DATE</span>
+                    <strong>25 Aug 2026</strong>
+                </div>
+
+                <div>
+                    <span>TIME</span>
+                    <strong>06:00 PM - 07:00 PM</strong>
+                </div>
+
+                <div>
+                    <span>AMOUNT PAID</span>
+                    <strong>₹1,000</strong>
+                </div>
+
+                <div>
+                    <span>PAYMENT</span>
+                    <strong>UPI</strong>
+                </div>
+
+            </div>
+
+            <div class="success-actions">
+
+                <a href="/qr-ticket"
+                   class="dashboard-primary-btn">
+                    View QR Ticket
+                </a>
+
+                <a href="/booking-history"
+                   class="secondary-action-btn">
+                    View My Bookings
+                </a>
+
+            </div>
+
+            <p class="success-note">
+                📧 Booking confirmation has been sent to your registered account.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+{% endblock %}

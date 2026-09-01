@@ -1,0 +1,1628 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Staff Management | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff" class="active">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Staff Management
+                </h1>
+
+                <p>
+                    Manage employees, roles, shifts and attendance.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-primary-btn"
+                onclick="openStaffModal()">
+
+                + Add Staff
+
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Staff
+                    </span>
+
+                    <strong>
+                        18
+                    </strong>
+
+                    <small>
+                        Active employees
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        Present Today
+                    </span>
+
+                    <strong>
+                        15
+                    </strong>
+
+                    <small>
+                        Checked in
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    🌴
+                </div>
+
+                <div>
+
+                    <span>
+                        On Leave
+                    </span>
+
+                    <strong>
+                        2
+                    </strong>
+
+                    <small>
+                        Today
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    🌙
+                </div>
+
+                <div>
+
+                    <span>
+                        Night Shift
+                    </span>
+
+                    <strong>
+                        5
+                    </strong>
+
+                    <small>
+                        Today's team
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FILTER -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Staff Directory
+                    </h2>
+
+                    <p>
+                        Search staff and filter by role or shift.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="staff-filter-grid">
+
+                <div class="admin-field">
+
+                    <label>
+                        Search
+                    </label>
+
+                    <input
+                        type="text"
+                        id="staffSearch"
+                        placeholder="Name / phone / ID">
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Role
+                    </label>
+
+                    <select id="staffRoleFilter">
+
+                        <option value="">
+                            All Roles
+                        </option>
+
+                        <option value="Manager">
+                            Manager
+                        </option>
+
+                        <option value="Ground Staff">
+                            Ground Staff
+                        </option>
+
+                        <option value="Security">
+                            Security
+                        </option>
+
+                        <option value="Cleaner">
+                            Cleaner
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Shift
+                    </label>
+
+                    <select id="staffShiftFilter">
+
+                        <option value="">
+                            All Shifts
+                        </option>
+
+                        <option value="Morning">
+                            Morning
+                        </option>
+
+                        <option value="Evening">
+                            Evening
+                        </option>
+
+                        <option value="Night">
+                            Night
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-filter-btn"
+                    onclick="filterStaff()">
+
+                    Apply Filter
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- STAFF TABLE -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Staff Members
+                    </h2>
+
+                    <p>
+                        Current TurfX employees.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="exportStaff()">
+
+                    Export CSV
+
+                </button>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table
+                    class="admin-table"
+                    id="staffTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Staff
+                            </th>
+
+                            <th>
+                                Role
+                            </th>
+
+                            <th>
+                                Contact
+                            </th>
+
+                            <th>
+                                Shift
+                            </th>
+
+                            <th>
+                                Attendance
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr
+                            class="staff-row"
+                            data-role="Manager"
+                            data-shift="Morning">
+
+                            <td>
+
+                                <div class="staff-table-cell">
+
+                                    <div class="staff-avatar">
+                                        AK
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Arun Kumar
+                                        </strong>
+
+                                        <span>
+                                            #ST001
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                Manager
+                            </td>
+
+                            <td>
+
+                                <strong class="contact-main">
+                                    9876543210
+                                </strong>
+
+                                <span class="contact-sub">
+                                    arun@turfx.com
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Morning
+                            </td>
+
+                            <td>
+                                8h 12m
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Present
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewStaff('ST001')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="staff-row"
+                            data-role="Ground Staff"
+                            data-shift="Evening">
+
+                            <td>
+
+                                <div class="staff-table-cell">
+
+                                    <div class="staff-avatar blue">
+                                        RH
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Rahul
+                                        </strong>
+
+                                        <span>
+                                            #ST002
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                Ground Staff
+                            </td>
+
+                            <td>
+
+                                <strong class="contact-main">
+                                    9876543211
+                                </strong>
+
+                                <span class="contact-sub">
+                                    rahul@turfx.com
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Evening
+                            </td>
+
+                            <td>
+                                5h 32m
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Present
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewStaff('ST002')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="staff-row"
+                            data-role="Security"
+                            data-shift="Night">
+
+                            <td>
+
+                                <div class="staff-table-cell">
+
+                                    <div class="staff-avatar orange">
+                                        VG
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Vignesh
+                                        </strong>
+
+                                        <span>
+                                            #ST003
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                Security
+                            </td>
+
+                            <td>
+
+                                <strong class="contact-main">
+                                    9876543212
+                                </strong>
+
+                                <span class="contact-sub">
+                                    vignesh@turfx.com
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Night
+                            </td>
+
+                            <td>
+                                On Leave
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status booked">
+                                    Leave
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewStaff('ST003')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="staff-row"
+                            data-role="Cleaner"
+                            data-shift="Morning">
+
+                            <td>
+
+                                <div class="staff-table-cell">
+
+                                    <div class="staff-avatar red">
+                                        KA
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Karthick
+                                        </strong>
+
+                                        <span>
+                                            #ST004
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                Cleaner
+                            </td>
+
+                            <td>
+
+                                <strong class="contact-main">
+                                    9876543213
+                                </strong>
+
+                                <span class="contact-sub">
+                                    karthick@turfx.com
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Morning
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status blocked">
+                                    Absent
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewStaff('ST004')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ATTENDANCE / SHIFTS -->
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Today's Attendance
+                        </h2>
+
+                        <p>
+                            Staff check-in and check-out.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="attendance-list">
+
+
+                    <div>
+
+                        <span class="attendance-icon present">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Arun Kumar
+                            </strong>
+
+                            <span>
+                                Check-in 06:02 AM
+                            </span>
+
+                        </div>
+
+                        <small>
+                            8h 12m
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="attendance-icon present">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Rahul
+                            </strong>
+
+                            <span>
+                                Check-in 02:04 PM
+                            </span>
+
+                        </div>
+
+                        <small>
+                            5h 32m
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="attendance-icon leave">
+                            L
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Vignesh
+                            </strong>
+
+                            <span>
+                                Approved leave
+                            </span>
+
+                        </div>
+
+                        <small>
+                            Leave
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Shift Overview
+                        </h2>
+
+                        <p>
+                            Current staff allocation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="shift-overview">
+
+                    <div>
+
+                        <span class="shift-badge morning">
+                            Morning
+                        </span>
+
+                        <strong>
+                            6 Staff
+                        </strong>
+
+                        <small>
+                            06:00 AM - 02:00 PM
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="shift-badge evening">
+                            Evening
+                        </span>
+
+                        <strong>
+                            7 Staff
+                        </strong>
+
+                        <small>
+                            02:00 PM - 10:00 PM
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="shift-badge night">
+                            Night
+                        </span>
+
+                        <strong>
+                            5 Staff
+                        </strong>
+
+                        <small>
+                            10:00 PM - 06:00 AM
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SALARY -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Salary Overview
+                    </h2>
+
+                    <p>
+                        Current month salary status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="salary-summary-grid">
+
+                <div>
+
+                    <span>
+                        Total Payroll
+                    </span>
+
+                    <strong>
+                        ₹3,42,000
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Paid
+                    </span>
+
+                    <strong class="salary-green">
+                        ₹2,95,000
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <strong class="salary-orange">
+                        ₹47,000
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Next Pay Date
+                    </span>
+
+                    <strong>
+                        01 Sep 2026
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Staff Management
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- STAFF VIEW MODAL -->
+
+<div
+    id="staffModal"
+    class="admin-modal">
+
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <span>
+                    TURFX STAFF
+                </span>
+
+                <h2>
+                    Staff Profile
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeStaffModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="staff-profile-modal">
+
+            <div
+                id="modalStaffAvatar"
+                class="staff-avatar large">
+                AK
+            </div>
+
+            <div>
+
+                <h3 id="modalStaffName">
+                    Arun Kumar
+                </h3>
+
+                <p id="modalStaffRole">
+                    Manager
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="staff-detail-grid">
+
+            <div>
+
+                <span>
+                    Staff ID
+                </span>
+
+                <strong id="modalStaffId">
+                    #ST001
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Phone
+                </span>
+
+                <strong id="modalStaffPhone">
+                    9876543210
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Shift
+                </span>
+
+                <strong id="modalStaffShift">
+                    Morning
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Status
+                </span>
+
+                <strong id="modalStaffStatus">
+                    Present
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-modal-actions">
+
+            <button
+                type="button"
+                class="admin-outline-btn"
+                onclick="closeStaffModal()">
+
+                Close
+
+            </button>
+
+            <button
+                type="button"
+                class="admin-success-btn"
+                onclick="showAdminAlert('Staff edit feature ready for backend connection.', 'success')">
+
+                Edit
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ADD STAFF MODAL -->
+
+<div
+    id="addStaffModal"
+    class="admin-modal">
+
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <span>
+                    TURFX ADMIN
+                </span>
+
+                <h2>
+                    Add Staff
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeAddStaffModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form onsubmit="createStaff(event)">
+
+            <div class="admin-form-grid staff-form-grid">
+
+                <div class="admin-field">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newStaffName"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Role
+                    </label>
+
+                    <select
+                        id="newStaffRole"
+                        required>
+
+                        <option value="">
+                            Select Role
+                        </option>
+
+                        <option>
+                            Manager
+                        </option>
+
+                        <option>
+                            Ground Staff
+                        </option>
+
+                        <option>
+                            Security
+                        </option>
+
+                        <option>
+                            Cleaner
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="newStaffPhone"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Shift
+                    </label>
+
+                    <select
+                        id="newStaffShift"
+                        required>
+
+                        <option value="">
+                            Select Shift
+                        </option>
+
+                        <option>
+                            Morning
+                        </option>
+
+                        <option>
+                            Evening
+                        </option>
+
+                        <option>
+                            Night
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-modal-actions">
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="closeAddStaffModal()">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="admin-success-btn">
+
+                    Add Staff
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const staffData = {
+
+    ST001: {
+        name: "Arun Kumar",
+        role: "Manager",
+        phone: "9876543210",
+        shift: "Morning",
+        status: "Present",
+        initials: "AK"
+    },
+
+    ST002: {
+        name: "Rahul",
+        role: "Ground Staff",
+        phone: "9876543211",
+        shift: "Evening",
+        status: "Present",
+        initials: "RH"
+    },
+
+    ST003: {
+        name: "Vignesh",
+        role: "Security",
+        phone: "9876543212",
+        shift: "Night",
+        status: "Leave",
+        initials: "VG"
+    },
+
+    ST004: {
+        name: "Karthick",
+        role: "Cleaner",
+        phone: "9876543213",
+        shift: "Morning",
+        status: "Absent",
+        initials: "KA"
+    }
+
+};
+
+
+function filterStaff() {
+
+    const search =
+        document.querySelector(
+            "#staffSearch"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+    const role =
+        document.querySelector(
+            "#staffRoleFilter"
+        )
+        .value;
+
+    const shift =
+        document.querySelector(
+            "#staffShiftFilter"
+        )
+        .value;
+
+    document
+        .querySelectorAll(
+            ".staff-row"
+        )
+        .forEach(function (row) {
+
+            const text =
+                row.textContent
+                .toLowerCase();
+
+            const rowRole =
+                row.dataset.role || "";
+
+            const rowShift =
+                row.dataset.shift || "";
+
+            const matchSearch =
+                !search ||
+                text.includes(search);
+
+            const matchRole =
+                !role ||
+                rowRole === role;
+
+            const matchShift =
+                !shift ||
+                rowShift === shift;
+
+            row.style.display =
+                matchSearch &&
+                matchRole &&
+                matchShift
+                    ? ""
+                    : "none";
+
+        });
+
+}
+
+
+function viewStaff(id) {
+
+    const staff =
+        staffData[id];
+
+    if (!staff) {
+        return;
+    }
+
+    document.querySelector(
+        "#modalStaffAvatar"
+    ).textContent =
+        staff.initials;
+
+    document.querySelector(
+        "#modalStaffName"
+    ).textContent =
+        staff.name;
+
+    document.querySelector(
+        "#modalStaffRole"
+    ).textContent =
+        staff.role;
+
+    document.querySelector(
+        "#modalStaffId"
+    ).textContent =
+        "#" + id;
+
+    document.querySelector(
+        "#modalStaffPhone"
+    ).textContent =
+        staff.phone;
+
+    document.querySelector(
+        "#modalStaffShift"
+    ).textContent =
+        staff.shift;
+
+    document.querySelector(
+        "#modalStaffStatus"
+    ).textContent =
+        staff.status;
+
+    document.querySelector(
+        "#staffModal"
+    ).classList.add("show");
+
+}
+
+
+function closeStaffModal() {
+
+    document.querySelector(
+        "#staffModal"
+    ).classList.remove("show");
+
+}
+
+
+function openStaffModal() {
+
+    document.querySelector(
+        "#addStaffModal"
+    ).classList.add("show");
+
+}
+
+
+function closeAddStaffModal() {
+
+    document.querySelector(
+        "#addStaffModal"
+    ).classList.remove("show");
+
+}
+
+
+function createStaff(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.querySelector(
+            "#newStaffName"
+        ).value
+        .trim();
+
+    if (!name) {
+        return;
+    }
+
+    closeAddStaffModal();
+
+    showAdminAlert(
+        `${name} added successfully.`,
+        "success"
+    );
+
+    event.target.reset();
+
+}
+
+
+function exportStaff() {
+
+    const table =
+        document.querySelector(
+            "#staffTable"
+        );
+
+    if (!table) {
+        return;
+    }
+
+    const rows =
+        table.querySelectorAll("tr");
+
+    const csv = [];
+
+    rows.forEach(function (row) {
+
+        const cells =
+            row.querySelectorAll(
+                "th, td"
+            );
+
+        const values = [];
+
+        cells.forEach(function (cell) {
+
+            values.push(
+                '"' +
+                cell.innerText
+                .replace(/"/g, '""')
+                .trim() +
+                '"'
+            );
+
+        });
+
+        csv.push(
+            values.join(",")
+        );
+
+    });
+
+    const blob =
+        new Blob(
+            [csv.join("\n")],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "turfx-staff.csv";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const search =
+            document.querySelector(
+                "#staffSearch"
+            );
+
+        if (search) {
+
+            search.addEventListener(
+                "input",
+                filterStaff
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

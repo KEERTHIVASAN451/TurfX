@@ -1,0 +1,1454 @@
+/* =========================================================
+   TURFX USER DASHBOARD - PREMIUM POLISH
+   ========================================================= */
+
+.premium-dashboard {
+    background:
+        #f4f7f6;
+}
+
+
+/* SIDEBAR */
+
+.premium-sidebar {
+    background:
+        linear-gradient(
+            180deg,
+            #04180c 0%,
+            #062414 55%,
+            #03140a 100%
+        );
+
+    border-right:
+        1px solid
+        rgba(255,255,255,.06);
+
+    box-shadow:
+        10px 0 35px
+        rgba(2,20,9,.06);
+}
+
+
+.sidebar-brand {
+    letter-spacing:
+        -.4px;
+}
+
+
+.sidebar-brand-ball {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+
+.sidebar-section-label {
+    margin:
+        22px 18px 9px;
+
+    color:
+        #647d6d;
+
+    font-size:
+        7px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        1.8px;
+}
+
+
+.sidebar-secondary-label {
+    margin-top:
+        26px;
+}
+
+
+.premium-sidebar .sidebar-nav a {
+    position:
+        relative;
+
+    margin:
+        3px 10px;
+
+    min-height:
+        43px;
+
+    border-radius:
+        10px;
+
+    color:
+        #a8b9af;
+
+    transition:
+        background .22s ease,
+        color .22s ease,
+        transform .22s ease;
+}
+
+
+.premium-sidebar .sidebar-nav a:hover {
+    transform:
+        translateX(3px);
+
+    color:
+        #ffffff;
+
+    background:
+        rgba(255,255,255,.05);
+}
+
+
+.premium-sidebar .sidebar-nav a.active {
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(34,197,94,.18),
+            rgba(34,197,94,.06)
+        );
+
+    box-shadow:
+        inset 3px 0 0
+        #22c55e;
+}
+
+
+.nav-icon {
+    width:
+        25px;
+
+    text-align:
+        center;
+}
+
+
+.nav-badge {
+    margin-left:
+        auto;
+
+    min-width:
+        18px;
+
+    height:
+        18px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        99px;
+
+    background:
+        #22c55e;
+
+    color:
+        #052e16;
+
+    font-size:
+        6px;
+
+    font-weight:
+        900;
+}
+
+
+.nav-badge.blue {
+    background:
+        #38bdf8;
+
+    color:
+        #082f49;
+}
+
+
+.sidebar-help-card {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    margin:
+        0 10px 10px;
+
+    padding:
+        10px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255,255,255,.035);
+}
+
+
+.sidebar-help-card > span {
+    font-size:
+        15px;
+}
+
+
+.sidebar-help-card strong {
+    display:
+        block;
+
+    color:
+        #ffffff;
+
+    font-size:
+        7px;
+}
+
+
+.sidebar-help-card small {
+    display:
+        block;
+
+    margin-top:
+        2px;
+
+    color:
+        #6f8979;
+
+    font-size:
+        6px;
+}
+
+
+.logout-link {
+    border-radius:
+        10px;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.premium-topbar {
+    min-height:
+        76px;
+
+    padding:
+        18px 28px;
+
+    border-bottom:
+        1px solid
+        #e6ece9;
+
+    background:
+        rgba(255,255,255,.80);
+
+    backdrop-filter:
+        blur(14px);
+}
+
+
+.dashboard-topbar-left {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+}
+
+
+.dashboard-page-label {
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    color:
+        #16a34a;
+
+    font-size:
+        7px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        1.5px;
+}
+
+
+.premium-topbar h1 {
+    font-size:
+        22px;
+
+    letter-spacing:
+        -.6px;
+}
+
+
+.premium-topbar h1 span {
+    color:
+        #16a34a;
+}
+
+
+.premium-topbar p {
+    color:
+        #94a3b8;
+
+    font-size:
+        8px;
+}
+
+
+.premium-notification {
+    border:
+        1px solid
+        #e2e8f0;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 8px 20px
+        rgba(15,23,42,.06);
+}
+
+
+.premium-profile-mini {
+    padding:
+        6px 9px 6px 6px;
+
+    border:
+        1px solid
+        #e2e8f0;
+
+    border-radius:
+        10px;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 8px 20px
+        rgba(15,23,42,.05);
+}
+
+
+.profile-chevron {
+    margin-left:
+        4px;
+
+    color:
+        #94a3b8;
+
+    font-size:
+        8px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.user-dashboard-hero {
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    min-height:
+        250px;
+
+    margin:
+        24px 28px 18px;
+
+    padding:
+        32px;
+
+    border-radius:
+        20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #052e16 0%,
+            #0b4f27 55%,
+            #082f49 100%
+        );
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 25px 60px
+        rgba(5,46,22,.16);
+}
+
+
+.hero-pattern {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    opacity:
+        .14;
+
+    background:
+        radial-gradient(
+            circle at 85% 25%,
+            #ffffff 0 2px,
+            transparent 3px
+        );
+
+    background-size:
+        34px 34px;
+
+    pointer-events:
+        none;
+}
+
+
+.hero-content {
+    position:
+        relative;
+
+    z-index:
+        3;
+
+    max-width:
+        580px;
+}
+
+
+.hero-kicker {
+    color:
+        #86efac;
+
+    font-size:
+        7px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        2px;
+}
+
+
+.hero-content h2 {
+    margin:
+        9px 0 0;
+
+    font-size:
+        clamp(
+            30px,
+            4vw,
+            46px
+        );
+
+    line-height:
+        1.02;
+
+    letter-spacing:
+        -2px;
+}
+
+
+.hero-content p {
+    max-width:
+        450px;
+
+    margin-top:
+        12px;
+
+    color:
+        #d1fae5;
+
+    font-size:
+        9px;
+
+    line-height:
+        1.7;
+}
+
+
+.hero-actions {
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        8px;
+
+    margin-top:
+        20px;
+}
+
+
+.hero-primary {
+    background:
+        #ffffff !important;
+
+    color:
+        #14532d !important;
+
+    box-shadow:
+        0 12px 25px
+        rgba(0,0,0,.16);
+}
+
+
+.dashboard-secondary-btn {
+    min-height:
+        42px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    color:
+        #ffffff;
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    backdrop-filter:
+        blur(10px);
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+
+.dashboard-secondary-btn:hover {
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255,255,255,.12);
+}
+
+
+.hero-cricket-visual {
+    position:
+        absolute;
+
+    right:
+        8%;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    width:
+        180px;
+
+    height:
+        180px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+}
+
+
+.hero-ball-glow {
+    position:
+        absolute;
+
+    width:
+        130px;
+
+    height:
+        130px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(74,222,128,.20);
+
+    filter:
+        blur(35px);
+}
+
+
+.hero-cricket-ball {
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    font-size:
+        88px;
+
+    filter:
+        drop-shadow(
+            0 20px 25px
+            rgba(0,0,0,.20)
+        );
+
+    animation:
+        dashboardBallFloat
+        4s ease-in-out
+        infinite;
+}
+
+
+@keyframes dashboardBallFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-4deg);
+    }
+
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(4deg);
+    }
+
+}
+
+
+.hero-live-card {
+    position:
+        absolute;
+
+    right:
+        24px;
+
+    bottom:
+        20px;
+
+    z-index:
+        5;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    padding:
+        8px 11px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.14);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(0,0,0,.17);
+
+    backdrop-filter:
+        blur(10px);
+}
+
+
+.live-dot {
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        #4ade80;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(74,222,128,.12);
+}
+
+
+.hero-live-card strong {
+    display:
+        block;
+
+    font-size:
+        6px;
+
+    color:
+        #86efac;
+}
+
+
+.hero-live-card small {
+    display:
+        block;
+
+    margin-top:
+        1px;
+
+    color:
+        #cbd5e1;
+
+    font-size:
+        6px;
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.premium-stat-grid {
+    padding:
+        0 28px 6px;
+}
+
+
+.premium-stat-card {
+    border:
+        1px solid
+        #e4ebe7;
+
+    border-radius:
+        13px;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 8px 24px
+        rgba(15,23,42,.045);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease;
+}
+
+
+.premium-stat-card:hover {
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(15,23,42,.08);
+}
+
+
+.stat-positive {
+    color:
+        #16a34a !important;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.premium-dashboard-main {
+    background:
+        #f4f7f6;
+}
+
+
+.premium-panel {
+    margin-bottom:
+        18px;
+
+    border:
+        1px solid
+        #e4ebe7;
+
+    border-radius:
+        15px;
+
+    background:
+        rgba(255,255,255,.90);
+
+    box-shadow:
+        0 9px 30px
+        rgba(15,23,42,.045);
+}
+
+
+.panel-kicker {
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    color:
+        #16a34a;
+
+    font-size:
+        6px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        1.5px;
+}
+
+
+.panel-header a {
+    color:
+        #16a34a;
+
+    font-weight:
+        800;
+}
+
+
+/* =========================================================
+   UPCOMING BOOKING
+   ========================================================= */
+
+.premium-upcoming-booking {
+    display:
+        grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+
+    gap:
+        13px;
+
+    align-items:
+        center;
+
+    padding:
+        15px;
+
+    border:
+        1px solid
+        #edf1ef;
+
+    border-radius:
+        12px;
+
+    background:
+        #fbfdfc;
+}
+
+
+.premium-booking-image {
+    width:
+        58px;
+
+    height:
+        58px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #052e16,
+            #16a34a
+        );
+
+    box-shadow:
+        0 8px 18px
+        rgba(22,163,74,.15);
+}
+
+
+.premium-booking-image span {
+    font-size:
+        24px;
+}
+
+
+.premium-status {
+    color:
+        #15803d;
+
+    background:
+        #dcfce7;
+
+    border-radius:
+        999px;
+
+    padding:
+        4px 7px;
+
+    font-size:
+        6px;
+
+    font-weight:
+        900;
+}
+
+
+.premium-ticket-btn {
+    border-radius:
+        8px;
+
+    background:
+        #0f172a;
+
+    color:
+        #ffffff;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+
+.premium-ticket-btn:hover {
+    transform:
+        translateY(-2px);
+
+    background:
+        #14532d;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.premium-action-grid {
+    grid-template-columns:
+        repeat(2, 1fr);
+}
+
+
+.premium-action-card {
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    min-height:
+        105px;
+
+    border:
+        1px solid
+        #e6ece9;
+
+    border-radius:
+        12px;
+
+    background:
+        #ffffff;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
+
+
+.premium-action-card:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        #bbf7d0;
+
+    box-shadow:
+        0 13px 25px
+        rgba(15,23,42,.07);
+}
+
+
+.premium-action-card > span {
+    display:
+        block;
+
+    margin-bottom:
+        7px;
+
+    font-size:
+        19px;
+}
+
+
+.premium-action-card strong {
+    display:
+        block;
+
+    font-size:
+        8px;
+}
+
+
+.premium-action-card small {
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    color:
+        #94a3b8;
+}
+
+
+.premium-action-card b {
+    position:
+        absolute;
+
+    right:
+        12px;
+
+    bottom:
+        11px;
+
+    color:
+        #16a34a;
+}
+
+
+/* =========================================================
+   RECENT BOOKING
+   ========================================================= */
+
+.premium-recent-booking {
+    border-bottom:
+        1px solid
+        #edf1ef;
+
+    transition:
+        background .2s ease;
+}
+
+
+.premium-recent-booking:hover {
+    background:
+        #fbfdfc;
+}
+
+
+.premium-date {
+    border-radius:
+        10px;
+
+    background:
+        #f0fdf4;
+
+    color:
+        #15803d;
+}
+
+
+/* =========================================================
+   TOURNAMENT CARDS
+   ========================================================= */
+
+.premium-tournament-grid {
+    gap:
+        14px;
+}
+
+
+.premium-tournament-card {
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        #e6ece9;
+
+    border-radius:
+        13px;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 7px 20px
+        rgba(15,23,42,.04);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease;
+}
+
+
+.premium-tournament-card:hover {
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 16px 32px
+        rgba(15,23,42,.08);
+}
+
+
+.premium-tournament-cover {
+    position:
+        relative;
+
+    height:
+        130px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #052e16,
+            #16a34a,
+            #0f766e
+        );
+
+    color:
+        #ffffff;
+}
+
+
+.premium-tournament-cover.second {
+    background:
+        linear-gradient(
+            135deg,
+            #082f49,
+            #2563eb,
+            #1d4ed8
+        );
+}
+
+
+.premium-tournament-cover span {
+    font-size:
+        57px;
+
+    filter:
+        drop-shadow(
+            0 14px 20px
+            rgba(0,0,0,.18)
+        );
+}
+
+
+.premium-tournament-cover small {
+    position:
+        absolute;
+
+    top:
+        10px;
+
+    right:
+        10px;
+
+    padding:
+        5px 7px;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(0,0,0,.18);
+
+    font-size:
+        6px;
+
+    font-weight:
+        900;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.premium-dashboard-footer {
+    margin-top:
+        7px;
+
+    padding:
+        20px 3px 8px;
+
+    border-top:
+        1px solid
+        #e5ebe8;
+
+    color:
+        #94a3b8;
+
+    font-size:
+        7px;
+}
+
+
+.premium-dashboard-footer a {
+    color:
+        #64748b;
+
+    font-weight:
+        800;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+.mobile-dashboard-menu {
+    display:
+        none;
+
+    width:
+        35px;
+
+    height:
+        35px;
+
+    border:
+        1px solid
+        #e2e8f0;
+
+    border-radius:
+        9px;
+
+    background:
+        #ffffff;
+
+    cursor:
+        pointer;
+}
+
+
+@media (max-width: 900px) {
+
+    .premium-sidebar {
+        transform:
+            translateX(-100%);
+
+        transition:
+            transform .3s ease;
+
+        z-index:
+            1000;
+    }
+
+
+    .premium-sidebar.mobile-open {
+        transform:
+            translateX(0);
+    }
+
+
+    .mobile-dashboard-menu {
+        display:
+            inline-flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+    }
+
+
+    .premium-topbar {
+        padding:
+            16px 18px;
+    }
+
+
+    .premium-stat-grid {
+        padding:
+            0 18px 6px;
+    }
+
+
+    .user-dashboard-hero {
+        margin:
+            18px 18px;
+
+        padding:
+            26px 22px;
+    }
+
+
+    .hero-cricket-visual {
+        opacity:
+            .25;
+
+        right:
+            3%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .premium-topbar h1 {
+        font-size:
+            18px;
+    }
+
+
+    .premium-topbar p {
+        font-size:
+            7px;
+    }
+
+
+    .profile-mini > div:last-of-type,
+    .profile-chevron {
+        display:
+            none;
+    }
+
+
+    .user-dashboard-hero {
+        min-height:
+            300px;
+    }
+
+
+    .hero-content h2 {
+        font-size:
+            34px;
+    }
+
+
+    .hero-actions {
+        flex-direction:
+            column;
+    }
+
+
+    .dashboard-secondary-btn,
+    .hero-primary {
+        width:
+            100%;
+    }
+
+
+    .premium-upcoming-booking {
+        grid-template-columns:
+            auto 1fr;
+    }
+
+
+    .premium-ticket-btn {
+        grid-column:
+            1 / -1;
+
+        width:
+            100%;
+
+        justify-content:
+            center;
+    }
+
+
+    .premium-action-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .premium-dashboard-footer {
+        flex-direction:
+            column;
+
+        gap:
+            8px;
+    }
+
+}

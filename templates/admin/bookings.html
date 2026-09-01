@@ -1,0 +1,897 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Bookings | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/booking.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="admin-sidebar">
+
+        <div class="admin-brand">
+            🏏 <span>Turf<span>X</span></span>
+        </div>
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Admin</strong>
+                <span>Turf Manager</span>
+            </div>
+
+        </div>
+
+        <nav class="admin-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings"
+               class="active">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👨‍💼 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="admin-sidebar-bottom">
+
+            <a href="/" target="_blank">
+                🌐 <span>View Website</span>
+            </a>
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="admin-main">
+
+        <!-- TOPBAR -->
+
+        <header class="admin-topbar">
+
+            <div>
+
+                <h1>
+                    Booking Management
+                </h1>
+
+                <p>
+                    View, search and manage all turf bookings.
+                </p>
+
+            </div>
+
+            <div class="admin-top-actions">
+
+                <a href="/admin/qr-scanner"
+                   class="admin-outline-btn">
+                    📷 Scan QR
+                </a>
+
+                <a href="/admin/dashboard"
+                   class="admin-outline-btn">
+                    ← Dashboard
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- STAT CARDS -->
+
+        <section class="admin-stat-grid">
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon green">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        Today's Bookings
+                    </span>
+
+                    <strong>
+                        48
+                    </strong>
+
+                    <small class="positive">
+                        +8 today
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon orange">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <strong>
+                        12
+                    </strong>
+
+                    <small>
+                        Need attention
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon blue">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        Confirmed
+                    </span>
+
+                    <strong>
+                        30
+                    </strong>
+
+                    <small>
+                        Active bookings
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon purple">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Today's Revenue
+                    </span>
+
+                    <strong>
+                        ₹18,500
+                    </strong>
+
+                    <small class="positive">
+                        +12.4%
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FILTER PANEL -->
+
+        <section class="admin-panel">
+
+            <div class="admin-panel-header">
+
+                <div>
+
+                    <h2>
+                        Search & Filter
+                    </h2>
+
+                    <p>
+                        Find bookings quickly.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="booking-filter-grid">
+
+                <div class="admin-search-box">
+
+                    <span>
+                        🔍
+                    </span>
+
+                    <input
+                        type="text"
+                        id="adminBookingSearch"
+                        placeholder="Search booking ID, customer or turf...">
+
+                </div>
+
+
+                <select
+                    id="adminBookingStatusFilter"
+                    class="admin-filter-select">
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="confirmed">
+                        Confirmed
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                    <option value="cancelled">
+                        Cancelled
+                    </option>
+
+                </select>
+
+
+                <input
+                    type="date"
+                    id="adminBookingDate"
+                    class="admin-filter-date">
+
+
+                <button
+                    type="button"
+                    class="admin-primary-btn"
+                    id="clearBookingFilters">
+
+                    Reset
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- BOOKING TABLE -->
+
+        <section class="admin-panel">
+
+            <div class="admin-panel-header">
+
+                <div>
+
+                    <h2>
+                        All Bookings
+                    </h2>
+
+                    <p id="bookingResultText">
+                        Showing 6 bookings
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="admin-primary-btn"
+                    id="exportBookings">
+
+                    Export CSV
+
+                </button>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table
+                    class="admin-table admin-bookings-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Booking ID
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Turf
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Slot
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="adminBookingsBody">
+
+
+                        <tr
+                            data-booking-row
+                            data-status="confirmed"
+                            data-date="2026-08-25">
+
+                            <td>
+                                <strong>#TX001</strong>
+                            </td>
+
+                            <td>
+                                Arun Kumar
+                            </td>
+
+                            <td>
+                                TurfX Arena
+                            </td>
+
+                            <td>
+                                25 Aug 2026
+                            </td>
+
+                            <td>
+                                06:00 PM - 07:00 PM
+                            </td>
+
+                            <td>
+                                ₹800
+                            </td>
+
+                            <td>
+                                <span class="admin-status confirmed">
+                                    Confirmed
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="admin-action-group">
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-view"
+                                        data-booking-view>
+                                        View
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-cancel"
+                                        data-booking-cancel>
+                                        Cancel
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-booking-row
+                            data-status="pending"
+                            data-date="2026-08-25">
+
+                            <td>
+                                <strong>#TX002</strong>
+                            </td>
+
+                            <td>
+                                Vignesh
+                            </td>
+
+                            <td>
+                                Champions Turf
+                            </td>
+
+                            <td>
+                                25 Aug 2026
+                            </td>
+
+                            <td>
+                                07:00 PM - 08:00 PM
+                            </td>
+
+                            <td>
+                                ₹900
+                            </td>
+
+                            <td>
+                                <span class="admin-status pending">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="admin-action-group">
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-confirm"
+                                        data-booking-confirm>
+                                        Confirm
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-cancel"
+                                        data-booking-cancel>
+                                        Cancel
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-booking-row
+                            data-status="completed"
+                            data-date="2026-08-24">
+
+                            <td>
+                                <strong>#TX003</strong>
+                            </td>
+
+                            <td>
+                                Rahul
+                            </td>
+
+                            <td>
+                                City Sports Arena
+                            </td>
+
+                            <td>
+                                24 Aug 2026
+                            </td>
+
+                            <td>
+                                08:00 PM - 09:00 PM
+                            </td>
+
+                            <td>
+                                ₹1,000
+                            </td>
+
+                            <td>
+                                <span class="admin-status completed">
+                                    Completed
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="admin-action-group">
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-view"
+                                        data-booking-view>
+                                        View
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-booking-row
+                            data-status="cancelled"
+                            data-date="2026-08-24">
+
+                            <td>
+                                <strong>#TX004</strong>
+                            </td>
+
+                            <td>
+                                Karthick
+                            </td>
+
+                            <td>
+                                TurfX Arena
+                            </td>
+
+                            <td>
+                                24 Aug 2026
+                            </td>
+
+                            <td>
+                                09:00 PM - 10:00 PM
+                            </td>
+
+                            <td>
+                                ₹1,200
+                            </td>
+
+                            <td>
+                                <span class="admin-status cancelled">
+                                    Cancelled
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="admin-action-group">
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-view"
+                                        data-booking-view>
+                                        View
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-booking-row
+                            data-status="confirmed"
+                            data-date="2026-08-26">
+
+                            <td>
+                                <strong>#TX005</strong>
+                            </td>
+
+                            <td>
+                                Prakash
+                            </td>
+
+                            <td>
+                                Elite Cricket Club
+                            </td>
+
+                            <td>
+                                26 Aug 2026
+                            </td>
+
+                            <td>
+                                06:00 PM - 07:00 PM
+                            </td>
+
+                            <td>
+                                ₹1,200
+                            </td>
+
+                            <td>
+                                <span class="admin-status confirmed">
+                                    Confirmed
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="admin-action-group">
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-view"
+                                        data-booking-view>
+                                        View
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-cancel"
+                                        data-booking-cancel>
+                                        Cancel
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            data-booking-row
+                            data-status="confirmed"
+                            data-date="2026-08-26">
+
+                            <td>
+                                <strong>#TX006</strong>
+                            </td>
+
+                            <td>
+                                Sanjay
+                            </td>
+
+                            <td>
+                                Super Strikers Ground
+                            </td>
+
+                            <td>
+                                26 Aug 2026
+                            </td>
+
+                            <td>
+                                07:00 PM - 08:00 PM
+                            </td>
+
+                            <td>
+                                ₹750
+                            </td>
+
+                            <td>
+                                <span class="admin-status confirmed">
+                                    Confirmed
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="admin-action-group">
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-view"
+                                        data-booking-view>
+                                        View
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="admin-action-cancel"
+                                        data-booking-cancel>
+                                        Cancel
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- BOOKING DETAILS MODAL -->
+
+        <div
+            id="adminBookingModal"
+            class="admin-modal">
+
+            <div class="admin-modal-content">
+
+                <div class="admin-modal-header">
+
+                    <div>
+
+                        <h2>
+                            Booking Details
+                        </h2>
+
+                        <p>
+                            Complete booking information
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="closeBookingModal">
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="bookingModalBody"
+                    class="admin-modal-body">
+
+                    <div class="modal-booking-grid">
+
+                        <div>
+                            <span>Booking ID</span>
+                            <strong id="modalBookingId">-</strong>
+                        </div>
+
+                        <div>
+                            <span>Customer</span>
+                            <strong id="modalCustomer">-</strong>
+                        </div>
+
+                        <div>
+                            <span>Turf</span>
+                            <strong id="modalTurf">-</strong>
+                        </div>
+
+                        <div>
+                            <span>Date</span>
+                            <strong id="modalDate">-</strong>
+                        </div>
+
+                        <div>
+                            <span>Slot</span>
+                            <strong id="modalSlot">-</strong>
+                        </div>
+
+                        <div>
+                            <span>Amount</span>
+                            <strong id="modalAmount">-</strong>
+                        </div>
+
+                        <div>
+                            <span>Status</span>
+                            <strong id="modalStatus">-</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-modal-footer">
+
+                    <button
+                        type="button"
+                        id="closeBookingModalFooter"
+                        class="admin-outline-btn">
+
+                        Close
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer class="admin-footer">
+
+            <span>
+                © 2026 TurfX Admin Panel
+            </span>
+
+            <span>
+                Booking Management
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

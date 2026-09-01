@@ -1,0 +1,2034 @@
+{% extends "shared/head.html" %}
+
+{% block title %}
+    Book Turf | TurfX
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/user.css') }}"
+>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/booking.css') }}"
+>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script
+    src="{{ url_for('static', filename='js/booking.js') }}">
+</script>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="dashboard-sidebar">
+
+
+        <div class="sidebar-brand">
+
+            🏏
+
+            <span>
+                Turf<span class="brand-green">X</span>
+            </span>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+
+            <a href="/user/dashboard">
+
+                🏠
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="/search-turf">
+
+                🏟️
+
+                <span>
+                    Find Turf
+                </span>
+
+            </a>
+
+
+            <a
+                href="/booking-history"
+                class="active">
+
+                📅
+
+                <span>
+                    My Bookings
+                </span>
+
+            </a>
+
+
+            <a href="/team">
+
+                👥
+
+                <span>
+                    My Team
+                </span>
+
+            </a>
+
+
+            <a href="/tournament">
+
+                🏆
+
+                <span>
+                    Tournaments
+                </span>
+
+            </a>
+
+
+            <a href="/scorecard">
+
+                📊
+
+                <span>
+                    Scorecard
+                </span>
+
+            </a>
+
+
+            <a href="/notifications">
+
+                🔔
+
+                <span>
+                    Notifications
+                </span>
+
+            </a>
+
+
+            <a href="/profile">
+
+                👤
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <a href="/settings">
+
+                ⚙️
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+
+                🚪
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- =================================================
+             HEADER
+             ================================================= -->
+
+        <header class="dashboard-topbar">
+
+
+            <div>
+
+                <h1>
+                    Complete Your Booking
+                </h1>
+
+                <p>
+                    Review your turf, slot and booking details.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('search_turf') }}"
+                class="dashboard-primary-btn">
+
+                ← Change Turf
+
+            </a>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             STEPS
+             ================================================= -->
+
+        <section class="booking-steps">
+
+
+            <div class="booking-step completed">
+
+                <span>
+                    ✓
+                </span>
+
+                <strong>
+                    Turf
+                </strong>
+
+            </div>
+
+
+            <div class="booking-step completed">
+
+                <span>
+                    ✓
+                </span>
+
+                <strong>
+                    Slot
+                </strong>
+
+            </div>
+
+
+            <div class="booking-step active">
+
+                <span>
+                    3
+                </span>
+
+                <strong>
+                    Booking
+                </strong>
+
+            </div>
+
+
+            <div class="booking-step">
+
+                <span>
+                    4
+                </span>
+
+                <strong>
+                    Payment
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             FLASH MESSAGES
+             ================================================= -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                <section class="booking-alerts">
+
+                    {% for category, message in messages %}
+
+                        <div
+                            class="booking-alert {{ category }}">
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                </section>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+
+        <!-- =================================================
+             MAIN BOOKING FORM
+             ================================================= -->
+
+        <form
+            id="bookingForm"
+            method="POST"
+            action="{{ url_for('booking') }}"
+        >
+
+
+            <!-- =================================================
+                 REAL DATABASE VALUES
+                 ================================================= -->
+
+            <input
+                type="hidden"
+                name="turf_id"
+                value="{{ turf.id if turf else '' }}"
+            >
+
+
+            <input
+                type="hidden"
+                name="slot_id"
+                id="selectedSlot"
+                value="{{ slot.id if slot else '' }}"
+            >
+
+
+            <input
+                type="hidden"
+                name="slot_price"
+                id="slotPrice"
+                value="{{ slot.price if slot else 0 }}"
+            >
+
+
+
+            <div class="booking-page-grid">
+
+
+                <!-- =============================================
+                     LEFT COLUMN
+                     ============================================= -->
+
+                <div>
+
+
+                    <!-- =========================================
+                         TURF SUMMARY
+                         ========================================= -->
+
+                    <section class="dashboard-panel">
+
+
+                        <div class="panel-header">
+
+
+                            <div>
+
+                                <h2>
+                                    Turf Details
+                                </h2>
+
+                                <p>
+                                    Your selected playing ground
+                                </p>
+
+                            </div>
+
+
+                            <a
+                                href="{{ url_for('search_turf') }}">
+
+                                Change
+
+                            </a>
+
+
+                        </div>
+
+
+
+                        {% if turf %}
+
+                            <div class="booking-turf-summary">
+
+
+                                <div class="booking-turf-icon">
+
+                                    {% if turf.image %}
+
+                                        <img
+                                            src="{{ url_for(
+                                                'static',
+                                                filename='images/' + turf.image
+                                            ) }}"
+                                            alt="{{ turf.name }}"
+                                        >
+
+                                    {% else %}
+
+                                        🏏
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <div>
+
+
+                                    <span
+                                        class="booking-confirmed-label">
+
+                                        SELECTED TURF
+
+                                    </span>
+
+
+                                    <h3>
+
+                                        {{ turf.name }}
+
+                                    </h3>
+
+
+                                    <p>
+
+                                        📍
+
+                                        {{ turf.address }}
+
+                                        {% if turf.city %}
+                                            , {{ turf.city }}
+                                        {% endif %}
+
+                                    </p>
+
+
+                                    {% if turf.contact_phone %}
+
+                                        <p>
+
+                                            📞
+                                            {{ turf.contact_phone }}
+
+                                        </p>
+
+                                    {% endif %}
+
+
+                                    <div class="booking-rating">
+
+                                        ⭐
+
+                                        TurfX Turf
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        {% else %}
+
+
+                            <div class="booking-empty-state">
+
+                                <p>
+                                    Turf information is unavailable.
+                                </p>
+
+
+                                <a href="{{ url_for('search_turf') }}">
+
+                                    Go back to turf search
+
+                                </a>
+
+                            </div>
+
+
+                        {% endif %}
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         BOOKING DATE
+                         ========================================= -->
+
+                    <section class="dashboard-panel">
+
+
+                        <div class="panel-header">
+
+
+                            <div>
+
+                                <h2>
+                                    Booking Date
+                                </h2>
+
+                                <p>
+                                    Select when you want to play
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="booking-date-large">
+
+
+                            <label
+                                for="bookingDate">
+
+                                Select Date
+
+                            </label>
+
+
+                            <input
+                                type="date"
+                                id="bookingDate"
+                                name="booking_date"
+                                value="{{
+                                    selected_date.isoformat()
+                                    if selected_date
+                                    else ''
+                                }}"
+                                required
+                            >
+
+
+                        </div>
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         SELECTED SLOT
+                         ========================================= -->
+
+                    <section class="dashboard-panel">
+
+
+                        <div class="panel-header">
+
+
+                            <div>
+
+                                <h2>
+                                    Selected Slot
+                                </h2>
+
+                                <p>
+                                    Your selected playing time
+                                </p>
+
+                            </div>
+
+
+                            {% if turf %}
+
+                                <a
+                                    href="{{ url_for(
+                                        'turf_details',
+                                        turf_id=turf.id,
+                                        date=(
+                                            selected_date.isoformat()
+                                            if selected_date
+                                            else ''
+                                        )
+                                    ) }}">
+
+                                    Change Slot
+
+                                </a>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+
+                        {% if slot %}
+
+
+                            <div class="selected-slot-card">
+
+
+                                <div class="selected-slot-icon">
+
+                                    ⏰
+
+                                </div>
+
+
+                                <div>
+
+
+                                    <span>
+                                        SELECTED SESSION
+                                    </span>
+
+
+                                    <h3
+                                        id="bookingSlotDisplay">
+
+                                        {{ slot.start_time.strftime("%I:%M %p") }}
+
+                                        -
+
+                                        {{ slot.end_time.strftime("%I:%M %p") }}
+
+                                    </h3>
+
+
+                                    <p>
+
+                                        Turf slot
+
+                                    </p>
+
+
+                                </div>
+
+
+                                <strong>
+
+                                    ₹{{
+                                        "%.2f"|format(
+                                            slot.price|float
+                                        )
+                                    }}
+
+                                </strong>
+
+
+                            </div>
+
+
+                        {% else %}
+
+
+                            <div class="booking-empty-state">
+
+                                <p>
+                                    No slot selected.
+                                </p>
+
+
+                                {% if turf %}
+
+                                    <a
+                                        href="{{ url_for(
+                                            'turf_details',
+                                            turf_id=turf.id
+                                        ) }}">
+
+                                        Select Available Slot
+
+                                    </a>
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                        {% endif %}
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         NOTES
+                         ========================================= -->
+
+                    <section class="dashboard-panel">
+
+
+                        <div class="panel-header">
+
+
+                            <div>
+
+                                <h2>
+                                    Booking Notes
+                                </h2>
+
+                                <p>
+                                    Add an optional note for this booking
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="booking-notes">
+
+
+                            <label
+                                for="bookingNotes">
+
+                                Notes
+
+                            </label>
+
+
+                            <textarea
+                                id="bookingNotes"
+                                name="notes"
+                                rows="4"
+                                placeholder="Any special request..."
+                            ></textarea>
+
+
+                        </div>
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         EQUIPMENT
+                         ========================================= -->
+
+                    <section class="dashboard-panel">
+
+
+                        <div class="panel-header">
+
+
+                            <div>
+
+                                <h2>
+                                    Add Equipment
+                                </h2>
+
+                                <p>
+                                    Optional equipment selection
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="booking-equipment-list">
+
+
+                            <!-- BAT -->
+
+                            <div
+                                class="booking-equipment-item"
+                                data-price="150"
+                            >
+
+
+                                <div class="equipment-select-icon">
+
+                                    🏏
+
+                                </div>
+
+
+                                <div class="equipment-info">
+
+                                    <h3>
+                                        Cricket Bat
+                                    </h3>
+
+                                    <p>
+                                        Premium quality bat
+                                    </p>
+
+                                    <strong>
+                                        ₹150
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="equipment-quantity-box">
+
+
+                                    <button
+                                        type="button"
+                                        onclick="changeBookingEquipment(this, -1)"
+                                    >
+                                        −
+                                    </button>
+
+
+                                    <input
+                                        type="number"
+                                        class="equipment-quantity"
+                                        value="0"
+                                        min="0"
+                                        readonly
+                                    >
+
+
+                                    <button
+                                        type="button"
+                                        onclick="changeBookingEquipment(this, 1)"
+                                    >
+                                        +
+                                    </button>
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- GLOVES -->
+
+                            <div
+                                class="booking-equipment-item"
+                                data-price="50"
+                            >
+
+
+                                <div class="equipment-select-icon">
+
+                                    🧤
+
+                                </div>
+
+
+                                <div class="equipment-info">
+
+                                    <h3>
+                                        Batting Gloves
+                                    </h3>
+
+                                    <p>
+                                        Professional batting gloves
+                                    </p>
+
+                                    <strong>
+                                        ₹50
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="equipment-quantity-box">
+
+
+                                    <button
+                                        type="button"
+                                        onclick="changeBookingEquipment(this, -1)"
+                                    >
+                                        −
+                                    </button>
+
+
+                                    <input
+                                        type="number"
+                                        class="equipment-quantity"
+                                        value="0"
+                                        min="0"
+                                        readonly
+                                    >
+
+
+                                    <button
+                                        type="button"
+                                        onclick="changeBookingEquipment(this, 1)"
+                                    >
+                                        +
+                                    </button>
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- HELMET -->
+
+                            <div
+                                class="booking-equipment-item"
+                                data-price="70"
+                            >
+
+
+                                <div class="equipment-select-icon">
+
+                                    🪖
+
+                                </div>
+
+
+                                <div class="equipment-info">
+
+                                    <h3>
+                                        Cricket Helmet
+                                    </h3>
+
+                                    <p>
+                                        Safety helmet
+                                    </p>
+
+                                    <strong>
+                                        ₹70
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="equipment-quantity-box">
+
+
+                                    <button
+                                        type="button"
+                                        onclick="changeBookingEquipment(this, -1)"
+                                    >
+                                        −
+                                    </button>
+
+
+                                    <input
+                                        type="number"
+                                        class="equipment-quantity"
+                                        value="0"
+                                        min="0"
+                                        readonly
+                                    >
+
+
+                                    <button
+                                        type="button"
+                                        onclick="changeBookingEquipment(this, 1)"
+                                    >
+                                        +
+                                    </button>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         COUPON
+                         ========================================= -->
+
+                    <section class="dashboard-panel">
+
+
+                        <div class="panel-header">
+
+
+                            <div>
+
+                                <h2>
+                                    Coupon Code
+                                </h2>
+
+                                <p>
+                                    Frontend preview only for now
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="booking-coupon">
+
+
+                            <input
+                                type="text"
+                                id="couponCode"
+                                placeholder="Enter coupon code"
+                            >
+
+
+                            <button
+                                type="button"
+                                id="applyCoupon">
+
+                                Apply
+
+                            </button>
+
+
+                        </div>
+
+
+                        <div
+                            id="couponMessage"
+                            class="coupon-message"
+                        >
+                        </div>
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         PAYMENT METHOD
+                         ========================================= -->
+
+                    <section class="dashboard-panel">
+
+
+                        <div class="panel-header">
+
+
+                            <div>
+
+                                <h2>
+                                    Payment Method
+                                </h2>
+
+                                <p>
+                                    Payment will be handled in the next step
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="payment-options">
+
+
+                            <label class="payment-option">
+
+
+                                <input
+                                    type="radio"
+                                    name="payment_method"
+                                    value="upi"
+                                    checked
+                                >
+
+
+                                <span class="payment-option-icon">
+                                    📱
+                                </span>
+
+
+                                <span>
+
+                                    <strong>
+                                        UPI
+                                    </strong>
+
+                                    <small>
+                                        GPay / PhonePe / Paytm
+                                    </small>
+
+                                </span>
+
+
+                            </label>
+
+
+
+                            <label class="payment-option">
+
+
+                                <input
+                                    type="radio"
+                                    name="payment_method"
+                                    value="card"
+                                >
+
+
+                                <span class="payment-option-icon">
+                                    💳
+                                </span>
+
+
+                                <span>
+
+                                    <strong>
+                                        Card
+                                    </strong>
+
+                                    <small>
+                                        Credit / Debit Card
+                                    </small>
+
+                                </span>
+
+
+                            </label>
+
+
+
+                            <label class="payment-option">
+
+
+                                <input
+                                    type="radio"
+                                    name="payment_method"
+                                    value="cash"
+                                >
+
+
+                                <span class="payment-option-icon">
+                                    💵
+                                </span>
+
+
+                                <span>
+
+                                    <strong>
+                                        Pay at Turf
+                                    </strong>
+
+                                    <small>
+                                        Cash payment
+                                    </small>
+
+                                </span>
+
+
+                            </label>
+
+
+                        </div>
+
+
+                    </section>
+
+
+                </div>
+
+
+
+                <!-- =============================================
+                     RIGHT SUMMARY
+                     ============================================= -->
+
+                <aside>
+
+
+                    <section class="booking-final-card">
+
+
+                        <div class="booking-final-header">
+
+
+                            <span>
+                                BOOKING SUMMARY
+                            </span>
+
+
+                            <span>
+                                🔒 SECURE
+                            </span>
+
+
+                        </div>
+
+
+
+                        <h2>
+
+                            {{ turf.name if turf else "Turf" }}
+
+                        </h2>
+
+
+                        <p>
+
+                            {% if turf %}
+
+                                📍
+                                {{ turf.city }}
+
+                            {% else %}
+
+                                Turf details unavailable.
+
+                            {% endif %}
+
+                        </p>
+
+
+
+                        <div class="booking-summary-detail">
+
+
+                            <!-- DATE -->
+
+                            <div>
+
+                                <span>
+                                    Date
+                                </span>
+
+
+                                <strong
+                                    id="summaryDate">
+
+                                    {% if selected_date %}
+
+                                        {{ selected_date.strftime("%d %b %Y") }}
+
+                                    {% else %}
+
+                                        Select date
+
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <!-- TIME -->
+
+                            <div>
+
+                                <span>
+                                    Time
+                                </span>
+
+
+                                <strong>
+
+                                    {% if slot %}
+
+                                        {{ slot.start_time.strftime("%I:%M %p") }}
+
+                                        -
+
+                                        {{ slot.end_time.strftime("%I:%M %p") }}
+
+                                    {% else %}
+
+                                        Select slot
+
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <!-- TURF -->
+
+                            <div>
+
+                                <span>
+                                    Turf
+                                </span>
+
+
+                                <strong>
+
+                                    ₹{{
+                                        "%.2f"|format(
+                                            slot.price|float
+                                        )
+                                        if slot
+                                        else
+                                        "0.00"
+                                    }}
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <!-- EQUIPMENT -->
+
+                            <div>
+
+                                <span>
+                                    Equipment
+                                </span>
+
+
+                                <strong
+                                    id="equipmentBookingTotal">
+
+                                    ₹0.00
+
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="booking-summary-divider"></div>
+
+
+
+                        <div class="booking-coupon-summary">
+
+
+                            <span>
+                                Discount
+                            </span>
+
+
+                            <strong
+                                id="bookingDiscount">
+
+                                - ₹0.00
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        <div class="booking-total-row">
+
+
+                            <span>
+                                Turf Total
+                            </span>
+
+
+                            <strong
+                                id="bookingFinalTotal">
+
+                                ₹{{
+                                    "%.2f"|format(
+                                        slot.price|float
+                                    )
+                                    if slot
+                                    else
+                                    "0.00"
+                                }}
+
+                            </strong>
+
+
+                        </div>
+
+
+
+                        {% if slot %}
+
+
+                            <button
+                                type="submit"
+                                class="booking-pay-btn"
+                                id="confirmBookingBtn"
+                            >
+
+                                Confirm Booking →
+
+                            </button>
+
+
+                        {% else %}
+
+
+                            <button
+                                type="button"
+                                class="booking-pay-btn"
+                                disabled
+                            >
+
+                                Select a Slot First
+
+                            </button>
+
+
+                        {% endif %}
+
+
+
+                        <div class="booking-secure-note">
+
+                            🔒 Your booking information is securely processed.
+
+                        </div>
+
+
+                    </section>
+
+
+
+                    <!-- =========================================
+                         TRUST CARDS
+                         ========================================= -->
+
+                    <section class="booking-trust-card">
+
+
+                        <div>
+                            ✓
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Instant Booking Record
+                            </strong>
+
+                            <p>
+                                Your booking code will be generated automatically.
+                            </p>
+
+                        </div>
+
+
+                    </section>
+
+
+
+                    <section class="booking-trust-card">
+
+
+                        <div>
+                            ↩
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Flexible Cancellation
+                            </strong>
+
+                            <p>
+                                Cancellation is available for eligible bookings.
+                            </p>
+
+                        </div>
+
+
+                    </section>
+
+
+                </aside>
+
+
+            </div>
+
+
+        </form>
+
+
+
+        <!-- =================================================
+             FOOTER
+             ================================================= -->
+
+        <footer class="dashboard-footer">
+
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+
+            <span>
+                Secure Turf Booking
+            </span>
+
+
+        </footer>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     BOOKING PAGE JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+(function () {
+
+
+    /* =====================================================
+       GLOBAL TURF PRICE
+       ===================================================== */
+
+    const slotPriceInput =
+        document.querySelector(
+            "#slotPrice"
+        );
+
+
+    const turfPrice =
+        parseFloat(
+            slotPriceInput
+                ? slotPriceInput.value
+                : "0"
+        ) || 0;
+
+
+
+    /* =====================================================
+       DATE
+       ===================================================== */
+
+    const dateInput =
+        document.querySelector(
+            "#bookingDate"
+        );
+
+
+    const summaryDate =
+        document.querySelector(
+            "#summaryDate"
+        );
+
+
+    if (dateInput) {
+
+
+        const today =
+            new Date();
+
+
+        const todayText =
+            today
+                .toISOString()
+                .split("T")[0];
+
+
+        dateInput.min =
+            todayText;
+
+
+        if (
+            !dateInput.value
+        ) {
+
+            dateInput.value =
+                todayText;
+
+        }
+
+
+        dateInput.addEventListener(
+            "change",
+            function () {
+
+
+                if (
+                    !this.value
+                ) {
+
+                    return;
+
+                }
+
+
+                const selected =
+                    new Date(
+                        this.value
+                            + "T00:00:00"
+                    );
+
+
+                const display =
+                    selected.toLocaleDateString(
+                        "en-IN",
+                        {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric"
+                        }
+                    );
+
+
+                if (summaryDate) {
+
+                    summaryDate.textContent =
+                        display;
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       EQUIPMENT TOTAL
+       ===================================================== */
+
+    window.changeBookingEquipment =
+        function (
+            button,
+            change
+        ) {
+
+
+            const item =
+                button.closest(
+                    ".booking-equipment-item"
+                );
+
+
+            if (!item) {
+
+                return;
+
+            }
+
+
+            const input =
+                item.querySelector(
+                    ".equipment-quantity"
+                );
+
+
+            if (!input) {
+
+                return;
+
+            }
+
+
+            let quantity =
+                parseInt(
+                    input.value
+                ) || 0;
+
+
+            quantity += change;
+
+
+            if (
+                quantity < 0
+            ) {
+
+                quantity = 0;
+
+            }
+
+
+            input.value =
+                quantity;
+
+
+            updateBookingEquipmentTotal();
+
+        };
+
+
+
+    function updateBookingEquipmentTotal() {
+
+
+        let equipmentTotal =
+            0;
+
+
+        document
+            .querySelectorAll(
+                ".booking-equipment-item"
+            )
+            .forEach(
+                function (item) {
+
+
+                    const price =
+                        parseFloat(
+                            item.dataset.price
+                        ) || 0;
+
+
+                    const quantity =
+                        parseInt(
+                            item.querySelector(
+                                ".equipment-quantity"
+                            )?.value
+                        ) || 0;
+
+
+                    equipmentTotal +=
+                        price * quantity;
+
+                }
+            );
+
+
+        const equipmentDisplay =
+            document.querySelector(
+                "#equipmentBookingTotal"
+            );
+
+
+        if (
+            equipmentDisplay
+        ) {
+
+            equipmentDisplay.textContent =
+                "₹"
+                + equipmentTotal.toFixed(2);
+
+        }
+
+
+        /*
+         * IMPORTANT:
+         *
+         * Current backend stores only slot.price
+         * in bookings.total_amount.
+         *
+         * Therefore we do NOT add equipment to the
+         * final booking amount yet.
+         */
+
+
+        const finalTotal =
+            document.querySelector(
+                "#bookingFinalTotal"
+            );
+
+
+        if (
+            finalTotal
+        ) {
+
+            finalTotal.textContent =
+                "₹"
+                + turfPrice.toFixed(2);
+
+        }
+
+
+    }
+
+
+
+    /* =====================================================
+       COUPON
+       ===================================================== */
+
+    const couponButton =
+        document.querySelector(
+            "#applyCoupon"
+        );
+
+
+    if (
+        couponButton
+    ) {
+
+
+        couponButton.addEventListener(
+            "click",
+            function () {
+
+
+                const codeInput =
+                    document.querySelector(
+                        "#couponCode"
+                    );
+
+
+                const message =
+                    document.querySelector(
+                        "#couponMessage"
+                    );
+
+
+                const discount =
+                    document.querySelector(
+                        "#bookingDiscount"
+                    );
+
+
+                const code =
+                    codeInput
+                        ? codeInput.value
+                            .trim()
+                            .toUpperCase()
+                        : "";
+
+
+                if (
+                    !code
+                ) {
+
+
+                    if (message) {
+
+                        message.textContent =
+                            "Enter a coupon code.";
+
+                    }
+
+
+                    return;
+
+                }
+
+
+                /*
+                 * Coupon is UI-only for now.
+                 *
+                 * Do not change final DB amount here because
+                 * backend does not yet store coupon/discount.
+                 */
+
+
+                if (
+                    code === "TURFX10"
+                ) {
+
+
+                    if (message) {
+
+                        message.textContent =
+                            "Coupon accepted for preview. Discount will be connected in the payment phase.";
+
+                        message.style.color =
+                            "#16a34a";
+
+                    }
+
+
+                    if (discount) {
+
+                        discount.textContent =
+                            "- ₹0.00";
+
+                    }
+
+
+                } else {
+
+
+                    if (message) {
+
+                        message.textContent =
+                            "Invalid coupon code.";
+
+                        message.style.color =
+                            "#dc2626";
+
+                    }
+
+
+                    if (discount) {
+
+                        discount.textContent =
+                            "- ₹0.00";
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       FORM SUBMIT VALIDATION
+       ===================================================== */
+
+    const bookingForm =
+        document.querySelector(
+            "#bookingForm"
+        );
+
+
+    if (
+        bookingForm
+    ) {
+
+
+        bookingForm.addEventListener(
+            "submit",
+            function (event) {
+
+
+                const turfId =
+                    bookingForm.querySelector(
+                        'input[name="turf_id"]'
+                    )?.value;
+
+
+                const slotId =
+                    bookingForm.querySelector(
+                        'input[name="slot_id"]'
+                    )?.value;
+
+
+                const bookingDate =
+                    bookingForm.querySelector(
+                        'input[name="booking_date"]'
+                    )?.value;
+
+
+                if (
+                    !turfId
+                    || !slotId
+                ) {
+
+
+                    event.preventDefault();
+
+
+                    alert(
+                        "Please select a valid turf and slot."
+                    );
+
+
+                    return;
+
+                }
+
+
+                if (
+                    !bookingDate
+                ) {
+
+
+                    event.preventDefault();
+
+
+                    alert(
+                        "Please select a booking date."
+                    );
+
+
+                    return;
+
+                }
+
+
+                const confirmButton =
+                    document.querySelector(
+                        "#confirmBookingBtn"
+                    );
+
+
+                if (
+                    confirmButton
+                ) {
+
+                    confirmButton.disabled =
+                        true;
+
+
+                    confirmButton.textContent =
+                        "Booking...";
+
+                }
+
+            }
+        );
+
+    }
+
+
+})();
+
+</script>
+
+
+{% endblock %}

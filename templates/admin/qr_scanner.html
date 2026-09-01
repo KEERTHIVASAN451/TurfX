@@ -1,0 +1,862 @@
+{% extends "shared/head.html" %}
+
+{% block title %}QR Scanner | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="https://unpkg.com/html5-qrcode"
+        type="text/javascript"></script>
+
+<script src="{{ url_for('static', filename='js/qr.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner" class="active">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    QR Ticket Scanner
+                </h1>
+
+                <p>
+                    Scan customer QR tickets and verify bookings instantly.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        Verified Today
+                    </span>
+
+                    <strong>
+                        36
+                    </strong>
+
+                    <small>
+                        Successful entries
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    🎟️
+                </div>
+
+                <div>
+
+                    <span>
+                        Tickets Scanned
+                    </span>
+
+                    <strong>
+                        42
+                    </strong>
+
+                    <small>
+                        Today
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <strong>
+                        4
+                    </strong>
+
+                    <small>
+                        Awaiting check-in
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    🚫
+                </div>
+
+                <div>
+
+                    <span>
+                        Invalid
+                    </span>
+
+                    <strong>
+                        2
+                    </strong>
+
+                    <small>
+                        Rejected today
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SCANNER -->
+
+        <section class="dashboard-content-grid qr-scanner-layout">
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Live Scanner
+                        </h2>
+
+                        <p>
+                            Allow camera access and scan a TurfX QR ticket.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="qr-reader-wrapper">
+
+                    <div
+                        id="qrReader"
+                        class="qr-reader">
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="qrScanStatus"
+                    class="qr-scan-status waiting">
+
+                    <span class="qr-status-dot"></span>
+
+                    Waiting for QR scan...
+
+                </div>
+
+
+                <div class="qr-scanner-actions">
+
+                    <button
+                        type="button"
+                        class="admin-success-btn"
+                        onclick="startQRScanner()">
+
+                        Start Scanner
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="admin-outline-btn"
+                        onclick="stopQRScanner()">
+
+                        Stop Scanner
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="admin-outline-btn"
+                        onclick="simulateQRScan()">
+
+                        Demo Scan
+
+                    </button>
+
+                </div>
+
+
+                <div class="qr-camera-note">
+
+                    📷 Camera permission is required for live scanning.
+
+                </div>
+
+            </div>
+
+
+            <!-- VERIFICATION -->
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Verification
+                        </h2>
+
+                        <p>
+                            Scanned ticket information
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="qrVerificationCard"
+                    class="qr-verification-card empty">
+
+                    <div class="qr-verification-icon">
+                        🎟️
+                    </div>
+
+                    <h3>
+                        No Ticket Scanned
+                    </h3>
+
+                    <p>
+                        Scan a valid TurfX booking QR
+                        to view customer and slot details.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="qrBookingDetails"
+                    class="qr-booking-details hidden">
+
+
+                    <div class="qr-customer-header">
+
+                        <div
+                            id="qrCustomerAvatar"
+                            class="customer-avatar large">
+                            AK
+                        </div>
+
+                        <div>
+
+                            <span>
+                                VERIFIED CUSTOMER
+                            </span>
+
+                            <h3 id="qrCustomerName">
+                                Arun Kumar
+                            </h3>
+
+                        </div>
+
+                        <strong
+                            id="qrBookingStatus"
+                            class="qr-valid-badge">
+
+                            VALID
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="qr-detail-grid">
+
+                        <div>
+
+                            <span>
+                                Booking ID
+                            </span>
+
+                            <strong id="qrBookingId">
+                                #BK001
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Turf
+                            </span>
+
+                            <strong id="qrTurfName">
+                                TurfX Arena
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Date
+                            </span>
+
+                            <strong id="qrBookingDate">
+                                23 Aug 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Slot
+                            </span>
+
+                            <strong id="qrBookingSlot">
+                                06:00 PM - 07:00 PM
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Payment
+                            </span>
+
+                            <strong id="qrPaymentStatus">
+                                Paid
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Amount
+                            </span>
+
+                            <strong id="qrBookingAmount">
+                                ₹1,000
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="qr-entry-time">
+
+                        <span>
+                            Entry Time
+                        </span>
+
+                        <strong id="qrEntryTime">
+                            Not checked in
+                        </strong>
+
+                    </div>
+
+
+                    <div class="qr-verification-actions">
+
+                        <button
+                            type="button"
+                            class="admin-success-btn"
+                            onclick="confirmQRCheckIn()">
+
+                            ✓ Confirm Check-In
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="admin-outline-btn"
+                            onclick="clearQRResult()">
+
+                            Scan Another
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT SCANS -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Recent Scans
+                    </h2>
+
+                    <p>
+                        Latest customer check-in activity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Booking
+                            </th>
+
+                            <th>
+                                Turf
+                            </th>
+
+                            <th>
+                                Slot
+                            </th>
+
+                            <th>
+                                Scan Time
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td>
+                                Arun Kumar
+                            </td>
+
+                            <td>
+                                #BK001
+                            </td>
+
+                            <td>
+                                TurfX Arena
+                            </td>
+
+                            <td>
+                                06PM - 07PM
+                            </td>
+
+                            <td>
+                                05:47 PM
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Checked In
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Rahul
+                            </td>
+
+                            <td>
+                                #BK002
+                            </td>
+
+                            <td>
+                                Champions Turf
+                            </td>
+
+                            <td>
+                                07PM - 08PM
+                            </td>
+
+                            <td>
+                                06:52 PM
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Checked In
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Vignesh
+                            </td>
+
+                            <td>
+                                #BK003
+                            </td>
+
+                            <td>
+                                TurfX Arena
+                            </td>
+
+                            <td>
+                                08PM - 09PM
+                            </td>
+
+                            <td>
+                                07:46 PM
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status booked">
+                                    Pending
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Unknown
+                            </td>
+
+                            <td>
+                                #INVALID
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                07:51 PM
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status blocked">
+                                    Invalid
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- SCAN INSTRUCTIONS -->
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            How It Works
+                        </h2>
+
+                        <p>
+                            Simple three-step entry process.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="qr-how-grid">
+
+                    <div>
+
+                        <span>
+                            01
+                        </span>
+
+                        <strong>
+                            Scan QR
+                        </strong>
+
+                        <p>
+                            Point the camera at the customer's QR ticket.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            02
+                        </span>
+
+                        <strong>
+                            Verify
+                        </strong>
+
+                        <p>
+                            Check booking and payment information.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            03
+                        </span>
+
+                        <strong>
+                            Check In
+                        </strong>
+
+                        <p>
+                            Confirm entry and record the check-in time.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Scanner Tips
+                        </h2>
+
+                        <p>
+                            For faster verification
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <ul class="qr-tips">
+
+                    <li>
+                        Keep the QR code clearly visible.
+                    </li>
+
+                    <li>
+                        Ensure enough light around the ticket.
+                    </li>
+
+                    <li>
+                        Verify payment status before entry.
+                    </li>
+
+                    <li>
+                        Do not allow reused or invalid tickets.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Secure QR Check-In System
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Match Result
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status completed">
+
+                🏆 MATCH RESULT
+
+            </span>
+
+            <h1>
+                Match Result
+            </h1>
+
+            <p>
+                Chennai Weekend Premier League • Match 14
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament/fixtures"
+                class="tournament-btn">
+
+                ← Fixtures
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- WINNER HERO -->
+
+    <section class="tournament-section">
+
+
+        <div class="result-card">
+
+
+            <div class="result-title">
+                🏆 VICTORY KINGS WON
+            </div>
+
+
+            <p
+                style="
+                    margin-bottom:25px;
+                    color:#94a3b8;
+                    font-size:8px;
+                ">
+
+                Victory Kings won by 5 wickets
+
+            </p>
+
+
+            <div class="result-teams">
+
+
+                <div class="result-team">
+
+                    <div class="team-logo">
+
+                        VK
+
+                    </div>
+
+                    <div>
+
+                        Victory Kings
+
+                    </div>
+
+                </div>
+
+
+                <div class="result-score">
+
+                    156/5
+
+                    <div
+                        style="
+                            margin-top:5px;
+                            color:#94a3b8;
+                            font-size:8px;
+                        ">
+
+                        18.5 Overs
+
+                    </div>
+
+                </div>
+
+
+                <div class="result-team">
+
+                    <div class="team-logo">
+
+                        SS
+
+                    </div>
+
+                    <div>
+
+                        Super Strikers
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    margin-top:25px;
+                    padding:14px;
+                    border-radius:10px;
+                    background:#f0fdf4;
+                    color:#15803d;
+                    font-size:9px;
+                    font-weight:800;
+                ">
+
+                Victory Kings chased down 156
+                with 7 balls remaining.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SCORE SUMMARY -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    SCORE SUMMARY
+                </span>
+
+                <h2>
+                    Innings
+                </h2>
+
+                <p>
+                    Complete match overview.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-info-grid">
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Super Strikers
+                </span>
+
+                <strong class="value">
+                    155/8
+                </strong>
+
+                <p class="sub-value">
+                    20 Overs
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Victory Kings
+                </span>
+
+                <strong class="value">
+                    156/5
+                </strong>
+
+                <p class="sub-value">
+                    18.5 Overs
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Winning Margin
+                </span>
+
+                <strong class="value">
+                    5 Wickets
+                </strong>
+
+                <p class="sub-value">
+                    Victory Kings
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Player of Match
+                </span>
+
+                <strong class="value">
+                    Arun Kumar
+                </strong>
+
+                <p class="sub-value">
+                    78 Runs
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- PLAYER OF MATCH -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    PLAYER OF THE MATCH
+                </span>
+
+                <h2>
+                    Arun Kumar
+                </h2>
+
+                <p>
+                    Match-winning batting performance.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-grid">
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <span class="tournament-status completed">
+                        🏆 PLAYER OF MATCH
+                    </span>
+
+                    <h3 class="tournament-card-title">
+                        78 Runs
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        45 balls • 6 fours • 4 sixes
+                    </p>
+
+                    <div class="tournament-card-footer">
+
+                        <span>
+                            Strike Rate
+                        </span>
+
+                        <strong>
+                            173.3
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <span class="tournament-status upcoming">
+                        🏏 TOP BATTER
+                    </span>
+
+                    <h3 class="tournament-card-title">
+                        Rohit
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        51 Runs from 39 balls
+                    </p>
+
+                    <div class="tournament-card-footer">
+
+                        <span>
+                            Fours
+                        </span>
+
+                        <strong>
+                            5
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <span class="tournament-status live">
+                        ⚡ TOP BOWLER
+                    </span>
+
+                    <h3 class="tournament-card-title">
+                        Vignesh
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        3 wickets for 24 runs
+                    </p>
+
+                    <div class="tournament-card-footer">
+
+                        <span>
+                            Economy
+                        </span>
+
+                        <strong>
+                            6.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MATCH DETAILS -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    MATCH INFORMATION
+                </span>
+
+                <h2>
+                    Match Details
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-info-grid">
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Venue
+                </span>
+
+                <strong class="value">
+                    TurfX Arena
+                </strong>
+
+                <p class="sub-value">
+                    Chennai
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Date
+                </span>
+
+                <strong class="value">
+                    24 Aug
+                </strong>
+
+                <p class="sub-value">
+                    2026
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Format
+                </span>
+
+                <strong class="value">
+                    20 Overs
+                </strong>
+
+                <p class="sub-value">
+                    Cricket
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Status
+                </span>
+
+                <strong class="value">
+                    Completed
+                </strong>
+
+                <p class="sub-value">
+                    Official Result
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ACTIONS -->
+
+    <section
+        style="
+            display:flex;
+            justify-content:center;
+            gap:9px;
+            padding-bottom:35px;
+            flex-wrap:wrap;
+        ">
+
+
+        <a
+            href="/tournament/points-table"
+            class="tournament-main-btn">
+
+            View Points Table →
+
+        </a>
+
+
+        <a
+            href="/tournament/leaderboard"
+            class="tournament-outline-btn"
+            style="
+                background:#0f172a;
+                border-color:#0f172a;
+            ">
+
+            Player Leaderboard
+
+        </a>
+
+
+        <a
+            href="/tournament"
+            class="tournament-btn">
+
+            Tournament Home
+
+        </a>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/fixtures">
+                Fixtures
+            </a>
+
+            <a href="/scorecard">
+                Live Score
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+# =====================================================
+# TurfX - .gitignore
+# Ignore unnecessary files before GitHub upload
+# =====================================================
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Environment Variables
+.env
+instance/config.py
+
+# VS Code
+.vscode/
+.history/
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite3
+
+# Uploads (generated files only)
+static/uploads/team_logos/
+static/uploads/player_photos/
+static/uploads/certificates/
+static/uploads/qr_codes/
+
+# Backup Files
+database/backup/*
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary Files
+*.tmp
+*.temp
+
+# Python Build Files
+build/
+dist/
+*.egg-info/
+
+# IDE Files
+.idea/
+
+# Node (future use)
+node_modules/

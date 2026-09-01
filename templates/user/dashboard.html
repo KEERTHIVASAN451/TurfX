@@ -1,0 +1,1108 @@
+{% extends "shared/head.html" %}
+
+{% block title %}User Dashboard | TurfX{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/user.css') }}">
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script
+    src="{{ url_for('static', filename='js/user.js') }}">
+</script>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="dashboard-shell premium-dashboard">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="dashboard-sidebar premium-sidebar">
+
+
+        <div class="sidebar-brand">
+
+            <span class="sidebar-brand-ball">
+                🏏
+            </span>
+
+            <span>
+                Turf<span class="brand-green">X</span>
+            </span>
+
+        </div>
+
+
+        <div class="sidebar-section-label">
+            MENU
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="/user/dashboard"
+                class="active">
+
+                <span class="nav-icon">
+                    🏠
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="/search-turf">
+
+                <span class="nav-icon">
+                    🏟️
+                </span>
+
+                <span>
+                    Find Turf
+                </span>
+
+            </a>
+
+
+            <a href="/booking-history">
+
+                <span class="nav-icon">
+                    📅
+                </span>
+
+                <span>
+                    My Bookings
+                </span>
+
+                <span class="nav-badge">
+                    2
+                </span>
+
+            </a>
+
+
+            <a href="/team">
+
+                <span class="nav-icon">
+                    👥
+                </span>
+
+                <span>
+                    My Team
+                </span>
+
+            </a>
+
+
+            <a href="/tournament">
+
+                <span class="nav-icon">
+                    🏆
+                </span>
+
+                <span>
+                    Tournaments
+                </span>
+
+            </a>
+
+
+            <a href="/scorecard">
+
+                <span class="nav-icon">
+                    📊
+                </span>
+
+                <span>
+                    Scorecard
+                </span>
+
+            </a>
+
+
+            <a href="/notifications">
+
+                <span class="nav-icon">
+                    🔔
+                </span>
+
+                <span>
+                    Notifications
+                </span>
+
+                <span class="nav-badge blue">
+                    3
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-section-label sidebar-secondary-label">
+            ACCOUNT
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="/profile">
+
+                <span class="nav-icon">
+                    👤
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <a href="/settings">
+
+                <span class="nav-icon">
+                    ⚙️
+                </span>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-help-card">
+
+                <span>
+                    🎯
+                </span>
+
+                <div>
+
+                    <strong>
+                        Ready to play?
+                    </strong>
+
+                    <small>
+                        Find your next turf.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="/logout"
+                class="logout-link">
+
+                <span>
+                    🚪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="dashboard-main premium-dashboard-main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="dashboard-topbar premium-topbar">
+
+
+            <div class="dashboard-topbar-left">
+
+                <button
+                    type="button"
+                    id="dashboardMenuToggle"
+                    class="mobile-dashboard-menu">
+
+                    ☰
+
+                </button>
+
+
+                <div>
+
+                    <span class="dashboard-page-label">
+                        PLAYER DASHBOARD
+                    </span>
+
+                    <h1>
+                        Good Evening,
+                        <span>
+                            TurfX User
+                        </span>
+                        👋
+                    </h1>
+
+                    <p>
+                        Ready for your next game?
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+
+                <a
+                    href="/notifications"
+                    class="notification-btn premium-notification">
+
+                    🔔
+
+                    <span
+                        class="notification-count">
+
+                        3
+
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="/profile"
+                    class="profile-mini premium-profile-mini">
+
+                    <div class="profile-avatar">
+                        U
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            TurfX User
+                        </strong>
+
+                        <small>
+                            Player
+                        </small>
+
+                    </div>
+
+                    <span class="profile-chevron">
+                        ▾
+                    </span>
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="user-dashboard-hero">
+
+
+            <div class="hero-pattern"></div>
+
+
+            <div class="hero-content">
+
+
+                <span class="hero-kicker">
+                    TURFX ARENA
+                </span>
+
+
+                <h2>
+                    Your next match
+                    <br>
+                    is waiting.
+                </h2>
+
+
+                <p>
+                    Find a turf, book a slot and
+                    get your team ready for the game.
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a
+                        href="/search-turf"
+                        class="dashboard-primary-btn hero-primary">
+
+                        🏟️
+                        Find a Turf
+                        <span>
+                            →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/tournament"
+                        class="dashboard-secondary-btn">
+
+                        🏆
+                        Explore Tournaments
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="hero-cricket-visual">
+
+                <div class="hero-ball-glow"></div>
+
+                <span class="hero-cricket-ball">
+                    🏏
+                </span>
+
+            </div>
+
+
+            <div class="hero-live-card">
+
+                <span class="live-dot"></span>
+
+                <div>
+
+                    <strong>
+                        TURFX LIVE
+                    </strong>
+
+                    <small>
+                        03 matches happening now
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATS
+             ================================================= -->
+
+        <section class="dashboard-stat-grid premium-stat-grid">
+
+
+            <div class="user-stat-card premium-stat-card">
+
+                <div class="stat-icon green">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Bookings
+                    </span>
+
+                    <strong>
+                        12
+                    </strong>
+
+                    <small class="stat-positive">
+                        ↑ 2 this month
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card premium-stat-card">
+
+                <div class="stat-icon blue">
+                    🏟️
+                </div>
+
+                <div>
+
+                    <span>
+                        Turf Hours
+                    </span>
+
+                    <strong>
+                        24
+                    </strong>
+
+                    <small>
+                        Hours played
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card premium-stat-card">
+
+                <div class="stat-icon orange">
+                    🏆
+                </div>
+
+                <div>
+
+                    <span>
+                        Tournaments
+                    </span>
+
+                    <strong>
+                        4
+                    </strong>
+
+                    <small>
+                        Participated
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card premium-stat-card">
+
+                <div class="stat-icon purple">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        Team Members
+                    </span>
+
+                    <strong>
+                        11
+                    </strong>
+
+                    <small>
+                        Active squad
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             TWO COLUMN
+             ================================================= -->
+
+        <section class="dashboard-content-grid premium-two-column">
+
+
+            <!-- UPCOMING BOOKING -->
+
+            <div class="dashboard-panel premium-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-kicker">
+                            NEXT SESSION
+                        </span>
+
+                        <h2>
+                            Upcoming Booking
+                        </h2>
+
+                        <p>
+                            Your next turf session
+                        </p>
+
+                    </div>
+
+
+                    <a href="/booking-history">
+                        View All →
+                    </a>
+
+                </div>
+
+
+                <div class="premium-upcoming-booking">
+
+
+                    <div class="booking-image premium-booking-image">
+
+                        <span>
+                            🏏
+                        </span>
+
+                    </div>
+
+
+                    <div class="booking-main">
+
+                        <span class="booking-status premium-status">
+                            CONFIRMED
+                        </span>
+
+
+                        <h3>
+                            TurfX Arena
+                        </h3>
+
+
+                        <p>
+                            📍 Chennai
+                        </p>
+
+
+                        <div class="booking-info-row">
+
+                            <span>
+                                📅 25 Aug 2026
+                            </span>
+
+                            <span>
+                                ⏰ 6:00 PM – 7:00 PM
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="/qr-ticket"
+                        class="ticket-btn premium-ticket-btn">
+
+                        🎟️
+                        QR Ticket
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="dashboard-panel premium-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-kicker">
+                            SHORTCUTS
+                        </span>
+
+                        <h2>
+                            Quick Actions
+                        </h2>
+
+                        <p>
+                            Frequently used
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-action-grid premium-action-grid">
+
+
+                    <a
+                        href="/search-turf"
+                        class="quick-action premium-action-card">
+
+                        <span>
+                            🏟️
+                        </span>
+
+                        <strong>
+                            Book Turf
+                        </strong>
+
+                        <small>
+                            Find available slots
+                        </small>
+
+                        <b>
+                            →
+                        </b>
+
+                    </a>
+
+
+                    <a
+                        href="/create-team"
+                        class="quick-action premium-action-card">
+
+                        <span>
+                            👥
+                        </span>
+
+                        <strong>
+                            Create Team
+                        </strong>
+
+                        <small>
+                            Build your squad
+                        </small>
+
+                        <b>
+                            →
+                        </b>
+
+                    </a>
+
+
+                    <a
+                        href="/tournament"
+                        class="quick-action premium-action-card">
+
+                        <span>
+                            🏆
+                        </span>
+
+                        <strong>
+                            Join Tournament
+                        </strong>
+
+                        <small>
+                            Find competitions
+                        </small>
+
+                        <b>
+                            →
+                        </b>
+
+                    </a>
+
+
+                    <a
+                        href="/scorecard"
+                        class="quick-action premium-action-card">
+
+                        <span>
+                            📊
+                        </span>
+
+                        <strong>
+                            View Scorecard
+                        </strong>
+
+                        <small>
+                            Track your stats
+                        </small>
+
+                        <b>
+                            →
+                        </b>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECENT BOOKINGS
+             ================================================= -->
+
+        <section class="dashboard-panel premium-panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-kicker">
+                        ACTIVITY
+                    </span>
+
+                    <h2>
+                        Recent Bookings
+                    </h2>
+
+                    <p>
+                        Your latest turf sessions
+                    </p>
+
+                </div>
+
+
+                <a href="/booking-history">
+                    View History →
+                </a>
+
+            </div>
+
+
+
+            <div class="recent-booking-list premium-recent-list">
+
+
+                <div class="recent-booking premium-recent-booking">
+
+                    <div class="recent-date premium-date">
+
+                        <strong>
+                            22
+                        </strong>
+
+                        <span>
+                            AUG
+                        </span>
+
+                    </div>
+
+
+                    <div class="recent-info">
+
+                        <h3>
+                            TurfX Arena
+                        </h3>
+
+                        <p>
+                            6:00 PM – 7:00 PM
+                        </p>
+
+                    </div>
+
+
+                    <div class="recent-price">
+                        ₹800
+                    </div>
+
+
+                    <span class="status-badge confirmed">
+                        Confirmed
+                    </span>
+
+                </div>
+
+
+
+                <div class="recent-booking premium-recent-booking">
+
+                    <div class="recent-date premium-date">
+
+                        <strong>
+                            18
+                        </strong>
+
+                        <span>
+                            AUG
+                        </span>
+
+                    </div>
+
+
+                    <div class="recent-info">
+
+                        <h3>
+                            Champions Turf
+                        </h3>
+
+                        <p>
+                            7:00 PM – 8:00 PM
+                        </p>
+
+                    </div>
+
+
+                    <div class="recent-price">
+                        ₹900
+                    </div>
+
+
+                    <span class="status-badge completed">
+                        Completed
+                    </span>
+
+                </div>
+
+
+
+                <div class="recent-booking premium-recent-booking">
+
+                    <div class="recent-date premium-date">
+
+                        <strong>
+                            12
+                        </strong>
+
+                        <span>
+                            AUG
+                        </span>
+
+                    </div>
+
+
+                    <div class="recent-info">
+
+                        <h3>
+                            City Cricket Ground
+                        </h3>
+
+                        <p>
+                            8:00 PM – 9:00 PM
+                        </p>
+
+                    </div>
+
+
+                    <div class="recent-price">
+                        ₹750
+                    </div>
+
+
+                    <span class="status-badge completed">
+                        Completed
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TOURNAMENTS
+             ================================================= -->
+
+        <section class="dashboard-panel premium-panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-kicker">
+                        COMPETE
+                    </span>
+
+                    <h2>
+                        Upcoming Tournaments
+                    </h2>
+
+                    <p>
+                        Compete with the best
+                    </p>
+
+                </div>
+
+
+                <a href="/tournament">
+                    Explore →
+                </a>
+
+            </div>
+
+
+
+            <div class="tournament-preview-grid premium-tournament-grid">
+
+
+                <a
+                    href="/tournament"
+                    class="tournament-preview premium-tournament-card">
+
+
+                    <div class="tournament-cover premium-tournament-cover">
+
+                        <span>
+                            🏆
+                        </span>
+
+                        <small>
+                            OPEN
+                        </small>
+
+                    </div>
+
+
+                    <div class="tournament-body">
+
+                        <span class="tournament-tag">
+                            REGISTRATION OPEN
+                        </span>
+
+
+                        <h3>
+                            Weekend Premier League
+                        </h3>
+
+
+                        <p>
+                            📅 30 Aug 2026
+                        </p>
+
+
+                        <div>
+
+                            <span>
+                                16 Teams
+                            </span>
+
+                            <strong>
+                                ₹2,500
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="/tournament"
+                    class="tournament-preview premium-tournament-card">
+
+
+                    <div class="tournament-cover second premium-tournament-cover">
+
+                        <span>
+                            🏏
+                        </span>
+
+                        <small>
+                            UPCOMING
+                        </small>
+
+                    </div>
+
+
+                    <div class="tournament-body">
+
+                        <span class="tournament-tag">
+                            COMING SOON
+                        </span>
+
+
+                        <h3>
+                            Night Champions Cup
+                        </h3>
+
+
+                        <p>
+                            📅 12 Sep 2026
+                        </p>
+
+
+                        <div>
+
+                            <span>
+                                12 Teams
+                            </span>
+
+                            <strong>
+                                ₹2,000
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer premium-dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Smart Turf & Tournament Platform
+            </span>
+
+            <a href="/settings">
+                Settings
+            </a>
+
+        </footer>
+
+
+    </main>
+
+</div>
+
+{% endblock %}

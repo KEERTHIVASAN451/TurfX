@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Tournament Teams
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a href="/" class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a href="/tournament" class="active">
+            Tournaments
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+                👥 TEAM MANAGEMENT
+            </span>
+
+            <h1>
+                Tournament Teams
+            </h1>
+
+            <p>
+                View all registered teams, captains and squad status.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament/registration"
+                class="tournament-btn primary">
+
+                + Register Team
+
+            </a>
+
+            <a
+                href="/tournament"
+                class="tournament-btn">
+
+                ← Back
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SUMMARY -->
+
+    <section class="tournament-stat-grid">
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon green">
+                👥
+            </div>
+
+            <div>
+
+                <span>
+                    Registered
+                </span>
+
+                <strong>
+                    12
+                </strong>
+
+                <small>
+                    Teams
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon blue">
+                ✅
+            </div>
+
+            <div>
+
+                <span>
+                    Confirmed
+                </span>
+
+                <strong>
+                    10
+                </strong>
+
+                <small>
+                    Teams
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon orange">
+                ⏳
+            </div>
+
+            <div>
+
+                <span>
+                    Pending
+                </span>
+
+                <strong>
+                    2
+                </strong>
+
+                <small>
+                    Teams
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon purple">
+                👤
+            </div>
+
+            <div>
+
+                <span>
+                    Players
+                </span>
+
+                <strong>
+                    132
+                </strong>
+
+                <small>
+                    Registered
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- TEAM LIST -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    REGISTERED TEAMS
+                </span>
+
+                <h2>
+                    Chennai Weekend Premier League
+                </h2>
+
+                <p>
+                    12 of 16 available team slots filled.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-team-grid">
+
+
+            <!-- TEAM 1 -->
+
+            <article class="tournament-team-card">
+
+                <div
+                    class="team-logo">
+
+                    VK
+
+                </div>
+
+                <h3 class="team-name">
+                    Victory Kings
+                </h3>
+
+                <p class="team-captain">
+                    Captain: Arun Kumar
+                </p>
+
+                <div
+                    style="
+                        margin-top:10px;
+                    ">
+
+                    <span class="tournament-status completed">
+                        Confirmed
+                    </span>
+
+                </div>
+
+                <a
+                    href="/tournament/playing-xi"
+                    class="tournament-card-btn">
+
+                    View Squad →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- TEAM 2 -->
+
+            <article class="tournament-team-card">
+
+                <div class="team-logo">
+                    CW
+                </div>
+
+                <h3 class="team-name">
+                    Chennai Warriors
+                </h3>
+
+                <p class="team-captain">
+                    Captain: Rahul
+                </p>
+
+                <div
+                    style="
+                        margin-top:10px;
+                    ">
+
+                    <span class="tournament-status completed">
+                        Confirmed
+                    </span>
+
+                </div>
+
+                <a
+                    href="/tournament/playing-xi"
+                    class="tournament-card-btn">
+
+                    View Squad →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- TEAM 3 -->
+
+            <article class="tournament-team-card">
+
+                <div class="team-logo">
+                    SS
+                </div>
+
+                <h3 class="team-name">
+                    Super Strikers
+                </h3>
+
+                <p class="team-captain">
+                    Captain: Vignesh
+                </p>
+
+                <div
+                    style="
+                        margin-top:10px;
+                    ">
+
+                    <span class="tournament-status completed">
+                        Confirmed
+                    </span>
+
+                </div>
+
+                <a
+                    href="/tournament/playing-xi"
+                    class="tournament-card-btn">
+
+                    View Squad →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- TEAM 4 -->
+
+            <article class="tournament-team-card">
+
+                <div class="team-logo">
+                    RC
+                </div>
+
+                <h3 class="team-name">
+                    Royal Challengers
+                </h3>
+
+                <p class="team-captain">
+                    Captain: Karthick
+                </p>
+
+                <div
+                    style="
+                        margin-top:10px;
+                    ">
+
+                    <span class="tournament-status completed">
+                        Confirmed
+                    </span>
+
+                </div>
+
+                <a
+                    href="/tournament/playing-xi"
+                    class="tournament-card-btn">
+
+                    View Squad →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- TEAM 5 -->
+
+            <article class="tournament-team-card">
+
+                <div class="team-logo">
+                    CT
+                </div>
+
+                <h3 class="team-name">
+                    Chennai Titans
+                </h3>
+
+                <p class="team-captain">
+                    Captain: Sanjay
+                </p>
+
+                <div
+                    style="
+                        margin-top:10px;
+                    ">
+
+                    <span class="tournament-status completed">
+                        Confirmed
+                    </span>
+
+                </div>
+
+                <a
+                    href="/tournament/playing-xi"
+                    class="tournament-card-btn">
+
+                    View Squad →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- TEAM 6 -->
+
+            <article class="tournament-team-card">
+
+                <div class="team-logo">
+                    BW
+                </div>
+
+                <h3 class="team-name">
+                    Blue Warriors
+                </h3>
+
+                <p class="team-captain">
+                    Captain: Harish
+                </p>
+
+                <div
+                    style="
+                        margin-top:10px;
+                    ">
+
+                    <span class="tournament-status completed">
+                        Confirmed
+                    </span>
+
+                </div>
+
+                <a
+                    href="/tournament/playing-xi"
+                    class="tournament-card-btn">
+
+                    View Squad →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- TEAM 7 -->
+
+            <article class="tournament-team-card">
+
+                <div class="team-logo">
+                    GT
+                </div>
+
+                <h3 class="team-name">
+                    Green Titans
+                </h3>
+
+                <p class="team-captain">
+                    Captain: Naveen
+                </p>
+
+                <div
+                    style="
+                        margin-top:10px;
+                    ">
+
+                    <span class="tournament-status upcoming">
+                        Pending
+                    </span>
+
+                </div>
+
+                <a
+                    href="/tournament/playing-xi"
+                    class="tournament-card-btn">
+
+                    View Squad →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- TEAM 8 -->
+
+            <article class="tournament-team-card">
+
+                <div class="team-logo">
+                    TX
+                </div>
+
+                <h3 class="team-name">
+                    Thunder XI
+                </h3>
+
+                <p class="team-captain">
+                    Captain: Ajay
+                </p>
+
+                <div
+                    style="
+                        margin-top:10px;
+                    ">
+
+                    <span class="tournament-status upcoming">
+                        Pending
+                    </span>
+
+                </div>
+
+                <a
+                    href="/tournament/playing-xi"
+                    class="tournament-card-btn">
+
+                    View Squad →
+
+                </a>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- EMPTY SLOTS -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    REGISTRATION
+                </span>
+
+                <h2>
+                    Available Slots
+                </h2>
+
+                <p>
+                    Four team positions are still open.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="registration-summary">
+
+
+            <div class="registration-item">
+
+                <span>
+                    Capacity
+                </span>
+
+                <strong>
+                    16 Teams
+                </strong>
+
+            </div>
+
+
+            <div class="registration-item">
+
+                <span>
+                    Registered
+                </span>
+
+                <strong>
+                    12 Teams
+                </strong>
+
+            </div>
+
+
+            <div class="registration-item">
+
+                <span>
+                    Remaining
+                </span>
+
+                <strong>
+                    4 Teams
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div
+            style="
+                display:flex;
+                justify-content:flex-end;
+                margin-top:15px;
+            ">
+
+            <a
+                href="/tournament/registration"
+                class="tournament-main-btn">
+
+                Register New Team →
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/fixtures">
+                Fixtures
+            </a>
+
+            <a href="/tournament/leaderboard">
+                Leaderboard
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+
+</html>

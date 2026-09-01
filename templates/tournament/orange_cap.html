@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Orange Cap
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a href="/" class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a href="/tournament" class="active">
+            Tournaments
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+                🧡 BATTING LEADER
+            </span>
+
+            <h1>
+                Orange Cap
+            </h1>
+
+            <p>
+                Top run scorers of the Chennai Weekend Premier League.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament/leaderboard"
+                class="tournament-btn">
+
+                ← Leaderboard
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="tournament-section">
+
+        <div class="cap-card">
+
+            <div class="cap-icon">
+                🧡
+            </div>
+
+            <div class="cap-content">
+
+                <h4>
+                    Current Orange Cap Holder
+                </h4>
+
+                <p>
+                    Arun Kumar • Victory Kings
+                </p>
+
+            </div>
+
+            <span class="cap-value">
+                486
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    TOP BATTERS
+                </span>
+
+                <h2>
+                    Run Scorers
+                </h2>
+
+                <p>
+                    Current tournament batting standings.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="leaderboard-list">
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    01
+                </span>
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        AK
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Arun Kumar
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Victory Kings • 7 Matches
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <strong class="leaderboard-value">
+                    486 Runs
+                </strong>
+
+            </div>
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    02
+                </span>
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        RH
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Rahul
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Chennai Warriors • 7 Matches
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <strong class="leaderboard-value">
+                    421 Runs
+                </strong>
+
+            </div>
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    03
+                </span>
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        VG
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Vignesh
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Victory Kings • 7 Matches
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <strong class="leaderboard-value">
+                    398 Runs
+                </strong>
+
+            </div>
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    04
+                </span>
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        SJ
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Sanjay
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Chennai Titans • 7 Matches
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <strong class="leaderboard-value">
+                    356 Runs
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="tournament-section">
+
+        <div class="tournament-grid">
+
+
+            <article class="tournament-info-card">
+
+                <span class="label">
+                    Highest Score
+                </span>
+
+                <strong class="value">
+                    92
+                </strong>
+
+                <p class="sub-value">
+                    Arun Kumar
+                </p>
+
+            </article>
+
+
+            <article class="tournament-info-card">
+
+                <span class="label">
+                    Best Strike Rate
+                </span>
+
+                <strong class="value">
+                    184.2
+                </strong>
+
+                <p class="sub-value">
+                    Rahul
+                </p>
+
+            </article>
+
+
+            <article class="tournament-info-card">
+
+                <span class="label">
+                    Most Fours
+                </span>
+
+                <strong class="value">
+                    38
+                </strong>
+
+                <p class="sub-value">
+                    Arun Kumar
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <section class="tournament-bottom-cta">
+
+        <div>
+
+            <span>
+                KEEP SCORING
+            </span>
+
+            <h2>
+                Chase The Orange Cap.
+            </h2>
+
+            <p>
+                Every run moves you closer to the top.
+            </p>
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:center;
+                    gap:9px;
+                    margin-top:22px;
+                    flex-wrap:wrap;
+                ">
+
+                <a
+                    href="/tournament/leaderboard"
+                    class="tournament-main-btn">
+
+                    Full Leaderboard →
+
+                </a>
+
+                <a
+                    href="/tournament/points-table"
+                    class="tournament-outline-btn">
+
+                    Points Table
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/leaderboard">
+                Leaderboard
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+
+</html>

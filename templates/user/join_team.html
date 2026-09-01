@@ -1,0 +1,321 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Join Team | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf">
+                🏟️ <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history">
+                📅 <span>My Bookings</span>
+            </a>
+
+            <a href="/team" class="active">
+                👥 <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆 <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard">
+                📊 <span>Scorecard</span>
+            </a>
+
+            <a href="/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/profile">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Join a Team 🤝
+                </h1>
+
+                <p>
+                    Find your friends and join their squad.
+                </p>
+
+            </div>
+
+            <a href="/team"
+               class="secondary-action-btn">
+                ← Back
+            </a>
+
+        </header>
+
+
+        <section class="team-code-search">
+
+            <div>
+
+                <span>
+                    JOIN USING TEAM CODE
+                </span>
+
+                <h2>
+                    Have a team invite code?
+                </h2>
+
+                <p>
+                    Enter the code shared by your team captain.
+                </p>
+
+            </div>
+
+            <div class="team-code-input-box">
+
+                <input
+                    type="text"
+                    id="teamCode"
+                    placeholder="Enter team code"
+                    maxlength="10">
+
+                <button
+                    type="button"
+                    class="dashboard-primary-btn"
+                    onclick="joinTeamByCode()">
+                    Join Team
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Discover Teams
+                    </h2>
+
+                    <p>
+                        Teams currently accepting players.
+                    </p>
+
+                </div>
+
+                <input
+                    type="text"
+                    id="teamSearch"
+                    class="form-input"
+                    placeholder="Search team...">
+
+            </div>
+
+
+            <div class="discover-team-grid">
+
+
+                <article
+                    class="discover-team-card"
+                    data-team-name="royal kings">
+
+                    <div class="discover-team-logo">
+                        👑
+                    </div>
+
+                    <span>
+                        CHENNAI
+                    </span>
+
+                    <h3>
+                        Royal Kings
+                    </h3>
+
+                    <p>
+                        Looking for 2 players
+                    </p>
+
+                    <div>
+                        <small>
+                            👥 9/11 Players
+                        </small>
+
+                        <button
+                            type="button"
+                            onclick="requestToJoinTeam('Royal Kings')">
+                            Request
+                        </button>
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="discover-team-card"
+                    data-team-name="super strikers">
+
+                    <div class="discover-team-logo blue">
+                        ⭐
+                    </div>
+
+                    <span>
+                        TAMBARAM
+                    </span>
+
+                    <h3>
+                        Super Strikers
+                    </h3>
+
+                    <p>
+                        Looking for 3 players
+                    </p>
+
+                    <div>
+                        <small>
+                            👥 8/11 Players
+                        </small>
+
+                        <button
+                            type="button"
+                            onclick="requestToJoinTeam('Super Strikers')">
+                            Request
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="discover-team-card"
+                    data-team-name="night riders">
+
+                    <div class="discover-team-logo orange">
+                        ⚡
+                    </div>
+
+                    <span>
+                        VELACHERY
+                    </span>
+
+                    <h3>
+                        Night Riders
+                    </h3>
+
+                    <p>
+                        Looking for 1 player
+                    </p>
+
+                    <div>
+                        <small>
+                            👥 10/11 Players
+                        </small>
+
+                        <button
+                            type="button"
+                            onclick="requestToJoinTeam('Night Riders')">
+                            Request
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="discover-team-card"
+                    data-team-name="tamil tigers">
+
+                    <div class="discover-team-logo purple">
+                        🐯
+                    </div>
+
+                    <span>
+                        CHENNAI
+                    </span>
+
+                    <h3>
+                        Tamil Tigers
+                    </h3>
+
+                    <p>
+                        Looking for 4 players
+                    </p>
+
+                    <div>
+                        <small>
+                            👥 7/11 Players
+                        </small>
+
+                        <button
+                            type="button"
+                            onclick="requestToJoinTeam('Tamil Tigers')">
+                            Request
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+            <span>© 2026 TurfX</span>
+            <span>Find your team. Play together.</span>
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

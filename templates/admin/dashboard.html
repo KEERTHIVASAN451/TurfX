@@ -1,0 +1,949 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Admin Dashboard | TurfX{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="admin-sidebar">
+
+        <div class="admin-brand">
+            🏏 <span>Turf<span>X</span></span>
+        </div>
+
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar">
+                A
+            </div>
+
+            <div>
+
+                <strong>
+                    Admin
+                </strong>
+
+                <span>
+                    Turf Manager
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="admin-nav">
+
+            <a href="/admin/dashboard"
+               class="active">
+                📊
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅
+                <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰
+                <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥
+                <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳
+                <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈
+                <span>Reports</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊
+                <span>Analytics</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏
+                <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👨‍💼
+                <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰
+                <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷
+                <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔
+                <span>Notifications</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+
+        <div class="admin-sidebar-bottom">
+
+            <a href="/"
+               target="_blank">
+                🌐
+                <span>View Website</span>
+            </a>
+
+            <a href="/logout">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="admin-main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="admin-topbar">
+
+            <div>
+
+                <h1>
+                    Admin Dashboard
+                </h1>
+
+                <p>
+                    Here's what's happening at TurfX today.
+                </p>
+
+            </div>
+
+
+            <div class="admin-top-actions">
+
+                <a href="/admin/notifications"
+                   class="admin-notification">
+
+                    🔔
+
+                    <span>
+                        4
+                    </span>
+
+                </a>
+
+                <a href="/admin/settings"
+                   class="admin-user-button">
+
+                    <div class="admin-user-mini">
+                        A
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Admin
+                        </strong>
+
+                        <small>
+                            Manager
+                        </small>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <section class="admin-quick-actions">
+
+            <a href="/admin/bookings">
+                <span>📅</span>
+                <strong>Bookings</strong>
+                <small>Manage bookings</small>
+            </a>
+
+            <a href="/admin/slot-management">
+                <span>⏰</span>
+                <strong>Slots</strong>
+                <small>Manage availability</small>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                <span>📷</span>
+                <strong>Scan QR</strong>
+                <small>Verify tickets</small>
+            </a>
+
+            <a href="/admin/reports">
+                <span>📈</span>
+                <strong>Reports</strong>
+                <small>View reports</small>
+            </a>
+
+        </section>
+
+
+        <!-- STAT CARDS -->
+
+        <section class="admin-stat-grid">
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon green">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Today's Revenue
+                    </span>
+
+                    <strong>
+                        ₹18,500
+                    </strong>
+
+                    <small class="positive">
+                        ↑ 12.4% from yesterday
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon blue">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        Today's Bookings
+                    </span>
+
+                    <strong>
+                        48
+                    </strong>
+
+                    <small class="positive">
+                        ↑ 8 bookings today
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon orange">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Customers
+                    </span>
+
+                    <strong>
+                        562
+                    </strong>
+
+                    <small class="positive">
+                        ↑ 25 this month
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon purple">
+                    🏟️
+                </div>
+
+                <div>
+
+                    <span>
+                        Occupancy Rate
+                    </span>
+
+                    <strong>
+                        82%
+                    </strong>
+
+                    <small>
+                        Peak: 6PM - 10PM
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ANALYTICS -->
+
+        <section class="admin-content-grid">
+
+
+            <div class="admin-panel">
+
+                <div class="admin-panel-header">
+
+                    <div>
+
+                        <h2>
+                            Revenue Overview
+                        </h2>
+
+                        <p>
+                            Monthly turf revenue
+                        </p>
+
+                    </div>
+
+                    <a href="/admin/reports">
+                        View Report →
+                    </a>
+
+                </div>
+
+
+                <div class="admin-chart-box">
+
+                    <canvas
+                        id="adminRevenueChart"
+                        data-labels='[
+                            "Jan",
+                            "Feb",
+                            "Mar",
+                            "Apr",
+                            "May",
+                            "Jun",
+                            "Jul",
+                            "Aug"
+                        ]'
+                        data-values='[
+                            120000,
+                            145000,
+                            158000,
+                            172000,
+                            195000,
+                            215000,
+                            232000,
+                            245000
+                        ]'>
+                    </canvas>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-panel">
+
+                <div class="admin-panel-header">
+
+                    <div>
+
+                        <h2>
+                            Booking Overview
+                        </h2>
+
+                        <p>
+                            Today's status
+                        </p>
+
+                    </div>
+
+                    <a href="/admin/bookings">
+                        Manage →
+                    </a>
+
+                </div>
+
+
+                <div class="booking-overview">
+
+                    <div>
+
+                        <div class="overview-ring green">
+                            63%
+                        </div>
+
+                        <span>
+                            Confirmed
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="overview-ring yellow">
+                            18%
+                        </div>
+
+                        <span>
+                            Pending
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="overview-ring red">
+                            7%
+                        </div>
+
+                        <span>
+                            Cancelled
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="overview-total">
+
+                    <strong>
+                        48
+                    </strong>
+
+                    <span>
+                        Total Bookings Today
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT BOOKINGS -->
+
+        <section class="admin-panel">
+
+            <div class="admin-panel-header">
+
+                <div>
+
+                    <h2>
+                        Recent Bookings
+                    </h2>
+
+                    <p>
+                        Latest customer bookings
+                    </p>
+
+                </div>
+
+                <a href="/admin/bookings">
+                    View All →
+                </a>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Booking ID
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Turf
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Slot
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                #TX001
+                            </td>
+
+                            <td>
+                                Arun Kumar
+                            </td>
+
+                            <td>
+                                TurfX Arena
+                            </td>
+
+                            <td>
+                                25 Aug 2026
+                            </td>
+
+                            <td>
+                                6PM - 7PM
+                            </td>
+
+                            <td>
+                                ₹800
+                            </td>
+
+                            <td>
+                                <span class="admin-status confirmed">
+                                    Confirmed
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                #TX002
+                            </td>
+
+                            <td>
+                                Vignesh
+                            </td>
+
+                            <td>
+                                Champions Turf
+                            </td>
+
+                            <td>
+                                25 Aug 2026
+                            </td>
+
+                            <td>
+                                7PM - 8PM
+                            </td>
+
+                            <td>
+                                ₹900
+                            </td>
+
+                            <td>
+                                <span class="admin-status pending">
+                                    Pending
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                #TX003
+                            </td>
+
+                            <td>
+                                Rahul
+                            </td>
+
+                            <td>
+                                City Sports Arena
+                            </td>
+
+                            <td>
+                                25 Aug 2026
+                            </td>
+
+                            <td>
+                                8PM - 9PM
+                            </td>
+
+                            <td>
+                                ₹1,000
+                            </td>
+
+                            <td>
+                                <span class="admin-status completed">
+                                    Completed
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                #TX004
+                            </td>
+
+                            <td>
+                                Karthick
+                            </td>
+
+                            <td>
+                                TurfX Arena
+                            </td>
+
+                            <td>
+                                25 Aug 2026
+                            </td>
+
+                            <td>
+                                9PM - 10PM
+                            </td>
+
+                            <td>
+                                ₹1,200
+                            </td>
+
+                            <td>
+                                <span class="admin-status cancelled">
+                                    Cancelled
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOWER GRID -->
+
+        <section class="admin-content-grid">
+
+
+            <!-- UPCOMING TOURNAMENTS -->
+
+            <div class="admin-panel">
+
+                <div class="admin-panel-header">
+
+                    <div>
+
+                        <h2>
+                            Upcoming Tournaments
+                        </h2>
+
+                        <p>
+                            Active tournament registrations
+                        </p>
+
+                    </div>
+
+                    <a href="/tournament">
+                        View →
+                    </a>
+
+                </div>
+
+
+                <div class="admin-tournament-list">
+
+
+                    <a href="/tournament"
+                       class="admin-tournament-item">
+
+                        <div class="admin-tournament-icon green">
+                            🏆
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Weekend Premier League
+                            </strong>
+
+                            <span>
+                                16 Teams • 30 Aug 2026
+                            </span>
+
+                        </div>
+
+                        <b>
+                            →
+                        </b>
+
+                    </a>
+
+
+                    <a href="/tournament"
+                       class="admin-tournament-item">
+
+                        <div class="admin-tournament-icon blue">
+                            🏏
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Night Champions Cup
+                            </strong>
+
+                            <span>
+                                12 Teams • 12 Sep 2026
+                            </span>
+
+                        </div>
+
+                        <b>
+                            →
+                        </b>
+
+                    </a>
+
+
+                    <a href="/tournament"
+                       class="admin-tournament-item">
+
+                        <div class="admin-tournament-icon orange">
+                            ⭐
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Corporate Cricket Cup
+                            </strong>
+
+                            <span>
+                                20 Teams • 25 Sep 2026
+                            </span>
+
+                        </div>
+
+                        <b>
+                            →
+                        </b>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTIFICATIONS -->
+
+            <div class="admin-panel">
+
+                <div class="admin-panel-header">
+
+                    <div>
+
+                        <h2>
+                            Recent Alerts
+                        </h2>
+
+                        <p>
+                            Latest system notifications
+                        </p>
+
+                    </div>
+
+                    <a href="/admin/notifications">
+                        View All →
+                    </a>
+
+                </div>
+
+
+                <div class="admin-alert-list">
+
+
+                    <a href="/admin/bookings"
+                       class="admin-alert">
+
+                        <span class="alert-icon green">
+                            📅
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                New Booking
+                            </strong>
+
+                            <p>
+                                Arun Kumar booked 6PM slot.
+                            </p>
+
+                            <small>
+                                10 mins ago
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <a href="/admin/transactions"
+                       class="admin-alert">
+
+                        <span class="alert-icon blue">
+                            💳
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Payment Received
+                            </strong>
+
+                            <p>
+                                ₹1,000 payment completed.
+                            </p>
+
+                            <small>
+                                25 mins ago
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <a href="/admin/slot-management"
+                       class="admin-alert">
+
+                        <span class="alert-icon orange">
+                            ⏰
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Slot Almost Full
+                            </strong>
+
+                            <p>
+                                Only 2 evening slots remain.
+                            </p>
+
+                            <small>
+                                1 hour ago
+                            </small>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="admin-footer">
+
+            <span>
+                © 2026 TurfX Admin Panel
+            </span>
+
+            <span>
+                Smart Turf Management System
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

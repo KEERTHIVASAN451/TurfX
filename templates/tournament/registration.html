@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Register Team
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+
+                👥 TEAM REGISTRATION
+
+            </span>
+
+            <h1>
+                Register Your Team
+            </h1>
+
+            <p>
+                Enter your team details and get ready
+                for the Chennai Weekend Premier League.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament/1"
+                class="tournament-btn">
+
+                ← Back
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- TOURNAMENT SUMMARY -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    TOURNAMENT
+                </span>
+
+                <h2>
+                    Chennai Weekend Premier League
+                </h2>
+
+                <p>
+                    8 Overs • Tennis Ball • 16 Team Limit
+                </p>
+
+            </div>
+
+
+            <span class="tournament-status upcoming">
+
+                4 Slots Left
+
+            </span>
+
+        </div>
+
+
+        <div class="registration-summary">
+
+
+            <div class="registration-item">
+
+                <span>
+                    Entry Fee
+                </span>
+
+                <strong>
+                    ₹500
+                </strong>
+
+            </div>
+
+
+            <div class="registration-item">
+
+                <span>
+                    Start Date
+                </span>
+
+                <strong>
+                    30 Aug 2026
+                </strong>
+
+            </div>
+
+
+            <div class="registration-item">
+
+                <span>
+                    Venue
+                </span>
+
+                <strong>
+                    TurfX Arena
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REGISTRATION FORM -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    TEAM DETAILS
+                </span>
+
+                <h2>
+                    Register Team
+                </h2>
+
+                <p>
+                    Fill in your captain and team information.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            id="registerTeamForm"
+            class="registration-card"
+            method="POST"
+            action="/tournament/registration">
+
+
+            <div class="tournament-form-grid">
+
+
+                <div class="tournament-form-field">
+
+                    <label for="teamName">
+                        Team Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="teamName"
+                        name="team_name"
+                        placeholder="Example: Chennai Warriors"
+                        required>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="captainName">
+                        Captain Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="captainName"
+                        name="captain_name"
+                        placeholder="Captain full name"
+                        required>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="phone">
+                        Captain Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="9876543210"
+                        required>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="team@example.com"
+                        required>
+
+                </div>
+
+
+                <div class="tournament-form-field full">
+
+                    <label for="homeTurf">
+                        Preferred Turf
+                    </label>
+
+                    <select
+                        id="homeTurf"
+                        name="home_turf">
+
+                        <option>
+                            TurfX Arena
+                        </option>
+
+                        <option>
+                            Champions Turf
+                        </option>
+
+                        <option>
+                            Chennai Sports Ground
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PLAYERS -->
+
+            <div
+                style="
+                    margin-top:28px;
+                    padding-top:22px;
+                    border-top:1px solid #f1f5f9;
+                ">
+
+                <div
+                    style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:space-between;
+                        margin-bottom:15px;
+                    ">
+
+                    <div>
+
+                        <strong
+                            style="
+                                color:#0f172a;
+                                font-size:13px;
+                            ">
+
+                            Team Players
+
+                        </strong>
+
+                        <p
+                            style="
+                                margin:4px 0 0;
+                                color:#94a3b8;
+                                font-size:8px;
+                            ">
+
+                            Add your playing squad.
+
+                        </p>
+
+                    </div>
+
+
+                    <span
+                        id="playerCount"
+                        style="
+                            color:#15803d;
+                            font-size:10px;
+                            font-weight:900;
+                        ">
+
+                        0 / 11
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="tournament-team-grid"
+                    id="playerGrid">
+
+
+                    <label class="player-card">
+
+                        <input
+                            type="checkbox"
+                            class="player-checkbox"
+                            name="players"
+                            value="Arun Kumar">
+
+                        <div class="team-logo">
+                            AK
+                        </div>
+
+                        <div>
+
+                            <strong class="player-card-name">
+                                Arun Kumar
+                            </strong>
+
+                            <p class="player-card-role">
+                                Batsman • Captain
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="player-card">
+
+                        <input
+                            type="checkbox"
+                            class="player-checkbox"
+                            name="players"
+                            value="Rohit">
+
+                        <div class="team-logo">
+                            RH
+                        </div>
+
+                        <div>
+
+                            <strong class="player-card-name">
+                                Rohit
+                            </strong>
+
+                            <p class="player-card-role">
+                                Wicket Keeper
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="player-card">
+
+                        <input
+                            type="checkbox"
+                            class="player-checkbox"
+                            name="players"
+                            value="Vignesh">
+
+                        <div class="team-logo">
+                            VG
+                        </div>
+
+                        <div>
+
+                            <strong class="player-card-name">
+                                Vignesh
+                            </strong>
+
+                            <p class="player-card-role">
+                                All Rounder
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="player-card">
+
+                        <input
+                            type="checkbox"
+                            class="player-checkbox"
+                            name="players"
+                            value="Karthick">
+
+                        <div class="team-logo">
+                            KR
+                        </div>
+
+                        <div>
+
+                            <strong class="player-card-name">
+                                Karthick
+                            </strong>
+
+                            <p class="player-card-role">
+                                Bowler
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="player-card">
+
+                        <input
+                            type="checkbox"
+                            class="player-checkbox"
+                            name="players"
+                            value="Sanjay">
+
+                        <div class="team-logo">
+                            SJ
+                        </div>
+
+                        <div>
+
+                            <strong class="player-card-name">
+                                Sanjay
+                            </strong>
+
+                            <p class="player-card-role">
+                                Batsman
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="player-card">
+
+                        <input
+                            type="checkbox"
+                            class="player-checkbox"
+                            name="players"
+                            value="Ajay">
+
+                        <div class="team-logo">
+                            AJ
+                        </div>
+
+                        <div>
+
+                            <strong class="player-card-name">
+                                Ajay
+                            </strong>
+
+                            <p class="player-card-role">
+                                Bowler
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="player-card">
+
+                        <input
+                            type="checkbox"
+                            class="player-checkbox"
+                            name="players"
+                            value="Harish">
+
+                        <div class="team-logo">
+                            HR
+                        </div>
+
+                        <div>
+
+                            <strong class="player-card-name">
+                                Harish
+                            </strong>
+
+                            <p class="player-card-role">
+                                All Rounder
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="player-card">
+
+                        <input
+                            type="checkbox"
+                            class="player-checkbox"
+                            name="players"
+                            value="Naveen">
+
+                        <div class="team-logo">
+                            NV
+                        </div>
+
+                        <div>
+
+                            <strong class="player-card-name">
+                                Naveen
+                            </strong>
+
+                            <p class="player-card-role">
+                                Batsman
+                            </p>
+
+                        </div>
+
+                    </label>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+
+            <div
+                style="
+                    margin-top:28px;
+                    padding-top:22px;
+                    border-top:1px solid #f1f5f9;
+                ">
+
+                <div>
+
+                    <strong
+                        style="
+                            color:#0f172a;
+                            font-size:13px;
+                        ">
+
+                        Registration Payment
+
+                    </strong>
+
+                    <p
+                        style="
+                            margin:4px 0 15px;
+                            color:#94a3b8;
+                            font-size:8px;
+                        ">
+
+                        Secure your team slot with the entry fee.
+
+                    </p>
+
+                </div>
+
+
+                <div class="registration-summary">
+
+                    <div class="registration-item">
+
+                        <span>
+                            Entry Fee
+                        </span>
+
+                        <strong>
+                            ₹500
+                        </strong>
+
+                    </div>
+
+
+                    <div class="registration-item">
+
+                        <span>
+                            Teams
+                        </span>
+
+                        <strong>
+                            1
+                        </strong>
+
+                    </div>
+
+
+                    <div class="registration-item">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong>
+                            ₹500
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="tournament-form-actions">
+
+                <a
+                    href="/tournament/1"
+                    class="tournament-btn">
+
+                    Cancel
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="tournament-btn primary">
+
+                    Continue to Payment
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+    <!-- TRUST -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-grid">
+
+
+            <div class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        🔒 Secure Registration
+                    </h3>
+
+                    <p class="tournament-card-description">
+
+                        Your team and payment information
+                        stays protected.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        🎟️ Instant Confirmation
+                    </h3>
+
+                    <p class="tournament-card-description">
+
+                        Receive tournament confirmation
+                        after successful registration.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        🏏 Ready to Play
+                    </h3>
+
+                    <p class="tournament-card-description">
+
+                        Your team enters the fixture list
+                        once registration is complete.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/search-turf">
+                Find Turf
+            </a>
+
+            <a href="/tournament">
+                Tournaments
+            </a>
+
+            <a href="/scorecard">
+                Live Score
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const players =
+            document.querySelectorAll(
+                ".player-checkbox"
+            );
+
+        const counter =
+            document.querySelector(
+                "#playerCount"
+            );
+
+
+        function updatePlayerCount() {
+
+            const selected =
+                document.querySelectorAll(
+                    ".player-checkbox:checked"
+                ).length;
+
+
+            if (counter) {
+
+                counter.textContent =
+                    `${selected} / 11`;
+
+            }
+
+
+            if (selected >= 11) {
+
+                players.forEach(
+                    function (player) {
+
+                        if (!player.checked) {
+
+                            player.disabled = true;
+
+                        }
+
+                    }
+                );
+
+            } else {
+
+                players.forEach(
+                    function (player) {
+
+                        player.disabled = false;
+
+                    }
+                );
+
+            }
+
+        }
+
+
+        players.forEach(
+            function (player) {
+
+                player.addEventListener(
+                    "change",
+                    updatePlayerCount
+                );
+
+            }
+        );
+
+
+        updatePlayerCount();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

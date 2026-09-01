@@ -1,0 +1,670 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Scorecard | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/user.js') }}">
+</script>
+<script src="{{ url_for('static', filename='js/score.js') }}">
+</script>
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf">
+                🏟️ <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history">
+                📅 <span>My Bookings</span>
+            </a>
+
+            <a href="/team">
+                👥 <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆 <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard" class="active">
+                📊 <span>Scorecard</span>
+            </a>
+
+            <a href="/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/profile">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Scorecard 📊
+                </h1>
+
+                <p>
+                    Track your team's matches, runs and player stats.
+                </p>
+
+            </div>
+
+            <a href="/tournament"
+               class="dashboard-primary-btn">
+                View Tournaments
+            </a>
+
+        </header>
+
+
+        <!-- MATCH HERO -->
+
+        <section class="score-match-hero">
+
+            <div class="match-live-label">
+                🔴 LIVE MATCH
+            </div>
+
+            <div class="match-teams">
+
+                <div class="match-team">
+
+                    <div class="match-team-logo">
+                        ⚡
+                    </div>
+
+                    <h2>
+                        Thunder XI
+                    </h2>
+
+                    <strong>
+                        148/6
+                    </strong>
+
+                    <span>
+                        17.4 Overs
+                    </span>
+
+                </div>
+
+
+                <div class="match-vs">
+
+                    <span>
+                        VS
+                    </span>
+
+                    <small>
+                        2nd Innings
+                    </small>
+
+                </div>
+
+
+                <div class="match-team">
+
+                    <div class="match-team-logo blue">
+                        👑
+                    </div>
+
+                    <h2>
+                        Royal Kings
+                    </h2>
+
+                    <strong>
+                        132/8
+                    </strong>
+
+                    <span>
+                        20 Overs
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="match-status">
+                Thunder XI need  - 15 runs to win
+            </div>
+
+        </section>
+
+
+        <!-- SCORE STATS -->
+
+        <section class="score-stat-grid">
+
+            <div>
+
+                <span>
+                    Current Run Rate
+                </span>
+
+                <strong>
+                    8.37
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Required Rate
+                </span>
+
+                <strong>
+                    7.50
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Partnership
+                </span>
+
+                <strong>
+                    46
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Balls Remaining
+                </span>
+
+                <strong>
+                    14
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- CURRENT BATTERS -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Current Batters
+                    </h2>
+
+                    <p>
+                        Thunder XI
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="batting-table-wrapper">
+
+                <table class="score-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Batter
+                            </th>
+
+                            <th>
+                                R
+                            </th>
+
+                            <th>
+                                B
+                            </th>
+
+                            <th>
+                                4s
+                            </th>
+
+                            <th>
+                                6s
+                            </th>
+
+                            <th>
+                                SR
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr class="active-batter">
+
+                            <td>
+                                <strong>
+                                    Arun Kumar *
+                                </strong>
+                            </td>
+
+                            <td>
+                                54
+                            </td>
+
+                            <td>
+                                37
+                            </td>
+
+                            <td>
+                                6
+                            </td>
+
+                            <td>
+                                2
+                            </td>
+
+                            <td>
+                                145.95
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                Rahul Kumar
+                            </td>
+
+                            <td>
+                                32
+                            </td>
+
+                            <td>
+                                25
+                            </td>
+
+                            <td>
+                                4
+                            </td>
+
+                            <td>
+                                1
+                            </td>
+
+                            <td>
+                                128.00
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- BOWLING -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Bowling
+                    </h2>
+
+                    <p>
+                        Royal Kings
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="batting-table-wrapper">
+
+                <table class="score-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Bowler
+                            </th>
+
+                            <th>
+                                O
+                            </th>
+
+                            <th>
+                                M
+                            </th>
+
+                            <th>
+                                R
+                            </th>
+
+                            <th>
+                                W
+                            </th>
+
+                            <th>
+                                Econ
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                Prakash K
+                            </td>
+
+                            <td>
+                                3.4
+                            </td>
+
+                            <td>
+                                0
+                            </td>
+
+                            <td>
+                                28
+                            </td>
+
+                            <td>
+                                2
+                            </td>
+
+                            <td>
+                                7.63
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                Vignesh S
+                            </td>
+
+                            <td>
+                                4
+                            </td>
+
+                            <td>
+                                0
+                            </td>
+
+                            <td>
+                                31
+                            </td>
+
+                            <td>
+                                1
+                            </td>
+
+                            <td>
+                                7.75
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- OVER SUMMARY -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Over Summary
+                    </h2>
+
+                    <p>
+                        Latest six balls
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="ball-summary">
+
+                <span class="ball normal">
+                    1
+                </span>
+
+                <span class="ball boundary">
+                    4
+                </span>
+
+                <span class="ball dot">
+                    0
+                </span>
+
+                <span class="ball normal">
+                    2
+                </span>
+
+                <span class="ball boundary">
+                    6
+                </span>
+
+                <span class="ball wicket">
+                    W
+                </span>
+
+            </div>
+
+
+            <div class="score-highlight">
+
+                <strong>
+                    13 runs
+                </strong>
+
+                <span>
+                    from this over
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- PLAYER PERFORMANCE -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Player Performance
+                    </h2>
+
+                    <p>
+                        Your tournament statistics
+                    </p>
+
+                </div>
+
+                <a href="/tournament/leaderboard">
+                    Leaderboard
+                </a>
+
+            </div>
+
+
+            <div class="player-performance-grid">
+
+                <div>
+
+                    <span>
+                        Matches
+                    </span>
+
+                    <strong>
+                        8
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Runs
+                    </span>
+
+                    <strong>
+                        342
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Wickets
+                    </span>
+
+                    <strong>
+                        12
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Average
+                    </span>
+
+                    <strong>
+                        42.75
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Strike Rate
+                    </span>
+
+                    <strong>
+                        138.4
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Best Score
+                    </span>
+
+                    <strong>
+                        78*
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Every run counts.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,444 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Equipment | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf">
+                🏟️ <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history">
+                📅 <span>My Bookings</span>
+            </a>
+
+            <a href="/team">
+                👥 <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆 <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard">
+                📊 <span>Scorecard</span>
+            </a>
+
+            <a href="/equipment" class="active">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/profile">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h1>Cricket Equipment 🏏</h1>
+
+                <p>
+                    Rent the equipment you need for your next match.
+                </p>
+            </div>
+
+        </header>
+
+
+        <!-- SEARCH -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Available Equipment</h2>
+
+                    <p>
+                        Add equipment while booking your turf.
+                    </p>
+                </div>
+
+                <div>
+                    <input
+                        type="text"
+                        id="equipmentSearch"
+                        class="form-input"
+                        placeholder="Search equipment...">
+                </div>
+
+            </div>
+
+
+            <div class="user-equipment-grid">
+
+
+                <!-- BAT -->
+
+                <article
+                    class="user-equipment-card"
+                    data-equipment-name="cricket bat">
+
+                    <div class="user-equipment-icon">
+                        🏏
+                    </div>
+
+                    <span class="equipment-category">
+                        BAT
+                    </span>
+
+                    <h3>
+                        Professional Cricket Bat
+                    </h3>
+
+                    <p>
+                        Lightweight match-ready bat.
+                    </p>
+
+                    <div class="equipment-card-bottom">
+
+                        <div>
+                            <strong>₹150</strong>
+                            <span>/ match</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="equipment-add-btn"
+                            onclick="showUserMessage('Cricket Bat added to booking.', 'success')">
+                            Add
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- BALL -->
+
+                <article
+                    class="user-equipment-card"
+                    data-equipment-name="cricket ball">
+
+                    <div class="user-equipment-icon blue">
+                        🥎
+                    </div>
+
+                    <span class="equipment-category">
+                        BALL
+                    </span>
+
+                    <h3>
+                        Cricket Ball
+                    </h3>
+
+                    <p>
+                        Quality practice and match balls.
+                    </p>
+
+                    <div class="equipment-card-bottom">
+
+                        <div>
+                            <strong>₹30</strong>
+                            <span>/ ball</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="equipment-add-btn"
+                            onclick="showUserMessage('Cricket Ball added to booking.', 'success')">
+                            Add
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- HELMET -->
+
+                <article
+                    class="user-equipment-card"
+                    data-equipment-name="helmet">
+
+                    <div class="user-equipment-icon orange">
+                        🪖
+                    </div>
+
+                    <span class="equipment-category">
+                        SAFETY
+                    </span>
+
+                    <h3>
+                        Cricket Helmet
+                    </h3>
+
+                    <p>
+                        Protective helmet for batsmen.
+                    </p>
+
+                    <div class="equipment-card-bottom">
+
+                        <div>
+                            <strong>₹70</strong>
+                            <span>/ match</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="equipment-add-btn"
+                            onclick="showUserMessage('Helmet added to booking.', 'success')">
+                            Add
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- GLOVES -->
+
+                <article
+                    class="user-equipment-card"
+                    data-equipment-name="batting gloves">
+
+                    <div class="user-equipment-icon purple">
+                        🧤
+                    </div>
+
+                    <span class="equipment-category">
+                        GLOVES
+                    </span>
+
+                    <h3>
+                        Batting Gloves
+                    </h3>
+
+                    <p>
+                        Comfortable protection for batting.
+                    </p>
+
+                    <div class="equipment-card-bottom">
+
+                        <div>
+                            <strong>₹50</strong>
+                            <span>/ match</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="equipment-add-btn"
+                            onclick="showUserMessage('Batting Gloves added to booking.', 'success')">
+                            Add
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- STUMPS -->
+
+                <article
+                    class="user-equipment-card"
+                    data-equipment-name="stumps">
+
+                    <div class="user-equipment-icon red">
+                        🪵
+                    </div>
+
+                    <span class="equipment-category">
+                        STUMPS
+                    </span>
+
+                    <h3>
+                        Wooden Stumps Set
+                    </h3>
+
+                    <p>
+                        Complete wicket set for your match.
+                    </p>
+
+                    <div class="equipment-card-bottom">
+
+                        <div>
+                            <strong>₹80</strong>
+                            <span>/ match</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="equipment-add-btn"
+                            onclick="showUserMessage('Stumps added to booking.', 'success')">
+                            Add
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- CONES -->
+
+                <article
+                    class="user-equipment-card"
+                    data-equipment-name="training cones">
+
+                    <div class="user-equipment-icon teal">
+                        🔶
+                    </div>
+
+                    <span class="equipment-category">
+                        TRAINING
+                    </span>
+
+                    <h3>
+                        Training Cones
+                    </h3>
+
+                    <p>
+                        Useful for warm-up and fielding drills.
+                    </p>
+
+                    <div class="equipment-card-bottom">
+
+                        <div>
+                            <strong>₹40</strong>
+                            <span>/ set</span>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="equipment-add-btn"
+                            onclick="showUserMessage('Training Cones added to booking.', 'success')">
+                            Add
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- HOW IT WORKS -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>How Equipment Rental Works</h2>
+
+                    <p>
+                        Simple three-step process.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="equipment-steps">
+
+                <div>
+                    <span>1</span>
+
+                    <h3>Choose Equipment</h3>
+
+                    <p>
+                        Select the equipment you need.
+                    </p>
+                </div>
+
+                <div>
+                    <span>2</span>
+
+                    <h3>Add to Booking</h3>
+
+                    <p>
+                        Equipment cost is added to your booking.
+                    </p>
+                </div>
+
+                <div>
+                    <span>3</span>
+
+                    <h3>Collect at Turf</h3>
+
+                    <p>
+                        Pick up your equipment when you arrive.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Play equipped. Play better.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

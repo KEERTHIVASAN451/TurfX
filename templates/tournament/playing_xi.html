@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Playing XI
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+
+                👥 TEAM SHEET
+
+            </span>
+
+            <h1>
+                Playing XI
+            </h1>
+
+            <p>
+                Select the starting eleven for
+                Victory Kings.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament/fixtures"
+                class="tournament-btn">
+
+                ← Fixtures
+
+            </a>
+
+            <button
+                type="button"
+                class="tournament-btn primary"
+                onclick="savePlayingXI()">
+
+                Save Playing XI
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MATCH INFO -->
+
+    <section class="tournament-stat-grid">
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon green">
+                🏏
+            </div>
+
+            <div>
+
+                <span>
+                    Team
+                </span>
+
+                <strong>
+                    VK
+                </strong>
+
+                <small>
+                    Victory Kings
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon blue">
+                👥
+            </div>
+
+            <div>
+
+                <span>
+                    Squad
+                </span>
+
+                <strong>
+                    12
+                </strong>
+
+                <small>
+                    Registered
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon orange">
+                ⭐
+            </div>
+
+            <div>
+
+                <span>
+                    Playing XI
+                </span>
+
+                <strong id="playingXICount">
+                    0
+                </strong>
+
+                <small>
+                    Select exactly 11
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon purple">
+                📅
+            </div>
+
+            <div>
+
+                <span>
+                    Match
+                </span>
+
+                <strong>
+                    21
+                </strong>
+
+                <small>
+                    26 Aug • 06 PM
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- PLAYER SELECTION -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    SELECT PLAYERS
+                </span>
+
+                <h2>
+                    Victory Kings Squad
+                </h2>
+
+                <p>
+                    Select exactly 11 players for the match.
+                </p>
+
+            </div>
+
+
+            <span
+                class="tournament-status upcoming">
+
+                <span id="selectedCounter">
+                    0
+                </span>
+                / 11 Selected
+
+            </span>
+
+        </div>
+
+
+
+        <div class="playing-xi-grid">
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Arun Kumar"
+                    data-player="Arun Kumar">
+
+                <div class="team-logo">
+                    AK
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Arun Kumar
+                    </strong>
+
+                    <p class="player-card-role">
+                        Captain • Batsman
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Rohit"
+                    data-player="Rohit">
+
+                <div class="team-logo">
+                    RH
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Rohit
+                    </strong>
+
+                    <p class="player-card-role">
+                        Wicket Keeper
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Vignesh"
+                    data-player="Vignesh">
+
+                <div class="team-logo">
+                    VG
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Vignesh
+                    </strong>
+
+                    <p class="player-card-role">
+                        All Rounder
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Karthick"
+                    data-player="Karthick">
+
+                <div class="team-logo">
+                    KR
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Karthick
+                    </strong>
+
+                    <p class="player-card-role">
+                        Bowler
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Sanjay"
+                    data-player="Sanjay">
+
+                <div class="team-logo">
+                    SJ
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Sanjay
+                    </strong>
+
+                    <p class="player-card-role">
+                        Batsman
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Ajay"
+                    data-player="Ajay">
+
+                <div class="team-logo">
+                    AJ
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Ajay
+                    </strong>
+
+                    <p class="player-card-role">
+                        Bowler
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Harish"
+                    data-player="Harish">
+
+                <div class="team-logo">
+                    HR
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Harish
+                    </strong>
+
+                    <p class="player-card-role">
+                        All Rounder
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Naveen"
+                    data-player="Naveen">
+
+                <div class="team-logo">
+                    NV
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Naveen
+                    </strong>
+
+                    <p class="player-card-role">
+                        Batsman
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Praveen"
+                    data-player="Praveen">
+
+                <div class="team-logo">
+                    PR
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Praveen
+                    </strong>
+
+                    <p class="player-card-role">
+                        Bowler
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Dinesh"
+                    data-player="Dinesh">
+
+                <div class="team-logo">
+                    DN
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Dinesh
+                    </strong>
+
+                    <p class="player-card-role">
+                        All Rounder
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Manoj"
+                    data-player="Manoj">
+
+                <div class="team-logo">
+                    MN
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Manoj
+                    </strong>
+
+                    <p class="player-card-role">
+                        Bowler
+                    </p>
+
+                </div>
+
+            </label>
+
+
+
+            <label class="player-card">
+
+                <input
+                    type="checkbox"
+                    class="player-checkbox"
+                    value="Suresh"
+                    data-player="Suresh">
+
+                <div class="team-logo">
+                    SR
+                </div>
+
+                <div>
+
+                    <strong class="player-card-name">
+                        Suresh
+                    </strong>
+
+                    <p class="player-card-role">
+                        Substitute
+                    </p>
+
+                </div>
+
+            </label>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- RULES -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    MATCH RULES
+                </span>
+
+                <h2>
+                    Playing XI Requirements
+                </h2>
+
+                <p>
+                    Make sure your starting eleven is valid.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-grid">
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        11 Players
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        Exactly 11 players must be selected.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        1 Captain
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        Team captain must be part of the Playing XI.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        1 Wicket Keeper
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        A wicket keeper should be included.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ACTION -->
+
+    <section
+        style="
+            display:flex;
+            justify-content:flex-end;
+            gap:9px;
+            padding-bottom:30px;
+            flex-wrap:wrap;
+        ">
+
+        <a
+            href="/tournament/fixtures"
+            class="tournament-btn">
+
+            Cancel
+
+        </a>
+
+
+        <button
+            type="button"
+            class="tournament-btn primary"
+            onclick="savePlayingXI()">
+
+            Save Playing XI →
+
+        </button>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/fixtures">
+                Fixtures
+            </a>
+
+            <a href="/scorecard">
+                Live Score
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const players =
+            document.querySelectorAll(
+                ".player-checkbox"
+            );
+
+        const count =
+            document.querySelector(
+                "#selectedCounter"
+            );
+
+
+        function updateCount() {
+
+            const selected =
+                document.querySelectorAll(
+                    ".player-checkbox:checked"
+                ).length;
+
+
+            if (count) {
+                count.textContent =
+                    selected;
+            }
+
+
+            players.forEach(
+                function (player) {
+
+                    if (
+                        selected >= 11 &&
+                        !player.checked
+                    ) {
+
+                        player.disabled = true;
+
+                    } else {
+
+                        player.disabled = false;
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        players.forEach(
+            function (player) {
+
+                player.addEventListener(
+                    "change",
+                    updateCount
+                );
+
+            }
+        );
+
+
+        updateCount();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

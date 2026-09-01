@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Tournament Gallery
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a href="/" class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">Home</a>
+
+        <a href="/search-turf">Find Turf</a>
+
+        <a href="/tournament" class="active">
+            Tournaments
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+            Login
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+                📸 TOURNAMENT MOMENTS
+            </span>
+
+            <h1>
+                Gallery
+            </h1>
+
+            <p>
+                Highlights from matches, teams and championship moments.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament"
+                class="tournament-btn">
+                ← Tournament
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    HIGHLIGHTS
+                </span>
+
+                <h2>
+                    Chennai Weekend Premier League
+                </h2>
+
+                <p>
+                    Best moments from the tournament.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-gallery">
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="{{ url_for('static', filename='images/tournament-1.jpg') }}"
+                    alt="Tournament match">
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="{{ url_for('static', filename='images/tournament-2.jpg') }}"
+                    alt="Cricket players">
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="{{ url_for('static', filename='images/tournament-3.jpg') }}"
+                    alt="Cricket match">
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="{{ url_for('static', filename='images/tournament-4.jpg') }}"
+                    alt="Tournament celebration">
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="{{ url_for('static', filename='images/tournament-5.jpg') }}"
+                    alt="Team celebration">
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="{{ url_for('static', filename='images/tournament-6.jpg') }}"
+                    alt="Turf cricket">
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="{{ url_for('static', filename='images/tournament-7.jpg') }}"
+                    alt="Cricket stadium">
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <img
+                    src="{{ url_for('static', filename='images/tournament-8.jpg') }}"
+                    alt="Winning team">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="tournament-bottom-cta">
+
+        <div>
+
+            <span>
+                MORE THAN A MATCH
+            </span>
+
+            <h2>
+                Every Game Has A Story.
+            </h2>
+
+            <p>
+                Capture your best TurfX moments.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+        <div class="tournament-footer-links">
+
+            <a href="/">Home</a>
+
+            <a href="/tournament">Tournament</a>
+
+            <a href="/tournament/sponsors">Sponsors</a>
+
+        </div>
+
+        <div class="tournament-footer-copy">
+            © 2026 TurfX. All rights reserved.
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+</html>

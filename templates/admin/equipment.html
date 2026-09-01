@@ -1,0 +1,1601 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Equipment | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment" class="active">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Equipment Management
+                </h1>
+
+                <p>
+                    Manage cricket equipment, stock and rentals.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-primary-btn"
+                onclick="openEquipmentModal()">
+
+                + Add Equipment
+
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    🏏
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Equipment
+                    </span>
+
+                    <strong>
+                        185
+                    </strong>
+
+                    <small>
+                        Inventory items
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        Available
+                    </span>
+
+                    <strong>
+                        142
+                    </strong>
+
+                    <small>
+                        Ready to rent
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    📦
+                </div>
+
+                <div>
+
+                    <span>
+                        Rented
+                    </span>
+
+                    <strong>
+                        31
+                    </strong>
+
+                    <small>
+                        Currently in use
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    🔧
+                </div>
+
+                <div>
+
+                    <span>
+                        Maintenance
+                    </span>
+
+                    <strong>
+                        12
+                    </strong>
+
+                    <small>
+                        Need attention
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FILTER -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Equipment Inventory
+                    </h2>
+
+                    <p>
+                        Search and filter available items.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="equipment-filter-grid">
+
+                <div class="admin-field">
+
+                    <label>
+                        Search
+                    </label>
+
+                    <input
+                        type="text"
+                        id="equipmentSearch"
+                        placeholder="Equipment name / ID">
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select id="equipmentCategory">
+
+                        <option value="">
+                            All Categories
+                        </option>
+
+                        <option value="Bat">
+                            Bats
+                        </option>
+
+                        <option value="Ball">
+                            Balls
+                        </option>
+
+                        <option value="Stumps">
+                            Stumps
+                        </option>
+
+                        <option value="Gloves">
+                            Gloves
+                        </option>
+
+                        <option value="Helmet">
+                            Helmets
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select id="equipmentStatus">
+
+                        <option value="">
+                            All Status
+                        </option>
+
+                        <option value="Available">
+                            Available
+                        </option>
+
+                        <option value="Rented">
+                            Rented
+                        </option>
+
+                        <option value="Maintenance">
+                            Maintenance
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-filter-btn"
+                    onclick="filterEquipment()">
+
+                    Apply Filter
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- INVENTORY TABLE -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Inventory
+                    </h2>
+
+                    <p>
+                        Current equipment stock.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="exportEquipment()">
+
+                    Export CSV
+
+                </button>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table
+                    class="admin-table"
+                    id="equipmentTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Equipment
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Total Stock
+                            </th>
+
+                            <th>
+                                Available
+                            </th>
+
+                            <th>
+                                Rent
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr
+                            class="equipment-row"
+                            data-category="Bat"
+                            data-status="Available">
+
+                            <td>
+
+                                <div class="equipment-table-cell">
+
+                                    <div class="equipment-icon">
+                                        🏏
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            MRF Cricket Bat
+                                        </strong>
+
+                                        <span>
+                                            #EQ001
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                Bat
+                            </td>
+
+                            <td>
+                                12
+                            </td>
+
+                            <td>
+                                10
+                            </td>
+
+                            <td>
+                                ₹150
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Available
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewEquipment('EQ001')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="equipment-row"
+                            data-category="Ball"
+                            data-status="Available">
+
+                            <td>
+
+                                <div class="equipment-table-cell">
+
+                                    <div class="equipment-icon blue">
+                                        ⚾
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            SG Tennis Ball
+                                        </strong>
+
+                                        <span>
+                                            #EQ002
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                Ball
+                            </td>
+
+                            <td>
+                                40
+                            </td>
+
+                            <td>
+                                35
+                            </td>
+
+                            <td>
+                                ₹30
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Available
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewEquipment('EQ002')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="equipment-row"
+                            data-category="Stumps"
+                            data-status="Rented">
+
+                            <td>
+
+                                <div class="equipment-table-cell">
+
+                                    <div class="equipment-icon orange">
+                                        🥅
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Wooden Stumps Set
+                                        </strong>
+
+                                        <span>
+                                            #EQ003
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                Stumps
+                            </td>
+
+                            <td>
+                                5
+                            </td>
+
+                            <td>
+                                2
+                            </td>
+
+                            <td>
+                                ₹80
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status booked">
+                                    Rented
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewEquipment('EQ003')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="equipment-row"
+                            data-category="Gloves"
+                            data-status="Maintenance">
+
+                            <td>
+
+                                <div class="equipment-table-cell">
+
+                                    <div class="equipment-icon purple">
+                                        🧤
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Batting Gloves
+                                        </strong>
+
+                                        <span>
+                                            #EQ004
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                Gloves
+                            </td>
+
+                            <td>
+                                8
+                            </td>
+
+                            <td>
+                                5
+                            </td>
+
+                            <td>
+                                ₹50
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status blocked">
+                                    Maintenance
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewEquipment('EQ004')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="equipment-row"
+                            data-category="Helmet"
+                            data-status="Available">
+
+                            <td>
+
+                                <div class="equipment-table-cell">
+
+                                    <div class="equipment-icon red">
+                                        🪖
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Cricket Helmet
+                                        </strong>
+
+                                        <span>
+                                            #EQ005
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                Helmet
+                            </td>
+
+                            <td>
+                                10
+                            </td>
+
+                            <td>
+                                8
+                            </td>
+
+                            <td>
+                                ₹70
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Available
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewEquipment('EQ005')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- RENTAL ACTIVITY -->
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Recent Rentals
+                        </h2>
+
+                        <p>
+                            Latest equipment rental activity.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="rental-list">
+
+
+                    <div>
+
+                        <span class="rental-icon">
+                            🏏
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Arun Kumar
+                            </strong>
+
+                            <span>
+                                MRF Cricket Bat • #BK001
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            ₹150
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="rental-icon blue">
+                            🪖
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Rahul
+                            </strong>
+
+                            <span>
+                                Helmet • #BK002
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            ₹70
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="rental-icon orange">
+                            🥅
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Vignesh
+                            </strong>
+
+                            <span>
+                                Stumps Set • #BK003
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            ₹80
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Inventory Alerts
+                        </h2>
+
+                        <p>
+                            Equipment requiring attention.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="equipment-alert-list">
+
+                    <div>
+
+                        <span>
+                            ⚠️
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Low Stock
+                            </strong>
+
+                            <p>
+                                Wooden Stumps Set
+                            </p>
+
+                        </div>
+
+                        <b>
+                            2 left
+                        </b>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            🔧
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Maintenance
+                            </strong>
+
+                            <p>
+                                Batting Gloves
+                            </p>
+
+                        </div>
+
+                        <b>
+                            3 items
+                        </b>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            📦
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Return Due
+                            </strong>
+
+                            <p>
+                                4 equipment items
+                            </p>
+
+                        </div>
+
+                        <b>
+                            Today
+                        </b>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Equipment Inventory Management
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- EQUIPMENT MODAL -->
+
+<div
+    id="equipmentModal"
+    class="admin-modal">
+
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <span>
+                    TURFX EQUIPMENT
+                </span>
+
+                <h2>
+                    Equipment Details
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeEquipmentModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="equipment-detail-modal">
+
+            <div class="equipment-modal-icon"
+                 id="modalEquipmentIcon">
+                🏏
+            </div>
+
+            <div>
+
+                <h3 id="modalEquipmentName">
+                    MRF Cricket Bat
+                </h3>
+
+                <p id="modalEquipmentId">
+                    #EQ001
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="equipment-detail-grid">
+
+            <div>
+
+                <span>
+                    Category
+                </span>
+
+                <strong id="modalEquipmentCategory">
+                    Bat
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Total Stock
+                </span>
+
+                <strong id="modalEquipmentStock">
+                    12
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Available
+                </span>
+
+                <strong id="modalEquipmentAvailable">
+                    10
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Rental Price
+                </span>
+
+                <strong id="modalEquipmentPrice">
+                    ₹150
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-modal-actions">
+
+            <button
+                type="button"
+                class="admin-outline-btn"
+                onclick="closeEquipmentModal()">
+
+                Close
+
+            </button>
+
+            <button
+                type="button"
+                class="admin-success-btn"
+                onclick="showAdminAlert('Equipment edit feature ready for backend connection.', 'success')">
+
+                Edit
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ADD EQUIPMENT MODAL -->
+
+<div
+    id="addEquipmentModal"
+    class="admin-modal">
+
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <span>
+                    TURFX ADMIN
+                </span>
+
+                <h2>
+                    Add Equipment
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeAddEquipmentModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form onsubmit="createEquipment(event)">
+
+            <div class="admin-form-grid equipment-form-grid">
+
+                <div class="admin-field">
+
+                    <label>
+                        Equipment Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newEquipmentName"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select
+                        id="newEquipmentCategory"
+                        required>
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option>
+                            Bat
+                        </option>
+
+                        <option>
+                            Ball
+                        </option>
+
+                        <option>
+                            Stumps
+                        </option>
+
+                        <option>
+                            Gloves
+                        </option>
+
+                        <option>
+                            Helmet
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Stock
+                    </label>
+
+                    <input
+                        type="number"
+                        id="newEquipmentStock"
+                        min="1"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Rental Price
+                    </label>
+
+                    <input
+                        type="number"
+                        id="newEquipmentPrice"
+                        min="0"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-modal-actions">
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="closeAddEquipmentModal()">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="admin-success-btn">
+
+                    Add Equipment
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const equipmentData = {
+
+    EQ001: {
+        name: "MRF Cricket Bat",
+        category: "Bat",
+        stock: "12",
+        available: "10",
+        price: "₹150",
+        icon: "🏏"
+    },
+
+    EQ002: {
+        name: "SG Tennis Ball",
+        category: "Ball",
+        stock: "40",
+        available: "35",
+        price: "₹30",
+        icon: "⚾"
+    },
+
+    EQ003: {
+        name: "Wooden Stumps Set",
+        category: "Stumps",
+        stock: "5",
+        available: "2",
+        price: "₹80",
+        icon: "🥅"
+    },
+
+    EQ004: {
+        name: "Batting Gloves",
+        category: "Gloves",
+        stock: "8",
+        available: "5",
+        price: "₹50",
+        icon: "🧤"
+    },
+
+    EQ005: {
+        name: "Cricket Helmet",
+        category: "Helmet",
+        stock: "10",
+        available: "8",
+        price: "₹70",
+        icon: "🪖"
+    }
+
+};
+
+
+function filterEquipment() {
+
+    const search =
+        document
+        .querySelector("#equipmentSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const category =
+        document
+        .querySelector("#equipmentCategory")
+        .value;
+
+    const status =
+        document
+        .querySelector("#equipmentStatus")
+        .value;
+
+    document
+        .querySelectorAll(".equipment-row")
+        .forEach(function (row) {
+
+            const text =
+                row.textContent
+                .toLowerCase();
+
+            const rowCategory =
+                row.dataset.category || "";
+
+            const rowStatus =
+                row.dataset.status || "";
+
+            const matchSearch =
+                !search ||
+                text.includes(search);
+
+            const matchCategory =
+                !category ||
+                rowCategory === category;
+
+            const matchStatus =
+                !status ||
+                rowStatus === status;
+
+            row.style.display =
+                matchSearch &&
+                matchCategory &&
+                matchStatus
+                    ? ""
+                    : "none";
+
+        });
+
+}
+
+
+function viewEquipment(id) {
+
+    const item =
+        equipmentData[id];
+
+    if (!item) {
+        return;
+    }
+
+    document.querySelector(
+        "#modalEquipmentIcon"
+    ).textContent =
+        item.icon;
+
+    document.querySelector(
+        "#modalEquipmentName"
+    ).textContent =
+        item.name;
+
+    document.querySelector(
+        "#modalEquipmentId"
+    ).textContent =
+        "#" + id;
+
+    document.querySelector(
+        "#modalEquipmentCategory"
+    ).textContent =
+        item.category;
+
+    document.querySelector(
+        "#modalEquipmentStock"
+    ).textContent =
+        item.stock;
+
+    document.querySelector(
+        "#modalEquipmentAvailable"
+    ).textContent =
+        item.available;
+
+    document.querySelector(
+        "#modalEquipmentPrice"
+    ).textContent =
+        item.price;
+
+    document.querySelector(
+        "#equipmentModal"
+    ).classList.add("show");
+
+}
+
+
+function closeEquipmentModal() {
+
+    document.querySelector(
+        "#equipmentModal"
+    ).classList.remove("show");
+
+}
+
+
+function openEquipmentModal() {
+
+    document.querySelector(
+        "#addEquipmentModal"
+    ).classList.add("show");
+
+}
+
+
+function closeAddEquipmentModal() {
+
+    document.querySelector(
+        "#addEquipmentModal"
+    ).classList.remove("show");
+
+}
+
+
+function createEquipment(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.querySelector(
+            "#newEquipmentName"
+        ).value
+        .trim();
+
+    if (!name) {
+        return;
+    }
+
+    closeAddEquipmentModal();
+
+    showAdminAlert(
+        `${name} added successfully.`,
+        "success"
+    );
+
+    event.target.reset();
+
+}
+
+
+function exportEquipment() {
+
+    const table =
+        document.querySelector(
+            "#equipmentTable"
+        );
+
+    if (!table) {
+        return;
+    }
+
+    const rows =
+        table.querySelectorAll("tr");
+
+    const csv = [];
+
+    rows.forEach(function (row) {
+
+        const cells =
+            row.querySelectorAll(
+                "th, td"
+            );
+
+        const values = [];
+
+        cells.forEach(function (cell) {
+
+            values.push(
+                '"' +
+                cell.innerText
+                .replace(/"/g, '""')
+                .trim() +
+                '"'
+            );
+
+        });
+
+        csv.push(
+            values.join(",")
+        );
+
+    });
+
+    const blob =
+        new Blob(
+            [csv.join("\n")],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "turfx-equipment.csv";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const search =
+            document.querySelector(
+                "#equipmentSearch"
+            );
+
+        if (search) {
+
+            search.addEventListener(
+                "input",
+                filterEquipment
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

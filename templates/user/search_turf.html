@@ -1,0 +1,679 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Find Turf | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/booking.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf" class="active">
+                🏟️ <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history">
+                📅 <span>My Bookings</span>
+            </a>
+
+            <a href="/team">
+                👥 <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆 <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard">
+                📊 <span>Scorecard</span>
+            </a>
+
+            <a href="/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/profile">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- HEADER -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Find Your Turf 🏟️
+                </h1>
+
+                <p>
+                    Search and book the perfect turf for your next match.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- SEARCH AREA -->
+
+        <section class="turf-search-panel">
+
+            <div class="search-input-box">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    id="turfSearch"
+                    placeholder="Search turf by name or location...">
+
+            </div>
+
+            <div class="search-select-box">
+
+                <span>📍</span>
+
+                <select id="locationFilter">
+
+                    <option value="">
+                        All Locations
+                    </option>
+
+                    <option value="chennai">
+                        Chennai
+                    </option>
+
+                    <option value="tambaram">
+                        Tambaram
+                    </option>
+
+                    <option value="velachery">
+                        Velachery
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+                class="dashboard-primary-btn"
+                type="button"
+                onclick="filterTurfs()">
+
+                Search Turf
+
+            </button>
+
+        </section>
+
+
+        <!-- FILTERS -->
+
+        <section class="turf-filter-bar">
+
+            <button
+                class="filter-chip active"
+                data-turf-filter="all">
+
+                All Turfs
+
+            </button>
+
+            <button
+                class="filter-chip"
+                data-turf-filter="cricket">
+
+                🏏 Cricket
+
+            </button>
+
+            <button
+                class="filter-chip"
+                data-turf-filter="football">
+
+                ⚽ Football
+
+            </button>
+
+            <button
+                class="filter-chip"
+                data-turf-filter="premium">
+
+                ⭐ Premium
+
+            </button>
+
+        </section>
+
+
+        <!-- RESULTS HEADER -->
+
+        <div class="results-header">
+
+            <div>
+
+                <h2>
+                    Popular Turfs
+                </h2>
+
+                <p>
+                    6 turfs available near you
+                </p>
+
+            </div>
+
+            <select class="sort-select">
+
+                <option>
+                    Sort: Recommended
+                </option>
+
+                <option>
+                    Price: Low to High
+                </option>
+
+                <option>
+                    Price: High to Low
+                </option>
+
+                <option>
+                    Rating
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- TURF GRID -->
+
+        <section class="turf-results-grid">
+
+
+            <!-- TURF 1 -->
+
+            <article
+                class="turf-result-card"
+                data-category="cricket premium"
+                data-location="chennai">
+
+                <div class="turf-result-image cricket-one">
+
+                    <span class="turf-live-badge">
+                        OPEN NOW
+                    </span>
+
+                    <span class="turf-rating-badge">
+                        ⭐ 4.9
+                    </span>
+
+                </div>
+
+                <div class="turf-result-body">
+
+                    <div class="turf-result-type">
+                        CRICKET • PREMIUM
+                    </div>
+
+                    <h3>
+                        TurfX Arena
+                    </h3>
+
+                    <p>
+                        📍 Anna Nagar, Chennai
+                    </p>
+
+                    <div class="turf-features">
+
+                        <span>🌙 Night Lights</span>
+                        <span>🚿 Changing Room</span>
+                        <span>🅿️ Parking</span>
+
+                    </div>
+
+                    <div class="turf-result-footer">
+
+                        <div>
+
+                            <strong>
+                                ₹800
+                            </strong>
+
+                            <span>
+                                / hour
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="/turf/1"
+                            class="turf-book-btn">
+
+                            View Turf
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- TURF 2 -->
+
+            <article
+                class="turf-result-card"
+                data-category="cricket"
+                data-location="tambaram">
+
+                <div class="turf-result-image cricket-two">
+
+                    <span class="turf-live-badge">
+                        AVAILABLE
+                    </span>
+
+                    <span class="turf-rating-badge">
+                        ⭐ 4.7
+                    </span>
+
+                </div>
+
+                <div class="turf-result-body">
+
+                    <div class="turf-result-type">
+                        CRICKET
+                    </div>
+
+                    <h3>
+                        Champions Turf
+                    </h3>
+
+                    <p>
+                        📍 Tambaram, Chennai
+                    </p>
+
+                    <div class="turf-features">
+
+                        <span>💡 Flood Lights</span>
+                        <span>🎯 Practice Nets</span>
+                        <span>🅿️ Parking</span>
+
+                    </div>
+
+                    <div class="turf-result-footer">
+
+                        <div>
+
+                            <strong>
+                                ₹700
+                            </strong>
+
+                            <span>
+                                / hour
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="/turf/2"
+                            class="turf-book-btn">
+
+                            View Turf
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- TURF 3 -->
+
+            <article
+                class="turf-result-card"
+                data-category="football"
+                data-location="velachery">
+
+                <div class="turf-result-image football-one">
+
+                    <span class="turf-live-badge">
+                        AVAILABLE
+                    </span>
+
+                    <span class="turf-rating-badge">
+                        ⭐ 4.8
+                    </span>
+
+                </div>
+
+                <div class="turf-result-body">
+
+                    <div class="turf-result-type">
+                        FOOTBALL
+                    </div>
+
+                    <h3>
+                        City Sports Arena
+                    </h3>
+
+                    <p>
+                        📍 Velachery, Chennai
+                    </p>
+
+                    <div class="turf-features">
+
+                        <span>⚽ 5-a-side</span>
+                        <span>🌙 Night Lights</span>
+                        <span>🚿 Shower</span>
+
+                    </div>
+
+                    <div class="turf-result-footer">
+
+                        <div>
+
+                            <strong>
+                                ₹900
+                            </strong>
+
+                            <span>
+                                / hour
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="/turf/3"
+                            class="turf-book-btn">
+
+                            View Turf
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- TURF 4 -->
+
+            <article
+                class="turf-result-card"
+                data-category="cricket"
+                data-location="chennai">
+
+                <div class="turf-result-image cricket-three">
+
+                    <span class="turf-live-badge">
+                        AVAILABLE
+                    </span>
+
+                    <span class="turf-rating-badge">
+                        ⭐ 4.6
+                    </span>
+
+                </div>
+
+                <div class="turf-result-body">
+
+                    <div class="turf-result-type">
+                        CRICKET
+                    </div>
+
+                    <h3>
+                        Super Strikers Ground
+                    </h3>
+
+                    <p>
+                        📍 T Nagar, Chennai
+                    </p>
+
+                    <div class="turf-features">
+
+                        <span>🏏 Cricket Nets</span>
+                        <span>💡 Lights</span>
+                        <span>🅿️ Parking</span>
+
+                    </div>
+
+                    <div class="turf-result-footer">
+
+                        <div>
+
+                            <strong>
+                                ₹750
+                            </strong>
+
+                            <span>
+                                / hour
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="/turf/4"
+                            class="turf-book-btn">
+
+                            View Turf
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- TURF 5 -->
+
+            <article
+                class="turf-result-card"
+                data-category="cricket premium"
+                data-location="velachery">
+
+                <div class="turf-result-image cricket-four">
+
+                    <span class="turf-live-badge">
+                        PREMIUM
+                    </span>
+
+                    <span class="turf-rating-badge">
+                        ⭐ 5.0
+                    </span>
+
+                </div>
+
+                <div class="turf-result-body">
+
+                    <div class="turf-result-type">
+                        CRICKET • PREMIUM
+                    </div>
+
+                    <h3>
+                        Elite Cricket Club
+                    </h3>
+
+                    <p>
+                        📍 Velachery, Chennai
+                    </p>
+
+                    <div class="turf-features">
+
+                        <span>🏏 Pro Turf</span>
+                        <span>🎥 Cameras</span>
+                        <span>🚿 Shower</span>
+
+                    </div>
+
+                    <div class="turf-result-footer">
+
+                        <div>
+
+                            <strong>
+                                ₹1200
+                            </strong>
+
+                            <span>
+                                / hour
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="/turf/5"
+                            class="turf-book-btn">
+
+                            View Turf
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- TURF 6 -->
+
+            <article
+                class="turf-result-card"
+                data-category="football"
+                data-location="tambaram">
+
+                <div class="turf-result-image football-two">
+
+                    <span class="turf-live-badge">
+                        AVAILABLE
+                    </span>
+
+                    <span class="turf-rating-badge">
+                        ⭐ 4.5
+                    </span>
+
+                </div>
+
+                <div class="turf-result-body">
+
+                    <div class="turf-result-type">
+                        FOOTBALL
+                    </div>
+
+                    <h3>
+                        KickOff Arena
+                    </h3>
+
+                    <p>
+                        📍 Tambaram, Chennai
+                    </p>
+
+                    <div class="turf-features">
+
+                        <span>⚽ 7-a-side</span>
+                        <span>💡 Lights</span>
+                        <span>🅿️ Parking</span>
+
+                    </div>
+
+                    <div class="turf-result-footer">
+
+                        <div>
+
+                            <strong>
+                                ₹850
+                            </strong>
+
+                            <span>
+                                / hour
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="/turf/6"
+                            class="turf-book-btn">
+
+                            View Turf
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Find your game. Book your turf.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

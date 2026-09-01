@@ -1,0 +1,613 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Payment | TurfX{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/booking.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf">
+                🏟️ <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history">
+                📅 <span>My Bookings</span>
+            </a>
+
+            <a href="/team">
+                👥 <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆 <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard">
+                📊 <span>Scorecard</span>
+            </a>
+
+            <a href="/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/profile">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Secure Payment 💳
+                </h1>
+
+                <p>
+                    Complete your payment to confirm the booking.
+                </p>
+
+            </div>
+
+            <a
+                href="/booking"
+                class="dashboard-primary-btn">
+                ← Back
+            </a>
+
+        </header>
+
+
+        <form
+            method="POST"
+            action="/payment"
+            id="paymentForm">
+
+
+            <div class="payment-page-grid">
+
+
+                <!-- LEFT -->
+
+                <div>
+
+
+                    <!-- PAYMENT METHODS -->
+
+                    <section class="dashboard-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h2>
+                                    Choose Payment Method
+                                </h2>
+
+                                <p>
+                                    Your payment is secure.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="payment-tabs">
+
+
+                            <label class="payment-tab active">
+
+                                <input
+                                    type="radio"
+                                    name="payment_method"
+                                    value="upi"
+                                    checked>
+
+                                <span class="payment-tab-icon">
+                                    📱
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        UPI
+                                    </strong>
+
+                                    <small>
+                                        GPay / PhonePe / Paytm
+                                    </small>
+
+                                </div>
+
+                            </label>
+
+
+                            <label class="payment-tab">
+
+                                <input
+                                    type="radio"
+                                    name="payment_method"
+                                    value="card">
+
+                                <span class="payment-tab-icon">
+                                    💳
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Card
+                                    </strong>
+
+                                    <small>
+                                        Credit / Debit Card
+                                    </small>
+
+                                </div>
+
+                            </label>
+
+
+                            <label class="payment-tab">
+
+                                <input
+                                    type="radio"
+                                    name="payment_method"
+                                    value="cash">
+
+                                <span class="payment-tab-icon">
+                                    💵
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Pay at Turf
+                                    </strong>
+
+                                    <small>
+                                        Cash at venue
+                                    </small>
+
+                                </div>
+
+                            </label>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- UPI -->
+
+                    <section
+                        class="dashboard-panel payment-detail-panel"
+                        id="upiPaymentPanel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h2>
+                                    UPI Payment
+                                </h2>
+
+                                <p>
+                                    Enter your UPI ID.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                UPI ID
+                            </label>
+
+                            <input
+                                type="text"
+                                name="upi_id"
+                                id="upiId"
+                                class="form-input"
+                                placeholder="yourname@upi">
+
+                        </div>
+
+
+                        <div class="upi-demo-box">
+
+                            <div class="upi-demo-icon">
+                                📱
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Demo UPI Payment
+                                </strong>
+
+                                <p>
+                                    This demo will simulate
+                                    a successful payment.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- CARD -->
+
+                    <section
+                        class="dashboard-panel payment-detail-panel"
+                        id="cardPaymentPanel"
+                        style="display:none;">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h2>
+                                    Card Details
+                                </h2>
+
+                                <p>
+                                    Enter your card information.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Card Number
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-input"
+                                name="card_number"
+                                placeholder="1234 5678 9012 3456"
+                                maxlength="19">
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    Expiry Date
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-input"
+                                    name="expiry"
+                                    placeholder="MM/YY"
+                                    maxlength="5">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    CVV
+                                </label>
+
+                                <input
+                                    type="password"
+                                    class="form-input"
+                                    name="cvv"
+                                    placeholder="•••"
+                                    maxlength="3">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Card Holder Name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-input"
+                                name="card_holder"
+                                placeholder="Name on card">
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- CASH -->
+
+                    <section
+                        class="dashboard-panel payment-detail-panel"
+                        id="cashPaymentPanel"
+                        style="display:none;">
+
+                        <div class="cash-payment-box">
+
+                            <span>
+                                💵
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Pay at Turf
+                                </h3>
+
+                                <p>
+                                    Reserve the slot now and
+                                    pay the amount at the venue.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- SECURITY -->
+
+                    <section class="payment-security">
+
+                        <span>
+                            🔒
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Payment
+                            </strong>
+
+                            <p>
+                                Your payment information is
+                                protected and will not be stored.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+
+                <!-- RIGHT SUMMARY -->
+
+                <aside class="payment-summary-side">
+
+                    <section class="payment-summary-card">
+
+                        <div class="payment-summary-heading">
+
+                            <span>
+                                ORDER SUMMARY
+                            </span>
+
+                            <strong>
+                                TURFX
+                            </strong>
+
+                        </div>
+
+
+                        <div class="payment-turf-info">
+
+                            <div class="payment-turf-icon">
+                                🏏
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    TurfX Arena
+                                </strong>
+
+                                <span>
+                                    Anna Nagar, Chennai
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="payment-divider"></div>
+
+
+                        <div class="payment-summary-row">
+
+                            <span>
+                                Date
+                            </span>
+
+                            <strong>
+                                25 Aug 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div class="payment-summary-row">
+
+                            <span>
+                                Slot
+                            </span>
+
+                            <strong>
+                                06:00 PM - 07:00 PM
+                            </strong>
+
+                        </div>
+
+
+                        <div class="payment-summary-row">
+
+                            <span>
+                                Turf Booking
+                            </span>
+
+                            <strong>
+                                ₹1,000
+                            </strong>
+
+                        </div>
+
+
+                        <div class="payment-summary-row">
+
+                            <span>
+                                Equipment
+                            </span>
+
+                            <strong>
+                                ₹0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="payment-summary-row">
+
+                            <span>
+                                Discount
+                            </span>
+
+                            <strong>
+                                - ₹0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="payment-divider"></div>
+
+
+                        <div class="payment-total">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong>
+                                ₹1,000
+                            </strong>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="dashboard-primary-btn payment-submit-btn">
+
+                            Pay ₹1,000
+
+                        </button>
+
+
+                        <p class="payment-note">
+
+                            By continuing, you agree to TurfX
+                            booking terms and cancellation policy.
+
+                        </p>
+
+                    </section>
+
+                </aside>
+
+            </div>
+
+        </form>
+
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Secure & Easy Payments
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

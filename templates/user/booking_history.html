@@ -1,0 +1,337 @@
+{% extends "shared/head.html" %}
+
+{% block title %}My Bookings | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf">
+                🏟️ <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history" class="active">
+                📅 <span>My Bookings</span>
+            </a>
+
+            <a href="/team">
+                👥 <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆 <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard">
+                📊 <span>Scorecard</span>
+            </a>
+
+            <a href="/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/profile">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    My Bookings
+                </h1>
+
+                <p>
+                    Manage your current and previous turf sessions.
+                </p>
+
+            </div>
+
+            <a href="/search-turf"
+               class="dashboard-primary-btn">
+                + Book Turf
+            </a>
+
+        </header>
+
+
+        <section class="booking-history-stats">
+
+            <div>
+                <span>Total Bookings</span>
+                <strong>12</strong>
+            </div>
+
+            <div>
+                <span>Upcoming</span>
+                <strong>2</strong>
+            </div>
+
+            <div>
+                <span>Completed</span>
+                <strong>9</strong>
+            </div>
+
+            <div>
+                <span>Cancelled</span>
+                <strong>1</strong>
+            </div>
+
+        </section>
+
+
+        <section class="booking-history-panel">
+
+            <div class="history-tabs">
+
+                <button class="history-tab active">
+                    All
+                </button>
+
+                <button class="history-tab">
+                    Upcoming
+                </button>
+
+                <button class="history-tab">
+                    Completed
+                </button>
+
+                <button class="history-tab">
+                    Cancelled
+                </button>
+
+            </div>
+
+
+            <div class="history-list">
+
+
+                <article class="history-item">
+
+                    <div class="history-date">
+                        <strong>25</strong>
+                        <span>AUG</span>
+                    </div>
+
+                    <div class="history-main">
+
+                        <span class="history-status confirmed">
+                            CONFIRMED
+                        </span>
+
+                        <h3>
+                            TurfX Arena
+                        </h3>
+
+                        <p>
+                            📍 Anna Nagar, Chennai
+                        </p>
+
+                        <small>
+                            ⏰ 06:00 PM - 07:00 PM
+                        </small>
+
+                    </div>
+
+                    <div class="history-price">
+                        <span>Amount</span>
+                        <strong>₹1,000</strong>
+                    </div>
+
+                    <div class="history-actions">
+
+                        <a href="/qr-ticket">
+                            QR Ticket
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="history-item">
+
+                    <div class="history-date">
+                        <strong>18</strong>
+                        <span>AUG</span>
+                    </div>
+
+                    <div class="history-main">
+
+                        <span class="history-status completed">
+                            COMPLETED
+                        </span>
+
+                        <h3>
+                            Champions Turf
+                        </h3>
+
+                        <p>
+                            📍 Tambaram, Chennai
+                        </p>
+
+                        <small>
+                            ⏰ 07:00 PM - 08:00 PM
+                        </small>
+
+                    </div>
+
+                    <div class="history-price">
+                        <span>Amount</span>
+                        <strong>₹900</strong>
+                    </div>
+
+                    <div class="history-actions">
+
+                        <a href="/turf/2">
+                            Book Again
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="history-item">
+
+                    <div class="history-date">
+                        <strong>12</strong>
+                        <span>AUG</span>
+                    </div>
+
+                    <div class="history-main">
+
+                        <span class="history-status completed">
+                            COMPLETED
+                        </span>
+
+                        <h3>
+                            City Cricket Ground
+                        </h3>
+
+                        <p>
+                            📍 Velachery, Chennai
+                        </p>
+
+                        <small>
+                            ⏰ 08:00 PM - 09:00 PM
+                        </small>
+
+                    </div>
+
+                    <div class="history-price">
+                        <span>Amount</span>
+                        <strong>₹750</strong>
+                    </div>
+
+                    <div class="history-actions">
+
+                        <a href="/turf/3">
+                            Book Again
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="history-item">
+
+                    <div class="history-date">
+                        <strong>08</strong>
+                        <span>AUG</span>
+                    </div>
+
+                    <div class="history-main">
+
+                        <span class="history-status cancelled">
+                            CANCELLED
+                        </span>
+
+                        <h3>
+                            Super Strikers Ground
+                        </h3>
+
+                        <p>
+                            📍 T Nagar, Chennai
+                        </p>
+
+                        <small>
+                            ⏰ 09:00 PM - 10:00 PM
+                        </small>
+
+                    </div>
+
+                    <div class="history-price">
+                        <span>Amount</span>
+                        <strong>₹800</strong>
+                    </div>
+
+                    <div class="history-actions">
+
+                        <a href="/turf/4">
+                            Book Again
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Your game, your turf.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

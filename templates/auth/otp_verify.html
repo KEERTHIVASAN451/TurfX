@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Verify OTP
+    </title>
+
+    <meta
+        name="description"
+        content="Verify your TurfX account recovery OTP.">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="otp-page">
+
+
+    <!-- =====================================================
+         BACKGROUND
+         ===================================================== -->
+
+    <div class="otp-bg"></div>
+
+    <div class="otp-overlay"></div>
+
+    <div class="otp-glow otp-glow-one"></div>
+
+    <div class="otp-glow otp-glow-two"></div>
+
+
+    <!-- =====================================================
+         PARTICLES
+         ===================================================== -->
+
+    <div class="otp-particles">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+    <!-- =====================================================
+         CENTER
+         ===================================================== -->
+
+    <main class="otp-wrapper">
+
+        <section class="otp-card">
+
+            <div class="otp-card-inner">
+
+
+                <!-- =================================================
+                     BRAND
+                     ================================================= -->
+
+                <a
+                    href="/"
+                    class="otp-brand">
+
+                    <span class="otp-brand-icon">
+                        🏏
+                    </span>
+
+                    <span>
+                        Turf<span>X</span>
+                    </span>
+
+                </a>
+
+
+                <span class="otp-label">
+                    ACCOUNT VERIFICATION
+                </span>
+
+
+                <!-- =================================================
+                     ICON
+                     ================================================= -->
+
+                <div class="otp-icon">
+                    🔐
+                </div>
+
+
+                <h1>
+                    Verify Your OTP
+                </h1>
+
+
+                <p class="otp-description">
+
+                    Enter the 6-digit verification code
+                    sent to your registered email address.
+
+                </p>
+
+
+                <!-- =================================================
+                     FLASH MESSAGES
+                     ================================================= -->
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+
+                    {% if messages %}
+
+                        <div class="otp-alerts">
+
+                            {% for category, message in messages %}
+
+                                <div
+                                    class="otp-alert {{ category }}">
+
+                                    {{ message }}
+
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+                {% endwith %}
+
+
+                <!-- =================================================
+                     OTP FORM
+                     ================================================= -->
+
+                <form
+                    action="{{ url_for('verify_otp') }}"
+                    method="POST"
+                    class="otp-form"
+                    id="otpForm">
+
+
+                    <label
+                        for="otp"
+                        class="otp-field-label">
+
+                        Verification Code
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="otp"
+                        name="otp"
+                        class="otp-input"
+                        inputmode="numeric"
+                        autocomplete="one-time-code"
+                        maxlength="6"
+                        pattern="[0-9]{6}"
+                        placeholder="000000"
+                        required>
+
+
+                    <div class="otp-hint">
+                        Enter exactly 6 digits.
+                    </div>
+
+
+                    <!-- =================================================
+                         VERIFY BUTTON
+                         ================================================= -->
+
+                    <button
+                        type="submit"
+                        class="otp-submit"
+                        id="verifyOtpButton">
+
+                        <span>
+                            Verify OTP
+                        </span>
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- =================================================
+                     RESEND OTP
+                     ================================================= -->
+
+                <div class="otp-resend">
+
+                    <span>
+                        Didn't receive the code?
+                    </span>
+
+
+                    <form
+                        action="{{ url_for('forgot_password') }}"
+                        method="POST"
+                        class="otp-resend-form">
+
+                        <input
+                            type="hidden"
+                            name="email"
+                            value="{{ session.get('reset_email', '') }}">
+
+
+                        <button
+                            type="submit"
+                            id="resendOtp">
+
+                            Resend OTP
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- =================================================
+                     BACK
+                     ================================================= -->
+
+                <a
+                    href="{{ url_for('forgot_password') }}"
+                    class="otp-back">
+
+                    ← Back to Forgot Password
+
+                </a>
+
+
+                <div class="otp-secure">
+
+                    🔒 Secure TurfX account recovery
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         MAIN SCRIPT
+         ===================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}">
+    </script>
+
+
+    <!-- =====================================================
+         OTP PAGE SCRIPT
+         ===================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                const otpForm =
+                    document.getElementById(
+                        "otpForm"
+                    );
+
+
+                const otpInput =
+                    document.getElementById(
+                        "otp"
+                    );
+
+
+                const verifyButton =
+                    document.getElementById(
+                        "verifyOtpButton"
+                    );
+
+
+                const resendButton =
+                    document.getElementById(
+                        "resendOtp"
+                    );
+
+
+                /* =================================================
+                   OTP INPUT
+                   ================================================= */
+
+                if (otpInput) {
+
+                    otpInput.addEventListener(
+                        "input",
+                        function () {
+
+                            this.value =
+                                this.value
+                                    .replace(
+                                        /\D/g,
+                                        ""
+                                    )
+                                    .slice(
+                                        0,
+                                        6
+                                    );
+
+                        }
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            otpInput.focus();
+
+                        },
+                        300
+                    );
+
+                }
+
+
+                /* =================================================
+                   VERIFY BUTTON
+                   ================================================= */
+
+                if (otpForm) {
+
+                    otpForm.addEventListener(
+                        "submit",
+                        function (event) {
+
+                            const otp =
+                                otpInput.value.trim();
+
+
+                            if (
+                                otp.length !== 6
+                                ||
+                                !/^\d{6}$/.test(
+                                    otp
+                                )
+                            ) {
+
+                                event.preventDefault();
+
+
+                                alert(
+                                    "Please enter the complete 6-digit OTP."
+                                );
+
+
+                                otpInput.focus();
+
+                                return;
+
+                            }
+
+
+                            if (verifyButton) {
+
+                                verifyButton.disabled =
+                                    true;
+
+                                verifyButton
+                                    .querySelector(
+                                        "span:first-child"
+                                    )
+                                    .textContent =
+                                    "Verifying...";
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                /* =================================================
+                   RESEND BUTTON
+                   ================================================= */
+
+                if (resendButton) {
+
+                    resendButton.addEventListener(
+                        "click",
+                        function () {
+
+                            resendButton.disabled =
+                                true;
+
+                            resendButton.textContent =
+                                "Sending...";
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

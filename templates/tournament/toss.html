@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Match Toss
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+
+                🪙 MATCH TOSS
+
+            </span>
+
+            <h1>
+                Match Toss
+            </h1>
+
+            <p>
+                Victory Kings vs Super Strikers
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament/fixtures"
+                class="tournament-btn">
+
+                ← Fixtures
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- TOSS -->
+
+    <section class="tournament-section">
+
+
+        <div class="toss-container">
+
+
+            <h2 class="toss-title">
+                Who wins the toss?
+            </h2>
+
+
+            <p
+                style="
+                    margin:0 0 25px;
+                    color:#94a3b8;
+                    font-size:9px;
+                ">
+
+                Match 21 • TurfX Arena • 26 Aug 2026
+
+            </p>
+
+
+            <div class="toss-options">
+
+
+                <button
+                    type="button"
+                    class="toss-option"
+                    data-toss="Victory Kings">
+
+
+                    <div class="team-logo">
+                        VK
+                    </div>
+
+
+                    <strong>
+                        Victory Kings
+                    </strong>
+
+
+                    <small>
+                        Choose this team
+                    </small>
+
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="toss-option"
+                    data-toss="Super Strikers">
+
+
+                    <div class="team-logo">
+                        SS
+                    </div>
+
+
+                    <strong>
+                        Super Strikers
+                    </strong>
+
+
+                    <small>
+                        Choose this team
+                    </small>
+
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- RESULT -->
+
+            <div
+                style="
+                    width:100%;
+                    max-width:520px;
+                    margin-top:28px;
+                    padding:20px;
+                    border:1px solid #e2e8f0;
+                    border-radius:14px;
+                    background:#f8fafc;
+                ">
+
+                <span
+                    style="
+                        display:block;
+                        color:#94a3b8;
+                        font-size:7px;
+                        font-weight:800;
+                        letter-spacing:1px;
+                    ">
+
+                    TOSS RESULT
+
+                </span>
+
+
+                <strong
+                    id="tossResult"
+                    style="
+                        display:block;
+                        margin-top:8px;
+                        color:#15803d;
+                        font-size:17px;
+                    ">
+
+                    Waiting for toss...
+
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CHOICE -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    MATCH DECISION
+                </span>
+
+                <h2>
+                    Choose Bat or Bowl
+                </h2>
+
+                <p>
+                    The toss winner chooses how the match starts.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            style="
+                display:grid;
+                grid-template-columns:1fr 1fr;
+                gap:12px;
+                max-width:620px;
+            ">
+
+
+            <button
+                type="button"
+                class="tournament-btn primary"
+                id="batFirstBtn">
+
+                🏏 Bat First
+
+            </button>
+
+
+            <button
+                type="button"
+                class="tournament-btn"
+                id="bowlFirstBtn">
+
+                ⚡ Bowl First
+
+            </button>
+
+
+        </div>
+
+
+        <div
+            id="matchChoice"
+            style="
+                margin-top:16px;
+                color:#64748b;
+                font-size:9px;
+            ">
+
+            Waiting for toss winner...
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MATCH INFO -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-grid">
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        Venue
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        TurfX Arena, Chennai
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        Format
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        8 Overs • Tennis Ball
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        Match
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        Match 21 • League Stage
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ACTIONS -->
+
+    <section
+        style="
+            display:flex;
+            justify-content:flex-end;
+            gap:9px;
+            padding-bottom:30px;
+            flex-wrap:wrap;
+        ">
+
+        <a
+            href="/tournament/fixtures"
+            class="tournament-btn">
+
+            Cancel
+
+        </a>
+
+
+        <a
+            href="/scorecard"
+            class="tournament-main-btn"
+            id="continueMatch">
+
+            Continue to Match →
+
+        </a>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/fixtures">
+                Fixtures
+            </a>
+
+            <a href="/scorecard">
+                Live Score
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const tossButtons =
+            document.querySelectorAll(
+                "[data-toss]"
+            );
+
+        const tossResult =
+            document.querySelector(
+                "#tossResult"
+            );
+
+        const matchChoice =
+            document.querySelector(
+                "#matchChoice"
+            );
+
+
+        let tossWinner = "";
+
+
+        tossButtons.forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        tossButtons.forEach(
+                            function (item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        button.classList.add(
+                            "active"
+                        );
+
+
+                        tossWinner =
+                            button.dataset.toss;
+
+
+                        if (tossResult) {
+
+                            tossResult.textContent =
+                                `${tossWinner} won the toss`;
+
+                        }
+
+
+                        if (matchChoice) {
+
+                            matchChoice.textContent =
+                                `${tossWinner} can choose to bat or bowl first.`;
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        const batButton =
+            document.querySelector(
+                "#batFirstBtn"
+            );
+
+        const bowlButton =
+            document.querySelector(
+                "#bowlFirstBtn"
+            );
+
+
+        if (batButton) {
+
+            batButton.addEventListener(
+                "click",
+                function () {
+
+                    if (!tossWinner) {
+
+                        matchChoice.textContent =
+                            "Please select the toss winner first.";
+
+                        return;
+
+                    }
+
+                    matchChoice.textContent =
+                        `${tossWinner} chose to bat first.`;
+
+                    batButton.classList.add(
+                        "primary"
+                    );
+
+                    bowlButton.classList.remove(
+                        "primary"
+                    );
+
+                }
+            );
+
+        }
+
+
+        if (bowlButton) {
+
+            bowlButton.addEventListener(
+                "click",
+                function () {
+
+                    if (!tossWinner) {
+
+                        matchChoice.textContent =
+                            "Please select the toss winner first.";
+
+                        return;
+
+                    }
+
+                    matchChoice.textContent =
+                        `${tossWinner} chose to bowl first.`;
+
+                    bowlButton.classList.add(
+                        "primary"
+                    );
+
+                    batButton.classList.remove(
+                        "primary"
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

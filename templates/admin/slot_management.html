@@ -1,0 +1,1142 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Slot Management | TurfX{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/booking.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management" class="active">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Slot Management
+                </h1>
+
+                <p>
+                    Manage turf timings, availability and pricing.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-primary-btn"
+                onclick="openSlotModal()">
+
+                + Add Slot
+
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    ⏰
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Slots
+                    </span>
+
+                    <strong>
+                        18
+                    </strong>
+
+                    <small>
+                        Today's schedule
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        Available
+                    </span>
+
+                    <strong>
+                        9
+                    </strong>
+
+                    <small>
+                        Ready to book
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        Booked
+                    </span>
+
+                    <strong>
+                        7
+                    </strong>
+
+                    <small>
+                        Today's bookings
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    🚫
+                </div>
+
+                <div>
+
+                    <span>
+                        Blocked
+                    </span>
+
+                    <strong>
+                        2
+                    </strong>
+
+                    <small>
+                        Maintenance / closure
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DATE / TURF SELECT -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Schedule
+                    </h2>
+
+                    <p>
+                        Select turf and date to manage slots.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="slot-control-bar">
+
+                <div class="admin-field">
+
+                    <label for="turfSelect">
+                        Turf
+                    </label>
+
+                    <select id="turfSelect">
+
+                        <option>
+                            TurfX Arena
+                        </option>
+
+                        <option>
+                            Champions Turf
+                        </option>
+
+                        <option>
+                            City Sports Arena
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label for="slotDate">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="slotDate">
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-filter-btn"
+                    onclick="loadSlotSchedule()">
+
+                    Load Schedule
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- SLOT GRID -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Today's Slots
+                    </h2>
+
+                    <p>
+                        Click an available slot to select it.
+                    </p>
+
+                </div>
+
+                <div class="slot-legend">
+
+                    <span>
+                        <i class="legend-dot available"></i>
+                        Available
+                    </span>
+
+                    <span>
+                        <i class="legend-dot booked"></i>
+                        Booked
+                    </span>
+
+                    <span>
+                        <i class="legend-dot blocked"></i>
+                        Blocked
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-slot-grid">
+
+
+                <button
+                    type="button"
+                    class="admin-slot available"
+                    data-slot-id="1"
+                    data-price="500">
+
+                    <strong>
+                        06:00 AM
+                    </strong>
+
+                    <span>
+                        07:00 AM
+                    </span>
+
+                    <small>
+                        ₹500
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot available"
+                    data-slot-id="2"
+                    data-price="500">
+
+                    <strong>
+                        07:00 AM
+                    </strong>
+
+                    <span>
+                        08:00 AM
+                    </span>
+
+                    <small>
+                        ₹500
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot booked"
+                    disabled>
+
+                    <strong>
+                        08:00 AM
+                    </strong>
+
+                    <span>
+                        09:00 AM
+                    </span>
+
+                    <small>
+                        Arun Kumar
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot available"
+                    data-slot-id="4"
+                    data-price="700">
+
+                    <strong>
+                        09:00 AM
+                    </strong>
+
+                    <span>
+                        10:00 AM
+                    </span>
+
+                    <small>
+                        ₹700
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot available"
+                    data-slot-id="5"
+                    data-price="700">
+
+                    <strong>
+                        10:00 AM
+                    </strong>
+
+                    <span>
+                        11:00 AM
+                    </span>
+
+                    <small>
+                        ₹700
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot blocked"
+                    disabled>
+
+                    <strong>
+                        11:00 AM
+                    </strong>
+
+                    <span>
+                        12:00 PM
+                    </span>
+
+                    <small>
+                        Maintenance
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot available"
+                    data-slot-id="7"
+                    data-price="800">
+
+                    <strong>
+                        04:00 PM
+                    </strong>
+
+                    <span>
+                        05:00 PM
+                    </span>
+
+                    <small>
+                        ₹800
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot booked"
+                    disabled>
+
+                    <strong>
+                        05:00 PM
+                    </strong>
+
+                    <span>
+                        06:00 PM
+                    </span>
+
+                    <small>
+                        Rahul
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot booked"
+                    disabled>
+
+                    <strong>
+                        06:00 PM
+                    </strong>
+
+                    <span>
+                        07:00 PM
+                    </span>
+
+                    <small>
+                        Vignesh
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot available"
+                    data-slot-id="10"
+                    data-price="1200">
+
+                    <strong>
+                        07:00 PM
+                    </strong>
+
+                    <span>
+                        08:00 PM
+                    </span>
+
+                    <small>
+                        ₹1200
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot blocked"
+                    disabled>
+
+                    <strong>
+                        08:00 PM
+                    </strong>
+
+                    <span>
+                        09:00 PM
+                    </span>
+
+                    <small>
+                        Maintenance
+                    </small>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="admin-slot available"
+                    data-slot-id="12"
+                    data-price="1200">
+
+                    <strong>
+                        09:00 PM
+                    </strong>
+
+                    <span>
+                        10:00 PM
+                    </span>
+
+                    <small>
+                        ₹1200
+                    </small>
+
+                </button>
+
+
+            </div>
+
+
+            <!-- BULK ACTIONS -->
+
+            <div class="slot-bulk-actions">
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="selectAllSlots()">
+
+                    Select All Available
+
+                </button>
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="clearSelectedSlots()">
+
+                    Clear Selection
+
+                </button>
+
+                <button
+                    type="button"
+                    class="admin-danger-btn"
+                    onclick="updateSlotStatus('disabled')">
+
+                    Block Selected
+
+                </button>
+
+                <button
+                    type="button"
+                    class="admin-success-btn"
+                    onclick="updateSlotStatus('available')">
+
+                    Open Selected
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- SLOT TABLE -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Slot Details
+                    </h2>
+
+                    <p>
+                        Detailed view of today's schedule.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Slot
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Booking
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr data-booking-row>
+
+                            <td>
+                                06:00 AM - 07:00 AM
+                            </td>
+
+                            <td>
+                                ₹500
+                            </td>
+
+                            <td>
+                                <span class="admin-status available">
+                                    Available
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="editSlot(1)">
+                                    Edit
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr data-booking-row>
+
+                            <td>
+                                08:00 AM - 09:00 AM
+                            </td>
+
+                            <td>
+                                ₹700
+                            </td>
+
+                            <td>
+                                <span class="admin-status booked">
+                                    Booked
+                                </span>
+                            </td>
+
+                            <td>
+                                Arun Kumar
+                            </td>
+
+                            <td>
+                                #BK001
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewBooking(1)">
+                                    View
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr data-booking-row>
+
+                            <td>
+                                06:00 PM - 07:00 PM
+                            </td>
+
+                            <td>
+                                ₹1000
+                            </td>
+
+                            <td>
+                                <span class="admin-status booked">
+                                    Booked
+                                </span>
+                            </td>
+
+                            <td>
+                                Rahul
+                            </td>
+
+                            <td>
+                                #BK002
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewBooking(2)">
+                                    View
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr data-booking-row>
+
+                            <td>
+                                08:00 PM - 09:00 PM
+                            </td>
+
+                            <td>
+                                ₹1200
+                            </td>
+
+                            <td>
+                                <span class="admin-status blocked">
+                                    Blocked
+                                </span>
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+                                —
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="unblockSlot(11)">
+                                    Unblock
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Smart Slot Management
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- ADD SLOT MODAL -->
+
+<div
+    id="slotModal"
+    class="admin-modal">
+
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <span>
+                    TURFX ADMIN
+                </span>
+
+                <h2>
+                    Add New Slot
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeSlotModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form
+            onsubmit="createSlot(event)">
+
+            <div class="admin-form-grid">
+
+                <div class="admin-field">
+
+                    <label>
+                        Start Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="newStartTime"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        End Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="newEndTime"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Price
+                    </label>
+
+                    <input
+                        type="number"
+                        id="newSlotPrice"
+                        min="0"
+                        placeholder="800"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-modal-actions">
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="closeSlotModal()">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="admin-success-btn">
+
+                    Add Slot
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function openSlotModal() {
+
+    const modal =
+        document.querySelector("#slotModal");
+
+    if (modal) {
+        modal.classList.add("show");
+    }
+
+}
+
+
+function closeSlotModal() {
+
+    const modal =
+        document.querySelector("#slotModal");
+
+    if (modal) {
+        modal.classList.remove("show");
+    }
+
+}
+
+
+function createSlot(event) {
+
+    event.preventDefault();
+
+    const start =
+        document.querySelector(
+            "#newStartTime"
+        ).value;
+
+    const end =
+        document.querySelector(
+            "#newEndTime"
+        ).value;
+
+    const price =
+        document.querySelector(
+            "#newSlotPrice"
+        ).value;
+
+    if (!start || !end || !price) {
+        return;
+    }
+
+    closeSlotModal();
+
+    showAdminAlert(
+        `Slot ${start} - ${end} created successfully.`,
+        "success"
+    );
+
+    event.target.reset();
+
+}
+
+
+function loadSlotSchedule() {
+
+    showAdminAlert(
+        "Schedule loaded successfully.",
+        "success"
+    );
+
+}
+
+
+function editSlot(slotId) {
+
+    showAdminAlert(
+        `Editing slot #${slotId}.`,
+        "info"
+    );
+
+}
+
+
+function viewBooking(bookingId) {
+
+    showAdminAlert(
+        `Opening booking #${bookingId}.`,
+        "info"
+    );
+
+}
+
+
+function unblockSlot(slotId) {
+
+    const confirmed =
+        window.confirm(
+            "Unblock this slot?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    showAdminAlert(
+        "Slot unblocked successfully.",
+        "success"
+    );
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const date =
+            document.querySelector(
+                "#slotDate"
+            );
+
+        if (date) {
+
+            const today =
+                new Date()
+                .toISOString()
+                .split("T")[0];
+
+            date.value =
+                today;
+
+            date.min =
+                today;
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

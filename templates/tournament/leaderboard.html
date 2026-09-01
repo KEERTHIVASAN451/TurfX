@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Player Leaderboard
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+                📊 PLAYER PERFORMANCE
+            </span>
+
+            <h1>
+                Leaderboard
+            </h1>
+
+            <p>
+                Track the top run scorers, wicket takers
+                and all-round performers.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament"
+                class="tournament-btn">
+
+                ← Tournament
+
+            </a>
+
+
+            <a
+                href="/tournament/points-table"
+                class="tournament-btn primary">
+
+                Points Table →
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CAPS -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    SEASON LEADERS
+                </span>
+
+                <h2>
+                    Tournament Caps
+                </h2>
+
+                <p>
+                    Current leading performers.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-grid">
+
+
+            <article class="cap-card">
+
+                <div class="cap-icon">
+                    🧡
+                </div>
+
+                <div class="cap-content">
+
+                    <h4>
+                        Orange Cap
+                    </h4>
+
+                    <p>
+                        Arun Kumar • Victory Kings
+                    </p>
+
+                </div>
+
+                <span class="cap-value">
+                    486
+                </span>
+
+            </article>
+
+
+            <article class="cap-card">
+
+                <div class="cap-icon">
+                    💜
+                </div>
+
+                <div class="cap-content">
+
+                    <h4>
+                        Purple Cap
+                    </h4>
+
+                    <p>
+                        Vignesh • Victory Kings
+                    </p>
+
+                </div>
+
+                <span class="cap-value">
+                    18
+                </span>
+
+            </article>
+
+
+            <article class="cap-card">
+
+                <div class="cap-icon">
+                    ⭐
+                </div>
+
+                <div class="cap-content">
+
+                    <h4>
+                        Best All-Rounder
+                    </h4>
+
+                    <p>
+                        Rahul • Chennai Warriors
+                    </p>
+
+                </div>
+
+                <span class="cap-value">
+                    342
+                </span>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- RUN SCORERS -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    BATTING
+                </span>
+
+                <h2>
+                    Top Run Scorers
+                </h2>
+
+                <p>
+                    Most runs in the tournament.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="leaderboard-list">
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    01
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        AK
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Arun Kumar
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Victory Kings
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    486 Runs
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    02
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        RH
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Rahul
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Chennai Warriors
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    421 Runs
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    03
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        VG
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Vignesh
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Victory Kings
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    398 Runs
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    04
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        SJ
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Sanjay
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Chennai Titans
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    356 Runs
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- WICKET TAKERS -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    BOWLING
+                </span>
+
+                <h2>
+                    Top Wicket Takers
+                </h2>
+
+                <p>
+                    Leading bowlers of the tournament.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="leaderboard-list">
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    01
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        VG
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Vignesh
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Victory Kings
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    18 W
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    02
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        KR
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Karthick
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Royal Challengers
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    15 W
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    03
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        AJ
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Ajay
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Chennai Warriors
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    13 W
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    04
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        DN
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Dinesh
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Super Strikers
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    11 W
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- PERFORMANCE -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    PERFORMANCE
+                </span>
+
+                <h2>
+                    Best Match Figures
+                </h2>
+
+                <p>
+                    Standout individual performances.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-info-grid">
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Highest Score
+                </span>
+
+                <strong class="value">
+                    92
+                </strong>
+
+                <p class="sub-value">
+                    Arun Kumar
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Best Bowling
+                </span>
+
+                <strong class="value">
+                    4/18
+                </strong>
+
+                <p class="sub-value">
+                    Vignesh
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Best Strike Rate
+                </span>
+
+                <strong class="value">
+                    184.2
+                </strong>
+
+                <p class="sub-value">
+                    Rahul
+                </p>
+
+            </div>
+
+
+            <div class="tournament-info-card">
+
+                <span class="label">
+                    Best Economy
+                </span>
+
+                <strong class="value">
+                    5.42
+                </strong>
+
+                <p class="sub-value">
+                    Karthick
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CTA -->
+
+    <section class="tournament-bottom-cta">
+
+        <div>
+
+            <span>
+                KEEP CLIMBING
+            </span>
+
+            <h2>
+                Every Run Matters.
+            </h2>
+
+            <p>
+                Follow the leaderboard and see who takes the caps.
+            </p>
+
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:center;
+                    gap:9px;
+                    margin-top:22px;
+                    flex-wrap:wrap;
+                ">
+
+                <a
+                    href="/tournament/points-table"
+                    class="tournament-main-btn">
+
+                    View Points Table →
+
+                </a>
+
+
+                <a
+                    href="/tournament/fixtures"
+                    class="tournament-outline-btn">
+
+                    View Fixtures
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/fixtures">
+                Fixtures
+            </a>
+
+            <a href="/scorecard">
+                Live Score
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+
+</html>

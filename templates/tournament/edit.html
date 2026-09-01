@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Edit Tournament
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+
+                ⚙️ TOURNAMENT SETTINGS
+
+            </span>
+
+            <h1>
+                Edit Tournament
+            </h1>
+
+            <p>
+                Update tournament details, schedule and registration settings.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament"
+                class="tournament-btn">
+
+                ← Tournament
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FORM -->
+
+    <form
+        id="editTournamentForm"
+        method="POST"
+        action="/tournament/edit">
+
+
+        <!-- BASIC INFORMATION -->
+
+        <section class="tournament-section">
+
+            <div class="tournament-section-heading">
+
+                <div>
+
+                    <span>
+                        BASIC INFORMATION
+                    </span>
+
+                    <h2>
+                        Tournament Details
+                    </h2>
+
+                    <p>
+                        Update the public tournament information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="tournament-form-grid">
+
+
+                <div class="tournament-form-field full">
+
+                    <label for="tournamentName">
+                        Tournament Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="tournamentName"
+                        name="tournament_name"
+                        value="Chennai Weekend Premier League"
+                        required>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="sport">
+                        Sport
+                    </label>
+
+                    <select
+                        id="sport"
+                        name="sport">
+
+                        <option selected>
+                            Cricket
+                        </option>
+
+                        <option>
+                            Football
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="format">
+                        Tournament Format
+                    </label>
+
+                    <select
+                        id="format"
+                        name="format">
+
+                        <option selected>
+                            League
+                        </option>
+
+                        <option>
+                            Knockout
+                        </option>
+
+                        <option>
+                            League + Knockout
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="overs">
+                        Overs
+                    </label>
+
+                    <select
+                        id="overs"
+                        name="overs">
+
+                        <option>
+                            5 Overs
+                        </option>
+
+                        <option selected>
+                            8 Overs
+                        </option>
+
+                        <option>
+                            10 Overs
+                        </option>
+
+                        <option>
+                            20 Overs
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="ballType">
+                        Ball Type
+                    </label>
+
+                    <select
+                        id="ballType"
+                        name="ball_type">
+
+                        <option selected>
+                            Tennis Ball
+                        </option>
+
+                        <option>
+                            Leather Ball
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="tournament-form-field full">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="4">Weekend cricket tournament for competitive teams across Chennai.</textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SCHEDULE -->
+
+        <section class="tournament-section">
+
+            <div class="tournament-section-heading">
+
+                <div>
+
+                    <span>
+                        SCHEDULE
+                    </span>
+
+                    <h2>
+                        Date & Venue
+                    </h2>
+
+                    <p>
+                        Update match schedule and location.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="tournament-form-grid">
+
+
+                <div class="tournament-form-field">
+
+                    <label for="startDate">
+                        Start Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="startDate"
+                        name="start_date"
+                        value="2026-08-30"
+                        required>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="endDate">
+                        End Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="endDate"
+                        name="end_date"
+                        value="2026-09-06"
+                        required>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="startTime">
+                        Match Start Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="startTime"
+                        name="start_time"
+                        value="18:00">
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="venue">
+                        Venue
+                    </label>
+
+                    <input
+                        type="text"
+                        id="venue"
+                        name="venue"
+                        value="TurfX Arena">
+
+                </div>
+
+
+                <div class="tournament-form-field full">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        value="Anna Nagar, Chennai">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- REGISTRATION -->
+
+        <section class="tournament-section">
+
+            <div class="tournament-section-heading">
+
+                <div>
+
+                    <span>
+                        REGISTRATION
+                    </span>
+
+                    <h2>
+                        Team Settings
+                    </h2>
+
+                    <p>
+                        Control participation and entry settings.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="tournament-form-grid">
+
+
+                <div class="tournament-form-field">
+
+                    <label for="maxTeams">
+                        Maximum Teams
+                    </label>
+
+                    <select
+                        id="maxTeams"
+                        name="max_teams">
+
+                        <option>
+                            8 Teams
+                        </option>
+
+                        <option selected>
+                            16 Teams
+                        </option>
+
+                        <option>
+                            24 Teams
+                        </option>
+
+                        <option>
+                            32 Teams
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="playersPerTeam">
+                        Players Per Team
+                    </label>
+
+                    <select
+                        id="playersPerTeam"
+                        name="players_per_team">
+
+                        <option>
+                            9
+                        </option>
+
+                        <option selected>
+                            11
+                        </option>
+
+                        <option>
+                            15
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="registrationFee">
+                        Registration Fee
+                    </label>
+
+                    <input
+                        type="number"
+                        id="registrationFee"
+                        name="registration_fee"
+                        value="500"
+                        min="0">
+
+                </div>
+
+
+                <div class="tournament-form-field">
+
+                    <label for="prizePool">
+                        Prize Pool
+                    </label>
+
+                    <input
+                        type="number"
+                        id="prizePool"
+                        name="prize_pool"
+                        value="10000"
+                        min="0">
+
+                </div>
+
+            </div>
+
+
+            <div class="tournament-setting-list">
+
+
+                <div class="tournament-setting-row">
+
+                    <div>
+
+                        <strong>
+                            Registration Open
+                        </strong>
+
+                        <span>
+                            Teams can still register.
+                        </span>
+
+                    </div>
+
+
+                    <label class="tournament-switch">
+
+                        <input
+                            type="checkbox"
+                            name="open_registration"
+                            checked>
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+
+                <div class="tournament-setting-row">
+
+                    <div>
+
+                        <strong>
+                            Publish Tournament
+                        </strong>
+
+                        <span>
+                            Tournament remains visible to users.
+                        </span>
+
+                    </div>
+
+
+                    <label class="tournament-switch">
+
+                        <input
+                            type="checkbox"
+                            name="publish"
+                            checked>
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+
+                <div class="tournament-setting-row">
+
+                    <div>
+
+                        <strong>
+                            Live Score
+                        </strong>
+
+                        <span>
+                            Enable live score updates.
+                        </span>
+
+                    </div>
+
+
+                    <label class="tournament-switch">
+
+                        <input
+                            type="checkbox"
+                            name="live_score"
+                            checked>
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- RULES -->
+
+        <section class="tournament-section">
+
+            <div class="tournament-section-heading">
+
+                <div>
+
+                    <span>
+                        RULES
+                    </span>
+
+                    <h2>
+                        Tournament Policies
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="tournament-form-grid">
+
+
+                <div class="tournament-form-field full">
+
+                    <label for="rules">
+                        Tournament Rules
+                    </label>
+
+                    <textarea
+                        id="rules"
+                        name="rules"
+                        rows="5">8 overs per innings. Maximum 11 players. One substitute allowed. Standard TurfX cricket rules apply.</textarea>
+
+                </div>
+
+
+                <div class="tournament-form-field full">
+
+                    <label for="cancellationPolicy">
+                        Cancellation Policy
+                    </label>
+
+                    <textarea
+                        id="cancellationPolicy"
+                        name="cancellation_policy"
+                        rows="3">Registration fee is non-refundable after fixture generation.</textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ACTIONS -->
+
+        <section class="tournament-form-actions">
+
+            <a
+                href="/tournament"
+                class="tournament-btn">
+
+                Cancel
+
+            </a>
+
+
+            <button
+                type="submit"
+                class="tournament-btn primary">
+
+                Save Changes
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </section>
+
+
+    </form>
+
+
+
+    <!-- DANGER ZONE -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span style="color:#dc2626;">
+                    DANGER ZONE
+                </span>
+
+                <h2>
+                    Tournament Actions
+                </h2>
+
+                <p>
+                    Actions below may affect tournament visibility.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-setting-list">
+
+
+            <div class="tournament-setting-row">
+
+                <div>
+
+                    <strong>
+                        Close Registration
+                    </strong>
+
+                    <span>
+                        Stop accepting new teams.
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="tournament-btn">
+
+                    Close
+
+                </button>
+
+            </div>
+
+
+            <div class="tournament-setting-row">
+
+                <div>
+
+                    <strong>
+                        Cancel Tournament
+                    </strong>
+
+                    <span>
+                        Cancel the entire tournament.
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="tournament-btn danger">
+
+                    Cancel Tournament
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/teams">
+                Teams
+            </a>
+
+            <a href="/tournament/fixtures">
+                Fixtures
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const form =
+            document.querySelector(
+                "#editTournamentForm"
+            );
+
+
+        const startDate =
+            document.querySelector(
+                "#startDate"
+            );
+
+
+        const endDate =
+            document.querySelector(
+                "#endDate"
+            );
+
+
+        if (form) {
+
+            form.addEventListener(
+                "submit",
+                function (event) {
+
+                    if (
+                        startDate &&
+                        endDate &&
+                        startDate.value &&
+                        endDate.value &&
+                        endDate.value < startDate.value
+                    ) {
+
+                        event.preventDefault();
+
+                        alert(
+                            "End date cannot be before start date."
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

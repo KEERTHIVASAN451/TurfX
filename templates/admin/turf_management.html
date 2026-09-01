@@ -1,0 +1,572 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turf Management | TurfX</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2>🏏 TurfX</h2>
+
+        <ul>
+
+            <li>
+                <a href="/admin/dashboard">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="/admin/bookings">Bookings</a>
+            </li>
+
+            <li class="active">
+                <a href="/admin/turf-management">
+                    Turf Management
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/slot-management">
+                    Slot Management
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/customers">Customers</a>
+            </li>
+
+            <li>
+                <a href="/admin/staff">Staff</a>
+            </li>
+
+            <li>
+                <a href="/admin/equipment">Equipment</a>
+            </li>
+
+            <li>
+                <a href="/admin/transactions">
+                    Transactions
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/reports">Reports</a>
+            </li>
+
+            <li>
+                <a href="/admin/settings">Settings</a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <!-- Header -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Turf Management</h1>
+
+                <p>
+                    Manage turf details, availability and facilities.
+                </p>
+
+            </div>
+
+            <button class="add-btn">
+                + Add Turf
+            </button>
+
+        </header>
+
+
+        <!-- Summary Cards -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <h3>Total Turfs</h3>
+
+                <h2>4</h2>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Available</h3>
+
+                <h2>3</h2>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Maintenance</h3>
+
+                <h2>1</h2>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Today's Bookings</h3>
+
+                <h2>48</h2>
+
+            </div>
+
+        </section>
+
+
+        <!-- Turf List -->
+
+        <section class="table-section">
+
+            <h2>All Turfs</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Turf ID</th>
+
+                        <th>Turf Name</th>
+
+                        <th>Sport</th>
+
+                        <th>Capacity</th>
+
+                        <th>Hourly Price</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+
+                        <td>TRF001</td>
+
+                        <td>Champions Arena</td>
+
+                        <td>Cricket</td>
+
+                        <td>14 Players</td>
+
+                        <td>₹1000</td>
+
+                        <td>
+                            <span class="status confirmed">
+                                Available
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+                                View
+                            </button>
+
+                            <button class="edit-btn">
+                                Edit
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>TRF002</td>
+
+                        <td>Pro Cricket Turf</td>
+
+                        <td>Cricket</td>
+
+                        <td>12 Players</td>
+
+                        <td>₹900</td>
+
+                        <td>
+                            <span class="status confirmed">
+                                Available
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+                                View
+                            </button>
+
+                            <button class="edit-btn">
+                                Edit
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>TRF003</td>
+
+                        <td>Elite Football Arena</td>
+
+                        <td>Football</td>
+
+                        <td>10 Players</td>
+
+                        <td>₹1200</td>
+
+                        <td>
+                            <span class="status confirmed">
+                                Available
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+                                View
+                            </button>
+
+                            <button class="edit-btn">
+                                Edit
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>TRF004</td>
+
+                        <td>Premium Turf</td>
+
+                        <td>Multi Sport</td>
+
+                        <td>16 Players</td>
+
+                        <td>₹1500</td>
+
+                        <td>
+                            <span class="status cancelled">
+                                Maintenance
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+                                View
+                            </button>
+
+                            <button class="edit-btn">
+                                Edit
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- Turf Details -->
+
+        <section class="table-section">
+
+            <h2>Turf Facilities</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Facility</th>
+
+                        <th>Champions Arena</th>
+
+                        <th>Pro Cricket Turf</th>
+
+                        <th>Elite Football Arena</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>Flood Lights</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Parking</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Changing Room</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Drinking Water</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Washroom</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                        <td>Available</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- Turf Timing -->
+
+        <section class="table-section">
+
+            <h2>Operating Hours</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Day</th>
+
+                        <th>Opening</th>
+
+                        <th>Closing</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>Monday</td>
+
+                        <td>06:00 AM</td>
+
+                        <td>11:00 PM</td>
+
+                        <td>Open</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Tuesday</td>
+
+                        <td>06:00 AM</td>
+
+                        <td>11:00 PM</td>
+
+                        <td>Open</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Wednesday</td>
+
+                        <td>06:00 AM</td>
+
+                        <td>11:00 PM</td>
+
+                        <td>Open</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Thursday</td>
+
+                        <td>06:00 AM</td>
+
+                        <td>11:00 PM</td>
+
+                        <td>Open</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Friday</td>
+
+                        <td>06:00 AM</td>
+
+                        <td>11:00 PM</td>
+
+                        <td>Open</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Saturday</td>
+
+                        <td>06:00 AM</td>
+
+                        <td>11:00 PM</td>
+
+                        <td>Open</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Sunday</td>
+
+                        <td>06:00 AM</td>
+
+                        <td>11:00 PM</td>
+
+                        <td>Open</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- Quick Actions -->
+
+        <section class="table-section">
+
+            <h2>Quick Actions</h2>
+
+            <div class="cards">
+
+                <button class="card">
+                    ➕ Add New Turf
+                </button>
+
+                <button class="card">
+                    💰 Manage Pricing
+                </button>
+
+                <button class="card">
+                    ⏰ Manage Slots
+                </button>
+
+                <button class="card">
+                    🔧 Maintenance Mode
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+
+        <footer class="footer">
+
+            © 2026 TurfX Turf Management
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+</body>
+</html>

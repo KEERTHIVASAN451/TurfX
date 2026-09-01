@@ -1,0 +1,1120 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Reports | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports" class="active">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Reports
+                </h1>
+
+                <p>
+                    Analyse bookings, revenue and customer activity.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-primary-btn"
+                onclick="exportReport()">
+
+                Export CSV
+
+            </button>
+
+        </header>
+
+
+        <!-- REPORT FILTER -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Generate Report
+                    </h2>
+
+                    <p>
+                        Select a period and report category.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="report-filter-grid">
+
+                <div class="admin-field">
+
+                    <label for="reportFrom">
+                        From Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="reportFrom">
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label for="reportTo">
+                        To Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="reportTo">
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label for="reportType">
+                        Report Type
+                    </label>
+
+                    <select id="reportType">
+
+                        <option value="all">
+                            All Reports
+                        </option>
+
+                        <option value="revenue">
+                            Revenue
+                        </option>
+
+                        <option value="bookings">
+                            Bookings
+                        </option>
+
+                        <option value="customers">
+                            Customers
+                        </option>
+
+                        <option value="equipment">
+                            Equipment
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-filter-btn"
+                    onclick="generateReport()">
+
+                    Generate
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Revenue
+                    </span>
+
+                    <strong>
+                        ₹4.82L
+                    </strong>
+
+                    <small>
+                        Current month
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Bookings
+                    </span>
+
+                    <strong>
+                        1,248
+                    </strong>
+
+                    <small>
+                        Current month
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        Active Customers
+                    </span>
+
+                    <strong>
+                        562
+                    </strong>
+
+                    <small>
+                        Registered users
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    🏏
+                </div>
+
+                <div>
+
+                    <span>
+                        Equipment Revenue
+                    </span>
+
+                    <strong>
+                        ₹38,400
+                    </strong>
+
+                    <small>
+                        Current month
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHARTS -->
+
+        <section class="dashboard-content-grid">
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Revenue Trend
+                        </h2>
+
+                        <p>
+                            Monthly revenue performance
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="report-chart-box">
+
+                    <canvas
+                        id="reportRevenueChart">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Booking Trend
+                        </h2>
+
+                        <p>
+                            Weekly booking activity
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="report-chart-box">
+
+                    <canvas
+                        id="reportBookingChart">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- REVENUE REPORT -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Revenue Report
+                    </h2>
+
+                    <p>
+                        Day-wise financial summary
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table
+                    class="admin-table"
+                    id="reportTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Bookings
+                            </th>
+
+                            <th>
+                                Turf Revenue
+                            </th>
+
+                            <th>
+                                Equipment
+                            </th>
+
+                            <th>
+                                Refunds
+                            </th>
+
+                            <th>
+                                Net Revenue
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                23 Aug 2026
+                            </td>
+
+                            <td>
+                                48
+                            </td>
+
+                            <td>
+                                ₹18,500
+                            </td>
+
+                            <td>
+                                ₹1,200
+                            </td>
+
+                            <td>
+                                ₹500
+                            </td>
+
+                            <td>
+                                ₹19,200
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                22 Aug 2026
+                            </td>
+
+                            <td>
+                                45
+                            </td>
+
+                            <td>
+                                ₹17,800
+                            </td>
+
+                            <td>
+                                ₹950
+                            </td>
+
+                            <td>
+                                ₹400
+                            </td>
+
+                            <td>
+                                ₹18,350
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                21 Aug 2026
+                            </td>
+
+                            <td>
+                                42
+                            </td>
+
+                            <td>
+                                ₹16,900
+                            </td>
+
+                            <td>
+                                ₹880
+                            </td>
+
+                            <td>
+                                ₹700
+                            </td>
+
+                            <td>
+                                ₹17,080
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                20 Aug 2026
+                            </td>
+
+                            <td>
+                                48
+                            </td>
+
+                            <td>
+                                ₹18,500
+                            </td>
+
+                            <td>
+                                ₹1,200
+                            </td>
+
+                            <td>
+                                ₹300
+                            </td>
+
+                            <td>
+                                ₹19,400
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- TOP CUSTOMERS / PEAK HOURS -->
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Top Customers
+                        </h2>
+
+                        <p>
+                            Highest spending customers
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="top-customer-list">
+
+                    <div>
+
+                        <div class="customer-rank">
+                            01
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Rahul
+                            </strong>
+
+                            <span>
+                                25 bookings
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            ₹22,300
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="customer-rank">
+                            02
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Arun Kumar
+                            </strong>
+
+                            <span>
+                                18 bookings
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            ₹15,400
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="customer-rank">
+                            03
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Vignesh
+                            </strong>
+
+                            <span>
+                                12 bookings
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            ₹8,700
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Peak Hours
+                        </h2>
+
+                        <p>
+                            Most booked times
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="peak-hour-list">
+
+                    <div>
+
+                        <span>
+                            06 PM - 07 PM
+                        </span>
+
+                        <div class="peak-bar">
+                            <span style="width: 95%;"></span>
+                        </div>
+
+                        <strong>
+                            95%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            07 PM - 08 PM
+                        </span>
+
+                        <div class="peak-bar">
+                            <span style="width: 91%;"></span>
+                        </div>
+
+                        <strong>
+                            91%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            08 PM - 09 PM
+                        </span>
+
+                        <div class="peak-bar">
+                            <span style="width: 86%;"></span>
+                        </div>
+
+                        <strong>
+                            86%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            09 PM - 10 PM
+                        </span>
+
+                        <div class="peak-bar">
+                            <span style="width: 78%;"></span>
+                        </div>
+
+                        <strong>
+                            78%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Smart Business Reports
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+function setDefaultReportDates() {
+
+    const from =
+        document.querySelector(
+            "#reportFrom"
+        );
+
+    const to =
+        document.querySelector(
+            "#reportTo"
+        );
+
+    const today =
+        new Date();
+
+    const todayString =
+        today
+        .toISOString()
+        .split("T")[0];
+
+    if (to) {
+        to.value = todayString;
+    }
+
+    if (from) {
+
+        const previous =
+            new Date(today);
+
+        previous.setDate(
+            previous.getDate() - 30
+        );
+
+        from.value =
+            previous
+            .toISOString()
+            .split("T")[0];
+
+    }
+
+}
+
+
+function generateReport() {
+
+    const type =
+        document.querySelector(
+            "#reportType"
+        ).value;
+
+    showAdminAlert(
+        `${type.toUpperCase()} report generated successfully.`,
+        "success"
+    );
+
+}
+
+
+function exportReport() {
+
+    const table =
+        document.querySelector(
+            "#reportTable"
+        );
+
+    if (!table) {
+        return;
+    }
+
+    const rows =
+        table.querySelectorAll("tr");
+
+    const csv = [];
+
+    rows.forEach(function (row) {
+
+        const cells =
+            row.querySelectorAll(
+                "th, td"
+            );
+
+        const values = [];
+
+        cells.forEach(function (cell) {
+
+            values.push(
+                '"' +
+                cell.innerText
+                    .replace(/"/g, '""')
+                    .trim() +
+                '"'
+            );
+
+        });
+
+        csv.push(
+            values.join(",")
+        );
+
+    });
+
+    const blob =
+        new Blob(
+            [csv.join("\n")],
+            {
+                type: "text/csv;charset=utf-8;"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "turfx-report.csv";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+/* =========================================================
+   REPORT CHARTS
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        setDefaultReportDates();
+
+        if (
+            typeof Chart ===
+            "undefined"
+        ) {
+            return;
+        }
+
+
+        const revenueCanvas =
+            document.querySelector(
+                "#reportRevenueChart"
+            );
+
+        if (revenueCanvas) {
+
+            new Chart(
+                revenueCanvas,
+                {
+
+                    type: "line",
+
+                    data: {
+
+                        labels: [
+                            "Mar",
+                            "Apr",
+                            "May",
+                            "Jun",
+                            "Jul",
+                            "Aug"
+                        ],
+
+                        datasets: [
+                            {
+                                label:
+                                    "Revenue",
+
+                                data: [
+                                    280000,
+                                    320000,
+                                    360000,
+                                    390000,
+                                    430000,
+                                    482000
+                                ],
+
+                                borderWidth: 2,
+
+                                tension: .35,
+
+                                fill: true
+
+                            }
+
+                        ]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        plugins: {
+
+                            legend: {
+                                display: false
+                            }
+
+                        },
+
+                        scales: {
+
+                            y: {
+                                beginAtZero: true
+                            }
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        const bookingCanvas =
+            document.querySelector(
+                "#reportBookingChart"
+            );
+
+        if (bookingCanvas) {
+
+            new Chart(
+                bookingCanvas,
+                {
+
+                    type: "bar",
+
+                    data: {
+
+                        labels: [
+                            "Mon",
+                            "Tue",
+                            "Wed",
+                            "Thu",
+                            "Fri",
+                            "Sat",
+                            "Sun"
+                        ],
+
+                        datasets: [
+                            {
+
+                                label:
+                                    "Bookings",
+
+                                data: [
+                                    32,
+                                    41,
+                                    37,
+                                    45,
+                                    49,
+                                    58,
+                                    52
+                                ],
+
+                                borderWidth: 1
+
+                            }
+
+                        ]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        plugins: {
+
+                            legend: {
+                                display: false
+                            }
+
+                        },
+
+                        scales: {
+
+                            y: {
+                                beginAtZero: true
+                            }
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

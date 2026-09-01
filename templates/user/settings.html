@@ -1,0 +1,541 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Settings | TurfX{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏
+            <span>
+                Turf<span class="brand-green">X</span>
+            </span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf">
+                🏟️
+                <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history">
+                📅
+                <span>My Bookings</span>
+            </a>
+
+            <a href="/team">
+                👥
+                <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆
+                <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard">
+                📊
+                <span>Scorecard</span>
+            </a>
+
+            <a href="/notifications">
+                🔔
+                <span>Notifications</span>
+            </a>
+
+            <a href="/profile">
+                👤
+                <span>Profile</span>
+            </a>
+
+            <a href="/settings" class="active">
+                ⚙️
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Settings
+                </h1>
+
+                <p>
+                    Customize your TurfX experience.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- SETTINGS -->
+
+        <section class="dashboard-panel">
+
+            <div class="settings-section">
+
+                <div class="settings-section-header">
+
+                    <div>
+
+                        <span class="settings-eyebrow">
+                            PERSONALIZATION
+                        </span>
+
+                        <h2>
+                            🎨 Appearance
+                        </h2>
+
+                        <p>
+                            Customize how TurfX looks and feels.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DARK MODE -->
+
+                <div class="user-setting-row">
+
+                    <div class="user-setting-info">
+
+                        <div class="user-setting-icon dark">
+                            🌙
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Dark Mode
+                            </strong>
+
+                            <span>
+                                Use a darker appearance across TurfX.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="user-toggle">
+
+                        <input
+                            type="checkbox"
+                            id="darkModeToggle">
+
+                        <span class="user-toggle-slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- COMPACT LAYOUT -->
+
+                <div class="user-setting-row">
+
+                    <div class="user-setting-info">
+
+                        <div class="user-setting-icon blue">
+                            📐
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Compact Layout
+                            </strong>
+
+                            <span>
+                                Reduce spacing and show more content.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="user-toggle">
+
+                        <input
+                            type="checkbox"
+                            id="compactLayoutToggle">
+
+                        <span class="user-toggle-slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- ACCENT COLOR -->
+
+                <div class="user-setting-block">
+
+                    <div class="user-setting-info">
+
+                        <div class="user-setting-icon purple">
+                            🎨
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Accent Color
+                            </strong>
+
+                            <span>
+                                Choose your preferred TurfX highlight color.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="appearance-choice-grid accent-choice-grid">
+
+                        <button
+                            type="button"
+                            class="appearance-choice accent-option active"
+                            data-accent="green">
+
+                            <span class="accent-preview green"></span>
+
+                            <span>
+                                Green
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="appearance-choice accent-option"
+                            data-accent="blue">
+
+                            <span class="accent-preview blue"></span>
+
+                            <span>
+                                Blue
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="appearance-choice accent-option"
+                            data-accent="purple">
+
+                            <span class="accent-preview purple"></span>
+
+                            <span>
+                                Purple
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="appearance-choice accent-option"
+                            data-accent="orange">
+
+                            <span class="accent-preview orange"></span>
+
+                            <span>
+                                Orange
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FONT SIZE -->
+
+                <div class="user-setting-block">
+
+                    <div class="user-setting-info">
+
+                        <div class="user-setting-icon orange">
+                            🔤
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Font Size
+                            </strong>
+
+                            <span>
+                                Adjust text size for better readability.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="appearance-choice-grid font-choice-grid">
+
+                        <button
+                            type="button"
+                            class="appearance-choice font-option"
+                            data-font-size="small">
+
+                            <span class="font-preview small">
+                                Aa
+                            </span>
+
+                            <span>
+                                Small
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="appearance-choice font-option active"
+                            data-font-size="medium">
+
+                            <span class="font-preview medium">
+                                Aa
+                            </span>
+
+                            <span>
+                                Medium
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="appearance-choice font-option"
+                            data-font-size="large">
+
+                            <span class="font-preview large">
+                                Aa
+                            </span>
+
+                            <span>
+                                Large
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ANIMATIONS -->
+
+                <div class="user-setting-row">
+
+                    <div class="user-setting-info">
+
+                        <div class="user-setting-icon sparkle">
+                            ✨
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Animations
+                            </strong>
+
+                            <span>
+                                Enable or disable interface animations.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="user-toggle">
+
+                        <input
+                            type="checkbox"
+                            id="animationsToggle"
+                            checked>
+
+                        <span class="user-toggle-slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- SIDEBAR STYLE -->
+
+                <div class="user-setting-block">
+
+                    <div class="user-setting-info">
+
+                        <div class="user-setting-icon green">
+                            🧭
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Sidebar Style
+                            </strong>
+
+                            <span>
+                                Choose between expanded and compact sidebar.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="appearance-choice-grid sidebar-choice-grid">
+
+                        <button
+                            type="button"
+                            class="appearance-choice sidebar-option active"
+                            data-sidebar-style="expanded">
+
+                            <div class="sidebar-preview expanded">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+                            <strong>
+                                Expanded
+                            </strong>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="appearance-choice sidebar-option"
+                            data-sidebar-style="compact">
+
+                            <div class="sidebar-preview compact">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+                            <strong>
+                                Compact
+                            </strong>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESET -->
+
+                <div class="appearance-footer-actions">
+
+                    <button
+                        type="button"
+                        class="settings-secondary-btn"
+                        id="resetAppearance">
+
+                        Reset Appearance
+
+                    </button>
+
+                    <span id="appearanceSaveStatus">
+                        Changes are saved automatically
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Personalized TurfX Experience
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

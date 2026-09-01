@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Tournament Details
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+        <a
+            href="/create-tournament"
+            class="tournament-create-btn">
+
+            + Create Tournament
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<main class="tournament-page">
+
+    <!-- HERO -->
+
+    <section class="tournament-hero">
+
+        <div class="tournament-hero-content">
+
+            <span class="tournament-badge">
+
+                🏆 TOURNAMENT DETAILS
+
+            </span>
+
+
+            <h1>
+
+                Chennai Weekend
+                <br>
+
+                <span>
+                    Premier League
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                8 Overs • Tennis Ball • 16 Teams
+
+                <br>
+
+                Compete for the championship and
+                take your team to the top.
+
+            </p>
+
+
+            <div class="tournament-hero-actions">
+
+                <a
+                    href="/tournament/registration"
+                    class="tournament-main-btn">
+
+                    Register Team →
+                    
+                </a>
+
+
+                <a
+                    href="/tournament/fixtures"
+                    class="tournament-outline-btn">
+
+                    View Fixtures
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-hero-card">
+
+            <span class="live-label">
+
+                TOURNAMENT STATUS
+
+            </span>
+
+
+            <div
+                style="
+                    margin-top:15px;
+                    color:#ffffff;
+                    font-size:22px;
+                    font-weight:900;
+                ">
+
+                OPEN
+
+            </div>
+
+
+            <div
+                style="
+                    margin-top:7px;
+                    color:#94a3b8;
+                    font-size:8px;
+                ">
+
+                Registration closes
+                29 Aug 2026
+
+            </div>
+
+
+            <div class="live-match-footer">
+
+                <span>
+                    12 / 16 Teams
+                </span>
+
+                <span>
+                    ₹500 Entry
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- STATS -->
+
+    <section class="tournament-stat-grid">
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon green">
+                👥
+            </div>
+
+            <div>
+
+                <span>
+                    Registered Teams
+                </span>
+
+                <strong>
+                    12 / 16
+                </strong>
+
+                <small>
+                    4 slots remaining
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon blue">
+                📅
+            </div>
+
+            <div>
+
+                <span>
+                    Start Date
+                </span>
+
+                <strong>
+                    30 Aug
+                </strong>
+
+                <small>
+                    2026
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon orange">
+                🏆
+            </div>
+
+            <div>
+
+                <span>
+                    Prize Pool
+                </span>
+
+                <strong>
+                    ₹10K
+                </strong>
+
+                <small>
+                    Winner + finalists
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon purple">
+                📍
+            </div>
+
+            <div>
+
+                <span>
+                    Venue
+                </span>
+
+                <strong>
+                    TurfX Arena
+                </strong>
+
+                <small>
+                    Chennai
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ABOUT -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    ABOUT
+                </span>
+
+                <h2>
+                    About This Tournament
+                </h2>
+
+                <p>
+                    Everything players need to know before joining.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-grid">
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        Tournament Format
+                    </h3>
+
+                    <p class="tournament-card-description">
+
+                        League stage followed by knockout
+                        matches. Each team plays multiple
+                        league matches before the top teams
+                        advance to the final stage.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        Match Rules
+                    </h3>
+
+                    <p class="tournament-card-description">
+
+                        8 overs per innings, tennis ball,
+                        maximum 11 players per team and
+                        standard TurfX match rules.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <h3 class="tournament-card-title">
+                        Entry Details
+                    </h3>
+
+                    <p class="tournament-card-description">
+
+                        Registration fee is ₹500 per team.
+                        Limited to 16 teams.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- REGISTRATION -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    REGISTRATION
+                </span>
+
+                <h2>
+                    Secure Your Spot
+                </h2>
+
+                <p>
+                    Only 4 team slots are remaining.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="registration-summary">
+
+
+            <div class="registration-item">
+
+                <span>
+                    Team Slots
+                </span>
+
+                <strong>
+                    4 Remaining
+                </strong>
+
+            </div>
+
+
+            <div class="registration-item">
+
+                <span>
+                    Entry Fee
+                </span>
+
+                <strong>
+                    ₹500
+                </strong>
+
+            </div>
+
+
+            <div class="registration-item">
+
+                <span>
+                    Registration Deadline
+                </span>
+
+                <strong>
+                    29 Aug 2026
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div
+            style="
+                display:flex;
+                justify-content:flex-end;
+                gap:8px;
+                margin-top:15px;
+                flex-wrap:wrap;
+            ">
+
+            <a
+                href="/tournament/registration"
+                class="tournament-main-btn">
+
+                Register Your Team →
+
+            </a>
+
+            <a
+                href="/login"
+                class="tournament-btn">
+
+                Login to Register
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FIXTURES -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    MATCH CENTRE
+                </span>
+
+                <h2>
+                    Upcoming Fixtures
+                </h2>
+
+                <p>
+                    Next matches in this tournament.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/tournament/fixtures"
+                class="view-all-link">
+
+                Full Schedule →
+
+            </a>
+
+        </div>
+
+
+        <div class="fixture-list">
+
+
+            <article class="fixture-card">
+
+                <div class="fixture-date">
+
+                    <strong>
+                        26
+                    </strong>
+
+                    <span>
+                        AUG
+                    </span>
+
+                </div>
+
+
+                <div class="fixture-info">
+
+                    <span>
+                        06:00 PM
+                    </span>
+
+                    <strong>
+                        Victory Kings
+                        <small>
+                            vs
+                        </small>
+                        Chennai Warriors
+                    </strong>
+
+                    <p>
+                        TurfX Arena • Match 21
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/scorecard"
+                    class="fixture-btn">
+
+                    View Match
+
+                </a>
+
+            </article>
+
+
+            <article class="fixture-card">
+
+                <div class="fixture-date">
+
+                    <strong>
+                        28
+                    </strong>
+
+                    <span>
+                        AUG
+                    </span>
+
+                </div>
+
+
+                <div class="fixture-info">
+
+                    <span>
+                        07:30 PM
+                    </span>
+
+                    <strong>
+                        Super Strikers
+                        <small>
+                            vs
+                        </small>
+                        Royal Challengers
+                    </strong>
+
+                    <p>
+                        Champions Turf • Match 22
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/scorecard"
+                    class="fixture-btn">
+
+                    View Match
+
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- POINTS -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    STANDINGS
+                </span>
+
+                <h2>
+                    Current Leaderboard
+                </h2>
+
+                <p>
+                    Top four teams qualify for knockouts.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/tournament/points-table"
+                class="view-all-link">
+
+                Full Table →
+
+            </a>
+
+        </div>
+
+
+        <div class="points-table-wrapper">
+
+            <table class="points-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            #
+                        </th>
+
+                        <th>
+                            Team
+                        </th>
+
+                        <th>
+                            P
+                        </th>
+
+                        <th>
+                            W
+                        </th>
+
+                        <th>
+                            L
+                        </th>
+
+                        <th>
+                            PTS
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            01
+                        </td>
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+                                    VK
+                                </div>
+
+                                <strong>
+                                    Victory Kings
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            6
+                        </td>
+
+                        <td>
+                            1
+                        </td>
+
+                        <td>
+                            <strong>
+                                12
+                            </strong>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            02
+                        </td>
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+                                    CW
+                                </div>
+
+                                <strong>
+                                    Chennai Warriors
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            5
+                        </td>
+
+                        <td>
+                            2
+                        </td>
+
+                        <td>
+                            <strong>
+                                10
+                            </strong>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            03
+                        </td>
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+                                    SS
+                                </div>
+
+                                <strong>
+                                    Super Strikers
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            4
+                        </td>
+
+                        <td>
+                            3
+                        </td>
+
+                        <td>
+                            <strong>
+                                8
+                            </strong>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FINAL CTA -->
+
+    <section class="tournament-bottom-cta">
+
+        <div>
+
+            <span>
+                READY TO COMPETE?
+            </span>
+
+            <h2>
+                Enter the Tournament.
+            </h2>
+
+            <p>
+                Build your squad and start your TurfX journey.
+            </p>
+
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:center;
+                    gap:9px;
+                    margin-top:22px;
+                    flex-wrap:wrap;
+                ">
+
+                <a
+                    href="/tournament/registration"
+                    class="tournament-main-btn">
+
+                    Register Team →
+
+                </a>
+
+
+                <a
+                    href="/tournament"
+                    class="tournament-outline-btn">
+
+                    Back to Tournaments
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking, tournaments,
+                teams and live cricket management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/search-turf">
+                Find Turf
+            </a>
+
+            <a href="/tournament">
+                Tournaments
+            </a>
+
+            <a href="/scorecard">
+                Live Score
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Payment Failed | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">🏠 <span>Dashboard</span></a>
+            <a href="/search-turf">🏟️ <span>Find Turf</span></a>
+            <a href="/booking-history">📅 <span>My Bookings</span></a>
+            <a href="/team">👥 <span>My Team</span></a>
+            <a href="/tournament">🏆 <span>Tournaments</span></a>
+            <a href="/scorecard">📊 <span>Scorecard</span></a>
+            <a href="/notifications">🔔 <span>Notifications</span></a>
+            <a href="/profile">👤 <span>Profile</span></a>
+            <a href="/settings">⚙️ <span>Settings</span></a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="/logout">🚪 <span>Logout</span></a>
+        </div>
+
+    </aside>
+
+    <main class="dashboard-main">
+
+        <div class="payment-result-page">
+
+            <div class="failed-icon">
+                !
+            </div>
+
+            <span class="failed-label">
+                PAYMENT FAILED
+            </span>
+
+            <h1>
+                Payment Could Not Be Completed
+            </h1>
+
+            <p>
+                Your payment was not successful.
+                Your booking has not been confirmed.
+            </p>
+
+            <div class="failed-info-card">
+
+                <div>
+                    <span>REASON</span>
+                    <strong>Payment was cancelled or declined.</strong>
+                </div>
+
+                <div>
+                    <span>BOOKING STATUS</span>
+                    <strong>Not Confirmed</strong>
+                </div>
+
+            </div>
+
+            <div class="success-actions">
+
+                <a href="/payment"
+                   class="dashboard-primary-btn">
+                    Try Again
+                </a>
+
+                <a href="/search-turf"
+                   class="secondary-action-btn">
+                    Choose Another Turf
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Sponsors
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a href="/" class="tournament-logo">
+        🏏
+        <strong>
+            Turf<span>X</span>
+        </strong>
+    </a>
+
+    <nav class="tournament-nav">
+
+        <a href="/">Home</a>
+
+        <a href="/search-turf">Find Turf</a>
+
+        <a href="/tournament" class="active">
+            Tournaments
+        </a>
+
+        <a href="/scorecard">Live Score</a>
+
+    </nav>
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+            Login
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status completed">
+                🤝 OFFICIAL PARTNERS
+            </span>
+
+            <h1>
+                Tournament Sponsors
+            </h1>
+
+            <p>
+                The brands supporting TurfX cricket.
+            </p>
+
+        </div>
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament"
+                class="tournament-btn">
+                ← Tournament
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    TITLE PARTNER
+                </span>
+
+                <h2>
+                    TurfX Championship
+                </h2>
+
+                <p>
+                    Proudly presented by our principal partner.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="sponsor-grid">
+
+
+            <div class="sponsor-card">
+
+                <div style="
+                    text-align:center;
+                    font-size:19px;
+                    font-weight:900;
+                    color:#15803d;
+                ">
+                    TURFX
+                </div>
+
+            </div>
+
+
+            <div class="sponsor-card">
+
+                <div style="
+                    text-align:center;
+                    font-size:18px;
+                    font-weight:900;
+                    color:#2563eb;
+                ">
+                    SPORTPRO
+                </div>
+
+            </div>
+
+
+            <div class="sponsor-card">
+
+                <div style="
+                    text-align:center;
+                    font-size:18px;
+                    font-weight:900;
+                    color:#ea580c;
+                ">
+                    CRICZONE
+                </div>
+
+            </div>
+
+
+            <div class="sponsor-card">
+
+                <div style="
+                    text-align:center;
+                    font-size:18px;
+                    font-weight:900;
+                    color:#7c3aed;
+                ">
+                    PLAYFIT
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="tournament-bottom-cta">
+
+        <div>
+
+            <span>
+                OUR PARTNERS
+            </span>
+
+            <h2>
+                Stronger Together.
+            </h2>
+
+            <p>
+                Powered by teams, players and brands that love the game.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+        <div class="tournament-footer-links">
+
+            <a href="/">Home</a>
+            <a href="/tournament">Tournament</a>
+            <a href="/tournament/gallery">Gallery</a>
+
+        </div>
+
+        <div class="tournament-footer-copy">
+            © 2026 TurfX. All rights reserved.
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+</html>

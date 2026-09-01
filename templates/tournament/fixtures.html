@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Tournament Fixtures
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+                📅 MATCH CENTRE
+            </span>
+
+            <h1>
+                Tournament Fixtures
+            </h1>
+
+            <p>
+                Follow every scheduled match,
+                result and upcoming fixture.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament"
+                class="tournament-btn">
+
+                ← Tournament
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- SUMMARY -->
+
+    <section class="tournament-stat-grid">
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon green">
+                🏏
+            </div>
+
+            <div>
+
+                <span>
+                    Total Matches
+                </span>
+
+                <strong>
+                    56
+                </strong>
+
+                <small>
+                    Tournament
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon blue">
+                ✅
+            </div>
+
+            <div>
+
+                <span>
+                    Completed
+                </span>
+
+                <strong>
+                    18
+                </strong>
+
+                <small>
+                    Matches played
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon orange">
+                🔴
+            </div>
+
+            <div>
+
+                <span>
+                    Live
+                </span>
+
+                <strong>
+                    01
+                </strong>
+
+                <small>
+                    Happening now
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon purple">
+                ⏳
+            </div>
+
+            <div>
+
+                <span>
+                    Upcoming
+                </span>
+
+                <strong>
+                    37
+                </strong>
+
+                <small>
+                    Remaining
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FILTERS -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    SCHEDULE
+                </span>
+
+                <h2>
+                    Match Fixtures
+                </h2>
+
+                <p>
+                    Chennai Weekend Premier League
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-tabs">
+
+            <button
+                class="tournament-tab active"
+                type="button">
+
+                All Matches
+
+            </button>
+
+            <button
+                class="tournament-tab"
+                type="button">
+
+                Upcoming
+
+            </button>
+
+            <button
+                class="tournament-tab"
+                type="button">
+
+                Live
+
+            </button>
+
+            <button
+                class="tournament-tab"
+                type="button">
+
+                Completed
+
+            </button>
+
+        </div>
+
+
+        <div class="fixture-list">
+
+
+            <!-- MATCH 1 -->
+
+            <article class="fixture-card">
+
+                <div class="fixture-header">
+
+                    <span class="fixture-number">
+                        MATCH 21
+                    </span>
+
+                    <span class="fixture-date">
+                        26 AUG • 06:00 PM
+                    </span>
+
+                </div>
+
+
+                <div class="fixture-teams">
+
+
+                    <div class="fixture-team">
+
+                        <div class="fixture-team-logo">
+                            VK
+                        </div>
+
+                        <span class="fixture-team-name">
+                            Victory Kings
+                        </span>
+
+                    </div>
+
+
+                    <span class="fixture-vs">
+                        VS
+                    </span>
+
+
+                    <div class="fixture-team">
+
+                        <div class="fixture-team-logo">
+                            CW
+                        </div>
+
+                        <span class="fixture-team-name">
+                            Chennai Warriors
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-score">
+
+                    <span class="match-score-team">
+                        TurfX Arena • Chennai
+                    </span>
+
+                    <a
+                        href="/scorecard"
+                        class="fixture-btn">
+
+                        Match Centre
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- MATCH 2 -->
+
+            <article class="fixture-card">
+
+                <div class="fixture-header">
+
+                    <span class="fixture-number">
+                        MATCH 22
+                    </span>
+
+                    <span class="fixture-date">
+                        26 AUG • 07:30 PM
+                    </span>
+
+                </div>
+
+
+                <div class="fixture-teams">
+
+
+                    <div class="fixture-team">
+
+                        <div class="fixture-team-logo">
+                            SS
+                        </div>
+
+                        <span class="fixture-team-name">
+                            Super Strikers
+                        </span>
+
+                    </div>
+
+
+                    <span class="fixture-vs">
+                        VS
+                    </span>
+
+
+                    <div class="fixture-team">
+
+                        <div class="fixture-team-logo">
+                            RC
+                        </div>
+
+                        <span class="fixture-team-name">
+                            Royal Challengers
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-score">
+
+                    <span class="match-score-team">
+                        Champions Turf • Chennai
+                    </span>
+
+                    <a
+                        href="/scorecard"
+                        class="fixture-btn">
+
+                        Match Centre
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- MATCH 3 -->
+
+            <article class="fixture-card">
+
+                <div class="fixture-header">
+
+                    <span class="fixture-number">
+                        MATCH 23
+                    </span>
+
+                    <span class="fixture-date">
+                        27 AUG • 06:00 PM
+                    </span>
+
+                </div>
+
+
+                <div class="fixture-teams">
+
+
+                    <div class="fixture-team">
+
+                        <div class="fixture-team-logo">
+                            CT
+                        </div>
+
+                        <span class="fixture-team-name">
+                            Chennai Titans
+                        </span>
+
+                    </div>
+
+
+                    <span class="fixture-vs">
+                        VS
+                    </span>
+
+
+                    <div class="fixture-team">
+
+                        <div class="fixture-team-logo">
+                            BW
+                        </div>
+
+                        <span class="fixture-team-name">
+                            Blue Warriors
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-score">
+
+                    <span class="match-score-team">
+                        TurfX Arena • Chennai
+                    </span>
+
+                    <a
+                        href="/scorecard"
+                        class="fixture-btn">
+
+                        Match Centre
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- MATCH 4 -->
+
+            <article class="fixture-card">
+
+                <div class="fixture-header">
+
+                    <span class="fixture-number">
+                        MATCH 24
+                    </span>
+
+                    <span class="fixture-date">
+                        27 AUG • 07:30 PM
+                    </span>
+
+                </div>
+
+
+                <div class="fixture-teams">
+
+
+                    <div class="fixture-team">
+
+                        <div class="fixture-team-logo">
+                            GT
+                        </div>
+
+                        <span class="fixture-team-name">
+                            Green Titans
+                        </span>
+
+                    </div>
+
+
+                    <span class="fixture-vs">
+                        VS
+                    </span>
+
+
+                    <div class="fixture-team">
+
+                        <div class="fixture-team-logo">
+                            TX
+                        </div>
+
+                        <span class="fixture-team-name">
+                            Thunder XI
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-score">
+
+                    <span class="match-score-team">
+                        Champions Turf • Chennai
+                    </span>
+
+                    <a
+                        href="/scorecard"
+                        class="fixture-btn">
+
+                        Match Centre
+
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- LIVE MATCH -->
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    LIVE NOW
+                </span>
+
+                <h2>
+                    Match in Progress
+                </h2>
+
+                <p>
+                    Follow the live score.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="live-score-card">
+
+            <div class="live-score-header">
+
+                <h2 class="live-score-title">
+                    Victory Kings vs Super Strikers
+                </h2>
+
+                <span class="live-score-status">
+
+                    <span class="live-dot"></span>
+
+                    LIVE
+
+                </span>
+
+            </div>
+
+
+            <div class="live-score-main">
+
+                <div class="live-score-runs">
+                    148/6
+                </div>
+
+                <div class="live-score-over">
+                    17.4 Overs • Need 8 runs
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:center;
+                    margin-top:20px;
+                ">
+
+                <a
+                    href="/scorecard"
+                    class="tournament-main-btn">
+
+                    Watch Live Score →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/search-turf">
+                Find Turf
+            </a>
+
+            <a href="/tournament">
+                Tournaments
+            </a>
+
+            <a href="/scorecard">
+                Live Score
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+
+</html>

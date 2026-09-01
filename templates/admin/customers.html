@@ -1,0 +1,1517 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Customers | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers" class="active">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Customers
+                </h1>
+
+                <p>
+                    Manage users, bookings and customer activity.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-primary-btn"
+                onclick="openCustomerModal()">
+
+                + Add Customer
+
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Customers
+                    </span>
+
+                    <strong>
+                        562
+                    </strong>
+
+                    <small>
+                        Registered users
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    🟢
+                </div>
+
+                <div>
+
+                    <span>
+                        Active Today
+                    </span>
+
+                    <strong>
+                        74
+                    </strong>
+
+                    <small>
+                        Active customers
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    ⭐
+                </div>
+
+                <div>
+
+                    <span>
+                        VIP Customers
+                    </span>
+
+                    <strong>
+                        28
+                    </strong>
+
+                    <small>
+                        Frequent players
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    ➕
+                </div>
+
+                <div>
+
+                    <span>
+                        New This Month
+                    </span>
+
+                    <strong>
+                        96
+                    </strong>
+
+                    <small>
+                        New registrations
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEARCH / FILTER -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Customer Search
+                    </h2>
+
+                    <p>
+                        Search by name, phone or email.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="customer-filter-grid">
+
+                <div class="admin-field">
+
+                    <label>
+                        Search Customer
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerSearch"
+                        placeholder="Name / phone / email">
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Customer Type
+                    </label>
+
+                    <select id="customerTypeFilter">
+
+                        <option value="">
+                            All Customers
+                        </option>
+
+                        <option value="VIP">
+                            VIP
+                        </option>
+
+                        <option value="Regular">
+                            Regular
+                        </option>
+
+                        <option value="Blocked">
+                            Blocked
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select id="customerStatusFilter">
+
+                        <option value="">
+                            All Status
+                        </option>
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Inactive">
+                            Inactive
+                        </option>
+
+                        <option value="Blocked">
+                            Blocked
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-filter-btn"
+                    onclick="filterCustomers()">
+
+                    Apply Filter
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- CUSTOMER TABLE -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Customer Directory
+                    </h2>
+
+                    <p>
+                        Registered TurfX users.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="exportCustomers()">
+
+                    Export CSV
+
+                </button>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table
+                    class="admin-table"
+                    id="customersTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Contact
+                            </th>
+
+                            <th>
+                                Type
+                            </th>
+
+                            <th>
+                                Bookings
+                            </th>
+
+                            <th>
+                                Spent
+                            </th>
+
+                            <th>
+                                Last Booking
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr
+                            class="customer-row"
+                            data-type="VIP"
+                            data-status="Active">
+
+                            <td>
+
+                                <div class="customer-cell">
+
+                                    <div class="customer-avatar">
+                                        AK
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Arun Kumar
+                                        </strong>
+
+                                        <span>
+                                            #CUS001
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <strong class="contact-main">
+                                    9876543210
+                                </strong>
+
+                                <span class="contact-sub">
+                                    arun@gmail.com
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="customer-type vip">
+                                    ⭐ VIP
+                                </span>
+
+                            </td>
+
+                            <td>
+                                18
+                            </td>
+
+                            <td>
+                                ₹15,400
+                            </td>
+
+                            <td>
+                                23 Aug 2026
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewCustomer('CUS001')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="customer-row"
+                            data-type="Regular"
+                            data-status="Active">
+
+                            <td>
+
+                                <div class="customer-cell">
+
+                                    <div class="customer-avatar blue">
+                                        VG
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Vignesh
+                                        </strong>
+
+                                        <span>
+                                            #CUS002
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <strong class="contact-main">
+                                    9876543211
+                                </strong>
+
+                                <span class="contact-sub">
+                                    vignesh@gmail.com
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="customer-type regular">
+                                    Regular
+                                </span>
+
+                            </td>
+
+                            <td>
+                                12
+                            </td>
+
+                            <td>
+                                ₹8,700
+                            </td>
+
+                            <td>
+                                22 Aug 2026
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewCustomer('CUS002')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="customer-row"
+                            data-type="VIP"
+                            data-status="Active">
+
+                            <td>
+
+                                <div class="customer-cell">
+
+                                    <div class="customer-avatar orange">
+                                        RH
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Rahul
+                                        </strong>
+
+                                        <span>
+                                            #CUS003
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <strong class="contact-main">
+                                    9876543212
+                                </strong>
+
+                                <span class="contact-sub">
+                                    rahul@gmail.com
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="customer-type vip">
+                                    ⭐ VIP
+                                </span>
+
+                            </td>
+
+                            <td>
+                                25
+                            </td>
+
+                            <td>
+                                ₹22,300
+                            </td>
+
+                            <td>
+                                23 Aug 2026
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status available">
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewCustomer('CUS003')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="customer-row"
+                            data-type="Blocked"
+                            data-status="Blocked">
+
+                            <td>
+
+                                <div class="customer-cell">
+
+                                    <div class="customer-avatar red">
+                                        KA
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Karthick
+                                        </strong>
+
+                                        <span>
+                                            #CUS004
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <strong class="contact-main">
+                                    9876543213
+                                </strong>
+
+                                <span class="contact-sub">
+                                    karthick@gmail.com
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="customer-type blocked">
+                                    Blocked
+                                </span>
+
+                            </td>
+
+                            <td>
+                                5
+                            </td>
+
+                            <td>
+                                ₹3,800
+                            </td>
+
+                            <td>
+                                15 Aug 2026
+                            </td>
+
+                            <td>
+
+                                <span class="admin-status blocked">
+                                    Blocked
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewCustomer('CUS004')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- CUSTOMER ACTIVITY -->
+
+        <section class="dashboard-content-grid">
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Recent Activity
+                        </h2>
+
+                        <p>
+                            Latest customer actions
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="customer-activity-list">
+
+
+                    <div>
+
+                        <span class="activity-icon green">
+                            📅
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Arun Kumar booked a turf
+                            </strong>
+
+                            <span>
+                                TurfX Arena • 6:00 PM
+                            </span>
+
+                        </div>
+
+                        <small>
+                            10 min
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="activity-icon blue">
+                            🏆
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Rahul joined tournament
+                            </strong>
+
+                            <span>
+                                Weekend Premier League
+                            </span>
+
+                        </div>
+
+                        <small>
+                            30 min
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="activity-icon orange">
+                            💳
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Vignesh completed payment
+                            </strong>
+
+                            <span>
+                                Transaction TXN1003
+                            </span>
+
+                        </div>
+
+                        <small>
+                            1 hr
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Customer Insights
+                        </h2>
+
+                        <p>
+                            Quick statistics
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="customer-insight-grid">
+
+                    <div>
+
+                        <strong>
+                            72%
+                        </strong>
+
+                        <span>
+                            Returning customers
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ₹860
+                        </strong>
+
+                        <span>
+                            Average booking
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            4.7
+                        </strong>
+
+                        <span>
+                            Average rating
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            2.3
+                        </strong>
+
+                        <span>
+                            Bookings / customer
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Customer Management
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- CUSTOMER VIEW MODAL -->
+
+<div
+    id="customerModal"
+    class="admin-modal">
+
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <span>
+                    TURFX CUSTOMER
+                </span>
+
+                <h2>
+                    Customer Profile
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeCustomerModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="customer-modal-profile">
+
+            <div
+                id="modalCustomerAvatar"
+                class="customer-avatar large">
+                AK
+            </div>
+
+            <div>
+
+                <h3 id="modalCustomerName">
+                    Arun Kumar
+                </h3>
+
+                <p id="modalCustomerEmail">
+                    arun@gmail.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="customer-detail-grid">
+
+            <div>
+
+                <span>
+                    Customer ID
+                </span>
+
+                <strong id="modalCustomerId">
+                    #CUS001
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Phone
+                </span>
+
+                <strong id="modalCustomerPhone">
+                    9876543210
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Bookings
+                </span>
+
+                <strong id="modalCustomerBookings">
+                    18
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Total Spent
+                </span>
+
+                <strong id="modalCustomerSpent">
+                    ₹15,400
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-modal-actions">
+
+            <button
+                type="button"
+                class="admin-outline-btn"
+                onclick="closeCustomerModal()">
+
+                Close
+
+            </button>
+
+            <button
+                type="button"
+                class="admin-success-btn"
+                onclick="showAdminAlert('Customer message feature ready for backend connection.', 'success')">
+
+                Message
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ADD CUSTOMER MODAL -->
+
+<div
+    id="addCustomerModal"
+    class="admin-modal">
+
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <span>
+                    TURFX ADMIN
+                </span>
+
+                <h2>
+                    Add Customer
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeAddCustomerModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form
+            onsubmit="createCustomer(event)">
+
+            <div class="admin-form-grid customer-form-grid">
+
+                <div class="admin-field">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newCustomerName"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="newCustomerEmail"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="newCustomerPhone"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-modal-actions">
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="closeAddCustomerModal()">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="admin-success-btn">
+
+                    Add Customer
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const customerData = {
+
+    CUS001: {
+        name: "Arun Kumar",
+        email: "arun@gmail.com",
+        phone: "9876543210",
+        bookings: "18",
+        spent: "₹15,400"
+    },
+
+    CUS002: {
+        name: "Vignesh",
+        email: "vignesh@gmail.com",
+        phone: "9876543211",
+        bookings: "12",
+        spent: "₹8,700"
+    },
+
+    CUS003: {
+        name: "Rahul",
+        email: "rahul@gmail.com",
+        phone: "9876543212",
+        bookings: "25",
+        spent: "₹22,300"
+    },
+
+    CUS004: {
+        name: "Karthick",
+        email: "karthick@gmail.com",
+        phone: "9876543213",
+        bookings: "5",
+        spent: "₹3,800"
+    }
+
+};
+
+
+function filterCustomers() {
+
+    const search =
+        document.querySelector(
+            "#customerSearch"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+    const type =
+        document.querySelector(
+            "#customerTypeFilter"
+        )
+        .value;
+
+    const status =
+        document.querySelector(
+            "#customerStatusFilter"
+        )
+        .value;
+
+    document
+        .querySelectorAll(
+            ".customer-row"
+        )
+        .forEach(function (row) {
+
+            const text =
+                row.textContent
+                .toLowerCase();
+
+            const rowType =
+                row.dataset.type || "";
+
+            const rowStatus =
+                row.dataset.status || "";
+
+            const matchSearch =
+                !search ||
+                text.includes(search);
+
+            const matchType =
+                !type ||
+                rowType === type;
+
+            const matchStatus =
+                !status ||
+                rowStatus === status;
+
+            row.style.display =
+                matchSearch &&
+                matchType &&
+                matchStatus
+                    ? ""
+                    : "none";
+
+        });
+
+}
+
+
+function viewCustomer(id) {
+
+    const customer =
+        customerData[id];
+
+    if (!customer) {
+        return;
+    }
+
+    document.querySelector(
+        "#modalCustomerId"
+    ).textContent =
+        "#" + id;
+
+    document.querySelector(
+        "#modalCustomerName"
+    ).textContent =
+        customer.name;
+
+    document.querySelector(
+        "#modalCustomerEmail"
+    ).textContent =
+        customer.email;
+
+    document.querySelector(
+        "#modalCustomerPhone"
+    ).textContent =
+        customer.phone;
+
+    document.querySelector(
+        "#modalCustomerBookings"
+    ).textContent =
+        customer.bookings;
+
+    document.querySelector(
+        "#modalCustomerSpent"
+    ).textContent =
+        customer.spent;
+
+    document.querySelector(
+        "#customerModal"
+    ).classList.add("show");
+
+}
+
+
+function closeCustomerModal() {
+
+    document.querySelector(
+        "#customerModal"
+    ).classList.remove("show");
+
+}
+
+
+function openCustomerModal() {
+
+    document.querySelector(
+        "#addCustomerModal"
+    ).classList.add("show");
+
+}
+
+
+function closeAddCustomerModal() {
+
+    document.querySelector(
+        "#addCustomerModal"
+    ).classList.remove("show");
+
+}
+
+
+function createCustomer(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.querySelector(
+            "#newCustomerName"
+        ).value.trim();
+
+    if (!name) {
+        return;
+    }
+
+    closeAddCustomerModal();
+
+    showAdminAlert(
+        `${name} added successfully.`,
+        "success"
+    );
+
+    event.target.reset();
+
+}
+
+
+function exportCustomers() {
+
+    const table =
+        document.querySelector(
+            "#customersTable"
+        );
+
+    if (!table) {
+        return;
+    }
+
+    const rows =
+        table.querySelectorAll("tr");
+
+    const csv = [];
+
+    rows.forEach(function (row) {
+
+        const cells =
+            row.querySelectorAll(
+                "th, td"
+            );
+
+        const values = [];
+
+        cells.forEach(function (cell) {
+
+            values.push(
+                '"' +
+                cell.innerText
+                .replace(/"/g, '""')
+                .trim() +
+                '"'
+            );
+
+        });
+
+        csv.push(
+            values.join(",")
+        );
+
+    });
+
+    const blob =
+        new Blob(
+            [csv.join("\n")],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "turfx-customers.csv";
+
+    document.body.appendChild(
+        link
+    );
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const search =
+            document.querySelector(
+                "#customerSearch"
+            );
+
+        if (search) {
+
+            search.addEventListener(
+                "input",
+                filterCustomers
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Purple Cap
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a href="/" class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a href="/tournament" class="active">
+            Tournaments
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status upcoming">
+                💜 BOWLING LEADER
+            </span>
+
+            <h1>
+                Purple Cap
+            </h1>
+
+            <p>
+                Top wicket takers of the Chennai Weekend Premier League.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament/leaderboard"
+                class="tournament-btn">
+
+                ← Leaderboard
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="tournament-section">
+
+        <div class="cap-card">
+
+            <div class="cap-icon">
+                💜
+            </div>
+
+            <div class="cap-content">
+
+                <h4>
+                    Current Purple Cap Holder
+                </h4>
+
+                <p>
+                    Vignesh • Victory Kings
+                </p>
+
+            </div>
+
+            <span class="cap-value">
+                18
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="tournament-section">
+
+        <div class="tournament-section-heading">
+
+            <div>
+
+                <span>
+                    TOP BOWLERS
+                </span>
+
+                <h2>
+                    Wicket Takers
+                </h2>
+
+                <p>
+                    Current tournament bowling standings.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="leaderboard-list">
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    01
+                </span>
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        VG
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Vignesh
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Victory Kings • 7 Matches
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <strong class="leaderboard-value">
+                    18 W
+                </strong>
+
+            </div>
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    02
+                </span>
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        KR
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Karthick
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Royal Challengers • 7 Matches
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <strong class="leaderboard-value">
+                    15 W
+                </strong>
+
+            </div>
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    03
+                </span>
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        AJ
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Ajay
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Chennai Warriors • 7 Matches
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <strong class="leaderboard-value">
+                    13 W
+                </strong>
+
+            </div>
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    04
+                </span>
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        DN
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Dinesh
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Super Strikers • 7 Matches
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <strong class="leaderboard-value">
+                    11 W
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="tournament-section">
+
+        <div class="tournament-grid">
+
+
+            <article class="tournament-info-card">
+
+                <span class="label">
+                    Best Bowling
+                </span>
+
+                <strong class="value">
+                    4/18
+                </strong>
+
+                <p class="sub-value">
+                    Vignesh
+                </p>
+
+            </article>
+
+
+            <article class="tournament-info-card">
+
+                <span class="label">
+                    Best Economy
+                </span>
+
+                <strong class="value">
+                    5.42
+                </strong>
+
+                <p class="sub-value">
+                    Karthick
+                </p>
+
+            </article>
+
+
+            <article class="tournament-info-card">
+
+                <span class="label">
+                    Most Maidens
+                </span>
+
+                <strong class="value">
+                    4
+                </strong>
+
+                <p class="sub-value">
+                    Vignesh
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="tournament-bottom-cta">
+
+        <div>
+
+            <span>
+                KEEP WICKET TAKING
+            </span>
+
+            <h2>
+                Chase The Purple Cap.
+            </h2>
+
+            <p>
+                Every wicket takes you closer to the top.
+            </p>
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:center;
+                    gap:9px;
+                    margin-top:22px;
+                    flex-wrap:wrap;
+                ">
+
+                <a
+                    href="/tournament/leaderboard"
+                    class="tournament-main-btn">
+
+                    Full Leaderboard →
+
+                </a>
+
+                <a
+                    href="/tournament/points-table"
+                    class="tournament-outline-btn">
+
+                    Points Table
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/leaderboard">
+                Leaderboard
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+
+</html>

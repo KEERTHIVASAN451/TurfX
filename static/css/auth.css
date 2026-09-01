@@ -1,0 +1,349 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #061b12,
+            #0c4b2d
+        );
+
+    color: #17221d;
+}
+
+
+/* ============================================================
+   PAGE
+============================================================ */
+
+.auth-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+}
+
+
+/* ============================================================
+   CARD
+============================================================ */
+
+.auth-card {
+
+    width: 100%;
+
+    max-width: 480px;
+
+    background: #ffffff;
+
+    padding: 40px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.30);
+}
+
+
+/* ============================================================
+   LOGO
+============================================================ */
+
+.auth-logo {
+
+    width: 70px;
+
+    height: 70px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #19c96b;
+
+    border-radius: 18px;
+
+    font-size: 36px;
+}
+
+
+/* ============================================================
+   TITLES
+============================================================ */
+
+.auth-card h1 {
+
+    text-align: center;
+
+    color: #12a958;
+
+    font-size: 36px;
+
+    margin-bottom: 8px;
+}
+
+
+.auth-card h2 {
+
+    text-align: center;
+
+    font-size: 25px;
+
+    margin-bottom: 8px;
+}
+
+
+.auth-subtitle {
+
+    text-align: center;
+
+    color: #718078;
+
+    font-size: 14px;
+
+    margin-bottom: 28px;
+}
+
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.form-group {
+
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border:
+        1px solid #d4ddd8;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+.form-group input:focus {
+
+    border-color: #19c96b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(25, 201, 107, 0.12);
+}
+
+
+/* ============================================================
+   TERMS
+============================================================ */
+
+.terms {
+
+    margin:
+        5px 0 20px;
+
+    color: #65716b;
+
+    font-size: 13px;
+}
+
+
+.terms label {
+
+    display: flex;
+
+    gap: 8px;
+
+    align-items: flex-start;
+}
+
+
+.terms input {
+
+    margin-top: 2px;
+}
+
+
+/* ============================================================
+   BUTTON
+============================================================ */
+
+.auth-button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #19c96b;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.auth-button:hover {
+
+    background: #0eaa58;
+}
+
+
+/* ============================================================
+   ALERTS
+============================================================ */
+
+.alert {
+
+    padding: 12px 14px;
+
+    margin-bottom: 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+}
+
+
+.alert.success {
+
+    background: #e5f9ed;
+
+    color: #087a3d;
+
+    border:
+        1px solid #b8ebcb;
+}
+
+
+.alert.error {
+
+    background: #fff0f0;
+
+    color: #b42318;
+
+    border:
+        1px solid #f5c2c0;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.auth-footer {
+
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #6c7771;
+
+    font-size: 14px;
+}
+
+
+.auth-footer a {
+
+    color: #0eaa58;
+
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+
+.auth-footer a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 550px) {
+
+    .auth-page {
+
+        padding: 15px;
+    }
+
+
+    .auth-card {
+
+        padding: 28px 22px;
+
+        border-radius: 16px;
+    }
+
+
+    .auth-card h1 {
+
+        font-size: 30px;
+    }
+
+
+    .auth-card h2 {
+
+        font-size: 22px;
+    }
+
+}

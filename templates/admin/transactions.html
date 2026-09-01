@@ -1,0 +1,1269 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Transactions | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions" class="active">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Transactions
+                </h1>
+
+                <p>
+                    Track payments, refunds and revenue.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-primary-btn"
+                onclick="exportTransactions()">
+
+                Export Report
+
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Today's Revenue
+                    </span>
+
+                    <strong>
+                        ₹18,500
+                    </strong>
+
+                    <small>
+                        48 transactions
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        Successful
+                    </span>
+
+                    <strong>
+                        ₹4.82L
+                    </strong>
+
+                    <small>
+                        This month
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <strong>
+                        ₹12,400
+                    </strong>
+
+                    <small>
+                        14 payments
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    ↩️
+                </div>
+
+                <div>
+
+                    <span>
+                        Refunds
+                    </span>
+
+                    <strong>
+                        ₹8,750
+                    </strong>
+
+                    <small>
+                        This month
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEARCH / FILTER -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Transaction Search
+                    </h2>
+
+                    <p>
+                        Find a payment by ID, customer or booking.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="transaction-filter-grid">
+
+                <div class="admin-field">
+
+                    <label>
+                        Search
+                    </label>
+
+                    <input
+                        type="text"
+                        id="transactionSearch"
+                        placeholder="TXN ID / Customer / Booking">
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Payment Method
+                    </label>
+
+                    <select id="paymentMethodFilter">
+
+                        <option value="">
+                            All Methods
+                        </option>
+
+                        <option value="UPI">
+                            UPI
+                        </option>
+
+                        <option value="Card">
+                            Card
+                        </option>
+
+                        <option value="Cash">
+                            Cash
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select id="transactionStatusFilter">
+
+                        <option value="">
+                            All Status
+                        </option>
+
+                        <option value="Success">
+                            Success
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Refunded">
+                            Refunded
+                        </option>
+
+                        <option value="Failed">
+                            Failed
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="transactionDate">
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-filter-btn"
+                    onclick="filterTransactions()">
+
+                    Apply Filter
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- TRANSACTION TABLE -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Recent Transactions
+                    </h2>
+
+                    <p>
+                        Latest customer payments.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table
+                    class="admin-table"
+                    id="transactionsTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Transaction ID
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Booking
+                            </th>
+
+                            <th>
+                                Method
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr
+                            class="transaction-row"
+                            data-method="UPI"
+                            data-status="Success"
+                            data-date="2026-08-23">
+
+                            <td>
+                                TXN1001
+                            </td>
+
+                            <td>
+                                Arun Kumar
+                            </td>
+
+                            <td>
+                                #BK001
+                            </td>
+
+                            <td>
+                                UPI
+                            </td>
+
+                            <td>
+                                ₹800
+                            </td>
+
+                            <td>
+                                <span class="admin-status available">
+                                    Success
+                                </span>
+                            </td>
+
+                            <td>
+                                23 Aug 2026
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewTransaction('TXN1001')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="transaction-row"
+                            data-method="Card"
+                            data-status="Success"
+                            data-date="2026-08-23">
+
+                            <td>
+                                TXN1002
+                            </td>
+
+                            <td>
+                                Rahul
+                            </td>
+
+                            <td>
+                                #BK002
+                            </td>
+
+                            <td>
+                                Card
+                            </td>
+
+                            <td>
+                                ₹1,000
+                            </td>
+
+                            <td>
+                                <span class="admin-status available">
+                                    Success
+                                </span>
+                            </td>
+
+                            <td>
+                                23 Aug 2026
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewTransaction('TXN1002')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="transaction-row"
+                            data-method="UPI"
+                            data-status="Pending"
+                            data-date="2026-08-23">
+
+                            <td>
+                                TXN1003
+                            </td>
+
+                            <td>
+                                Vignesh
+                            </td>
+
+                            <td>
+                                #BK003
+                            </td>
+
+                            <td>
+                                UPI
+                            </td>
+
+                            <td>
+                                ₹700
+                            </td>
+
+                            <td>
+                                <span class="admin-status booked">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td>
+                                23 Aug 2026
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewTransaction('TXN1003')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="transaction-row"
+                            data-method="UPI"
+                            data-status="Refunded"
+                            data-date="2026-08-22">
+
+                            <td>
+                                TXN1004
+                            </td>
+
+                            <td>
+                                Karthick
+                            </td>
+
+                            <td>
+                                #BK004
+                            </td>
+
+                            <td>
+                                UPI
+                            </td>
+
+                            <td>
+                                ₹900
+                            </td>
+
+                            <td>
+                                <span class="admin-status blocked">
+                                    Refunded
+                                </span>
+                            </td>
+
+                            <td>
+                                22 Aug 2026
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewTransaction('TXN1004')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr
+                            class="transaction-row"
+                            data-method="Cash"
+                            data-status="Success"
+                            data-date="2026-08-22">
+
+                            <td>
+                                TXN1005
+                            </td>
+
+                            <td>
+                                Prakash
+                            </td>
+
+                            <td>
+                                #BK005
+                            </td>
+
+                            <td>
+                                Cash
+                            </td>
+
+                            <td>
+                                ₹750
+                            </td>
+
+                            <td>
+                                <span class="admin-status available">
+                                    Success
+                                </span>
+                            </td>
+
+                            <td>
+                                22 Aug 2026
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="viewTransaction('TXN1005')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAYMENT METHOD SUMMARY -->
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Payment Methods
+                        </h2>
+
+                        <p>
+                            Current month breakdown
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="payment-method-summary">
+
+                    <div class="payment-method-row">
+
+                        <span>
+                            📱 UPI
+                        </span>
+
+                        <strong>
+                            ₹2,40,000
+                        </strong>
+
+                    </div>
+
+
+                    <div class="payment-progress">
+                        <span style="width: 65%;"></span>
+                    </div>
+
+
+                    <div class="payment-method-row">
+
+                        <span>
+                            💳 Card
+                        </span>
+
+                        <strong>
+                            ₹1,50,000
+                        </strong>
+
+                    </div>
+
+
+                    <div class="payment-progress">
+                        <span style="width: 42%;"></span>
+                    </div>
+
+
+                    <div class="payment-method-row">
+
+                        <span>
+                            💵 Cash
+                        </span>
+
+                        <strong>
+                            ₹92,000
+                        </strong>
+
+                    </div>
+
+
+                    <div class="payment-progress">
+                        <span style="width: 26%;"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Refund Summary
+                        </h2>
+
+                        <p>
+                            Recent refund activity
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="refund-summary-list">
+
+                    <div>
+
+                        <strong>
+                            18
+                        </strong>
+
+                        <span>
+                            Refunds this month
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            ₹8,750
+                        </strong>
+
+                        <span>
+                            Total refunded
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            98.2%
+                        </strong>
+
+                        <span>
+                            Successful payment rate
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Secure Transaction Management
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- TRANSACTION MODAL -->
+
+<div
+    id="transactionModal"
+    class="admin-modal">
+
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <span>
+                    TURFX TRANSACTION
+                </span>
+
+                <h2 id="transactionModalTitle">
+                    Transaction Details
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeTransactionModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="transaction-detail-box">
+
+            <div>
+
+                <span>
+                    Transaction ID
+                </span>
+
+                <strong id="detailTransactionId">
+                    -
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Customer
+                </span>
+
+                <strong id="detailCustomer">
+                    -
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Booking
+                </span>
+
+                <strong id="detailBooking">
+                    -
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Payment Method
+                </span>
+
+                <strong id="detailMethod">
+                    -
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Amount
+                </span>
+
+                <strong id="detailAmount">
+                    -
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Status
+                </span>
+
+                <strong id="detailStatus">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-modal-actions">
+
+            <button
+                type="button"
+                class="admin-outline-btn"
+                onclick="closeTransactionModal()">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function filterTransactions() {
+
+    const search =
+        document
+        .querySelector("#transactionSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const method =
+        document
+        .querySelector("#paymentMethodFilter")
+        .value;
+
+    const status =
+        document
+        .querySelector("#transactionStatusFilter")
+        .value;
+
+    const date =
+        document
+        .querySelector("#transactionDate")
+        .value;
+
+    const rows =
+        document.querySelectorAll(
+            ".transaction-row"
+        );
+
+    rows.forEach(function (row) {
+
+        const text =
+            row.textContent.toLowerCase();
+
+        const rowMethod =
+            row.dataset.method || "";
+
+        const rowStatus =
+            row.dataset.status || "";
+
+        const rowDate =
+            row.dataset.date || "";
+
+        const matchSearch =
+            !search ||
+            text.includes(search);
+
+        const matchMethod =
+            !method ||
+            rowMethod === method;
+
+        const matchStatus =
+            !status ||
+            rowStatus === status;
+
+        const matchDate =
+            !date ||
+            rowDate === date;
+
+        row.style.display =
+            matchSearch &&
+            matchMethod &&
+            matchStatus &&
+            matchDate
+                ? ""
+                : "none";
+
+    });
+
+}
+
+
+function viewTransaction(id) {
+
+    const transactions = {
+
+        TXN1001: {
+            customer: "Arun Kumar",
+            booking: "#BK001",
+            method: "UPI",
+            amount: "₹800",
+            status: "Success"
+        },
+
+        TXN1002: {
+            customer: "Rahul",
+            booking: "#BK002",
+            method: "Card",
+            amount: "₹1,000",
+            status: "Success"
+        },
+
+        TXN1003: {
+            customer: "Vignesh",
+            booking: "#BK003",
+            method: "UPI",
+            amount: "₹700",
+            status: "Pending"
+        },
+
+        TXN1004: {
+            customer: "Karthick",
+            booking: "#BK004",
+            method: "UPI",
+            amount: "₹900",
+            status: "Refunded"
+        },
+
+        TXN1005: {
+            customer: "Prakash",
+            booking: "#BK005",
+            method: "Cash",
+            amount: "₹750",
+            status: "Success"
+        }
+
+    };
+
+    const transaction =
+        transactions[id];
+
+    if (!transaction) {
+        return;
+    }
+
+    document.querySelector(
+        "#detailTransactionId"
+    ).textContent = id;
+
+    document.querySelector(
+        "#detailCustomer"
+    ).textContent =
+        transaction.customer;
+
+    document.querySelector(
+        "#detailBooking"
+    ).textContent =
+        transaction.booking;
+
+    document.querySelector(
+        "#detailMethod"
+    ).textContent =
+        transaction.method;
+
+    document.querySelector(
+        "#detailAmount"
+    ).textContent =
+        transaction.amount;
+
+    document.querySelector(
+        "#detailStatus"
+    ).textContent =
+        transaction.status;
+
+    document.querySelector(
+        "#transactionModal"
+    ).classList.add("show");
+
+}
+
+
+function closeTransactionModal() {
+
+    const modal =
+        document.querySelector(
+            "#transactionModal"
+        );
+
+    if (modal) {
+        modal.classList.remove("show");
+    }
+
+}
+
+
+function exportTransactions() {
+
+    const table =
+        document.querySelector(
+            "#transactionsTable"
+        );
+
+    if (!table) {
+        return;
+    }
+
+    const rows =
+        table.querySelectorAll("tr");
+
+    const csv = [];
+
+    rows.forEach(function (row) {
+
+        const cells =
+            row.querySelectorAll(
+                "th, td"
+            );
+
+        const values =
+            [];
+
+        cells.forEach(function (cell) {
+
+            values.push(
+                '"' +
+                cell.innerText
+                    .replace(/"/g, '""')
+                    .trim() +
+                '"'
+            );
+
+        });
+
+        csv.push(
+            values.join(",")
+        );
+
+    });
+
+    const blob =
+        new Blob(
+            [csv.join("\n")],
+            {
+                type: "text/csv;charset=utf-8;"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "turfx-transactions.csv";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const search =
+            document.querySelector(
+                "#transactionSearch"
+            );
+
+        if (search) {
+
+            search.addEventListener(
+                "input",
+                filterTransactions
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

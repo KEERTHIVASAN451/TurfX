@@ -1,0 +1,700 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Turf Details | TurfX{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/booking.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf">
+                🏟️ <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history">
+                📅 <span>My Bookings</span>
+            </a>
+
+            <a href="/team">
+                👥 <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆 <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard">
+                📊 <span>Scorecard</span>
+            </a>
+
+            <a href="/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/profile">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Turf Details
+                </h1>
+
+                <p>
+                    Check facilities, availability and book your slot.
+                </p>
+
+            </div>
+
+            <a
+                href="/search-turf"
+                class="dashboard-primary-btn">
+
+                ← Back to Turfs
+
+            </a>
+
+        </header>
+
+
+        <!-- TURF HERO -->
+
+        <section class="turf-detail-hero">
+
+            <div class="turf-detail-image">
+
+                <div class="turf-detail-image-content">
+                    🏏
+                </div>
+
+                <span class="turf-detail-live">
+                    OPEN NOW
+                </span>
+
+                <span class="turf-detail-rating">
+                    ⭐ 4.9
+                </span>
+
+            </div>
+
+
+            <div class="turf-detail-main">
+
+                <span class="turf-result-type">
+                    CRICKET • PREMIUM
+                </span>
+
+                <h2>
+                    TurfX Arena
+                </h2>
+
+                <p class="turf-detail-location">
+                    📍 Anna Nagar, Chennai
+                </p>
+
+                <p class="turf-detail-description">
+                    Premium cricket turf with professional
+                    artificial pitch, flood lights and
+                    comfortable facilities for day and night
+                    matches.
+                </p>
+
+
+                <div class="turf-detail-highlights">
+
+                    <div>
+                        <strong>⭐ 4.9</strong>
+                        <span>Rating</span>
+                    </div>
+
+                    <div>
+                        <strong>500+</strong>
+                        <span>Bookings</span>
+                    </div>
+
+                    <div>
+                        <strong>24/7</strong>
+                        <span>Availability</span>
+                    </div>
+
+                </div>
+
+                <div class="turf-detail-price">
+
+                    <strong>
+                        ₹800
+                    </strong>
+
+                    <span>
+                        / hour
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTENT -->
+
+        <section class="turf-detail-layout">
+
+
+            <!-- LEFT -->
+
+            <div>
+
+
+                <!-- FACILITIES -->
+
+                <section class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Facilities
+                            </h2>
+
+                            <p>
+                                Everything available at this turf
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="facility-grid">
+
+                        <div class="facility-card">
+                            <span>🏏</span>
+                            <strong>Cricket Pitch</strong>
+                            <small>Professional turf</small>
+                        </div>
+
+                        <div class="facility-card">
+                            <span>💡</span>
+                            <strong>Flood Lights</strong>
+                            <small>Night matches</small>
+                        </div>
+
+                        <div class="facility-card">
+                            <span>🚿</span>
+                            <strong>Changing Room</strong>
+                            <small>Clean & secure</small>
+                        </div>
+
+                        <div class="facility-card">
+                            <span>🅿️</span>
+                            <strong>Parking</strong>
+                            <small>Free parking</small>
+                        </div>
+
+                        <div class="facility-card">
+                            <span>💧</span>
+                            <strong>Drinking Water</strong>
+                            <small>Available</small>
+                        </div>
+
+                        <div class="facility-card">
+                            <span>📹</span>
+                            <strong>Security Cameras</strong>
+                            <small>24/7 monitoring</small>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- AVAILABLE SLOTS -->
+
+                <section class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Select Date & Slot
+                            </h2>
+
+                            <p>
+                                Choose your preferred playing time.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        id="bookingForm"
+                        method="POST"
+                        action="/booking">
+
+
+                        <input
+                            type="hidden"
+                            name="turf_id"
+                            value="{{ turf_id }}"
+                            id="turfId">
+
+
+                        <div class="booking-date-box">
+
+                            <label for="bookingDate">
+                                Booking Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="bookingDate"
+                                name="booking_date"
+                                required>
+
+                        </div>
+
+
+                        <div class="slot-heading">
+
+                            <h3>
+                                Morning
+                            </h3>
+
+                        </div>
+
+                        <div class="detail-slot-grid">
+
+
+                            <button
+                                type="button"
+                                class="detail-slot"
+                                data-slot-id="1"
+                                data-price="500"
+                                data-start="06:00 AM"
+                                data-end="07:00 AM">
+
+                                <strong>06:00 AM</strong>
+                                <small>₹500</small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="detail-slot"
+                                data-slot-id="2"
+                                data-price="500"
+                                data-start="07:00 AM"
+                                data-end="08:00 AM">
+
+                                <strong>07:00 AM</strong>
+                                <small>₹500</small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="detail-slot booked"
+                                disabled>
+
+                                <strong>08:00 AM</strong>
+                                <small>Booked</small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="detail-slot"
+                                data-slot-id="4"
+                                data-price="700"
+                                data-start="09:00 AM"
+                                data-end="10:00 AM">
+
+                                <strong>09:00 AM</strong>
+                                <small>₹700</small>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="slot-heading">
+
+                            <h3>
+                                Evening
+                            </h3>
+
+                        </div>
+
+
+                        <div class="detail-slot-grid">
+
+
+                            <button
+                                type="button"
+                                class="detail-slot"
+                                data-slot-id="5"
+                                data-price="1000"
+                                data-start="05:00 PM"
+                                data-end="06:00 PM">
+
+                                <strong>05:00 PM</strong>
+                                <small>₹1000</small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="detail-slot"
+                                data-slot-id="6"
+                                data-price="1000"
+                                data-start="06:00 PM"
+                                data-end="07:00 PM">
+
+                                <strong>06:00 PM</strong>
+                                <small>₹1000</small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="detail-slot"
+                                data-slot-id="7"
+                                data-price="1200"
+                                data-start="07:00 PM"
+                                data-end="08:00 PM">
+
+                                <strong>07:00 PM</strong>
+                                <small>₹1200</small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="detail-slot booked"
+                                disabled>
+
+                                <strong>08:00 PM</strong>
+                                <small>Booked</small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="detail-slot"
+                                data-slot-id="9"
+                                data-price="1200"
+                                data-start="09:00 PM"
+                                data-end="10:00 PM">
+
+                                <strong>09:00 PM</strong>
+                                <small>₹1200</small>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="detail-slot"
+                                data-slot-id="10"
+                                data-price="900"
+                                data-start="10:00 PM"
+                                data-end="11:00 PM">
+
+                                <strong>10:00 PM</strong>
+                                <small>₹900</small>
+
+                            </button>
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            name="slot_id"
+                            id="selectedSlot">
+
+
+                        <input
+                            type="hidden"
+                            name="slot_price"
+                            id="slotPrice"
+                            value="0">
+
+
+                        <!-- BOOKING SUMMARY -->
+
+                        <div class="booking-summary-box">
+
+                            <div>
+
+                                <span>
+                                    Selected Slot
+                                </span>
+
+                                <strong id="summarySlot">
+                                    Not selected
+                                </strong>
+
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Slot Price
+                                </span>
+
+                                <strong id="summarySlotPrice">
+                                    ₹0
+                                </strong>
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="dashboard-primary-btn">
+
+                                Continue to Booking →
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <aside>
+
+
+                <!-- BOOKING CARD -->
+
+                <section class="turf-booking-card">
+
+                    <span>
+                        BOOK THIS TURF
+                    </span>
+
+                    <h3>
+                        TurfX Arena
+                    </h3>
+
+                    <div class="booking-price-large">
+
+                        <strong>
+                            ₹800
+                        </strong>
+
+                        <small>
+                            / hour onwards
+                        </small>
+
+                    </div>
+
+
+                    <div class="booking-feature-line">
+
+                        <span>✓</span>
+                        Flexible time slots
+
+                    </div>
+
+                    <div class="booking-feature-line">
+
+                        <span>✓</span>
+                        Instant confirmation
+
+                    </div>
+
+                    <div class="booking-feature-line">
+
+                        <span>✓</span>
+                        QR ticket included
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="dashboard-primary-btn booking-full-btn"
+                        onclick="document.getElementById('bookingDate').focus()">
+
+                        Select Slot
+
+                    </button>
+
+                </section>
+
+
+                <!-- LOCATION -->
+
+                <section class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Location
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="location-box">
+
+                        📍
+
+                        <div>
+
+                            <strong>
+                                TurfX Arena
+                            </strong>
+
+                            <span>
+                                Anna Nagar, Chennai
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- RULES -->
+
+                <section class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Turf Rules
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <ul class="turf-rules">
+
+                        <li>
+                            Arrive 10 minutes before your slot.
+                        </li>
+
+                        <li>
+                            Proper sports shoes are required.
+                        </li>
+
+                        <li>
+                            No smoking or alcohol inside the turf.
+                        </li>
+
+                        <li>
+                            Cancellation policy applies.
+                        </li>
+
+                    </ul>
+
+                </section>
+
+            </aside>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Play safe. Play better.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

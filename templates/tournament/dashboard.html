@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Tournament Hub
+    </title>
+
+    <meta
+        name="description"
+        content="TurfX Tournament Management - teams, fixtures, live scores and leaderboards.">
+
+
+    <!-- GLOBAL CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+
+    <!-- TOURNAMENT CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     TOP NAVBAR
+     ========================================================= -->
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        <span>
+            🏏
+        </span>
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+
+        <a
+            href="/create-tournament"
+            class="tournament-create-btn">
+
+            + Create Tournament
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     PAGE
+     ========================================================= -->
+
+<main class="tournament-page">
+
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="tournament-hero">
+
+
+        <div class="tournament-hero-glow"></div>
+
+
+        <div class="tournament-hero-content">
+
+
+            <span class="tournament-badge">
+
+                🏆 SMART CRICKET MANAGEMENT
+
+            </span>
+
+
+            <h1>
+
+                Play More.
+                <br>
+
+                <span>
+                    Win Bigger.
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Discover tournaments, build your squad,
+                follow live matches and track every
+                point, run and wicket on TurfX.
+
+            </p>
+
+
+            <div class="tournament-hero-actions">
+
+
+                <a
+                    href="/create-tournament"
+                    class="tournament-main-btn">
+
+                    Create Tournament
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#tournaments"
+                    class="tournament-outline-btn">
+
+                    Explore Tournaments
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- LIVE MATCH CARD -->
+
+        <div class="tournament-hero-card">
+
+
+            <span class="live-label">
+
+                🔴 LIVE MATCH
+
+            </span>
+
+
+            <div
+                style="
+                    margin-top:7px;
+                    color:#94a3b8;
+                    font-size:8px;
+                ">
+
+                Chennai Weekend Premier League
+
+            </div>
+
+
+            <div class="live-match-teams">
+
+
+                <div>
+
+                    <div class="team-mini-logo">
+
+                        VK
+
+                    </div>
+
+                    <strong>
+                        Victory Kings
+                    </strong>
+
+                </div>
+
+
+                <div class="live-score">
+
+                    <strong>
+                        148/6
+                    </strong>
+
+                    <span>
+                        17.4 Overs
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <div class="team-mini-logo orange">
+
+                        SS
+
+                    </div>
+
+                    <strong>
+                        Super Strikers
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="live-match-footer">
+
+                <span>
+                    Need 8 runs to win
+                </span>
+
+
+                <a
+                    href="/scorecard">
+
+                    View Score →
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STATS
+         ===================================================== -->
+
+    <section class="tournament-stat-grid">
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon green">
+
+                🏆
+
+            </div>
+
+            <div>
+
+                <span>
+                    Active Tournaments
+                </span>
+
+                <strong>
+                    12
+                </strong>
+
+                <small>
+                    Running now
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon blue">
+
+                👥
+
+            </div>
+
+            <div>
+
+                <span>
+                    Registered Teams
+                </span>
+
+                <strong>
+                    86
+                </strong>
+
+                <small>
+                    Across TurfX
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon orange">
+
+                🏏
+
+            </div>
+
+            <div>
+
+                <span>
+                    Matches Played
+                </span>
+
+                <strong>
+                    248
+                </strong>
+
+                <small>
+                    This season
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon purple">
+
+                🔴
+
+            </div>
+
+            <div>
+
+                <span>
+                    Live Matches
+                </span>
+
+                <strong>
+                    03
+                </strong>
+
+                <small>
+                    Happening now
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         TOURNAMENTS
+         ===================================================== -->
+
+    <section
+        id="tournaments"
+        class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+
+            <div>
+
+                <span>
+                    DISCOVER
+                </span>
+
+                <h2>
+                    Featured Tournaments
+                </h2>
+
+                <p>
+                    Join a competition and take your team
+                    to the top of the table.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/tournament"
+                class="view-all-link">
+
+                View All →
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- FILTERS -->
+
+        <div class="tournament-filters">
+
+
+            <button
+                type="button"
+                class="tournament-filter active"
+                data-filter="all">
+
+                All
+
+            </button>
+
+
+            <button
+                type="button"
+                class="tournament-filter"
+                data-filter="upcoming">
+
+                Upcoming
+
+            </button>
+
+
+            <button
+                type="button"
+                class="tournament-filter"
+                data-filter="live">
+
+                Live
+
+            </button>
+
+
+            <button
+                type="button"
+                class="tournament-filter"
+                data-filter="completed">
+
+                Completed
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- CARDS -->
+
+        <div class="tournament-card-grid">
+
+
+            <!-- CARD 1 -->
+
+            <article
+                class="tournament-card"
+                data-tournament-status="upcoming">
+
+
+                <div class="tournament-card-banner green-banner">
+
+
+                    <span class="card-status">
+                        OPEN
+                    </span>
+
+
+                    <span class="card-sport">
+                        CRICKET
+                    </span>
+
+
+                    <div class="tournament-trophy">
+
+                        🏆
+
+                    </div>
+
+                </div>
+
+
+                <div class="tournament-card-body">
+
+
+                    <div class="tournament-card-title-row">
+
+                        <div>
+
+                            <h3>
+                                Chennai Weekend Premier League
+                            </h3>
+
+                            <span>
+                                8 Overs • Tennis Ball
+                            </span>
+
+                        </div>
+
+
+                        <strong>
+                            ₹500
+                        </strong>
+
+                    </div>
+
+
+                    <div class="tournament-card-meta">
+
+                        <span>
+                            📅 30 Aug 2026
+                        </span>
+
+                        <span>
+                            📍 Chennai
+                        </span>
+
+                        <span>
+                            👥 12/16 Teams
+                        </span>
+
+                    </div>
+
+
+                    <div class="tournament-card-progress">
+
+
+                        <div>
+
+                            <span>
+                                Registration
+                            </span>
+
+                            <strong>
+                                75%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-track">
+
+                            <span
+                                style="width:75%;">
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <a
+                        href="/tournament/1"
+                        class="tournament-card-btn">
+
+                        View Tournament →
+
+                    </a>
+
+
+                </div>
+
+            </article>
+
+
+
+            <!-- CARD 2 -->
+
+            <article
+                class="tournament-card"
+                data-tournament-status="live">
+
+
+                <div class="tournament-card-banner blue-banner">
+
+
+                    <span class="card-status live">
+                        LIVE
+                    </span>
+
+
+                    <span class="card-sport">
+                        CRICKET
+                    </span>
+
+
+                    <div class="tournament-trophy">
+
+                        🏏
+
+                    </div>
+
+                </div>
+
+
+                <div class="tournament-card-body">
+
+
+                    <div class="tournament-card-title-row">
+
+                        <div>
+
+                            <h3>
+                                TurfX Champions Cup
+                            </h3>
+
+                            <span>
+                                10 Overs • Leather Ball
+                            </span>
+
+                        </div>
+
+
+                        <strong>
+                            LIVE
+                        </strong>
+
+                    </div>
+
+
+                    <div class="tournament-card-meta">
+
+                        <span>
+                            🔴 Match 14
+                        </span>
+
+                        <span>
+                            📍 Anna Nagar
+                        </span>
+
+                        <span>
+                            👥 16 Teams
+                        </span>
+
+                    </div>
+
+
+                    <div class="tournament-live-score">
+
+                        <span>
+                            LIVE SCORE
+                        </span>
+
+                        <strong>
+                            Victory Kings 148/6
+                        </strong>
+
+                        <small>
+                            17.4 Overs • Need 8 Runs
+                        </small>
+
+                    </div>
+
+
+                    <a
+                        href="/scorecard"
+                        class="tournament-card-btn">
+
+                        Watch Live Score →
+
+                    </a>
+
+
+                </div>
+
+            </article>
+
+
+
+            <!-- CARD 3 -->
+
+            <article
+                class="tournament-card"
+                data-tournament-status="upcoming">
+
+
+                <div class="tournament-card-banner purple-banner">
+
+
+                    <span class="card-status">
+                        OPEN
+                    </span>
+
+
+                    <span class="card-sport">
+                        CRICKET
+                    </span>
+
+
+                    <div class="tournament-trophy">
+
+                        ⚡
+
+                    </div>
+
+                </div>
+
+
+                <div class="tournament-card-body">
+
+
+                    <div class="tournament-card-title-row">
+
+                        <div>
+
+                            <h3>
+                                Chennai Night Cricket Cup
+                            </h3>
+
+                            <span>
+                                12 Overs • Tennis Ball
+                            </span>
+
+                        </div>
+
+
+                        <strong>
+                            ₹750
+                        </strong>
+
+                    </div>
+
+
+                    <div class="tournament-card-meta">
+
+                        <span>
+                            📅 06 Sep 2026
+                        </span>
+
+                        <span>
+                            📍 Chennai
+                        </span>
+
+                        <span>
+                            👥 8/16 Teams
+                        </span>
+
+                    </div>
+
+
+                    <div class="tournament-card-progress">
+
+
+                        <div>
+
+                            <span>
+                                Registration
+                            </span>
+
+                            <strong>
+                                50%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-track">
+
+                            <span
+                                style="width:50%;">
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <a
+                        href="/tournament/2"
+                        class="tournament-card-btn">
+
+                        Register Team →
+
+                    </a>
+
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         UPCOMING FIXTURES
+         ===================================================== -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+
+            <div>
+
+                <span>
+                    MATCH CENTRE
+                </span>
+
+                <h2>
+                    Upcoming Fixtures
+                </h2>
+
+                <p>
+                    Don't miss the next big match.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/tournament/fixtures"
+                class="view-all-link">
+
+                Full Schedule →
+
+            </a>
+
+        </div>
+
+
+
+        <div class="fixture-list">
+
+
+            <article class="fixture-card">
+
+
+                <div class="fixture-date">
+
+                    <strong>
+                        26
+                    </strong>
+
+                    <span>
+                        AUG
+                    </span>
+
+                </div>
+
+
+                <div class="fixture-info">
+
+                    <span>
+                        06:00 PM
+                    </span>
+
+                    <strong>
+                        Victory Kings
+                        <small>
+                            vs
+                        </small>
+                        Chennai Warriors
+                    </strong>
+
+                    <p>
+                        TurfX Arena • Match 21
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/scorecard"
+                    class="fixture-btn">
+
+                    Match Centre
+
+                </a>
+
+
+            </article>
+
+
+
+            <article class="fixture-card">
+
+
+                <div class="fixture-date">
+
+                    <strong>
+                        28
+                    </strong>
+
+                    <span>
+                        AUG
+                    </span>
+
+                </div>
+
+
+                <div class="fixture-info">
+
+                    <span>
+                        07:30 PM
+                    </span>
+
+                    <strong>
+                        Super Strikers
+                        <small>
+                            vs
+                        </small>
+                        Royal Challengers
+                    </strong>
+
+                    <p>
+                        Champions Turf • Match 22
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/scorecard"
+                    class="fixture-btn">
+
+                    Match Centre
+
+                </a>
+
+
+            </article>
+
+
+
+            <article class="fixture-card">
+
+
+                <div class="fixture-date">
+
+                    <strong>
+                        30
+                    </strong>
+
+                    <span>
+                        AUG
+                    </span>
+
+                </div>
+
+
+                <div class="fixture-info">
+
+                    <span>
+                        06:00 PM
+                    </span>
+
+                    <strong>
+                        Chennai Titans
+                        <small>
+                            vs
+                        </small>
+                        Blue Warriors
+                    </strong>
+
+                    <p>
+                        TurfX Arena • Match 23
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/scorecard"
+                    class="fixture-btn">
+
+                    Match Centre
+
+                </a>
+
+
+            </article>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         POINTS TABLE
+         ===================================================== -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+
+            <div>
+
+                <span>
+                    STANDINGS
+                </span>
+
+                <h2>
+                    Points Table
+                </h2>
+
+                <p>
+                    Current tournament ranking.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/tournament/points-table"
+                class="view-all-link">
+
+                Full Table →
+
+            </a>
+
+        </div>
+
+
+
+        <div class="points-table-wrapper">
+
+
+            <table
+                id="pointsTable"
+                class="points-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            POS
+                        </th>
+
+                        <th>
+                            TEAM
+                        </th>
+
+                        <th>
+                            P
+                        </th>
+
+                        <th>
+                            W
+                        </th>
+
+                        <th>
+                            L
+                        </th>
+
+                        <th>
+                            NRR
+                        </th>
+
+                        <th>
+                            PTS
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr
+                        class="points-row"
+                        data-wins="6"
+                        data-draws="0"
+                        data-losses="1">
+
+
+                        <td class="team-position">
+                            01
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+
+                                    VK
+
+                                </div>
+
+                                <strong>
+                                    Victory Kings
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            6
+                        </td>
+
+                        <td>
+                            1
+                        </td>
+
+                        <td>
+                            +1.84
+                        </td>
+
+                        <td>
+                            <strong>
+                                12
+                            </strong>
+                        </td>
+
+
+                    </tr>
+
+
+
+                    <tr
+                        class="points-row"
+                        data-wins="5"
+                        data-draws="0"
+                        data-losses="2">
+
+
+                        <td class="team-position">
+                            02
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+
+                                    CW
+
+                                </div>
+
+                                <strong>
+                                    Chennai Warriors
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            5
+                        </td>
+
+                        <td>
+                            2
+                        </td>
+
+                        <td>
+                            +1.12
+                        </td>
+
+                        <td>
+                            <strong>
+                                10
+                            </strong>
+                        </td>
+
+
+                    </tr>
+
+
+
+                    <tr
+                        class="points-row"
+                        data-wins="4"
+                        data-draws="0"
+                        data-losses="3">
+
+
+                        <td class="team-position">
+                            03
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+
+                                    SS
+
+                                </div>
+
+                                <strong>
+                                    Super Strikers
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            4
+                        </td>
+
+                        <td>
+                            3
+                        </td>
+
+                        <td>
+                            +0.54
+                        </td>
+
+                        <td>
+                            <strong>
+                                8
+                            </strong>
+                        </td>
+
+
+                    </tr>
+
+
+
+                    <tr
+                        class="points-row"
+                        data-wins="3"
+                        data-draws="0"
+                        data-losses="4">
+
+
+                        <td class="team-position">
+                            04
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+
+                                    RC
+
+                                </div>
+
+                                <strong>
+                                    Royal Challengers
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            3
+                        </td>
+
+                        <td>
+                            4
+                        </td>
+
+                        <td>
+                            -0.18
+                        </td>
+
+                        <td>
+                            <strong>
+                                6
+                            </strong>
+                        </td>
+
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LEADERBOARD
+         ===================================================== -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+
+            <div>
+
+                <span>
+                    TOP PERFORMERS
+                </span>
+
+                <h2>
+                    Player Leaderboard
+                </h2>
+
+                <p>
+                    Current batting and bowling leaders.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/tournament/leaderboard"
+                class="view-all-link">
+
+                View Leaderboard →
+
+            </a>
+
+        </div>
+
+
+
+        <div class="leaderboard-list">
+
+
+            <div class="leaderboard-item">
+
+
+                <span class="leaderboard-rank">
+                    01
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        AK
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Arun Kumar
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Victory Kings
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    486 Runs
+                </strong>
+
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+
+                <span class="leaderboard-rank">
+                    02
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        RH
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Rahul
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Chennai Warriors
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    421 Runs
+                </strong>
+
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+
+                <span class="leaderboard-rank">
+                    03
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        VG
+                    </div>
+
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Vignesh
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            Victory Kings
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    18 Wickets
+                </strong>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FINAL CTA
+         ===================================================== -->
+
+    <section class="tournament-bottom-cta">
+
+
+        <div>
+
+
+            <span>
+                READY FOR YOUR NEXT MATCH?
+            </span>
+
+
+            <h2>
+
+                Build Your Team.
+                <br>
+                Own The Tournament.
+
+            </h2>
+
+
+            <p>
+
+                Create your tournament, register teams
+                and start your TurfX journey.
+
+            </p>
+
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:center;
+                    gap:9px;
+                    margin-top:22px;
+                    flex-wrap:wrap;
+                ">
+
+
+                <a
+                    href="/create-tournament"
+                    class="tournament-main-btn">
+
+                    Create Tournament
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="/tournament/leaderboard"
+                    class="tournament-outline-btn">
+
+                    View Leaderboard
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="tournament-footer">
+
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+
+                Smart turf booking, tournaments,
+                teams and live cricket management.
+
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/search-turf">
+                Find Turf
+            </a>
+
+            <a href="/tournament">
+                Tournaments
+            </a>
+
+            <a href="/scorecard">
+                Live Score
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+
+    </footer>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     JS
+     ========================================================= -->
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+
+
+<!-- =========================================================
+     SMALL DASHBOARD FILTER
+     ========================================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const filters =
+            document.querySelectorAll(
+                ".tournament-filter"
+            );
+
+        const cards =
+            document.querySelectorAll(
+                ".tournament-card"
+            );
+
+
+        filters.forEach(
+            function (filter) {
+
+                filter.addEventListener(
+                    "click",
+                    function () {
+
+                        filters.forEach(
+                            function (item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        filter.classList.add(
+                            "active"
+                        );
+
+
+                        const selected =
+                            filter.dataset.filter;
+
+
+                        cards.forEach(
+                            function (card) {
+
+                                const status =
+                                    card.dataset
+                                        .tournamentStatus;
+
+
+                                if (
+                                    selected ===
+                                    "all" ||
+                                    selected ===
+                                    status
+                                ) {
+
+                                    card.style.display =
+                                        "";
+
+                                } else {
+
+                                    card.style.display =
+                                        "none";
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

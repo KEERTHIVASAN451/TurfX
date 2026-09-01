@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Certificates
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a href="/" class="tournament-logo">
+        🏏
+        <strong>
+            Turf<span>X</span>
+        </strong>
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">Home</a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a href="/tournament" class="active">
+            Tournaments
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status completed">
+                🎓 CERTIFICATES
+            </span>
+
+            <h1>
+                Player Certificates
+            </h1>
+
+            <p>
+                Download your official TurfX tournament certificate.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament"
+                class="tournament-btn">
+
+                ← Tournament
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="tournament-section">
+
+        <div class="certificate-card">
+
+
+            <div class="certificate-preview">
+
+                <div
+                    style="
+                        font-size:10px;
+                        color:#15803d;
+                        font-weight:900;
+                        letter-spacing:2px;
+                    ">
+
+                    TURFX CRICKET CHAMPIONSHIP
+
+                </div>
+
+
+                <div
+                    style="
+                        margin:25px 0;
+                        font-size:28px;
+                    ">
+
+                    🏆
+
+                </div>
+
+
+                <h1>
+                    Certificate of Achievement
+                </h1>
+
+
+                <p>
+                    This certificate is proudly presented to
+                </p>
+
+
+                <h2
+                    style="
+                        margin:14px 0;
+                        color:#15803d;
+                        font-size:22px;
+                    ">
+
+                    Arun Kumar
+
+                </h2>
+
+
+                <p>
+                    for outstanding performance in
+                </p>
+
+
+                <strong
+                    style="
+                        display:block;
+                        margin-top:8px;
+                        color:#0f172a;
+                        font-size:14px;
+                    ">
+
+                    Chennai Weekend Premier League
+
+                </strong>
+
+
+                <p
+                    style="
+                        margin-top:20px;
+                    ">
+
+                    Player of the Match
+
+                </p>
+
+
+                <div
+                    style="
+                        display:flex;
+                        justify-content:space-between;
+                        margin-top:35px;
+                        color:#64748b;
+                        font-size:8px;
+                    ">
+
+                    <span>
+                        TurfX Arena
+                    </span>
+
+                    <span>
+                        24 Aug 2026
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:center;
+                    gap:9px;
+                    margin-top:20px;
+                    flex-wrap:wrap;
+                ">
+
+                <button
+                    type="button"
+                    class="tournament-btn primary"
+                    onclick="window.print()">
+
+                    🖨️ Print Certificate
+
+                </button>
+
+
+                <a
+                    href="/tournament"
+                    class="tournament-btn">
+
+                    Back to Tournament
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/tournament">
+                Tournament
+            </a>
+
+            <a href="/tournament/winners">
+                Winners
+            </a>
+
+        </div>
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+</html>

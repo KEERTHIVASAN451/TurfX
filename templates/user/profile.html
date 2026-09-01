@@ -1,0 +1,453 @@
+{% extends "shared/head.html" %}
+
+{% block title %}My Profile | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf">
+                🏟️ <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history">
+                📅 <span>My Bookings</span>
+            </a>
+
+            <a href="/team">
+                👥 <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆 <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard">
+                📊 <span>Scorecard</span>
+            </a>
+
+            <a href="/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/profile" class="active">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    My Profile 👤
+                </h1>
+
+                <p>
+                    Manage your personal and player information.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- PROFILE HERO -->
+
+        <section class="profile-hero">
+
+            <div class="profile-large-avatar">
+                U
+            </div>
+
+            <div class="profile-hero-info">
+
+                <h2>
+                    TurfX User
+                </h2>
+
+                <p>
+                    user@turfx.com
+                </p>
+
+                <span>
+                    🏏 Cricket Player
+                </span>
+
+            </div>
+
+            <div class="profile-badge">
+                ACTIVE
+            </div>
+
+        </section>
+
+
+        <div class="profile-layout">
+
+
+            <!-- PERSONAL DETAILS -->
+
+            <section class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Personal Information
+                        </h2>
+
+                        <p>
+                            Update your account details.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    id="profileForm"
+                    method="POST"
+                    action="/profile">
+
+
+                    <div class="profile-photo-row">
+
+                        <div class="profile-photo">
+
+                            <span>
+                                U
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <label class="form-label">
+                                Profile Photo
+                            </label>
+
+                            <input
+                                type="file"
+                                id="profilePhoto"
+                                name="profile_photo"
+                                accept="image/*"
+                                class="form-input">
+
+                            <small>
+                                JPG or PNG • Max recommended 2MB
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label
+                                for="profileName"
+                                class="form-label">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileName"
+                                name="name"
+                                class="form-input"
+                                value="TurfX User"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="profileEmail"
+                                class="form-label">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="profileEmail"
+                                name="email"
+                                class="form-input"
+                                value="user@turfx.com"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label
+                                for="profilePhone"
+                                class="form-label">
+                                Phone
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="profilePhone"
+                                name="phone"
+                                class="form-input"
+                                value="9000000001">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="profileCity"
+                                class="form-label">
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileCity"
+                                name="city"
+                                class="form-input"
+                                value="Chennai">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label
+                            for="profileBio"
+                            class="form-label">
+                            About Me
+                        </label>
+
+                        <textarea
+                            id="profileBio"
+                            name="bio"
+                            rows="4"
+                            class="form-input"
+                            placeholder="Tell something about yourself...">Cricket player and TurfX member.</textarea>
+
+                    </div>
+
+
+                    <div class="profile-form-actions">
+
+                        <button
+                            type="reset"
+                            class="secondary-action-btn">
+                            Reset
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="dashboard-primary-btn">
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- RIGHT SIDE -->
+
+            <aside>
+
+
+                <!-- PLAYER PROFILE -->
+
+                <section class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Player Profile
+                            </h2>
+
+                            <p>
+                                Your cricket information.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="player-profile-list">
+
+                        <div>
+                            <span>Playing Role</span>
+                            <strong>All Rounder</strong>
+                        </div>
+
+                        <div>
+                            <span>Batting Style</span>
+                            <strong>Right Handed</strong>
+                        </div>
+
+                        <div>
+                            <span>Bowling Style</span>
+                            <strong>Right Arm Medium</strong>
+                        </div>
+
+                        <div>
+                            <span>Team</span>
+                            <strong>Thunder XI</strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ACCOUNT STATS -->
+
+                <section class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Account Stats
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-stat-list">
+
+                        <div>
+
+                            <span>Total Bookings</span>
+
+                            <strong>
+                                12
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Tournaments</span>
+
+                            <strong>
+                                4
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Matches Played</span>
+
+                            <strong>
+                                18
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>Member Since</span>
+
+                            <strong>
+                                Aug 2026
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            </aside>
+
+        </div>
+
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Your profile. Your game.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

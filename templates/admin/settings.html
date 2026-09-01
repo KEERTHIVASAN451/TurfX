@@ -1,0 +1,1452 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Settings | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings" class="active">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h1>Settings</h1>
+                <p>Manage your TurfX business and application preferences.</p>
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-primary-btn"
+                onclick="saveAdminSettings()">
+
+                Save Changes
+
+            </button>
+
+        </header>
+
+
+        <!-- SETTINGS LAYOUT -->
+
+        <section class="settings-layout">
+
+            <!-- SETTINGS NAV -->
+
+            <aside class="settings-menu">
+
+                <button
+                    type="button"
+                    class="settings-menu-item active"
+                    data-settings-tab="general">
+
+                    🏟️
+                    <span>General</span>
+
+                </button>
+
+                <button
+                    type="button"
+                    class="settings-menu-item"
+                    data-settings-tab="booking">
+
+                    📅
+                    <span>Booking</span>
+
+                </button>
+
+                <button
+                    type="button"
+                    class="settings-menu-item"
+                    data-settings-tab="notifications">
+
+                    🔔
+                    <span>Notifications</span>
+
+                </button>
+
+                <button
+                    type="button"
+                    class="settings-menu-item"
+                    data-settings-tab="security">
+
+                    🔐
+                    <span>Security</span>
+
+                </button>
+
+                <button
+                    type="button"
+                    class="settings-menu-item"
+                    data-settings-tab="appearance">
+
+                    🎨
+                    <span>Appearance</span>
+
+                </button>
+
+                <button
+                    type="button"
+                    class="settings-menu-item"
+                    data-settings-tab="system">
+
+                    ⚙️
+                    <span>System</span>
+
+                </button>
+
+            </aside>
+
+
+            <!-- SETTINGS CONTENT -->
+
+            <div class="settings-content">
+
+
+                <!-- GENERAL -->
+
+                <section
+                    class="settings-tab active"
+                    data-settings-content="general">
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Turf Information
+                                </h2>
+
+                                <p>
+                                    Update the basic information shown to customers.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-form-grid">
+
+                            <div class="admin-field">
+
+                                <label>
+                                    Turf Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="turfName"
+                                    value="TurfX Arena">
+
+                            </div>
+
+
+                            <div class="admin-field">
+
+                                <label>
+                                    Owner Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="ownerName"
+                                    value="TurfX Admin">
+
+                            </div>
+
+
+                            <div class="admin-field">
+
+                                <label>
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="turfEmail"
+                                    value="admin@turfx.com">
+
+                            </div>
+
+
+                            <div class="admin-field">
+
+                                <label>
+                                    Phone
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="turfPhone"
+                                    value="9876543210">
+
+                            </div>
+
+
+                            <div class="admin-field full">
+
+                                <label>
+                                    Address
+                                </label>
+
+                                <textarea
+                                    id="turfAddress"
+                                    rows="3">Anna Nagar, Chennai, Tamil Nadu</textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUSINESS HOURS -->
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Business Hours
+                                </h2>
+
+                                <p>
+                                    Set the daily operating hours of the turf.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="business-hours-grid">
+
+                            <div>
+
+                                <strong>
+                                    Monday - Friday
+                                </strong>
+
+                                <div class="business-time-inputs">
+
+                                    <input
+                                        type="time"
+                                        value="06:00">
+
+                                    <span>
+                                        to
+                                    </span>
+
+                                    <input
+                                        type="time"
+                                        value="23:00">
+
+                                </div>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Saturday - Sunday
+                                </strong>
+
+                                <div class="business-time-inputs">
+
+                                    <input
+                                        type="time"
+                                        value="06:00">
+
+                                    <span>
+                                        to
+                                    </span>
+
+                                    <input
+                                        type="time"
+                                        value="00:00">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- BOOKING -->
+
+                <section
+                    class="settings-tab"
+                    data-settings-content="booking">
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Booking Settings
+                                </h2>
+
+                                <p>
+                                    Control slot availability and booking rules.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-option-list">
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Allow Advance Booking
+                                    </strong>
+
+                                    <span>
+                                        Customers can reserve slots in advance.
+                                    </span>
+
+                                </div>
+
+                                <label class="toggle-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Allow Same-Day Booking
+                                    </strong>
+
+                                    <span>
+                                        Customers can book slots on the current day.
+                                    </span>
+
+                                </div>
+
+                                <label class="toggle-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Auto Confirm Paid Bookings
+                                    </strong>
+
+                                    <span>
+                                        Confirm bookings immediately after successful payment.
+                                    </span>
+
+                                </div>
+
+                                <label class="toggle-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Allow Cancellation
+                                    </strong>
+
+                                    <span>
+                                        Customers can cancel according to your policy.
+                                    </span>
+
+                                </div>
+
+                                <label class="toggle-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-form-grid">
+
+                            <div class="admin-field">
+
+                                <label>
+                                    Maximum Advance Booking Days
+                                </label>
+
+                                <input
+                                    type="number"
+                                    value="30"
+                                    min="1">
+
+                            </div>
+
+
+                            <div class="admin-field">
+
+                                <label>
+                                    Slot Duration (Minutes)
+                                </label>
+
+                                <select>
+
+                                    <option>
+                                        30
+                                    </option>
+
+                                    <option selected>
+                                        60
+                                    </option>
+
+                                    <option>
+                                        90
+                                    </option>
+
+                                    <option>
+                                        120
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="admin-field">
+
+                                <label>
+                                    Cancellation Window (Hours)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    value="4"
+                                    min="0">
+
+                            </div>
+
+
+                            <div class="admin-field">
+
+                                <label>
+                                    Maximum Team Size
+                                </label>
+
+                                <input
+                                    type="number"
+                                    value="15"
+                                    min="1">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- NOTIFICATIONS -->
+
+                <section
+                    class="settings-tab"
+                    data-settings-content="notifications">
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Notification Preferences
+                                </h2>
+
+                                <p>
+                                    Choose which events trigger admin alerts.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-option-list">
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        New Booking Alerts
+                                    </strong>
+
+                                    <span>
+                                        Notify when a customer creates a booking.
+                                    </span>
+
+                                </div>
+
+                                <label class="toggle-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Payment Alerts
+                                    </strong>
+
+                                    <span>
+                                        Notify about successful or failed payments.
+                                    </span>
+
+                                </div>
+
+                                <label class="toggle-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Tournament Alerts
+                                    </strong>
+
+                                    <span>
+                                        Notify about registrations and match events.
+                                    </span>
+
+                                </div>
+
+                                <label class="toggle-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Equipment Alerts
+                                    </strong>
+
+                                    <span>
+                                        Notify about low stock and returns.
+                                    </span>
+
+                                </div>
+
+                                <label class="toggle-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked>
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Staff Alerts
+                                    </strong>
+
+                                    <span>
+                                        Notify about attendance and leave activity.
+                                    </span>
+
+                                </div>
+
+                                <label class="toggle-switch">
+
+                                    <input
+                                        type="checkbox">
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SECURITY -->
+
+                <section
+                    class="settings-tab"
+                    data-settings-content="security">
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Admin Security
+                                </h2>
+
+                                <p>
+                                    Update your administrator account security.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-form-grid">
+
+                            <div class="admin-field full">
+
+                                <label>
+                                    Current Password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="currentPassword"
+                                    placeholder="Current password">
+
+                            </div>
+
+
+                            <div class="admin-field">
+
+                                <label>
+                                    New Password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="newPassword"
+                                    placeholder="New password">
+
+                            </div>
+
+
+                            <div class="admin-field">
+
+                                <label>
+                                    Confirm Password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    placeholder="Confirm password">
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="admin-success-btn"
+                            onclick="updateAdminPassword()">
+
+                            Update Password
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Two-Factor Authentication
+                                </h2>
+
+                                <p>
+                                    Add an extra layer of security to the admin account.
+                                </p>
+
+                            </div>
+
+                            <label class="toggle-switch">
+
+                                <input
+                                    type="checkbox">
+
+                                <span></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- APPEARANCE -->
+
+                <section
+                    class="settings-tab"
+                    data-settings-content="appearance">
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Appearance
+                                </h2>
+
+                                <p>
+                                    Customize the TurfX admin interface.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="theme-choice-grid">
+
+                            <button
+                                type="button"
+                                class="theme-choice active"
+                                data-theme-choice="light">
+
+                                <div class="theme-preview light">
+                                    ☀️
+                                </div>
+
+                                <strong>
+                                    Light
+                                </strong>
+
+                                <span>
+                                    Clean and bright
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="theme-choice"
+                                data-theme-choice="dark">
+
+                                <div class="theme-preview dark">
+                                    🌙
+                                </div>
+
+                                <strong>
+                                    Dark
+                                </strong>
+
+                                <span>
+                                    Easy on the eyes
+                                </span>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="theme-choice"
+                                data-theme-choice="system">
+
+                                <div class="theme-preview system">
+                                    💻
+                                </div>
+
+                                <strong>
+                                    System
+                                </strong>
+
+                                <span>
+                                    Follow device theme
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="settings-option">
+
+                            <div>
+
+                                <strong>
+                                    Compact Sidebar
+                                </strong>
+
+                                <span>
+                                    Reduce sidebar width to show more content.
+                                </span>
+
+                            </div>
+
+                            <label class="toggle-switch">
+
+                                <input
+                                    type="checkbox">
+
+                                <span></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SYSTEM -->
+
+                <section
+                    class="settings-tab"
+                    data-settings-content="system">
+
+                    <div class="settings-section">
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    System Information
+                                </h2>
+
+                                <p>
+                                    Current TurfX application details.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="system-info-grid">
+
+                            <div>
+
+                                <span>
+                                    Application
+                                </span>
+
+                                <strong>
+                                    TurfX
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Version
+                                </span>
+
+                                <strong>
+                                    1.0.0
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Environment
+                                </span>
+
+                                <strong>
+                                    Development
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Database
+                                </span>
+
+                                <strong class="system-online">
+                                    ● Connected
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-section danger-zone">
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Danger Zone
+                                </h2>
+
+                                <p>
+                                    Actions that affect application data.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="danger-actions">
+
+                            <button
+                                type="button"
+                                class="admin-outline-btn"
+                                onclick="backupData()">
+
+                                Export Backup
+
+                            </button>
+
+                            <button
+                                type="button"
+                                class="admin-danger-btn"
+                                onclick="resetDemoData()">
+
+                                Reset Demo Data
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Admin Settings
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+function initializeSettingsTabs() {
+
+    const buttons =
+        document.querySelectorAll(
+            ".settings-menu-item"
+        );
+
+    const sections =
+        document.querySelectorAll(
+            ".settings-tab"
+        );
+
+    buttons.forEach(
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const target =
+                        button.dataset.settingsTab;
+
+                    buttons.forEach(
+                        function (item) {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+                    sections.forEach(
+                        function (section) {
+
+                            section.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                    const section =
+                        document.querySelector(
+                            `[data-settings-content="${target}"]`
+                        );
+
+                    if (section) {
+
+                        section.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+function initializeThemeChoices() {
+
+    const choices =
+        document.querySelectorAll(
+            ".theme-choice"
+        );
+
+    choices.forEach(
+        function (choice) {
+
+            choice.addEventListener(
+                "click",
+                function () {
+
+                    choices.forEach(
+                        function (item) {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+                    choice.classList.add(
+                        "active"
+                    );
+
+                    const theme =
+                        choice.dataset.themeChoice;
+
+                    localStorage.setItem(
+                        "turfxAdminTheme",
+                        theme
+                    );
+
+                    showAdminAlert(
+                        `${theme} theme selected.`,
+                        "success"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+function saveAdminSettings() {
+
+    const turfName =
+        document.querySelector(
+            "#turfName"
+        )?.value.trim();
+
+    if (!turfName) {
+
+        showAdminAlert(
+            "Please enter the turf name.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "turfxTurfName",
+        turfName
+    );
+
+    showAdminAlert(
+        "Settings saved successfully.",
+        "success"
+    );
+
+}
+
+
+function updateAdminPassword() {
+
+    const current =
+        document.querySelector(
+            "#currentPassword"
+        )?.value;
+
+    const password =
+        document.querySelector(
+            "#newPassword"
+        )?.value;
+
+    const confirm =
+        document.querySelector(
+            "#confirmPassword"
+        )?.value;
+
+    if (!current || !password || !confirm) {
+
+        showAdminAlert(
+            "Please fill all password fields.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    if (password.length < 6) {
+
+        showAdminAlert(
+            "New password must contain at least 6 characters.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    if (password !== confirm) {
+
+        showAdminAlert(
+            "Passwords do not match.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    showAdminAlert(
+        "Password updated successfully.",
+        "success"
+    );
+
+}
+
+
+function backupData() {
+
+    const backup = {
+
+        application:
+            "TurfX",
+
+        version:
+            "1.0.0",
+
+        exportedAt:
+            new Date().toISOString(),
+
+        message:
+            "Demo backup generated successfully."
+
+    };
+
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    backup,
+                    null,
+                    2
+                )
+            ],
+            {
+                type:
+                    "application/json"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href =
+        url;
+
+    link.download =
+        "turfx-backup.json";
+
+    document.body.appendChild(
+        link
+    );
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+function resetDemoData() {
+
+    const confirmed =
+        window.confirm(
+            "Reset demo settings? This cannot be undone."
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    localStorage.clear();
+
+    showAdminAlert(
+        "Demo settings reset successfully.",
+        "success"
+    );
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        initializeSettingsTabs();
+
+        initializeThemeChoices();
+
+    }
+);
+
+</script>
+
+{% endblock %}

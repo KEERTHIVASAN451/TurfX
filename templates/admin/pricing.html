@@ -1,0 +1,1257 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Pricing Management | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing" class="active">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Pricing Management
+                </h1>
+
+                <p>
+                    Manage turf, peak-hour and equipment prices.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-primary-btn"
+                onclick="saveAllPricing()">
+
+                Save Changes
+
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Weekday Rate
+                    </span>
+
+                    <strong>
+                        ₹800
+                    </strong>
+
+                    <small>
+                        Per hour
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        Weekend Rate
+                    </span>
+
+                    <strong>
+                        ₹1,000
+                    </strong>
+
+                    <small>
+                        Per hour
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    🌙
+                </div>
+
+                <div>
+
+                    <span>
+                        Peak Rate
+                    </span>
+
+                    <strong>
+                        ₹1,200
+                    </strong>
+
+                    <small>
+                        6PM - 10PM
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    🏏
+                </div>
+
+                <div>
+
+                    <span>
+                        Equipment
+                    </span>
+
+                    <strong>
+                        ₹30+
+                    </strong>
+
+                    <small>
+                        Rental starting price
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TURF PRICING -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Turf Slot Pricing
+                    </h2>
+
+                    <p>
+                        Set prices by time and day type.
+                    </p>
+
+                </div>
+
+                <span class="pricing-save-status"
+                      id="pricingSaveStatus">
+                    All changes saved
+                </span>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-table pricing-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Time Slot
+                            </th>
+
+                            <th>
+                                Weekday
+                            </th>
+
+                            <th>
+                                Weekend
+                            </th>
+
+                            <th>
+                                Peak
+                            </th>
+
+                            <th>
+                                Festival
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td>
+                                06:00 AM - 09:00 AM
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="500"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="700"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="800"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="900"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="savePricingRow(this)">
+                                    Save
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                09:00 AM - 05:00 PM
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="800"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="900"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1000"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1100"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="savePricingRow(this)">
+                                    Save
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                05:00 PM - 06:00 PM
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="900"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1000"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1100"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1300"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="savePricingRow(this)">
+                                    Save
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                06:00 PM - 10:00 PM
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1000"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1200"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1400"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1600"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="savePricingRow(this)">
+                                    Save
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                10:00 PM - 12:00 AM
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="900"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1100"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1200"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="price-input-box">
+                                    <span>₹</span>
+                                    <input
+                                        type="number"
+                                        class="price-input"
+                                        value="1400"
+                                        min="0">
+                                </div>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="admin-table-btn"
+                                    onclick="savePricingRow(this)">
+                                    Save
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- SPECIAL DAYS -->
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Special Day Pricing
+                        </h2>
+
+                        <p>
+                            Apply special pricing for selected dates.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="admin-success-btn"
+                        onclick="openSpecialDayModal()">
+
+                        + Add Day
+
+                    </button>
+
+                </div>
+
+
+                <div class="special-day-list">
+
+                    <div>
+
+                        <div class="special-day-icon">
+                            🎉
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Independence Day
+                            </strong>
+
+                            <span>
+                                15 Aug 2026 • +25%
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="admin-table-btn"
+                            onclick="removeSpecialDay(this)">
+                            Remove
+                        </button>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="special-day-icon">
+                            🏆
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Tournament Finals
+                            </strong>
+
+                            <span>
+                                30 Aug 2026 • +15%
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="admin-table-btn"
+                            onclick="removeSpecialDay(this)">
+                            Remove
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DISCOUNTS -->
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Discount Rules
+                        </h2>
+
+                        <p>
+                            Manage automatic discounts.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="discount-rule-list">
+
+                    <div>
+
+                        <div>
+                            <strong>
+                                Morning Offer
+                            </strong>
+
+                            <span>
+                                Before 9 AM
+                            </span>
+                        </div>
+
+                        <b>
+                            -20%
+                        </b>
+
+                        <label class="toggle-switch">
+
+                            <input
+                                type="checkbox"
+                                checked>
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div>
+
+                        <div>
+                            <strong>
+                                Weekend Combo
+                            </strong>
+
+                            <span>
+                                3+ hours
+                            </span>
+                        </div>
+
+                        <b>
+                            -15%
+                        </b>
+
+                        <label class="toggle-switch">
+
+                            <input
+                                type="checkbox"
+                                checked>
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div>
+
+                        <div>
+                            <strong>
+                                Tournament Teams
+                            </strong>
+
+                            <span>
+                                Group booking
+                            </span>
+                        </div>
+
+                        <b>
+                            -10%
+                        </b>
+
+                        <label class="toggle-switch">
+
+                            <input
+                                type="checkbox">
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EQUIPMENT PRICING -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Equipment Rental Pricing
+                    </h2>
+
+                    <p>
+                        Set rental prices for cricket equipment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="equipment-price-grid">
+
+
+                <div class="equipment-price-card">
+
+                    <div>
+                        🏏
+                    </div>
+
+                    <h3>
+                        Cricket Bat
+                    </h3>
+
+                    <p>
+                        Premium quality bat
+                    </p>
+
+                    <div class="equipment-price-input">
+
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            value="150"
+                            min="0">
+
+                        <span>/ hour</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="equipment-price-card">
+
+                    <div>
+                        ⚾
+                    </div>
+
+                    <h3>
+                        Tennis Ball
+                    </h3>
+
+                    <p>
+                        SG quality ball
+                    </p>
+
+                    <div class="equipment-price-input">
+
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            value="30"
+                            min="0">
+
+                        <span>/ hour</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="equipment-price-card">
+
+                    <div>
+                        🧤
+                    </div>
+
+                    <h3>
+                        Batting Gloves
+                    </h3>
+
+                    <p>
+                        Professional gloves
+                    </p>
+
+                    <div class="equipment-price-input">
+
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            value="50"
+                            min="0">
+
+                        <span>/ hour</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="equipment-price-card">
+
+                    <div>
+                        🪖
+                    </div>
+
+                    <h3>
+                        Helmet
+                    </h3>
+
+                    <p>
+                        Safety helmet
+                    </p>
+
+                    <div class="equipment-price-input">
+
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            value="70"
+                            min="0">
+
+                        <span>/ hour</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Smart Pricing Management
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- SPECIAL DAY MODAL -->
+
+<div
+    id="specialDayModal"
+    class="admin-modal">
+
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <span>
+                    TURFX PRICING
+                </span>
+
+                <h2>
+                    Add Special Day
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeSpecialDayModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form
+            onsubmit="createSpecialDay(event)">
+
+            <div class="admin-form-grid">
+
+                <div class="admin-field">
+
+                    <label>
+                        Event Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="specialDayName"
+                        placeholder="Festival / Tournament"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="specialDayDate"
+                        required>
+
+                </div>
+
+
+                <div class="admin-field">
+
+                    <label>
+                        Price Increase %
+                    </label>
+
+                    <input
+                        type="number"
+                        id="specialDayPercent"
+                        min="0"
+                        value="10"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-modal-actions">
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="closeSpecialDayModal()">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="admin-success-btn">
+
+                    Add Special Day
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function savePricingRow(button) {
+
+    const row =
+        button.closest("tr");
+
+    if (!row) {
+        return;
+    }
+
+    const inputs =
+        row.querySelectorAll(
+            ".price-input"
+        );
+
+    inputs.forEach(function (input) {
+
+        if (
+            Number(input.value) < 0
+        ) {
+
+            input.value = 0;
+
+        }
+
+    });
+
+    showAdminAlert(
+        "Pricing updated successfully.",
+        "success"
+    );
+
+}
+
+
+function saveAllPricing() {
+
+    document
+        .querySelectorAll(
+            ".price-input, .equipment-price-input input"
+        )
+        .forEach(function (input) {
+
+            if (
+                Number(input.value) < 0
+            ) {
+
+                input.value = 0;
+
+            }
+
+        });
+
+    const status =
+        document.querySelector(
+            "#pricingSaveStatus"
+        );
+
+    if (status) {
+
+        status.textContent =
+            "Changes saved just now";
+
+    }
+
+    showAdminAlert(
+        "All pricing changes saved successfully.",
+        "success"
+    );
+
+}
+
+
+function openSpecialDayModal() {
+
+    document
+        .querySelector(
+            "#specialDayModal"
+        )
+        .classList.add("show");
+
+}
+
+
+function closeSpecialDayModal() {
+
+    document
+        .querySelector(
+            "#specialDayModal"
+        )
+        .classList.remove("show");
+
+}
+
+
+function createSpecialDay(event) {
+
+    event.preventDefault();
+
+    const name =
+        document
+        .querySelector(
+            "#specialDayName"
+        )
+        .value
+        .trim();
+
+    if (!name) {
+        return;
+    }
+
+    closeSpecialDayModal();
+
+    showAdminAlert(
+        `${name} pricing rule created successfully.`,
+        "success"
+    );
+
+    event.target.reset();
+
+}
+
+
+function removeSpecialDay(button) {
+
+    const confirmed =
+        window.confirm(
+            "Remove this special pricing rule?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const item =
+        button.closest(
+            ".special-day-list > div"
+        );
+
+    if (item) {
+        item.remove();
+    }
+
+    showAdminAlert(
+        "Special pricing rule removed.",
+        "success"
+    );
+
+}
+
+</script>
+
+{% endblock %}

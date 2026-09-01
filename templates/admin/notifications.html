@@ -1,0 +1,897 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Notifications | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/notification.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications" class="active">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Notifications
+                </h1>
+
+                <p>
+                    Monitor bookings, payments, tournaments and system alerts.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-primary-btn"
+                onclick="markAllNotificationsRead()">
+
+                ✓ Mark All Read
+
+            </button>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    🔔
+                </div>
+
+                <div>
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="totalNotificationCount">
+                        32
+                    </strong>
+
+                    <small>
+                        This week
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    🟠
+                </div>
+
+                <div>
+
+                    <span>
+                        Unread
+                    </span>
+
+                    <strong id="unreadNotificationCount">
+                        8
+                    </strong>
+
+                    <small>
+                        Need attention
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        Bookings
+                    </span>
+
+                    <strong>
+                        12
+                    </strong>
+
+                    <small>
+                        Alerts
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    💳
+                </div>
+
+                <div>
+
+                    <span>
+                        Payments
+                    </span>
+
+                    <strong>
+                        6
+                    </strong>
+
+                    <small>
+                        Alerts
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FILTER BAR -->
+
+        <section class="dashboard-panel notification-filter-panel">
+
+            <div class="notification-filter-buttons">
+
+                <button
+                    type="button"
+                    class="notification-filter active"
+                    data-filter="all">
+
+                    All
+
+                </button>
+
+                <button
+                    type="button"
+                    class="notification-filter"
+                    data-filter="unread">
+
+                    Unread
+
+                </button>
+
+                <button
+                    type="button"
+                    class="notification-filter"
+                    data-filter="booking">
+
+                    📅 Bookings
+
+                </button>
+
+                <button
+                    type="button"
+                    class="notification-filter"
+                    data-filter="payment">
+
+                    💳 Payments
+
+                </button>
+
+                <button
+                    type="button"
+                    class="notification-filter"
+                    data-filter="tournament">
+
+                    🏆 Tournament
+
+                </button>
+
+                <button
+                    type="button"
+                    class="notification-filter"
+                    data-filter="system">
+
+                    ⚙️ System
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- NOTIFICATION LIST -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Recent Notifications
+                    </h2>
+
+                    <p>
+                        Latest TurfX system activity.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="admin-outline-btn"
+                    onclick="clearReadNotifications()">
+
+                    Clear Read
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="notificationList"
+                class="admin-notification-list">
+
+
+                <!-- BOOKING -->
+
+                <article
+                    class="admin-notification unread"
+                    data-type="booking">
+
+                    <div class="notification-type-icon booking">
+                        📅
+                    </div>
+
+                    <div class="notification-message">
+
+                        <div class="notification-title-row">
+
+                            <h3>
+                                New Booking Received
+                            </h3>
+
+                            <span class="notification-new-dot"></span>
+
+                        </div>
+
+                        <p>
+                            Arun Kumar booked TurfX Arena
+                            from 06:00 PM to 07:00 PM.
+                        </p>
+
+                        <small>
+                            10 minutes ago
+                        </small>
+
+                    </div>
+
+                    <div class="notification-actions">
+
+                        <button
+                            type="button"
+                            class="notification-read-btn"
+                            onclick="markNotificationRead(this)">
+
+                            Mark Read
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notification-remove-btn"
+                            onclick="removeNotification(this)">
+
+                            ×
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PAYMENT -->
+
+                <article
+                    class="admin-notification unread"
+                    data-type="payment">
+
+                    <div class="notification-type-icon payment">
+                        💳
+                    </div>
+
+                    <div class="notification-message">
+
+                        <div class="notification-title-row">
+
+                            <h3>
+                                Payment Received
+                            </h3>
+
+                            <span class="notification-new-dot"></span>
+
+                        </div>
+
+                        <p>
+                            ₹1,000 payment received for booking
+                            #BK002 from Rahul.
+                        </p>
+
+                        <small>
+                            25 minutes ago
+                        </small>
+
+                    </div>
+
+                    <div class="notification-actions">
+
+                        <button
+                            type="button"
+                            class="notification-read-btn"
+                            onclick="markNotificationRead(this)">
+
+                            Mark Read
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notification-remove-btn"
+                            onclick="removeNotification(this)">
+
+                            ×
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- TOURNAMENT -->
+
+                <article
+                    class="admin-notification unread"
+                    data-type="tournament">
+
+                    <div class="notification-type-icon tournament">
+                        🏆
+                    </div>
+
+                    <div class="notification-message">
+
+                        <div class="notification-title-row">
+
+                            <h3>
+                                Tournament Registration
+                            </h3>
+
+                            <span class="notification-new-dot"></span>
+
+                        </div>
+
+                        <p>
+                            Weekend Premier League has reached
+                            16 registered teams.
+                        </p>
+
+                        <small>
+                            1 hour ago
+                        </small>
+
+                    </div>
+
+                    <div class="notification-actions">
+
+                        <button
+                            type="button"
+                            class="notification-read-btn"
+                            onclick="markNotificationRead(this)">
+
+                            Mark Read
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notification-remove-btn"
+                            onclick="removeNotification(this)">
+
+                            ×
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- BOOKING CANCEL -->
+
+                <article
+                    class="admin-notification"
+                    data-type="booking">
+
+                    <div class="notification-type-icon booking">
+                        ❌
+                    </div>
+
+                    <div class="notification-message">
+
+                        <div class="notification-title-row">
+
+                            <h3>
+                                Booking Cancelled
+                            </h3>
+
+                        </div>
+
+                        <p>
+                            Karthick cancelled booking #BK004
+                            for today's 09:00 PM slot.
+                        </p>
+
+                        <small>
+                            2 hours ago
+                        </small>
+
+                    </div>
+
+                    <div class="notification-actions">
+
+                        <button
+                            type="button"
+                            class="notification-read-btn disabled"
+                            disabled>
+
+                            Read
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notification-remove-btn"
+                            onclick="removeNotification(this)">
+
+                            ×
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- REFUND -->
+
+                <article
+                    class="admin-notification"
+                    data-type="payment">
+
+                    <div class="notification-type-icon refund">
+                        ↩️
+                    </div>
+
+                    <div class="notification-message">
+
+                        <div class="notification-title-row">
+
+                            <h3>
+                                Refund Completed
+                            </h3>
+
+                        </div>
+
+                        <p>
+                            ₹900 refund processed for booking #BK004.
+                        </p>
+
+                        <small>
+                            Yesterday
+                        </small>
+
+                    </div>
+
+                    <div class="notification-actions">
+
+                        <button
+                            type="button"
+                            class="notification-read-btn disabled"
+                            disabled>
+
+                            Read
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notification-remove-btn"
+                            onclick="removeNotification(this)">
+
+                            ×
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- SYSTEM -->
+
+                <article
+                    class="admin-notification"
+                    data-type="system">
+
+                    <div class="notification-type-icon system">
+                        ⚙️
+                    </div>
+
+                    <div class="notification-message">
+
+                        <div class="notification-title-row">
+
+                            <h3>
+                                Slot Maintenance Alert
+                            </h3>
+
+                        </div>
+
+                        <p>
+                            TurfX Arena 08:00 PM slot has been
+                            blocked for maintenance.
+                        </p>
+
+                        <small>
+                            Yesterday
+                        </small>
+
+                    </div>
+
+                    <div class="notification-actions">
+
+                        <button
+                            type="button"
+                            class="notification-read-btn disabled"
+                            disabled>
+
+                            Read
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notification-remove-btn"
+                            onclick="removeNotification(this)">
+
+                            ×
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PAYMENT FAILURE -->
+
+                <article
+                    class="admin-notification"
+                    data-type="payment">
+
+                    <div class="notification-type-icon failed">
+                        ⚠️
+                    </div>
+
+                    <div class="notification-message">
+
+                        <div class="notification-title-row">
+
+                            <h3>
+                                Payment Failed
+                            </h3>
+
+                        </div>
+
+                        <p>
+                            Payment attempt for booking #BK009
+                            was unsuccessful.
+                        </p>
+
+                        <small>
+                            2 days ago
+                        </small>
+
+                    </div>
+
+                    <div class="notification-actions">
+
+                        <button
+                            type="button"
+                            class="notification-read-btn disabled"
+                            disabled>
+
+                            Read
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notification-remove-btn"
+                            onclick="removeNotification(this)">
+
+                            ×
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- NOTIFICATION SETTINGS -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Notification Preferences
+                    </h2>
+
+                    <p>
+                        Choose which alerts the admin receives.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="notification-preference-list">
+
+
+                <div>
+
+                    <div>
+
+                        <strong>
+                            Booking Alerts
+                        </strong>
+
+                        <span>
+                            New bookings and cancellations
+                        </span>
+
+                    </div>
+
+                    <label class="toggle-switch">
+
+                        <input
+                            type="checkbox"
+                            checked>
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div>
+
+                    <div>
+
+                        <strong>
+                            Payment Alerts
+                        </strong>
+
+                        <span>
+                            Successful and failed payments
+                        </span>
+
+                    </div>
+
+                    <label class="toggle-switch">
+
+                        <input
+                            type="checkbox"
+                            checked>
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div>
+
+                    <div>
+
+                        <strong>
+                            Tournament Alerts
+                        </strong>
+
+                        <span>
+                            Team registrations and tournament events
+                        </span>
+
+                    </div>
+
+                    <label class="toggle-switch">
+
+                        <input
+                            type="checkbox"
+                            checked>
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div>
+
+                    <div>
+
+                        <strong>
+                            System Alerts
+                        </strong>
+
+                        <span>
+                            Maintenance and application alerts
+                        </span>
+
+                    </div>
+
+                    <label class="toggle-switch">
+
+                        <input
+                            type="checkbox"
+                            checked>
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Smart Notification Center
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

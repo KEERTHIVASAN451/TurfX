@@ -1,0 +1,1025 @@
+/* =========================================================
+   TurfX - Forms CSS
+   File: static/css/forms.css
+   ========================================================= */
+
+
+/* =========================================================
+   FORM CONTAINER
+   ========================================================= */
+
+.form-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.form-container.small {
+    max-width: 450px;
+}
+
+.form-container.large {
+    max-width: 1000px;
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+.form-card {
+    width: 100%;
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
+
+
+/* =========================================================
+   FORM HEADER
+   ========================================================= */
+
+.form-header {
+    margin-bottom: 22px;
+}
+
+.form-header h1 {
+    margin: 0 0 6px;
+
+    color: #0f172a;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.form-header p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.form-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #334155;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.form-label .required {
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #0f172a;
+
+    outline: none;
+
+    font-family: inherit;
+    font-size: 11px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.form-input,
+.form-select {
+    height: 42px;
+
+    padding: 0 12px;
+}
+
+
+.form-textarea {
+    min-height: 110px;
+
+    padding: 11px 12px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   INPUT FOCUS
+   ========================================================= */
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: #16a34a;
+
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.10);
+}
+
+
+/* =========================================================
+   INPUT HOVER
+   ========================================================= */
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+    border-color: #94a3b8;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   DISABLED
+   ========================================================= */
+
+.form-input:disabled,
+.form-select:disabled,
+.form-textarea:disabled {
+    background: #f8fafc;
+
+    color: #94a3b8;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   READONLY
+   ========================================================= */
+
+.form-input:read-only {
+    background: #f8fafc;
+
+    cursor: default;
+}
+
+
+/* =========================================================
+   INPUT WITH ICON
+   ========================================================= */
+
+.form-input-wrapper {
+    position: relative;
+}
+
+.form-input-wrapper .form-input {
+    padding-left: 40px;
+}
+
+.form-input-wrapper .input-icon {
+    position: absolute;
+
+    top: 50%;
+    left: 13px;
+
+    transform: translateY(-50%);
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   RIGHT ICON
+   ========================================================= */
+
+.form-input-wrapper.right-icon .form-input {
+    padding-right: 40px;
+}
+
+.form-input-wrapper .right-icon {
+    position: absolute;
+
+    top: 50%;
+    right: 13px;
+
+    transform: translateY(-50%);
+
+    color: #64748b;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TWO COLUMN FORM
+   ========================================================= */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+
+.form-row.three {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+/* =========================================================
+   CHECKBOX
+   ========================================================= */
+
+.form-check {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+}
+
+.form-check input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+
+    margin: 0;
+
+    accent-color: #16a34a;
+
+    cursor: pointer;
+}
+
+.form-check label {
+    color: #475569;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   RADIO
+   ========================================================= */
+
+.form-radio-group {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+}
+
+.form-radio {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.form-radio input[type="radio"] {
+    width: 15px;
+    height: 15px;
+
+    margin: 0;
+
+    accent-color: #16a34a;
+
+    cursor: pointer;
+}
+
+.form-radio label {
+    color: #475569;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CUSTOM OPTION CARD
+   ========================================================= */
+
+.form-option-group {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+.form-option {
+    position: relative;
+}
+
+.form-option input {
+    position: absolute;
+
+    opacity: 0;
+}
+
+.form-option label {
+    display: block;
+
+    padding: 13px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    font-size: 10px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.form-option label:hover {
+    border-color: #86efac;
+
+    background: #f0fdf4;
+}
+
+.form-option input:checked + label {
+    border-color: #16a34a;
+
+    background: #f0fdf4;
+
+    color: #166534;
+}
+
+
+/* =========================================================
+   HELP TEXT
+   ========================================================= */
+
+.form-help {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #94a3b8;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.form-error {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #dc2626;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+   ========================================================= */
+
+.form-success {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #16a34a;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   ERROR INPUT
+   ========================================================= */
+
+.form-group.error .form-input,
+.form-group.error .form-select,
+.form-group.error .form-textarea {
+    border-color: #ef4444;
+
+    background: #fffafa;
+}
+
+.form-group.error .form-input:focus,
+.form-group.error .form-select:focus,
+.form-group.error .form-textarea:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.10);
+}
+
+
+/* =========================================================
+   SUCCESS INPUT
+   ========================================================= */
+
+.form-group.success .form-input,
+.form-group.success .form-select,
+.form-group.success .form-textarea {
+    border-color: #22c55e;
+}
+
+
+/* =========================================================
+   FILE UPLOAD
+   ========================================================= */
+
+.form-file {
+    width: 100%;
+
+    padding: 15px;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 9px;
+
+    background: #f8fafc;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.form-file:hover {
+    border-color: #16a34a;
+
+    background: #f0fdf4;
+}
+
+.form-file input[type="file"] {
+    width: 100%;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   IMAGE PREVIEW
+   ========================================================= */
+
+.form-image-preview {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.form-image-preview img {
+    width: 80px;
+    height: 80px;
+
+    border-radius: 8px;
+
+    border: 1px solid #e2e8f0;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   PASSWORD STRENGTH
+   ========================================================= */
+
+.password-strength {
+    margin-top: 8px;
+}
+
+.password-strength-bar {
+    width: 100%;
+
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e2e8f0;
+}
+
+.password-strength-fill {
+    width: 0;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    transition: width 0.3s ease;
+}
+
+.password-strength-text {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #f1f5f9;
+}
+
+
+/* =========================================================
+   FORM BUTTON
+   ========================================================= */
+
+.form-btn {
+    min-width: 100px;
+
+    height: 40px;
+
+    padding: 0 16px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.form-btn:hover {
+    border-color: #94a3b8;
+
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.form-btn.primary {
+    border-color: #16a34a;
+
+    background: #16a34a;
+
+    color: #ffffff;
+}
+
+.form-btn.primary:hover {
+    border-color: #15803d;
+
+    background: #15803d;
+}
+
+
+/* =========================================================
+   DANGER BUTTON
+   ========================================================= */
+
+.form-btn.danger {
+    border-color: #dc2626;
+
+    background: #dc2626;
+
+    color: #ffffff;
+}
+
+.form-btn.danger:hover {
+    border-color: #b91c1c;
+
+    background: #b91c1c;
+}
+
+
+/* =========================================================
+   FULL WIDTH BUTTON
+   ========================================================= */
+
+.form-btn.full {
+    width: 100%;
+}
+
+
+/* =========================================================
+   SEARCH FORM
+   ========================================================= */
+
+.form-search {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    width: 100%;
+}
+
+.form-search .form-input {
+    flex: 1;
+}
+
+
+/* =========================================================
+   DATE / TIME
+   ========================================================= */
+
+.form-date-group {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   PRICE INPUT
+   ========================================================= */
+
+.form-price-wrapper {
+    position: relative;
+}
+
+.form-price-wrapper .currency {
+    position: absolute;
+
+    top: 50%;
+    left: 12px;
+
+    transform: translateY(-50%);
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.form-price-wrapper .form-input {
+    padding-left: 30px;
+}
+
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+.form-select {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SWITCH
+   ========================================================= */
+
+.form-switch {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.form-switch-content h4 {
+    margin: 0 0 3px;
+
+    color: #334155;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.form-switch-content p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   SWITCH BUTTON
+   ========================================================= */
+
+.switch {
+    position: relative;
+
+    width: 38px;
+    height: 21px;
+
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+}
+
+.switch-slider {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 999px;
+
+    background: #cbd5e1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.switch-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 17px;
+    height: 17px;
+
+    left: 2px;
+    top: 2px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    transition: 0.2s;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.switch input:checked + .switch-slider {
+    background: #16a34a;
+}
+
+.switch input:checked + .switch-slider::before {
+    transform: translateX(17px);
+}
+
+
+/* =========================================================
+   FORM DIVIDER
+   ========================================================= */
+
+.form-divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 20px 0;
+
+    color: #94a3b8;
+
+    font-size: 9px;
+}
+
+.form-divider::before,
+.form-divider::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: #e2e8f0;
+}
+
+
+/* =========================================================
+   FORM ALERT
+   ========================================================= */
+
+.form-alert {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+
+    padding: 11px 13px;
+
+    border-radius: 8px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+.form-alert.info {
+    background: #eff6ff;
+
+    color: #1e40af;
+}
+
+.form-alert.success {
+    background: #f0fdf4;
+
+    color: #166534;
+}
+
+.form-alert.warning {
+    background: #fffbeb;
+
+    color: #92400e;
+}
+
+.form-alert.error {
+    background: #fef2f2;
+
+    color: #991b1b;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .form-row.three {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .form-row,
+    .form-row.three {
+        grid-template-columns: 1fr;
+    }
+
+    .form-option-group {
+        grid-template-columns: 1fr;
+    }
+
+    .form-date-group {
+        grid-template-columns: 1fr;
+    }
+
+    .form-card {
+        padding: 17px;
+    }
+
+    .form-header h1 {
+        font-size: 19px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-btn {
+        width: 100%;
+    }
+
+    .form-search {
+        flex-direction: column;
+    }
+
+    .form-search .form-input,
+    .form-search .form-btn {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .form-card {
+        padding: 14px;
+    }
+
+    .form-input,
+    .form-select {
+        height: 40px;
+    }
+
+    .form-textarea {
+        min-height: 90px;
+    }
+}

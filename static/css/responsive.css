@@ -1,0 +1,743 @@
+/* =========================================================
+   TurfX - Responsive CSS
+   File: static/css/responsive.css
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL RESPONSIVE SETTINGS
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+video,
+iframe {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   1400px AND BELOW
+   ========================================================= */
+
+@media (max-width: 1400px) {
+
+    .container,
+    .main-container,
+    .dashboard-container {
+        max-width: 1200px;
+    }
+
+    .content-wrapper {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}
+
+
+/* =========================================================
+   DESKTOP
+   1200px AND BELOW
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .container,
+    .main-container {
+        width: 94%;
+    }
+
+    .page-content {
+        padding: 22px;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+
+    .three-column {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   992px AND BELOW
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+    /* ---------- NAVBAR ---------- */
+
+    .navbar {
+        padding: 0 18px;
+    }
+
+    .navbar-menu {
+        display: none;
+    }
+
+    .navbar-toggle {
+        display: flex;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+
+    .sidebar {
+        transform: translateX(-100%);
+
+        transition: transform 0.25s ease;
+
+        z-index: 1000;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+        display: none;
+
+        position: fixed;
+
+        inset: 0;
+
+        background: rgba(15, 23, 42, 0.45);
+
+        z-index: 999;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+
+        width: 100%;
+    }
+
+    /* ---------- DASHBOARD ---------- */
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-grid.three {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ---------- CARDS ---------- */
+
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ---------- TABLE ---------- */
+
+    .table-container {
+        overflow-x: auto;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        min-width: 650px;
+    }
+
+    /* ---------- FORM ---------- */
+
+    .form-row.three {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ---------- TOURNAMENT ---------- */
+
+    .tournament-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   768px AND BELOW
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* ---------- BODY ---------- */
+
+    body {
+        overflow-x: hidden;
+    }
+
+    /* ---------- CONTAINER ---------- */
+
+    .container,
+    .main-container {
+        width: 92%;
+    }
+
+    /* ---------- HEADER ---------- */
+
+    .page-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+    .page-header-actions {
+        width: 100%;
+    }
+
+    /* ---------- NAVBAR ---------- */
+
+    .navbar {
+        height: 58px;
+    }
+
+    .navbar-brand {
+        font-size: 18px;
+    }
+
+    .navbar-actions {
+        gap: 6px;
+    }
+
+    /* ---------- DASHBOARD ---------- */
+
+    .dashboard-page {
+        padding: 18px 12px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .dashboard-header-actions {
+        width: 100%;
+    }
+
+    .dashboard-header-actions button {
+        flex: 1;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 12px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-grid.three {
+        grid-template-columns: 1fr;
+    }
+
+    /* ---------- GRID ---------- */
+
+    .grid-4,
+    .four-column {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .three-column {
+        grid-template-columns: 1fr;
+    }
+
+    /* ---------- CARDS ---------- */
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    /* ---------- FORM ---------- */
+
+    .form-row,
+    .form-row.three {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        max-width: 100%;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+
+    /* ---------- BOOKING ---------- */
+
+    .booking-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-summary {
+        position: static;
+    }
+
+    /* ---------- TOURNAMENT ---------- */
+
+    .tournament-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fixture-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ---------- MODAL ---------- */
+
+    .modal {
+        width: 92%;
+
+        max-width: 500px;
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   600px AND BELOW
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* ---------- BODY ---------- */
+
+    body {
+        font-size: 14px;
+    }
+
+    /* ---------- CONTAINER ---------- */
+
+    .container,
+    .main-container {
+        width: 94%;
+    }
+
+    /* ---------- NAVBAR ---------- */
+
+    .navbar {
+        padding: 0 12px;
+    }
+
+    .navbar-brand span {
+        display: none;
+    }
+
+    .navbar-actions .desktop-only {
+        display: none;
+    }
+
+    /* ---------- PAGE ---------- */
+
+    .page-content {
+        padding: 16px 12px;
+    }
+
+    .page-title {
+        font-size: 20px;
+    }
+
+    /* ---------- DASHBOARD ---------- */
+
+    .dashboard-stats {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 9px;
+    }
+
+    .dashboard-stat-card {
+        padding: 14px;
+    }
+
+    .dashboard-stat-value {
+        font-size: 20px;
+    }
+
+    .dashboard-welcome {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .dashboard-welcome-action {
+        width: 100%;
+    }
+
+    /* ---------- BUTTONS ---------- */
+
+    .btn-group {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+    }
+
+    /* ---------- SEARCH ---------- */
+
+    .search-bar {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+    .search-bar input,
+    .search-bar select,
+    .search-bar button {
+        width: 100%;
+    }
+
+    /* ---------- TABLE ---------- */
+
+    .table-wrapper {
+        width: 100%;
+
+        overflow-x: auto;
+
+        border-radius: 8px;
+    }
+
+    table {
+        min-width: 600px;
+    }
+
+    /* ---------- BOOKING ---------- */
+
+    .booking-card {
+        padding: 15px;
+    }
+
+    .booking-details {
+        grid-template-columns: 1fr;
+    }
+
+    .slot-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ---------- TEAM ---------- */
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .player-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ---------- TOURNAMENT ---------- */
+
+    .points-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .fixture-card {
+        padding: 12px;
+    }
+
+    /* ---------- FORM ---------- */
+
+    .form-card {
+        padding: 16px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+
+        width: 100%;
+    }
+
+    .form-actions button,
+    .form-actions .form-btn {
+        width: 100%;
+    }
+
+    /* ---------- MODAL ---------- */
+
+    .modal {
+        width: 94%;
+
+        max-height: 90vh;
+
+        overflow-y: auto;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 15px;
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   480px AND BELOW
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    /* ---------- HEADER ---------- */
+
+    .page-header h1 {
+        font-size: 20px;
+    }
+
+    .page-header p {
+        font-size: 10px;
+    }
+
+    /* ---------- DASHBOARD ---------- */
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-booking-item {
+        grid-template-columns: 42px 1fr;
+    }
+
+    .dashboard-booking-price {
+        grid-column: 2;
+
+        text-align: left;
+    }
+
+    /* ---------- SLOT ---------- */
+
+    .slot-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .slot {
+        min-height: 45px;
+    }
+
+    /* ---------- PLAYER ---------- */
+
+    .player-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ---------- BUTTON ---------- */
+
+    .btn {
+        min-height: 40px;
+    }
+
+    /* ---------- NOTIFICATION ---------- */
+
+    .notification-item {
+        padding: 12px;
+    }
+
+    /* ---------- PROFILE ---------- */
+
+    .profile-header {
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+   380px AND BELOW
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .container,
+    .main-container {
+        width: 96%;
+    }
+
+    .page-content {
+        padding: 12px 8px;
+    }
+
+    .dashboard-page {
+        padding: 12px 8px;
+    }
+
+    .dashboard-stat-card {
+        padding: 12px;
+    }
+
+    .dashboard-stat-value {
+        font-size: 18px;
+    }
+
+    .form-card {
+        padding: 13px;
+    }
+
+    .slot-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal {
+        width: 96%;
+    }
+}
+
+
+/* =========================================================
+   LANDSCAPE MOBILE
+   ========================================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+    .navbar {
+        height: 52px;
+    }
+
+    .modal {
+        max-height: 92vh;
+
+        overflow-y: auto;
+    }
+
+    .sidebar {
+        overflow-y: auto;
+    }
+}
+
+
+/* =========================================================
+   TOUCH DEVICES
+   ========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+    button,
+    a,
+    input,
+    select,
+    textarea {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    button,
+    .btn,
+    .form-btn {
+        min-height: 40px;
+    }
+
+    .dashboard-quick-action {
+        min-height: 60px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+    .navbar,
+    .sidebar,
+    .sidebar-overlay,
+    .footer,
+    .no-print,
+    button,
+    .btn {
+        display: none !important;
+    }
+
+    .main-content {
+        margin: 0 !important;
+
+        width: 100% !important;
+    }
+
+    .page-content {
+        padding: 0 !important;
+    }
+
+    body {
+        background: #ffffff !important;
+
+        color: #000000 !important;
+    }
+
+    .dashboard-card,
+    .form-card {
+        box-shadow: none !important;
+
+        border: 1px solid #ddd !important;
+    }
+}

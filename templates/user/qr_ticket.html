@@ -1,0 +1,158 @@
+{% extends "shared/head.html" %}
+
+{% block title %}QR Ticket | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/qr.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">🏠 <span>Dashboard</span></a>
+            <a href="/search-turf">🏟️ <span>Find Turf</span></a>
+            <a href="/booking-history" class="active">📅 <span>My Bookings</span></a>
+            <a href="/team">👥 <span>My Team</span></a>
+            <a href="/tournament">🏆 <span>Tournaments</span></a>
+            <a href="/scorecard">📊 <span>Scorecard</span></a>
+            <a href="/notifications">🔔 <span>Notifications</span></a>
+            <a href="/profile">👤 <span>Profile</span></a>
+            <a href="/settings">⚙️ <span>Settings</span></a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="/logout">🚪 <span>Logout</span></a>
+        </div>
+
+    </aside>
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h1>Booking QR Ticket 🎟️</h1>
+                <p>Show this QR code at the turf entrance.</p>
+            </div>
+
+            <a href="/booking-history"
+               class="dashboard-primary-btn">
+                ← My Bookings
+            </a>
+
+        </header>
+
+        <section class="qr-ticket-page">
+
+            <div class="qr-ticket-large">
+
+                <div class="qr-ticket-heading">
+                    <span>TURFX</span>
+                    <strong>BOOKING PASS</strong>
+                </div>
+
+                <div class="qr-ticket-turf">
+
+                    <div class="qr-ticket-icon">
+                        🏏
+                    </div>
+
+                    <div>
+                        <h2>TurfX Arena</h2>
+                        <p>Anna Nagar, Chennai</p>
+                    </div>
+
+                </div>
+
+                <div class="qr-code-wrapper">
+
+                    <div id="qrCode"></div>
+
+                </div>
+
+                <input
+                    type="hidden"
+                    id="bookingId"
+                    value="TX-2026-00124">
+
+                <div class="qr-booking-details">
+
+                    <div>
+                        <span>DATE</span>
+                        <strong>25 Aug 2026</strong>
+                    </div>
+
+                    <div>
+                        <span>TIME</span>
+                        <strong>06:00 PM - 07:00 PM</strong>
+                    </div>
+
+                    <div>
+                        <span>BOOKING ID</span>
+                        <strong>#TX-2026-00124</strong>
+                    </div>
+
+                    <div>
+                        <span>STATUS</span>
+                        <strong class="qr-confirmed">CONFIRMED</strong>
+                    </div>
+
+                </div>
+
+                <div class="qr-ticket-actions">
+
+                    <button
+                        type="button"
+                        id="generateQR"
+                        class="dashboard-primary-btn">
+                        Generate QR
+                    </button>
+
+                    <button
+                        type="button"
+                        id="downloadQR"
+                        class="secondary-action-btn">
+                        Download
+                    </button>
+
+                    <button
+                        type="button"
+                        id="printQR"
+                        class="secondary-action-btn">
+                        Print
+                    </button>
+
+                </div>
+
+                <p class="qr-ticket-note">
+                    Please arrive 10 minutes before your booked slot.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,318 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Notifications | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">🏠 <span>Dashboard</span></a>
+            <a href="/search-turf">🏟️ <span>Find Turf</span></a>
+            <a href="/booking-history">📅 <span>My Bookings</span></a>
+            <a href="/team">👥 <span>My Team</span></a>
+            <a href="/tournament">🏆 <span>Tournaments</span></a>
+            <a href="/scorecard">📊 <span>Scorecard</span></a>
+            <a href="/notifications" class="active">🔔 <span>Notifications</span></a>
+            <a href="/profile">👤 <span>Profile</span></a>
+            <a href="/settings">⚙️ <span>Settings</span></a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="/logout">🚪 <span>Logout</span></a>
+        </div>
+
+    </aside>
+
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h1>Notifications 🔔</h1>
+                <p>Stay updated with your TurfX activities.</p>
+            </div>
+
+            <button
+                type="button"
+                class="secondary-action-btn"
+                onclick="markAllUserNotificationsRead()">
+                Mark All Read
+            </button>
+
+        </header>
+
+
+        <section class="notification-summary-grid">
+
+            <div>
+                <span>Total</span>
+                <strong>8</strong>
+            </div>
+
+            <div>
+                <span>Unread</span>
+                <strong id="userUnreadCount">3</strong>
+            </div>
+
+            <div>
+                <span>Bookings</span>
+                <strong>4</strong>
+            </div>
+
+            <div>
+                <span>Tournaments</span>
+                <strong>2</strong>
+            </div>
+
+        </section>
+
+
+        <section class="dashboard-panel">
+
+            <div class="notification-filter-row">
+
+                <button
+                    class="notification-filter active"
+                    data-user-notification-filter="all">
+                    All
+                </button>
+
+                <button
+                    class="notification-filter"
+                    data-user-notification-filter="unread">
+                    Unread
+                </button>
+
+                <button
+                    class="notification-filter"
+                    data-user-notification-filter="booking">
+                    Bookings
+                </button>
+
+                <button
+                    class="notification-filter"
+                    data-user-notification-filter="tournament">
+                    Tournaments
+                </button>
+
+                <button
+                    class="notification-filter"
+                    data-user-notification-filter="payment">
+                    Payments
+                </button>
+
+            </div>
+
+
+            <div class="user-notification-list">
+
+
+                <article
+                    class="user-notification-item unread"
+                    data-user-notification-type="booking">
+
+                    <div class="user-notification-icon green">
+                        📅
+                    </div>
+
+                    <div class="user-notification-content">
+
+                        <strong>
+                            Booking Confirmed
+                        </strong>
+
+                        <p>
+                            Your TurfX Arena booking for 25 Aug,
+                            6PM - 7PM has been confirmed.
+                        </p>
+
+                        <small>
+                            10 minutes ago
+                        </small>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                        data-user-read>
+                        Mark Read
+                    </button>
+
+                </article>
+
+
+                <article
+                    class="user-notification-item unread"
+                    data-user-notification-type="payment">
+
+                    <div class="user-notification-icon blue">
+                        💳
+                    </div>
+
+                    <div class="user-notification-content">
+
+                        <strong>
+                            Payment Successful
+                        </strong>
+
+                        <p>
+                            Payment of ₹1,000 for Booking
+                            #TX-2026-00124 was successful.
+                        </p>
+
+                        <small>
+                            20 minutes ago
+                        </small>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                        data-user-read>
+                        Mark Read
+                    </button>
+
+                </article>
+
+
+                <article
+                    class="user-notification-item unread"
+                    data-user-notification-type="tournament">
+
+                    <div class="user-notification-icon orange">
+                        🏆
+                    </div>
+
+                    <div class="user-notification-content">
+
+                        <strong>
+                            Tournament Registration Open
+                        </strong>
+
+                        <p>
+                            Weekend Premier League is now open
+                            for team registration.
+                        </p>
+
+                        <small>
+                            1 hour ago
+                        </small>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                        data-user-read>
+                        Mark Read
+                    </button>
+
+                </article>
+
+
+                <article
+                    class="user-notification-item"
+                    data-user-notification-type="booking">
+
+                    <div class="user-notification-icon purple">
+                        ⏰
+                    </div>
+
+                    <div class="user-notification-content">
+
+                        <strong>
+                            Upcoming Match Reminder
+                        </strong>
+
+                        <p>
+                            Your booking starts tomorrow at
+                            6:00 PM.
+                        </p>
+
+                        <small>
+                            Yesterday
+                        </small>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                        data-user-read>
+                        Read
+                    </button>
+
+                </article>
+
+
+                <article
+                    class="user-notification-item"
+                    data-user-notification-type="tournament">
+
+                    <div class="user-notification-icon red">
+                        🏅
+                    </div>
+
+                    <div class="user-notification-content">
+
+                        <strong>
+                            Team Registration Accepted
+                        </strong>
+
+                        <p>
+                            Thunder XI has been accepted into
+                            the Night Champions Cup.
+                        </p>
+
+                        <small>
+                            2 days ago
+                        </small>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                        data-user-read>
+                        Read
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+            <span>© 2026 TurfX</span>
+            <span>Stay connected. Stay ready.</span>
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

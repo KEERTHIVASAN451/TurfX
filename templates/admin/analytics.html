@@ -1,0 +1,1208 @@
+{% extends "shared/head.html" %}
+
+{% block title %}Analytics | TurfX Admin{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/admin/dashboard">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/bookings">
+                📅 <span>Bookings</span>
+            </a>
+
+            <a href="/admin/slot-management">
+                ⏰ <span>Slot Management</span>
+            </a>
+
+            <a href="/admin/customers">
+                👥 <span>Customers</span>
+            </a>
+
+            <a href="/admin/transactions">
+                💳 <span>Transactions</span>
+            </a>
+
+            <a href="/admin/reports">
+                📈 <span>Reports</span>
+            </a>
+
+            <a href="/admin/equipment">
+                🏏 <span>Equipment</span>
+            </a>
+
+            <a href="/admin/staff">
+                👤 <span>Staff</span>
+            </a>
+
+            <a href="/admin/pricing">
+                💰 <span>Pricing</span>
+            </a>
+
+            <a href="/admin/qr-scanner">
+                📷 <span>QR Scanner</span>
+            </a>
+
+            <a href="/admin/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/admin/analytics" class="active">
+                📊 <span>Analytics</span>
+            </a>
+
+            <a href="/admin/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Analytics Dashboard
+                </h1>
+
+                <p>
+                    Track business performance and booking trends.
+                </p>
+
+            </div>
+
+            <div class="analytics-period-buttons">
+
+                <button
+                    type="button"
+                    class="analytics-period active"
+                    data-period="week">
+
+                    7 Days
+
+                </button>
+
+                <button
+                    type="button"
+                    class="analytics-period"
+                    data-period="month">
+
+                    30 Days
+
+                </button>
+
+                <button
+                    type="button"
+                    class="analytics-period"
+                    data-period="year">
+
+                    12 Months
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="dashboard-stat-grid">
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon green">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Revenue
+                    </span>
+
+                    <strong id="analyticsRevenue">
+                        ₹1.24L
+                    </strong>
+
+                    <small class="analytics-positive">
+                        ↑ 18.4%
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon blue">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        Bookings
+                    </span>
+
+                    <strong id="analyticsBookings">
+                        326
+                    </strong>
+
+                    <small class="analytics-positive">
+                        ↑ 12.8%
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon orange">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        New Users
+                    </span>
+
+                    <strong id="analyticsUsers">
+                        84
+                    </strong>
+
+                    <small class="analytics-positive">
+                        ↑ 9.6%
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="user-stat-card">
+
+                <div class="stat-icon purple">
+                    🏟️
+                </div>
+
+                <div>
+
+                    <span>
+                        Occupancy
+                    </span>
+
+                    <strong id="analyticsOccupancy">
+                        82%
+                    </strong>
+
+                    <small class="analytics-positive">
+                        ↑ 5.2%
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAIN CHARTS -->
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel analytics-large-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Revenue Performance
+                        </h2>
+
+                        <p>
+                            Revenue generated over the selected period.
+                        </p>
+
+                    </div>
+
+                    <span class="analytics-chart-label">
+                        ₹1.24L
+                    </span>
+
+                </div>
+
+                <div class="analytics-chart-box">
+
+                    <canvas
+                        id="analyticsRevenueChart">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Booking Distribution
+                        </h2>
+
+                        <p>
+                            Booking type breakdown.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="analytics-donut-box">
+
+                    <canvas
+                        id="bookingTypeChart">
+                    </canvas>
+
+                </div>
+
+                <div class="analytics-mini-legend">
+
+                    <span>
+                        <i class="legend-circle cricket"></i>
+                        Cricket 68%
+                    </span>
+
+                    <span>
+                        <i class="legend-circle football"></i>
+                        Football 21%
+                    </span>
+
+                    <span>
+                        <i class="legend-circle other"></i>
+                        Other 11%
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BOOKING + USERS -->
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel analytics-large-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Booking Trends
+                        </h2>
+
+                        <p>
+                            Daily booking volume.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="analytics-chart-box">
+
+                    <canvas
+                        id="analyticsBookingChart">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            User Growth
+                        </h2>
+
+                        <p>
+                            New user registrations.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="analytics-chart-box small">
+
+                    <canvas
+                        id="analyticsUserChart">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERFORMANCE METRICS -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Turf Performance
+                    </h2>
+
+                    <p>
+                        Compare turf utilisation and revenue.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-performance-list">
+
+
+                <div class="performance-row">
+
+                    <div class="performance-info">
+
+                        <strong>
+                            TurfX Arena
+                        </strong>
+
+                        <span>
+                            92% occupancy
+                        </span>
+
+                    </div>
+
+                    <div class="performance-track">
+
+                        <span
+                            style="width:92%;">
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        ₹62,400
+                    </strong>
+
+                </div>
+
+
+                <div class="performance-row">
+
+                    <div class="performance-info">
+
+                        <strong>
+                            Champions Turf
+                        </strong>
+
+                        <span>
+                            86% occupancy
+                        </span>
+
+                    </div>
+
+                    <div class="performance-track">
+
+                        <span
+                            style="width:86%;">
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        ₹54,800
+                    </strong>
+
+                </div>
+
+
+                <div class="performance-row">
+
+                    <div class="performance-info">
+
+                        <strong>
+                            City Sports Arena
+                        </strong>
+
+                        <span>
+                            74% occupancy
+                        </span>
+
+                    </div>
+
+                    <div class="performance-track">
+
+                        <span
+                            style="width:74%;">
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        ₹43,600
+                    </strong>
+
+                </div>
+
+
+                <div class="performance-row">
+
+                    <div class="performance-info">
+
+                        <strong>
+                            Super Strikers Ground
+                        </strong>
+
+                        <span>
+                            69% occupancy
+                        </span>
+
+                    </div>
+
+                    <div class="performance-track">
+
+                        <span
+                            style="width:69%;">
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        ₹38,200
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INSIGHTS -->
+
+        <section class="dashboard-content-grid">
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Peak Hours
+                        </h2>
+
+                        <p>
+                            Most popular booking times.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="peak-hours-chart">
+
+                    <div>
+
+                        <span>
+                            06 PM
+                        </span>
+
+                        <div class="peak-track">
+                            <span style="width:95%;"></span>
+                        </div>
+
+                        <strong>
+                            95%
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            07 PM
+                        </span>
+
+                        <div class="peak-track">
+                            <span style="width:92%;"></span>
+                        </div>
+
+                        <strong>
+                            92%
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            08 PM
+                        </span>
+
+                        <div class="peak-track">
+                            <span style="width:88%;"></span>
+                        </div>
+
+                        <strong>
+                            88%
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            09 PM
+                        </span>
+
+                        <div class="peak-track">
+                            <span style="width:79%;"></span>
+                        </div>
+
+                        <strong>
+                            79%
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            10 PM
+                        </span>
+
+                        <div class="peak-track">
+                            <span style="width:61%;"></span>
+                        </div>
+
+                        <strong>
+                            61%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Business Insights
+                        </h2>
+
+                        <p>
+                            Automated performance summary.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analytics-insight-list">
+
+                    <div>
+
+                        <span class="insight-icon green">
+                            📈
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Revenue is growing
+                            </strong>
+
+                            <p>
+                                Revenue increased 18.4% compared
+                                with the previous period.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="insight-icon blue">
+                            🏟️
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Evening slots are popular
+                            </strong>
+
+                            <p>
+                                6PM-10PM contributes most of the
+                                daily booking volume.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="insight-icon orange">
+                            ⭐
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                TurfX Arena leads
+                            </strong>
+
+                            <p>
+                                TurfX Arena currently has the
+                                highest occupancy.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <span>
+                © 2026 TurfX
+            </span>
+
+            <span>
+                Smart Business Analytics
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const analyticsData = {
+
+    week: {
+        revenue: [12000, 14500, 17200, 15800, 19400, 22100, 23800],
+        bookings: [18, 21, 24, 22, 31, 38, 42],
+        users: [8, 12, 11, 15, 16, 20, 22],
+        revenueTotal: "₹1.24L",
+        bookingTotal: "326",
+        userTotal: "84",
+        occupancy: "82%"
+    },
+
+    month: {
+        revenue: [42000, 51000, 47000, 62000, 71000, 68000, 82000],
+        bookings: [82, 96, 91, 108, 121, 117, 134],
+        users: [25, 34, 29, 41, 46, 43, 51],
+        revenueTotal: "₹4.82L",
+        bookingTotal: "1,248",
+        userTotal: "326",
+        occupancy: "84%"
+    },
+
+    year: {
+        revenue: [280000, 320000, 360000, 390000, 430000, 482000],
+        bookings: [810, 880, 940, 1010, 1140, 1248],
+        users: [210, 240, 265, 289, 315, 326],
+        revenueTotal: "₹22.4L",
+        bookingTotal: "6,028",
+        userTotal: "1,645",
+        occupancy: "87%"
+    }
+
+};
+
+
+let revenueChart = null;
+let bookingChart = null;
+let userChart = null;
+let bookingTypeChart = null;
+
+
+function createAnalyticsCharts(
+    period = "week"
+) {
+
+    if (
+        typeof Chart ===
+        "undefined"
+    ) {
+        return;
+    }
+
+
+    const data =
+        analyticsData[period];
+
+
+    const revenueCanvas =
+        document.querySelector(
+            "#analyticsRevenueChart"
+        );
+
+    const bookingCanvas =
+        document.querySelector(
+            "#analyticsBookingChart"
+        );
+
+    const userCanvas =
+        document.querySelector(
+            "#analyticsUserChart"
+        );
+
+    const typeCanvas =
+        document.querySelector(
+            "#bookingTypeChart"
+        );
+
+
+    if (revenueChart) {
+        revenueChart.destroy();
+    }
+
+    if (bookingChart) {
+        bookingChart.destroy();
+    }
+
+    if (userChart) {
+        userChart.destroy();
+    }
+
+    if (bookingTypeChart) {
+        bookingTypeChart.destroy();
+    }
+
+
+    const labels =
+        period === "year"
+            ? [
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug"
+            ]
+            : [
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat",
+                "Sun"
+            ];
+
+
+    if (revenueCanvas) {
+
+        revenueChart =
+            new Chart(
+                revenueCanvas,
+                {
+
+                    type: "line",
+
+                    data: {
+
+                        labels: labels,
+
+                        datasets: [
+                            {
+                                label: "Revenue",
+
+                                data:
+                                    data.revenue,
+
+                                borderWidth: 2,
+
+                                tension: .35,
+
+                                fill: true
+                            }
+                        ]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        plugins: {
+
+                            legend: {
+                                display: false
+                            }
+
+                        },
+
+                        scales: {
+
+                            y: {
+                                beginAtZero: true
+                            }
+
+                        }
+
+                    }
+
+                }
+            );
+
+    }
+
+
+    if (bookingCanvas) {
+
+        bookingChart =
+            new Chart(
+                bookingCanvas,
+                {
+
+                    type: "bar",
+
+                    data: {
+
+                        labels: labels,
+
+                        datasets: [
+                            {
+                                label: "Bookings",
+
+                                data:
+                                    data.bookings,
+
+                                borderWidth: 1
+                            }
+                        ]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        plugins: {
+
+                            legend: {
+                                display: false
+                            }
+
+                        },
+
+                        scales: {
+
+                            y: {
+                                beginAtZero: true
+                            }
+
+                        }
+
+                    }
+
+                }
+            );
+
+    }
+
+
+    if (userCanvas) {
+
+        userChart =
+            new Chart(
+                userCanvas,
+                {
+
+                    type: "line",
+
+                    data: {
+
+                        labels: labels,
+
+                        datasets: [
+                            {
+                                label: "Users",
+
+                                data:
+                                    data.users,
+
+                                borderWidth: 2,
+
+                                tension: .35,
+
+                                fill: true
+                            }
+                        ]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        plugins: {
+
+                            legend: {
+                                display: false
+                            }
+
+                        },
+
+                        scales: {
+
+                            y: {
+                                beginAtZero: true
+                            }
+
+                        }
+
+                    }
+
+                }
+            );
+
+    }
+
+
+    if (typeCanvas) {
+
+        bookingTypeChart =
+            new Chart(
+                typeCanvas,
+                {
+
+                    type: "doughnut",
+
+                    data: {
+
+                        labels: [
+                            "Cricket",
+                            "Football",
+                            "Other"
+                        ],
+
+                        datasets: [
+                            {
+                                data: [
+                                    68,
+                                    21,
+                                    11
+                                ],
+
+                                borderWidth: 1
+                            }
+                        ]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        cutout: "70%",
+
+                        plugins: {
+
+                            legend: {
+                                display: false
+                            }
+
+                        }
+
+                    }
+
+                }
+            );
+
+    }
+
+
+    document.querySelector(
+        "#analyticsRevenue"
+    ).textContent =
+        data.revenueTotal;
+
+    document.querySelector(
+        "#analyticsBookings"
+    ).textContent =
+        data.bookingTotal;
+
+    document.querySelector(
+        "#analyticsUsers"
+    ).textContent =
+        data.userTotal;
+
+    document.querySelector(
+        "#analyticsOccupancy"
+    ).textContent =
+        data.occupancy;
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        createAnalyticsCharts(
+            "week"
+        );
+
+
+        document
+            .querySelectorAll(
+                ".analytics-period"
+            )
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            document
+                                .querySelectorAll(
+                                    ".analytics-period"
+                                )
+                                .forEach(
+                                    function (item) {
+
+                                        item.classList
+                                            .remove(
+                                                "active"
+                                            );
+
+                                    }
+                                );
+
+                            button.classList.add(
+                                "active"
+                            );
+
+                            createAnalyticsCharts(
+                                button.dataset.period
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+);
+
+</script>
+
+{% endblock %}

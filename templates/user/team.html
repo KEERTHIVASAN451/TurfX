@@ -1,0 +1,432 @@
+{% extends "shared/head.html" %}
+
+{% block title %}My Team | TurfX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-shell">
+
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            🏏 <span>Turf<span class="brand-green">X</span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="/user/dashboard">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/search-turf">
+                🏟️ <span>Find Turf</span>
+            </a>
+
+            <a href="/booking-history">
+                📅 <span>My Bookings</span>
+            </a>
+
+            <a href="/team" class="active">
+                👥 <span>My Team</span>
+            </a>
+
+            <a href="/tournament">
+                🏆 <span>Tournaments</span>
+            </a>
+
+            <a href="/scorecard">
+                📊 <span>Scorecard</span>
+            </a>
+
+            <a href="/notifications">
+                🔔 <span>Notifications</span>
+            </a>
+
+            <a href="/profile">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+        </div>
+
+    </aside>
+
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h1>My Team 👥</h1>
+                <p>Manage your squad and get ready for tournaments.</p>
+            </div>
+
+            <div style="display:flex;gap:8px;">
+
+                <a href="/join-team"
+                   class="secondary-action-btn">
+                    Join Team
+                </a>
+
+                <a href="/create-team"
+                   class="dashboard-primary-btn">
+                    + Create Team
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- TEAM HERO -->
+
+        <section class="team-hero">
+
+            <div class="team-logo">
+                ⚡
+            </div>
+
+            <div class="team-hero-info">
+
+                <span>YOUR CURRENT TEAM</span>
+
+                <h2>Thunder XI</h2>
+
+                <p>
+                    Chennai • Established 2026
+                </p>
+
+                <div class="team-meta">
+
+                    <span>👥 11 Players</span>
+                    <span>🏆 3 Tournaments</span>
+                    <span>⭐ 4 Wins</span>
+
+                </div>
+
+            </div>
+
+            <div class="team-hero-actions">
+
+                <a href="/tournament"
+                   class="dashboard-primary-btn">
+                    Find Tournament
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATS -->
+
+        <section class="team-stat-grid">
+
+            <div>
+                <span>Matches</span>
+                <strong>12</strong>
+            </div>
+
+            <div>
+                <span>Wins</span>
+                <strong>8</strong>
+            </div>
+
+            <div>
+                <span>Losses</span>
+                <strong>4</strong>
+            </div>
+
+            <div>
+                <span>Win Rate</span>
+                <strong>66%</strong>
+            </div>
+
+        </section>
+
+
+        <!-- TEAM MEMBERS -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Team Members</h2>
+                    <p>Your current playing squad</p>
+                </div>
+
+                <a href="/create-team">
+                    Manage Team
+                </a>
+
+            </div>
+
+
+            <div class="team-member-grid">
+
+                <div class="team-member-card captain">
+
+                    <div class="player-avatar">
+                        AK
+                    </div>
+
+                    <div>
+                        <strong>Arun Kumar</strong>
+                        <span>Captain • All Rounder</span>
+                    </div>
+
+                    <b>C</b>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        RK
+                    </div>
+
+                    <div>
+                        <strong>Rahul Kumar</strong>
+                        <span>Vice Captain • Batsman</span>
+                    </div>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        VS
+                    </div>
+
+                    <div>
+                        <strong>Vignesh S</strong>
+                        <span>Batsman</span>
+                    </div>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        PK
+                    </div>
+
+                    <div>
+                        <strong>Prakash K</strong>
+                        <span>Bowler</span>
+                    </div>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        MK
+                    </div>
+
+                    <div>
+                        <strong>Manoj K</strong>
+                        <span>Wicket Keeper</span>
+                    </div>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        SJ
+                    </div>
+
+                    <div>
+                        <strong>Sanjay J</strong>
+                        <span>All Rounder</span>
+                    </div>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        AK
+                    </div>
+
+                    <div>
+                        <strong>Ajay K</strong>
+                        <span>Batsman</span>
+                    </div>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        VK
+                    </div>
+
+                    <div>
+                        <strong>Vikram K</strong>
+                        <span>Bowler</span>
+                    </div>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        RS
+                    </div>
+
+                    <div>
+                        <strong>Rohit S</strong>
+                        <span>Batsman</span>
+                    </div>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        DK
+                    </div>
+
+                    <div>
+                        <strong>Dinesh K</strong>
+                        <span>Bowler</span>
+                    </div>
+
+                </div>
+
+
+                <div class="team-member-card">
+
+                    <div class="player-avatar">
+                        MS
+                    </div>
+
+                    <div>
+                        <strong>Manish S</strong>
+                        <span>All Rounder</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT RESULTS -->
+
+        <section class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Recent Results</h2>
+                    <p>Latest matches played by your team</p>
+                </div>
+
+                <a href="/scorecard">
+                    View Scorecard
+                </a>
+
+            </div>
+
+
+            <div class="team-result-list">
+
+                <div class="team-result">
+
+                    <div class="result-team">
+                        Thunder XI
+                    </div>
+
+                    <strong>
+                        148/6
+                    </strong>
+
+                    <span>VS</span>
+
+                    <div class="result-team">
+                        Royal Kings
+                    </div>
+
+                    <strong>
+                        132/8
+                    </strong>
+
+                    <span class="result-win">
+                        WON
+                    </span>
+
+                </div>
+
+
+                <div class="team-result">
+
+                    <div class="result-team">
+                        Thunder XI
+                    </div>
+
+                    <strong>
+                        126/9
+                    </strong>
+
+                    <span>VS</span>
+
+                    <div class="result-team">
+                        Super Strikers
+                    </div>
+
+                    <strong>
+                        130/5
+                    </strong>
+
+                    <span class="result-loss">
+                        LOST
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+
+            <span>© 2026 TurfX</span>
+
+            <span>Build your squad. Win together.</span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+{% endblock %}

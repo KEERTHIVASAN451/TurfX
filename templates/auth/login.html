@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Login
+    </title>
+
+    <meta
+        name="description"
+        content="Login to your TurfX account.">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="login-page">
+
+
+<div class="login-shell">
+
+
+    <!-- =====================================================
+         LEFT CINEMATIC SIDE
+         ===================================================== -->
+
+    <section class="login-showcase">
+
+
+        <!-- PHOTO -->
+
+        <div class="login-parallax-photo"></div>
+
+
+        <!-- DARK OVERLAY -->
+
+        <div class="login-parallax-overlay"></div>
+
+
+        <!-- GLOW -->
+
+        <div class="login-parallax-glow"></div>
+
+
+        <!-- CONTENT -->
+
+        <div class="login-showcase-inner">
+
+
+            <!-- BRAND -->
+
+            <a
+                href="/"
+                class="login-brand">
+
+                <span class="login-brand-mark">
+                    🏏
+                </span>
+
+                <span>
+                    TurfX
+                </span>
+
+            </a>
+
+
+
+            <!-- HERO COPY -->
+
+            <div class="login-showcase-copy">
+
+
+                <span class="login-eyebrow">
+                    SMART SPORTS PLATFORM
+                </span>
+
+
+                <h1>
+
+                    <span class="login-white-text">
+                        Play More.
+                    </span>
+
+                    <br>
+
+                    <span class="login-white-text">
+                        Manage Better.
+                    </span>
+
+                </h1>
+
+
+                <p class="login-white-description">
+
+                    Your complete platform for
+                    turf booking, cricket tournaments,
+                    teams and live scores.
+
+                </p>
+
+
+                <!-- FEATURES -->
+
+                <div class="login-feature-list">
+
+
+                    <div class="login-feature">
+
+                        <span class="login-feature-icon">
+                            📅
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Instant Turf Booking
+                            </strong>
+
+                            <small>
+                                Find a slot and get on the pitch.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="login-feature">
+
+                        <span class="login-feature-icon">
+                            🏆
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Tournament Management
+                            </strong>
+
+                            <small>
+                                Teams, fixtures and standings.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="login-feature">
+
+                        <span class="login-feature-icon">
+                            📊
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Live Cricket Scores
+                            </strong>
+
+                            <small>
+                                Follow every run and wicket.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BOTTOM -->
+
+            <div class="login-showcase-bottom">
+
+                <span>
+                    TURFX
+                </span>
+
+                <span>
+                    PLAY • COMPETE • WIN
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RIGHT PREMIUM BLUE LOGIN SIDE
+         ===================================================== -->
+
+    <section class="login-panel">
+
+
+        <!-- BLUE BACKGROUND GLOWS -->
+
+        <div
+            class="login-blue-glow blue-glow-one">
+        </div>
+
+
+        <div
+            class="login-blue-glow blue-glow-two">
+        </div>
+
+
+
+        <!-- LOGIN CARD -->
+
+        <div
+            class="login-card premium-login-card">
+
+
+            <!-- CARD SHINE EFFECT -->
+
+            <div
+                class="login-card-shine">
+            </div>
+
+
+
+            <!-- CARD HEADER -->
+
+            <div class="login-card-top">
+
+
+                <!-- MOBILE LOGO -->
+
+                <div class="login-mobile-logo">
+
+                    🏏
+
+                    <strong>
+                        Turf<span>X</span>
+                    </strong>
+
+                </div>
+
+
+                <span class="login-mini-label">
+                    TURFX ACCOUNT
+                </span>
+
+
+                <h2 class="premium-slide-element">
+
+                    Welcome Back 👋
+
+                </h2>
+
+
+                <p class="premium-slide-element">
+
+                    Login to continue your
+                    TurfX experience.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- FLASH MESSAGES -->
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    <div class="login-alert-list">
+
+                        {% for category, message in messages %}
+
+                            <div
+                                class="login-alert {{ category }}">
+
+                                {{ message }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            {% endwith %}
+
+
+
+            <!-- LOGIN FORM -->
+
+            <form
+                action="/login"
+                method="POST"
+                class="login-form premium-login-form"
+                data-loading>
+
+
+                <!-- EMAIL -->
+
+                <div
+                    class="login-field premium-field premium-slide-element">
+
+                    <label for="email">
+
+                        Email Address
+
+                    </label>
+
+
+                    <div class="login-control">
+
+                        <span
+                            class="login-control-icon">
+
+                            ✉
+
+                        </span>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div
+                    class="login-field premium-field premium-slide-element">
+
+                    <label for="password">
+
+                        Password
+
+                    </label>
+
+
+                    <div class="login-control">
+
+                        <span
+                            class="login-control-icon">
+
+                            🔒
+
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+
+
+                        <button
+                            type="button"
+                            class="login-show-password"
+                            data-password-toggle="#password">
+
+                            Show
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- OPTIONS -->
+
+                <div
+                    class="login-form-options premium-slide-element">
+
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            name="remember"
+                            value="1">
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <a
+                        href="/forgot-password">
+
+                        Forgot password?
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <div
+                    class="premium-button-wrap premium-slide-element">
+
+
+                    <button
+                        type="submit"
+                        class="login-submit premium-login-submit">
+
+
+                        <span>
+                            Login to TurfX
+                        </span>
+
+
+                        <span
+                            class="premium-arrow">
+
+                            →
+
+                        </span>
+
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <div
+                class="login-create premium-slide-element">
+
+
+                <span>
+
+                    Don't have an account?
+
+                </span>
+
+
+                <a href="/register">
+
+                    Create Account
+
+                </a>
+
+            </div>
+
+
+
+            <!-- OR -->
+
+            <div
+                class="login-or premium-slide-element">
+
+                <span>
+                    OR
+                </span>
+
+            </div>
+
+
+
+            <!-- BACK HOME -->
+
+            <a
+                href="/"
+                class="login-back premium-back premium-slide-element">
+
+
+                <span>
+                    ←
+                </span>
+
+
+                Back to Home
+
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+
+</body>
+
+</html>

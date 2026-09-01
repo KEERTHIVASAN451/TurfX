@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TurfX | Points Table
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/tournament.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="tournament-navbar">
+
+    <a
+        href="/"
+        class="tournament-logo">
+
+        🏏
+
+        <strong>
+            Turf<span>X</span>
+        </strong>
+
+    </a>
+
+
+    <nav class="tournament-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/search-turf">
+            Find Turf
+        </a>
+
+        <a
+            href="/tournament"
+            class="active">
+
+            Tournaments
+
+        </a>
+
+        <a href="/scorecard">
+            Live Score
+        </a>
+
+    </nav>
+
+
+    <div class="tournament-nav-actions">
+
+        <a
+            href="/login"
+            class="tournament-login-btn">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="tournament-page">
+
+
+    <!-- HEADER -->
+
+    <section class="tournament-header">
+
+        <div class="tournament-header-content">
+
+            <span class="tournament-status live">
+
+                🏆 STANDINGS
+
+            </span>
+
+            <h1>
+                Points Table
+            </h1>
+
+            <p>
+                Track every win, loss, point and NRR
+                throughout the tournament.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-header-actions">
+
+            <a
+                href="/tournament"
+                class="tournament-btn">
+
+                ← Tournament
+
+            </a>
+
+
+            <a
+                href="/tournament/fixtures"
+                class="tournament-btn primary">
+
+                Fixtures →
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- TOURNAMENT INFO -->
+
+    <section class="tournament-stat-grid">
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon green">
+                🏆
+            </div>
+
+            <div>
+
+                <span>
+                    Current Leader
+                </span>
+
+                <strong>
+                    VK
+                </strong>
+
+                <small>
+                    Victory Kings
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon blue">
+                ✅
+            </div>
+
+            <div>
+
+                <span>
+                    Qualified
+                </span>
+
+                <strong>
+                    4
+                </strong>
+
+                <small>
+                    Top teams
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon orange">
+                🏏
+            </div>
+
+            <div>
+
+                <span>
+                    Matches Played
+                </span>
+
+                <strong>
+                    18
+                </strong>
+
+                <small>
+                    League stage
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="tournament-stat-card">
+
+            <div class="tournament-stat-icon purple">
+                📊
+            </div>
+
+            <div>
+
+                <span>
+                    Matches Left
+                </span>
+
+                <strong>
+                    38
+                </strong>
+
+                <small>
+                    Remaining
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- POINTS TABLE -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+
+            <div>
+
+                <span>
+                    LEAGUE STAGE
+                </span>
+
+                <h2>
+                    Chennai Weekend Premier League
+                </h2>
+
+                <p>
+                    16 Teams • 8 Overs • Top 4 qualify
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="tournament-btn primary"
+                onclick="sortPointsTable()">
+
+                Sort by Points
+
+            </button>
+
+
+        </div>
+
+
+
+        <div class="points-table-wrapper">
+
+
+            <table
+                id="pointsTable"
+                class="points-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            POS
+                        </th>
+
+                        <th>
+                            TEAM
+                        </th>
+
+                        <th>
+                            P
+                        </th>
+
+                        <th>
+                            W
+                        </th>
+
+                        <th>
+                            L
+                        </th>
+
+                        <th>
+                            NRR
+                        </th>
+
+                        <th>
+                            PTS
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <!-- 1 -->
+
+                    <tr
+                        class="points-row"
+                        data-wins="6"
+                        data-draws="0"
+                        data-losses="1">
+
+
+                        <td class="team-position">
+                            01
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+                                    VK
+                                </div>
+
+                                <strong>
+                                    Victory Kings
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            6
+                        </td>
+
+                        <td>
+                            1
+                        </td>
+
+                        <td>
+                            +1.84
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                12
+                            </strong>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- 2 -->
+
+                    <tr
+                        class="points-row"
+                        data-wins="5"
+                        data-draws="0"
+                        data-losses="2">
+
+
+                        <td class="team-position">
+                            02
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+                                    CW
+                                </div>
+
+                                <strong>
+                                    Chennai Warriors
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            5
+                        </td>
+
+                        <td>
+                            2
+                        </td>
+
+                        <td>
+                            +1.12
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                10
+                            </strong>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- 3 -->
+
+                    <tr
+                        class="points-row"
+                        data-wins="4"
+                        data-draws="0"
+                        data-losses="3">
+
+
+                        <td class="team-position">
+                            03
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+                                    SS
+                                </div>
+
+                                <strong>
+                                    Super Strikers
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            4
+                        </td>
+
+                        <td>
+                            3
+                        </td>
+
+                        <td>
+                            +0.54
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                8
+                            </strong>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- 4 -->
+
+                    <tr
+                        class="points-row"
+                        data-wins="3"
+                        data-draws="0"
+                        data-losses="4">
+
+
+                        <td class="team-position">
+                            04
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+                                    RC
+                                </div>
+
+                                <strong>
+                                    Royal Challengers
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            3
+                        </td>
+
+                        <td>
+                            4
+                        </td>
+
+                        <td>
+                            -0.18
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                6
+                            </strong>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- 5 -->
+
+                    <tr
+                        class="points-row"
+                        data-wins="2"
+                        data-draws="1"
+                        data-losses="4">
+
+
+                        <td class="team-position">
+                            05
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+                                    CT
+                                </div>
+
+                                <strong>
+                                    Chennai Titans
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            2
+                        </td>
+
+                        <td>
+                            4
+                        </td>
+
+                        <td>
+                            -0.44
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                5
+                            </strong>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- 6 -->
+
+                    <tr
+                        class="points-row"
+                        data-wins="1"
+                        data-draws="0"
+                        data-losses="6">
+
+
+                        <td class="team-position">
+                            06
+                        </td>
+
+
+                        <td>
+
+                            <div class="team-cell">
+
+                                <div class="team-logo">
+                                    BW
+                                </div>
+
+                                <strong>
+                                    Blue Warriors
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            7
+                        </td>
+
+                        <td>
+                            1
+                        </td>
+
+                        <td>
+                            6
+                        </td>
+
+                        <td>
+                            -1.22
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                2
+                            </strong>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- QUALIFICATION -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+
+            <div>
+
+                <span>
+                    QUALIFICATION
+                </span>
+
+                <h2>
+                    Knockout Picture
+                </h2>
+
+                <p>
+                    Top four teams advance to the next stage.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="tournament-grid">
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <span class="tournament-status completed">
+                        1ST PLACE
+                    </span>
+
+                    <h3 class="tournament-card-title">
+                        Victory Kings
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        12 points • +1.84 NRR
+                    </p>
+
+                    <a
+                        href="/tournament/leaderboard"
+                        class="tournament-card-btn">
+
+                        View Team →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <span class="tournament-status completed">
+                        2ND PLACE
+                    </span>
+
+                    <h3 class="tournament-card-title">
+                        Chennai Warriors
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        10 points • +1.12 NRR
+                    </p>
+
+                    <a
+                        href="/tournament/leaderboard"
+                        class="tournament-card-btn">
+
+                        View Team →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="tournament-card">
+
+                <div class="tournament-card-body">
+
+                    <span class="tournament-status upcoming">
+                        3RD PLACE
+                    </span>
+
+                    <h3 class="tournament-card-title">
+                        Super Strikers
+                    </h3>
+
+                    <p class="tournament-card-description">
+                        8 points • +0.54 NRR
+                    </p>
+
+                    <a
+                        href="/tournament/leaderboard"
+                        class="tournament-card-btn">
+
+                        View Team →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- TOP PERFORMERS -->
+
+    <section class="tournament-section">
+
+
+        <div class="tournament-section-heading">
+
+
+            <div>
+
+                <span>
+                    PLAYER STATS
+                </span>
+
+                <h2>
+                    Current Leaders
+                </h2>
+
+                <p>
+                    Best individual performances so far.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/tournament/leaderboard"
+                class="view-all-link">
+
+                Full Leaderboard →
+
+            </a>
+
+        </div>
+
+
+
+        <div class="leaderboard-list">
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    01
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        AK
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Arun Kumar
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            486 Runs • Victory Kings
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    486
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    02
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        RH
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Rahul
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            421 Runs • Chennai Warriors
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    421
+                </strong>
+
+            </div>
+
+
+
+            <div class="leaderboard-item">
+
+                <span class="leaderboard-rank">
+                    03
+                </span>
+
+
+                <div class="leaderboard-player">
+
+                    <div class="team-logo">
+                        VG
+                    </div>
+
+                    <div>
+
+                        <strong class="leaderboard-player-name">
+                            Vignesh
+                        </strong>
+
+                        <p class="leaderboard-player-team">
+                            18 Wickets • Victory Kings
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <strong class="leaderboard-value">
+                    18 W
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CTA -->
+
+    <section class="tournament-bottom-cta">
+
+        <div>
+
+            <span>
+                KEEP CLIMBING
+            </span>
+
+            <h2>
+                Every Run Matters.
+            </h2>
+
+            <p>
+                Follow fixtures, live scores and team progress.
+            </p>
+
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:center;
+                    gap:9px;
+                    margin-top:22px;
+                    flex-wrap:wrap;
+                ">
+
+                <a
+                    href="/tournament/fixtures"
+                    class="tournament-main-btn">
+
+                    View Fixtures →
+
+                </a>
+
+
+                <a
+                    href="/tournament/leaderboard"
+                    class="tournament-outline-btn">
+
+                    Player Leaderboard
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="tournament-footer">
+
+        <div>
+
+            <strong>
+                🏏 TurfX
+            </strong>
+
+            <p>
+                Smart turf booking and cricket tournament management.
+            </p>
+
+        </div>
+
+
+        <div class="tournament-footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/search-turf">
+                Find Turf
+            </a>
+
+            <a href="/tournament">
+                Tournaments
+            </a>
+
+            <a href="/scorecard">
+                Live Score
+            </a>
+
+        </div>
+
+
+        <div class="tournament-footer-copy">
+
+            © 2026 TurfX. All rights reserved.
+
+        </div>
+
+    </footer>
+
+</main>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+<script
+    src="{{ url_for('static', filename='js/tournament.js') }}">
+</script>
+
+</body>
+
+</html>
