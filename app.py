@@ -145,6 +145,14 @@ def initialize_database():
         return False
 
 
+# Auto-initialize tables safely on startup (e.g., under Gunicorn / Render)
+try:
+    with app.app_context():
+        db.create_all()
+except Exception as _startup_err:
+    print(f"[Notice] Startup database check: {_startup_err}")
+
+
 # =========================================================
 # EMAIL HELPER
 # =========================================================
