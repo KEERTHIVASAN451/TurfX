@@ -1463,6 +1463,40 @@ def turf_details(turf_id):
             .all()
         )
 
+        if not slots:
+            default_slot_times = [
+                ("06:00 AM", "07:00 AM", 500.0),
+                ("07:00 AM", "08:00 AM", 500.0),
+                ("08:00 AM", "09:00 AM", 600.0),
+                ("09:00 AM", "10:00 AM", 700.0),
+                ("05:00 PM", "06:00 PM", 1000.0),
+                ("06:00 PM", "07:00 PM", 1000.0),
+                ("07:00 PM", "08:00 PM", 1200.0),
+                ("09:00 PM", "10:00 PM", 1200.0),
+                ("10:00 PM", "11:00 PM", 900.0),
+            ]
+            for s_start, s_end, s_price in default_slot_times:
+                TurfSlot(
+                    turf_id=turf.id,
+                    slot_date=selected_date,
+                    start_time=s_start,
+                    end_time=s_end,
+                    price=s_price,
+                    status="available"
+                ).save()
+            slots = (
+                TurfSlot.query
+                .filter(
+                    TurfSlot.turf_id == turf.id,
+                    TurfSlot.slot_date == selected_date,
+                    TurfSlot.status == "available"
+                )
+                .order_by(
+                    TurfSlot.start_time.asc()
+                )
+                .all()
+            )
+
         return render_template(
             "user/turf_details.html",
             turf=turf,
@@ -1777,6 +1811,9 @@ def booking():
         )
 
         if not slot:
+            slot = TurfSlot.objects(turf_id=turf.id, slot_date=booking_date, status="available").first()
+
+        if not slot:
 
             flash(
                 "Selected slot does not exist.",
@@ -1893,6 +1930,7 @@ def booking():
         )
 
         slot.status = "booked"
+        slot.save()
 
         db.session.commit()
 
