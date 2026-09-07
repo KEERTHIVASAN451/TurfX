@@ -1,1428 +1,354 @@
-# =========================================================
-# TurfX - Database Models
+﻿# =========================================================
+# TurfX - Database Models (MongoDB Atlas via MongoEngine)
 # File: models.py
 # =========================================================
 
-from datetime import (
-    datetime,
-    timezone
-)
+from datetime import datetime, date, timezone
+import mongoengine as me
+from werkzeug.security import generate_password_hash, check_password_hash
+from extensions import MongoQueryWrapper
 
-from sqlalchemy.dialects.mysql import INTEGER
-
-from werkzeug.security import (
-    generate_password_hash,
-    check_password_hash
-)
-
-from extensions import db
-
-
-# =========================================================
-# UTC DATETIME HELPER
-# =========================================================
 
 def utc_now():
-    """
-    Return timezone-naive UTC datetime.
+    """Return timezone-naive UTC datetime."""
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
-    MySQL DATETIME fields in this project store UTC
-    without timezone information.
-    """
 
-    return (
-        datetime.now(
-            timezone.utc
-        ).replace(
-            tzinfo=None
-        )
-    )
+class QueryDescriptor:
+    """Descriptor returning a SQLAlchemy-compatible query wrapper."""
+    def __get__(self, instance, owner):
+        return MongoQueryWrapper(owner)
 
 
 # =========================================================
 # USER MODEL
 # =========================================================
 
-class User(db.Model):
+class User(me.Document):
+    meta = {
+        "collection": "users",
+        "indexes": [
+            "email",
+            "role_id",
+            "status",
+        ]
+    }
 
-    __tablename__ = "users"
+    id = me.SequenceField(primary_key=True)
+    role_id = me.IntField(required=True, default=2)
+    name = me.StringField(required=True, max_length=120)
+    email = me.StringField(required=True, unique=True, max_length=150)
+    phone = me.StringField(max_length=20)
+    password_hash = me.StringField(required=True, max_length=255)
+    profile_image = me.StringField(max_length=255)
+    status = me.StringField(default="active", max_length=20)
+    email_verified = me.BooleanField(default=False)
+    phone_verified = me.BooleanField(default=False)
+    last_login_at = me.DateTimeField()
+    created_at = me.DateTimeField(default=utc_now)
+    updated_at = me.DateTimeField(default=utc_now)
 
+    query = QueryDescriptor()
 
-    # -----------------------------------------------------
-    # PRIMARY KEY
-    # MySQL: INT UNSIGNED
-    # -----------------------------------------------------
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
-    id = db.Column(
-        INTEGER(unsigned=True),
-        primary_key=True
-    )
-
-
-    # -----------------------------------------------------
-    # ROLE ID
-    # MySQL: INT UNSIGNED
-    # -----------------------------------------------------
-
-    role_id = db.Column(
-        INTEGER(unsigned=True),
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # NAME
-    # Python: user.name
-    # MySQL: full_name
-    # -----------------------------------------------------
-
-    name = db.Column(
-        "full_name",
-        db.String(120),
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # EMAIL
-    # -----------------------------------------------------
-
-    email = db.Column(
-        db.String(150),
-        unique=True,
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # PHONE
-    # -----------------------------------------------------
-
-    phone = db.Column(
-        db.String(20),
-        unique=True,
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # PASSWORD HASH
-    # -----------------------------------------------------
-
-    password_hash = db.Column(
-        db.String(255),
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # PROFILE IMAGE
-    # -----------------------------------------------------
-
-    profile_image = db.Column(
-        db.String(255),
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # ACCOUNT STATUS
-    # active / inactive / blocked
-    # -----------------------------------------------------
-
-    status = db.Column(
-        db.String(20),
-        nullable=False,
-        default="active"
-    )
-
-
-    # -----------------------------------------------------
-    # EMAIL VERIFIED
-    # -----------------------------------------------------
-
-    email_verified = db.Column(
-        db.Boolean,
-        nullable=False,
-        default=False
-    )
-
-
-    # -----------------------------------------------------
-    # PHONE VERIFIED
-    # -----------------------------------------------------
-
-    phone_verified = db.Column(
-        db.Boolean,
-        nullable=False,
-        default=False
-    )
-
-
-    # -----------------------------------------------------
-    # LAST LOGIN
-    # -----------------------------------------------------
-
-    last_login_at = db.Column(
-        db.DateTime,
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # CREATED AT
-    # -----------------------------------------------------
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # UPDATED AT
-    # -----------------------------------------------------
-
-    updated_at = db.Column(
-        db.DateTime,
-        nullable=False
-    )
-
-
-    # =====================================================
-    # SET PASSWORD
-    # =====================================================
-
-    def set_password(
-        self,
-        password
-    ):
-
-        self.password_hash = (
-            generate_password_hash(
-                password
-            )
-        )
-
-
-    # =====================================================
-    # CHECK PASSWORD
-    # =====================================================
-
-    def check_password(
-        self,
-        password
-    ):
-
+    def check_password(self, password):
         if not self.password_hash:
-
             return False
-
-
-        return check_password_hash(
-            self.password_hash,
-            password
-        )
-
-
-    # =====================================================
-    # ACTIVE ACCOUNT CHECK
-    # =====================================================
+        return check_password_hash(self.password_hash, password)
 
     @property
     def is_active(self):
-
-        return (
-            self.status == "active"
-        )
-
-
-    # =====================================================
-    # ROLE
-    # =====================================================
+        return self.status == "active"
 
     @property
     def role(self):
-
-        if self.role_id == 1:
-
-            return "admin"
-
-
-        return "user"
-
-
-    # =====================================================
-    # LAST LOGIN UPDATE
-    # =====================================================
+        return "admin" if self.role_id == 1 else "user"
 
     def update_last_login(self):
-
-        self.last_login_at = (
-            utc_now()
-        )
-
-
-    # =====================================================
-    # TIMESTAMP PREPARATION
-    # =====================================================
+        self.last_login_at = utc_now()
+        self.save()
 
     def prepare_timestamps(self):
-
         now = utc_now()
-
-
         if not self.created_at:
-
             self.created_at = now
-
-
         self.updated_at = now
 
-
-    # =====================================================
-    # REPRESENTATION
-    # =====================================================
-
     def __repr__(self):
-
-        return (
-            f"<User "
-            f"id={self.id} "
-            f"email={self.email}>"
-        )
+        return f"<User id={self.id} email={self.email}>"
 
 
 # =========================================================
 # PASSWORD RESET OTP MODEL
 # =========================================================
 
-class PasswordResetOTP(db.Model):
+class PasswordResetOTP(me.Document):
+    meta = {
+        "collection": "password_reset_otps",
+        "indexes": [
+            "user_id",
+            "purpose",
+            "is_used",
+        ]
+    }
 
-    __tablename__ = "password_reset_otps"
+    id = me.SequenceField(primary_key=True)
+    user_id = me.IntField(required=True)
+    otp_hash = me.StringField(required=True, max_length=255)
+    purpose = me.StringField(default="password_reset", max_length=30)
+    expires_at = me.DateTimeField(required=True)
+    attempts = me.IntField(default=0)
+    is_used = me.BooleanField(default=False)
+    created_at = me.DateTimeField(default=utc_now)
 
-
-    # -----------------------------------------------------
-    # PRIMARY KEY
-    # -----------------------------------------------------
-
-    id = db.Column(
-        INTEGER(unsigned=True),
-        primary_key=True
-    )
-
-
-    # -----------------------------------------------------
-    # USER ID
-    # FK -> users.id
-    # -----------------------------------------------------
-
-    user_id = db.Column(
-        INTEGER(unsigned=True),
-        db.ForeignKey(
-            "users.id",
-            ondelete="CASCADE",
-            onupdate="CASCADE"
-        ),
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # HASHED OTP
-    # -----------------------------------------------------
-
-    otp_hash = db.Column(
-        db.String(255),
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # PURPOSE
-    # -----------------------------------------------------
-
-    purpose = db.Column(
-        db.String(30),
-        nullable=False,
-        default="password_reset"
-    )
-
-
-    # -----------------------------------------------------
-    # OTP EXPIRY
-    # -----------------------------------------------------
-
-    expires_at = db.Column(
-        db.DateTime,
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # VERIFICATION ATTEMPTS
-    # -----------------------------------------------------
-
-    attempts = db.Column(
-        db.Integer,
-        nullable=False,
-        default=0
-    )
-
-
-    # -----------------------------------------------------
-    # USED STATUS
-    # -----------------------------------------------------
-
-    is_used = db.Column(
-        db.Boolean,
-        nullable=False,
-        default=False
-    )
-
-
-    # -----------------------------------------------------
-    # CREATED AT
-    # -----------------------------------------------------
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=utc_now
-    )
-
-
-    # =====================================================
-    # USER RELATIONSHIP
-    # =====================================================
-
-    user = db.relationship(
-        "User",
-        backref=db.backref(
-            "password_reset_otps",
-            lazy=True
-        )
-    )
-
-
-    # =====================================================
-    # OTP ACTIVE CHECK
-    # =====================================================
+    query = QueryDescriptor()
 
     @property
     def is_active(self):
-
         if self.is_used:
-
             return False
-
-
-        return (
-            utc_now()
-            < self.expires_at
-        )
-
-
-    # =====================================================
-    # OTP EXPIRED CHECK
-    # =====================================================
+        return utc_now() < self.expires_at
 
     @property
     def is_expired(self):
-
-        return (
-            utc_now()
-            >= self.expires_at
-        )
-
-
-    # =====================================================
-    # OTP ATTEMPT LIMIT
-    # =====================================================
+        return utc_now() >= self.expires_at
 
     @property
     def attempts_exhausted(self):
-
-        return (
-            self.attempts >= 5
-        )
-
-
-    # =====================================================
-    # REPRESENTATION
-    # =====================================================
+        return self.attempts >= 5
 
     def __repr__(self):
-
-        return (
-            f"<PasswordResetOTP "
-            f"id={self.id} "
-            f"user_id={self.user_id}>"
-        )
+        return f"<PasswordResetOTP id={self.id} user_id={self.user_id}>"
 
 
 # =========================================================
 # TURF MODEL
 # =========================================================
 
-class Turf(db.Model):
+class Turf(me.Document):
+    meta = {
+        "collection": "turfs",
+        "indexes": [
+            "owner_id",
+            "city",
+            "status",
+        ]
+    }
 
-    __tablename__ = "turfs"
+    id = me.SequenceField(primary_key=True)
+    owner_id = me.IntField(required=True)
+    name = me.StringField(required=True, max_length=150)
+    description = me.StringField()
+    address = me.StringField(required=True)
+    city = me.StringField(required=True, max_length=100)
+    state = me.StringField(max_length=100)
+    pincode = me.StringField(max_length=10)
+    latitude = me.FloatField()
+    longitude = me.FloatField()
+    contact_phone = me.StringField(max_length=20)
+    contact_email = me.StringField(max_length=150)
+    opening_time = me.StringField()
+    closing_time = me.StringField()
+    base_price = me.FloatField(default=0.0)
+    image = me.StringField(max_length=255)
+    facilities = me.StringField()
+    status = me.StringField(default="active", max_length=20)
+    created_at = me.DateTimeField(default=utc_now)
+    updated_at = me.DateTimeField(default=utc_now)
 
-
-    # -----------------------------------------------------
-    # PRIMARY KEY
-    # -----------------------------------------------------
-
-    id = db.Column(
-        INTEGER(unsigned=True),
-        primary_key=True
-    )
-
-
-    # -----------------------------------------------------
-    # OWNER
-    # FK -> users.id
-    # -----------------------------------------------------
-
-    owner_id = db.Column(
-        INTEGER(unsigned=True),
-        db.ForeignKey(
-            "users.id"
-        ),
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # BASIC DETAILS
-    # -----------------------------------------------------
-
-    name = db.Column(
-        db.String(150),
-        nullable=False
-    )
-
-
-    description = db.Column(
-        db.Text,
-        nullable=True
-    )
-
-
-    address = db.Column(
-        db.Text,
-        nullable=False
-    )
-
-
-    city = db.Column(
-        db.String(100),
-        nullable=False,
-        index=True
-    )
-
-
-    state = db.Column(
-        db.String(100),
-        nullable=True
-    )
-
-
-    pincode = db.Column(
-        db.String(10),
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # LOCATION
-    # -----------------------------------------------------
-
-    latitude = db.Column(
-        db.Numeric(10, 8),
-        nullable=True
-    )
-
-
-    longitude = db.Column(
-        db.Numeric(11, 8),
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # CONTACT
-    # -----------------------------------------------------
-
-    contact_phone = db.Column(
-        db.String(20),
-        nullable=True
-    )
-
-
-    contact_email = db.Column(
-        db.String(150),
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # OPENING / CLOSING
-    # -----------------------------------------------------
-
-    opening_time = db.Column(
-        db.Time,
-        nullable=False
-    )
-
-
-    closing_time = db.Column(
-        db.Time,
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # PRICE
-    # -----------------------------------------------------
-
-    base_price = db.Column(
-        db.Numeric(10, 2),
-        nullable=False,
-        default=0
-    )
-
-
-    # -----------------------------------------------------
-    # IMAGE
-    # -----------------------------------------------------
-
-    image = db.Column(
-        db.String(255),
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # FACILITIES
-    # -----------------------------------------------------
-
-    facilities = db.Column(
-        db.Text,
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # STATUS
-    # active / inactive / maintenance
-    # -----------------------------------------------------
-
-    status = db.Column(
-        db.String(20),
-        nullable=False,
-        default="active",
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # CREATED / UPDATED
-    # -----------------------------------------------------
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False
-    )
-
-
-    updated_at = db.Column(
-        db.DateTime,
-        nullable=False
-    )
-
-
-    # =====================================================
-    # OWNER RELATIONSHIP
-    # =====================================================
-
-    owner = db.relationship(
-        "User",
-        foreign_keys=[owner_id]
-    )
-
-
-    # =====================================================
-    # SLOT RELATIONSHIP
-    # =====================================================
-
-    slots = db.relationship(
-        "TurfSlot",
-        back_populates="turf",
-        lazy=True
-    )
-
-
-    # =====================================================
-    # ACTIVE CHECK
-    # =====================================================
+    query = QueryDescriptor()
 
     @property
     def is_active(self):
-
-        return (
-            self.status == "active"
-        )
-
-
-    # =====================================================
-    # REPRESENTATION
-    # =====================================================
+        return self.status == "active"
 
     def __repr__(self):
-
-        return (
-            f"<Turf "
-            f"id={self.id} "
-            f"name={self.name}>"
-        )
+        return f"<Turf id={self.id} name={self.name}>"
 
 
 # =========================================================
 # TURF SLOT MODEL
 # =========================================================
 
-class TurfSlot(db.Model):
+class TurfSlot(me.Document):
+    meta = {
+        "collection": "turf_slots",
+        "indexes": [
+            ("turf_id", "slot_date", "status"),
+            "status",
+        ]
+    }
 
-    __tablename__ = "turf_slots"
+    id = me.SequenceField(primary_key=True)
+    turf_id = me.IntField(required=True)
+    slot_date = me.DateField(required=True)
+    start_time = me.StringField(required=True)
+    end_time = me.StringField(required=True)
+    price = me.FloatField(default=0.0)
+    status = me.StringField(default="available", max_length=20)
+    created_at = me.DateTimeField(default=utc_now)
 
-
-    # -----------------------------------------------------
-    # PRIMARY KEY
-    # -----------------------------------------------------
-
-    id = db.Column(
-        INTEGER(unsigned=True),
-        primary_key=True
-    )
-
-
-    # -----------------------------------------------------
-    # TURF ID
-    # FK -> turfs.id
-    # -----------------------------------------------------
-
-    turf_id = db.Column(
-        INTEGER(unsigned=True),
-        db.ForeignKey(
-            "turfs.id"
-        ),
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # SLOT DATE
-    # -----------------------------------------------------
-
-    slot_date = db.Column(
-        db.Date,
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # START / END TIME
-    # -----------------------------------------------------
-
-    start_time = db.Column(
-        db.Time,
-        nullable=False
-    )
-
-
-    end_time = db.Column(
-        db.Time,
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # SLOT PRICE
-    # -----------------------------------------------------
-
-    price = db.Column(
-        db.Numeric(10, 2),
-        nullable=False,
-        default=0
-    )
-
-
-    # -----------------------------------------------------
-    # STATUS
-    # available / booked / blocked / maintenance
-    # -----------------------------------------------------
-
-    status = db.Column(
-        db.String(20),
-        nullable=False,
-        default="available",
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # CREATED AT
-    # -----------------------------------------------------
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False
-    )
-
-
-    # =====================================================
-    # TURF RELATIONSHIP
-    # =====================================================
-
-    turf = db.relationship(
-        "Turf",
-        back_populates="slots"
-    )
-
-
-    # =====================================================
-    # AVAILABILITY CHECK
-    # =====================================================
+    query = QueryDescriptor()
 
     @property
     def is_available(self):
+        return self.status == "available"
 
-        return (
-            self.status == "available"
-        )
+    @property
+    def is_booked(self):
+        return self.status == "booked"
 
-
-    # =====================================================
-    # REPRESENTATION
-    # =====================================================
+    @property
+    def is_blocked(self):
+        return self.status == "blocked"
 
     def __repr__(self):
-
-        return (
-            f"<TurfSlot "
-            f"id={self.id} "
-            f"turf_id={self.turf_id} "
-            f"date={self.slot_date}>"
-        )
+        return f"<TurfSlot id={self.id} turf_id={self.turf_id} time={self.start_time}-{self.end_time}>"
 
 
 # =========================================================
 # BOOKING MODEL
 # =========================================================
 
-class Booking(db.Model):
+class Booking(me.Document):
+    meta = {
+        "collection": "bookings",
+        "indexes": [
+            "booking_code",
+            "user_id",
+            "turf_id",
+            "slot_id",
+            "status",
+            "-created_at",
+        ]
+    }
 
-    __tablename__ = "bookings"
+    id = me.SequenceField(primary_key=True)
+    booking_code = me.StringField(unique=True, max_length=30)
+    user_id = me.IntField(required=True)
+    turf_id = me.IntField(required=True)
+    slot_id = me.IntField(required=True)
+    booking_date = me.DateField()
+    total_amount = me.FloatField(default=0.0)
+    status = me.StringField(default="pending", max_length=20)
+    notes = me.StringField()
+    created_at = me.DateTimeField(default=utc_now)
+    updated_at = me.DateTimeField(default=utc_now)
 
+    query = QueryDescriptor()
 
-    # -----------------------------------------------------
-    # PRIMARY KEY
-    # -----------------------------------------------------
-
-    id = db.Column(
-        INTEGER(unsigned=True),
-        primary_key=True
-    )
-
-
-    # -----------------------------------------------------
-    # UNIQUE BOOKING CODE
-    # -----------------------------------------------------
-
-    booking_code = db.Column(
-        db.String(50),
-        unique=True,
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # USER
-    # FK -> users.id
-    # -----------------------------------------------------
-
-    user_id = db.Column(
-        INTEGER(unsigned=True),
-        db.ForeignKey(
-            "users.id"
-        ),
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # TURF
-    # FK -> turfs.id
-    # -----------------------------------------------------
-
-    turf_id = db.Column(
-        INTEGER(unsigned=True),
-        db.ForeignKey(
-            "turfs.id"
-        ),
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # SLOT
-    # FK -> turf_slots.id
-    # -----------------------------------------------------
-
-    slot_id = db.Column(
-        INTEGER(unsigned=True),
-        db.ForeignKey(
-            "turf_slots.id"
-        ),
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # BOOKING DATE
-    # -----------------------------------------------------
-
-    booking_date = db.Column(
-        db.Date,
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # TOTAL AMOUNT
-    # -----------------------------------------------------
-
-    total_amount = db.Column(
-        db.Numeric(10, 2),
-        nullable=False,
-        default=0
-    )
-
-
-    # -----------------------------------------------------
-    # STATUS
-    # pending / confirmed / cancelled /
-    # completed / refunded
-    # -----------------------------------------------------
-
-    status = db.Column(
-        db.String(20),
-        nullable=False,
-        default="pending",
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # NOTES
-    # -----------------------------------------------------
-
-    notes = db.Column(
-        db.Text,
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # CREATED / UPDATED
-    # -----------------------------------------------------
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False
-    )
-
-
-    updated_at = db.Column(
-        db.DateTime,
-        nullable=False
-    )
-
-
-    # =====================================================
-    # RELATIONSHIPS
-    # =====================================================
-
-    user = db.relationship(
-        "User",
-        foreign_keys=[user_id]
-    )
-
-
-    turf = db.relationship(
-        "Turf",
-        foreign_keys=[turf_id]
-    )
-
-
-    slot = db.relationship(
-        "TurfSlot",
-        foreign_keys=[slot_id]
-    )
-
-
-    # =====================================================
-    # STATUS HELPERS
-    # =====================================================
+    @property
+    def is_pending(self):
+        return self.status == "pending"
 
     @property
     def is_confirmed(self):
-
-        return (
-            self.status == "confirmed"
-        )
-
+        return self.status == "confirmed"
 
     @property
     def is_cancelled(self):
+        return self.status == "cancelled"
 
-        return (
-            self.status == "cancelled"
-        )
-
-
-    # =====================================================
-    # REPRESENTATION
-    # =====================================================
+    @property
+    def is_completed(self):
+        return self.status == "completed"
 
     def __repr__(self):
-
-        return (
-            f"<Booking "
-            f"id={self.id} "
-            f"code={self.booking_code}>"
-        )
+        return f"<Booking id={self.id} code={self.booking_code}>"
 
 
 # =========================================================
 # PAYMENT MODEL
 # =========================================================
 
-class Payment(db.Model):
+class Payment(me.Document):
+    meta = {
+        "collection": "payments",
+        "indexes": [
+            "booking_id",
+            "user_id",
+            "transaction_id",
+            "status",
+        ]
+    }
 
-    __tablename__ = "payments"
+    id = me.SequenceField(primary_key=True)
+    booking_id = me.IntField(required=True)
+    user_id = me.IntField(required=True)
+    transaction_id = me.StringField(max_length=100)
+    payment_method = me.StringField(max_length=50)
+    amount = me.FloatField(default=0.0)
+    currency = me.StringField(default="INR", max_length=10)
+    status = me.StringField(default="pending", max_length=20)
+    payment_gateway = me.StringField(max_length=50)
+    gateway_response = me.StringField()
+    paid_at = me.DateTimeField()
+    created_at = me.DateTimeField(default=utc_now)
 
-
-    # -----------------------------------------------------
-    # PRIMARY KEY
-    # -----------------------------------------------------
-
-    id = db.Column(
-        INTEGER(unsigned=True),
-        primary_key=True
-    )
-
-
-    # -----------------------------------------------------
-    # BOOKING
-    # FK -> bookings.id
-    # -----------------------------------------------------
-
-    booking_id = db.Column(
-        INTEGER(unsigned=True),
-        db.ForeignKey(
-            "bookings.id"
-        ),
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # USER
-    # FK -> users.id
-    # -----------------------------------------------------
-
-    user_id = db.Column(
-        INTEGER(unsigned=True),
-        db.ForeignKey(
-            "users.id"
-        ),
-        nullable=False,
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # TRANSACTION ID
-    # -----------------------------------------------------
-
-    transaction_id = db.Column(
-        db.String(150),
-        unique=True,
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # PAYMENT METHOD
-    # cash / upi / card /
-    # netbanking / wallet
-    # -----------------------------------------------------
-
-    payment_method = db.Column(
-        db.String(20),
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # AMOUNT
-    # -----------------------------------------------------
-
-    amount = db.Column(
-        db.Numeric(10, 2),
-        nullable=False
-    )
-
-
-    # -----------------------------------------------------
-    # CURRENCY
-    # -----------------------------------------------------
-
-    currency = db.Column(
-        db.String(10),
-        nullable=False,
-        default="INR"
-    )
-
-
-    # -----------------------------------------------------
-    # PAYMENT STATUS
-    # pending / success / failed / refunded
-    # -----------------------------------------------------
-
-    status = db.Column(
-        db.String(20),
-        nullable=False,
-        default="pending",
-        index=True
-    )
-
-
-    # -----------------------------------------------------
-    # GATEWAY
-    # -----------------------------------------------------
-
-    payment_gateway = db.Column(
-        db.String(50),
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # GATEWAY RESPONSE
-    # -----------------------------------------------------
-
-    gateway_response = db.Column(
-        db.Text,
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # PAID AT
-    # -----------------------------------------------------
-
-    paid_at = db.Column(
-        db.DateTime,
-        nullable=True
-    )
-
-
-    # -----------------------------------------------------
-    # CREATED AT
-    # -----------------------------------------------------
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False
-    )
-
-
-    # =====================================================
-    # RELATIONSHIPS
-    # =====================================================
-
-    booking = db.relationship(
-        "Booking",
-        foreign_keys=[booking_id]
-    )
-
-
-    user = db.relationship(
-        "User",
-        foreign_keys=[user_id]
-    )
-
-
-    # =====================================================
-    # PAYMENT SUCCESS CHECK
-    # =====================================================
+    query = QueryDescriptor()
 
     @property
     def is_success(self):
-
-        return (
-            self.status == "success"
-        )
-
-
-    # =====================================================
-    # PAYMENT FAILED CHECK
-    # =====================================================
+        return self.status == "success"
 
     @property
     def is_failed(self):
+        return self.status == "failed"
 
-        return (
-            self.status == "failed"
-        )
-
-
-    # =====================================================
-    # REPRESENTATION
-    # =====================================================
+    @property
+    def is_refunded(self):
+        return self.status == "refunded"
 
     def __repr__(self):
-
-        return (
-            f"<Payment "
-            f"id={self.id} "
-            f"booking_id={self.booking_id} "
-            f"status={self.status}>"
-        )
+        return f"<Payment id={self.id} booking_id={self.booking_id} amount={self.amount}>"
 
 
-
-
-    # =========================================================
+# =========================================================
 # TOURNAMENT MODEL
 # =========================================================
 
-class Tournament(db.Model):
+class Tournament(me.Document):
+    meta = {
+        "collection": "tournaments",
+        "indexes": [
+            "created_by",
+            "status",
+            "-created_at",
+        ]
+    }
 
-    __tablename__ = "tournaments"
+    id = me.SequenceField(primary_key=True)
+    created_by = me.IntField()
+    name = me.StringField(required=True, max_length=150)
+    description = me.StringField()
+    sport = me.StringField(default="Cricket", max_length=50)
+    format = me.StringField(max_length=50)
+    location = me.StringField(max_length=150)
+    start_date = me.DateField()
+    end_date = me.DateField()
+    max_teams = me.IntField(default=8)
+    entry_fee = me.FloatField(default=0.0)
+    prize_amount = me.FloatField(default=0.0)
+    status = me.StringField(default="upcoming", max_length=20)
+    image = me.StringField(max_length=255)
+    created_at = me.DateTimeField(default=utc_now)
+    updated_at = me.DateTimeField(default=utc_now)
 
-    # -----------------------------------------------------
-    # PRIMARY KEY
-    # -----------------------------------------------------
-
-    id = db.Column(
-        INTEGER(unsigned=True),
-        primary_key=True
-    )
-
-    # -----------------------------------------------------
-    # CREATED BY
-    # FK -> users.id
-    # -----------------------------------------------------
-
-    created_by = db.Column(
-        INTEGER(unsigned=True),
-        db.ForeignKey(
-            "users.id"
-        ),
-        nullable=False,
-        index=True
-    )
-
-    # -----------------------------------------------------
-    # TOURNAMENT NAME
-    # -----------------------------------------------------
-
-    name = db.Column(
-        db.String(150),
-        nullable=False
-    )
-
-    # -----------------------------------------------------
-    # DESCRIPTION
-    # -----------------------------------------------------
-
-    description = db.Column(
-        db.Text,
-        nullable=True
-    )
-
-    # -----------------------------------------------------
-    # SPORT
-    # -----------------------------------------------------
-
-    sport = db.Column(
-        db.String(50),
-        nullable=False,
-        default="cricket"
-    )
-
-    # -----------------------------------------------------
-    # FORMAT
-    # league / knockout / league_knockout
-    # -----------------------------------------------------
-
-    format = db.Column(
-        db.String(30),
-        nullable=False,
-        default="league"
-    )
-
-    # -----------------------------------------------------
-    # LOCATION
-    # -----------------------------------------------------
-
-    location = db.Column(
-        db.String(255),
-        nullable=True
-    )
-
-    # -----------------------------------------------------
-    # START DATE
-    # -----------------------------------------------------
-
-    start_date = db.Column(
-        db.Date,
-        nullable=False
-    )
-
-    # -----------------------------------------------------
-    # END DATE
-    # -----------------------------------------------------
-
-    end_date = db.Column(
-        db.Date,
-        nullable=False
-    )
-
-    # -----------------------------------------------------
-    # MAX TEAMS
-    # -----------------------------------------------------
-
-    max_teams = db.Column(
-        db.Integer,
-        nullable=False,
-        default=8
-    )
-
-    # -----------------------------------------------------
-    # ENTRY FEE
-    # -----------------------------------------------------
-
-    entry_fee = db.Column(
-        db.Numeric(10, 2),
-        nullable=False,
-        default=0
-    )
-
-    # -----------------------------------------------------
-    # PRIZE
-    # -----------------------------------------------------
-
-    prize_amount = db.Column(
-        db.Numeric(10, 2),
-        nullable=False,
-        default=0
-    )
-
-    # -----------------------------------------------------
-    # STATUS
-    # draft / open / ongoing / completed / cancelled
-    # -----------------------------------------------------
-
-    status = db.Column(
-        db.String(20),
-        nullable=False,
-        default="draft",
-        index=True
-    )
-
-    # -----------------------------------------------------
-    # IMAGE
-    # -----------------------------------------------------
-
-    image = db.Column(
-        db.String(255),
-        nullable=True
-    )
-
-    # -----------------------------------------------------
-    # CREATED / UPDATED
-    # -----------------------------------------------------
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=utc_now
-    )
-
-    updated_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=utc_now
-    )
-
-    # =====================================================
-    # CREATOR RELATIONSHIP
-    # =====================================================
-
-    creator = db.relationship(
-        "User",
-        foreign_keys=[created_by]
-    )
-
-    # =====================================================
-    # STATUS HELPERS
-    # =====================================================
+    query = QueryDescriptor()
 
     @property
-    def is_open(self):
-
-        return (
-            self.status == "open"
-        )
+    def is_upcoming(self):
+        return self.status == "upcoming"
 
     @property
     def is_ongoing(self):
-
-        return (
-            self.status == "ongoing"
-        )
+        return self.status == "ongoing"
 
     @property
     def is_completed(self):
-
-        return (
-            self.status == "completed"
-        )
-
-    # =====================================================
-    # REPRESENTATION
-    # =====================================================
+        return self.status == "completed"
 
     def __repr__(self):
-
-        return (
-            f"<Tournament "
-            f"id={self.id} "
-            f"name={self.name}>"
-        )
+        return f"<Tournament id={self.id} name={self.name}>"

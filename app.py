@@ -26,8 +26,6 @@ from flask import (
 
 from flask_mail import Message
 
-from sqlalchemy import or_
-
 from werkzeug.security import (
     generate_password_hash,
     check_password_hash
@@ -37,7 +35,8 @@ from config import Config
 
 from extensions import (
     db,
-    mail
+    mail,
+    or_
 )
 
 from models import (
@@ -91,16 +90,12 @@ def test_database_connection():
 
     try:
 
-        with app.app_context():
-
-            with db.engine.connect() as connection:
-
-                connection.exec_driver_sql(
-                    "SELECT 1"
-                )
+        import mongoengine as me
+        conn = me.connection.get_connection()
+        conn.admin.command("ping")
 
         print(
-            "✅ MySQL database connected successfully!"
+            "[Success] MongoDB Atlas connected successfully!"
         )
 
         return True
@@ -108,7 +103,7 @@ def test_database_connection():
     except Exception as error:
 
         print(
-            "❌ MySQL database connection failed:"
+            "[Error] MongoDB Atlas connection failed:"
         )
 
         print(error)
@@ -124,20 +119,18 @@ def initialize_database():
 
     try:
 
-        with app.app_context():
+        db.create_all()
 
-            db.create_all()
+        print(
+            "[Success] MongoDB collections initialized successfully!"
+        )
 
-            print(
-                "✅ Database tables initialized successfully!"
-            )
-
-            return True
+        return True
 
     except Exception as error:
 
         print(
-            "❌ Database initialization failed:"
+            "[Error] MongoDB initialization failed:"
         )
 
         print(error)
@@ -145,7 +138,7 @@ def initialize_database():
         return False
 
 
-# Auto-initialize tables safely on startup (e.g., under Gunicorn / Render)
+# Auto-initialize database safely on startup (e.g., under Gunicorn / Render)
 try:
     with app.app_context():
         db.create_all()
@@ -166,7 +159,7 @@ def send_email(
     if not recipient:
 
         print(
-            "⚠️ Email skipped: recipient is empty."
+            "[Notice] Email skipped: recipient is empty."
         )
 
         return False
@@ -179,7 +172,7 @@ def send_email(
     if not mail_username:
 
         print(
-            "⚠️ Email skipped: MAIL_USERNAME is not configured."
+            "[Notice] Email skipped: MAIL_USERNAME is not configured."
         )
 
         return False
@@ -199,7 +192,7 @@ def send_email(
         )
 
         print(
-            f"✅ Email sent successfully to {recipient}"
+            f"[Success] Email sent successfully to {recipient}"
         )
 
         return True
@@ -207,10 +200,8 @@ def send_email(
     except Exception as error:
 
         print(
-            f"❌ Email sending failed for {recipient}"
+            f"[Error] Email sending failed for {recipient}: {error}"
         )
-
-        print(error)
 
         return False
 

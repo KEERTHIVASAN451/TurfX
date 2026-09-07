@@ -1,109 +1,91 @@
-﻿# 🚀 TurfX - Complete Render Deployment Guide
+﻿# 🚀 TurfX - Complete Render & MongoDB Atlas Deployment Guide
 
-This guide walks you step-by-step through deploying your **TurfX** project to **Render** for free.
+TurfX is now fully integrated with **MongoDB Atlas** and ready for deployment on **Render**.
 
 ---
 
 ## 📋 Overview of What We Configured
 
-1. **Safety Backup**: Created a full backup at `TurfX_backup_20260907`.
-2. **Universal Database Compatibility**: Updated `config.py` to support `DATABASE_URL` (standard on Render/Aiven/Railway/TiDB), with automatic SSL and connection pooling (`pool_pre_ping=True`) to prevent cloud connection drops.
-3. **Optimized Linux/Render Dependencies**: Fixed `requirements.txt` (UTF-8 encoding, removed C-compiler dependent `mysqlclient` and `Flask-MySQLdb`, added `cryptography` for cloud MySQL authentication, ensured `gunicorn` is ready).
-4. **Auto-Initialization**: App automatically initializes tables on startup; added `init_db.py` for manual/cli initialization.
-5. **Render Blueprint & Procfile**: Added `render.yaml`, `Procfile`, `build.sh`, and `.env.example`.
+1. **MongoDB Atlas Integration**: Migrated the database layer to MongoDB Atlas using MongoEngine with auto-increment integer IDs (`SequenceField`). All routes (`/turf/<int:turf_id>`) and templates work seamlessly without modification.
+2. **Safety Backup**: Complete original project backup preserved at `TurfX_backup_20260907`.
+3. **Render Configuration**:
+   - `render.yaml` (Render Blueprint configured for Python 3 & Gunicorn).
+   - `Procfile` (`web: gunicorn app:app`).
+   - `requirements.txt` (Optimized with `mongoengine`, `pymongo`, `dnspython`, `gunicorn`).
+   - `init_db.py` (Automatic MongoDB collection setup and admin seeder).
 
 ---
 
-## Step 1: Get a Free Cloud MySQL Database (2 Minutes)
+## Step 1: Verify Your MongoDB Atlas Cluster
 
-Since Render does not provide a free MySQL database (Render only provides PostgreSQL), you can use any free cloud MySQL provider. Here are the two best, completely free options:
+Your MongoDB Atlas cluster is already active and connected:
+- **Cluster**: `turfx-booking.o64agpk.mongodb.net`
+- **Database**: `turfx`
+- **User**: `kv0939169_db_user`
+- **URI**: `mongodb+srv://kv0939169_db_user:HOCLrddiK8iliBE5@turfx-booking.o64agpk.mongodb.net/turfx?retryWrites=true&w=majority`
 
-### Option A: Aiven (Recommended - Free MySQL 5GB)
-1. Go to [aiven.io](https://aiven.io/) and create a free account.
-2. Click **Create Service** > Select **MySQL**.
-3. Choose the **Free Tier** plan.
-4. Once created, in the service overview, copy the **Service URI** (looks like: `mysql://avnadmin:xxxx@mysql-xxx.aivencloud.com:xxxxx/defaultdb?ssl-mode=REQUIRED`).
-5. This URI is your `DATABASE_URL`!
-
-### Option B: TiDB Cloud Serverless (Free MySQL-compatible 5GB)
-1. Go to [tidbcloud.com](https://tidbcloud.com/) and sign up.
-2. Create a free **Serverless Cluster**.
-3. Click **Connect** > select **PyMySQL** or **SQLAlchemy**.
-4. Copy the connection string to use as `DATABASE_URL`.
+> **Note**: In MongoDB Atlas, make sure Network Access allows Render:
+> 1. Go to [cloud.mongodb.com](https://cloud.mongodb.com/) > **Network Access**.
+> 2. Ensure `0.0.0.0/0` (Allow Access from Anywhere) is added to the IP Access List so Render can connect.
 
 ---
 
-## Step 2: (Optional) Import Database Schema
+## Step 2: Push Changes to GitHub
 
-To import all tables and roles into your cloud MySQL database:
-- In Aiven or TiDB Cloud, open their Web SQL Query Editor or connect with MySQL Workbench / DBeaver.
-- Copy and run the contents of `database/turfx.sql`.
-- Or, just let the app run `init_db.py` or start up — it will automatically create all SQLAlchemy tables for you!
-
----
-
-## Step 3: Push Changes to GitHub
-
-Open a terminal in your `TurfX` folder and push your updated configuration to GitHub:
+Push the updated MongoDB Atlas configuration to your GitHub repository:
 
 ```bash
 git add .
-git commit -m "Prepare TurfX for Render deployment"
+git commit -m "Migrate TurfX database layer to MongoDB Atlas"
 git push origin main
 ```
 
 ---
 
-## Step 4: Create the Web Service on Render
+## Step 3: Deploy on Render
 
-1. Go to [dashboard.render.com](https://dashboard.render.com/) and sign in.
-2. Click the **"New +"** button in the top right, and select **"Web Service"**.
-3. Select **"Build and deploy from a Git repository"** and connect your GitHub repository (`TurfX`).
-4. Configure the service settings:
-   - **Name**: `turfx` (or any name you prefer)
-   - **Region**: Choose the region closest to your users (e.g., Singapore, Frankfurt, Oregon, Ohio).
-   - **Branch**: `main`
+1. Go to [dashboard.render.com](https://dashboard.render.com/) and log in.
+2. Click **"New +"** (top right) > **"Web Service"**.
+3. Select your repository: `KEERTHIVASAN451/TurfX`.
+4. Configure service settings:
+   - **Name**: `turfx`
    - **Runtime**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt` (or `chmod +x build.sh && ./build.sh`)
+   - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `gunicorn app:app`
    - **Instance Type**: `Free`
 
 ---
 
-## Step 5: Configure Environment Variables on Render
+## Step 4: Add Environment Variables on Render
 
-Scroll down to the **Environment Variables** section on Render and add the following keys:
+In the **Environment** tab on Render, add these variables:
 
 | Key | Value | Description |
 |---|---|---|
-| `SECRET_KEY` | *(Click "Generate" or enter a random string)* | Flask session encryption |
-| `DATABASE_URL` | `mysql://user:pass@host:port/dbname?ssl-mode=REQUIRED` | Cloud MySQL connection string |
-| `USER_ROLE_ID` | `2` | Default customer role ID |
+| `SECRET_KEY` | *(Click "Generate" or type a random string)* | Flask session security |
+| `MONGODB_URI` | `mongodb+srv://kv0939169_db_user:HOCLrddiK8iliBE5@turfx-booking.o64agpk.mongodb.net/turfx?retryWrites=true&w=majority` | Your MongoDB Atlas connection URI |
+| `MONGODB_DB` | `turfx` | Database name |
+| `USER_ROLE_ID` | `2` | Customer role ID |
 | `ADMIN_ROLE_ID` | `1` | Admin role ID |
 | `MAIL_SERVER` | `smtp.gmail.com` | SMTP server |
 | `MAIL_PORT` | `587` | SMTP port |
 | `MAIL_USE_TLS` | `true` | TLS flag |
-| `MAIL_USERNAME` | `your-email@gmail.com` | Your Gmail address |
-| `MAIL_PASSWORD` | `your-16-char-app-password` | Gmail App Password (not normal password) |
-| `ADMIN_EMAIL` | `your-email@gmail.com` | Admin email address |
-| `FLASK_DEBUG` | `false` | Disable debug mode in production |
-
-*(Tip: You can also use Render's "Secret File" or bulk copy from `.env.example`)*
+| `MAIL_USERNAME` | `kv0939169@gmail.com` | Gmail address |
+| `MAIL_PASSWORD` | `bglnslxkxgsqguqi` | Gmail App Password |
+| `ADMIN_EMAIL` | `kv0939169@gmail.com` | Admin email |
+| `FLASK_DEBUG` | `false` | Disable debug in production |
 
 ---
 
-## Step 6: Deploy and Launch!
+## Step 5: Launch!
 
-1. Click **"Deploy Web Service"** (or "Create Web Service").
-2. Render will pull your repo, install dependencies, and start Gunicorn.
-3. Once the deployment finishes, Render will provide your public URL:
+1. Click **"Deploy Web Service"**.
+2. Render will build the environment, connect to MongoDB Atlas, and start the Gunicorn server.
+3. Your live application will be available at:
    `https://turfx-xxxx.onrender.com`
-4. Click the link to view your live application!
 
 ---
 
-## 🛠 Troubleshooting & Tips
-
-- **Free Tier Sleep/Wakeup**: On Render's Free tier, services spin down after 15 minutes of inactivity. The first request after sleep may take ~30-50 seconds to boot up.
-- **Gmail App Password**: For OTP and booking emails to send, enable 2-Factor Authentication on your Google Account and generate an **App Password** (Google Account > Security > 2-Step Verification > App Passwords).
-- **Checking Logs**: In the Render dashboard, click **"Logs"** to see live server output, request logs, and error messages.
+## 🔑 Default Admin Account
+- **Email**: `kv0939169@gmail.com`
+- **Password**: `Admin@12345`
